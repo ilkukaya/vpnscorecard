@@ -1,0 +1,7 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
+const vpn = getVPNBySlug('protonvpn');
+if (!vpn) throw new Error('Proton VPN not found');
+---
+<ReviewLayout vpn={vpn} />

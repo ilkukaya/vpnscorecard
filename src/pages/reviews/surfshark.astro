@@ -1,0 +1,7 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
+const vpn = getVPNBySlug('surfshark');
+if (!vpn) throw new Error('Surfshark not found');
+---
+<ReviewLayout vpn={vpn} />

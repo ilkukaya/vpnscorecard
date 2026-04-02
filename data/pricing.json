@@ -1,0 +1,134 @@
+{
+  "son_guncelleme": "2026-04-01",
+  "fiyatlar": {
+    "nordvpn": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
+      "1yil_plan": {
+        "fiyat": 4.99,
+        "donem": "12 ay",
+        "toplam": 59.88,
+        "tasarruf_yuzde": 62
+      },
+      "2yil_plan": {
+        "fiyat": 3.09,
+        "donem": "24 ay + 3 ay ücretsiz",
+        "toplam": 83.43,
+        "tasarruf_yuzde": 76
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "expressvpn": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 12.95, "donem": "1 ay" },
+      "6ay_plan": { "fiyat": 9.99, "donem": "6 ay", "toplam": 59.94 },
+      "1yil_plan": {
+        "fiyat": 6.67,
+        "donem": "12 ay + 3 ay ücretsiz",
+        "toplam": 99.95,
+        "tasarruf_yuzde": 49
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "surfshark": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 15.45, "donem": "1 ay" },
+      "1yil_plan": {
+        "fiyat": 2.99,
+        "donem": "12 ay",
+        "toplam": 35.88,
+        "tasarruf_yuzde": 81
+      },
+      "2yil_plan": {
+        "fiyat": 2.19,
+        "donem": "24 ay + 3 ay ücretsiz",
+        "toplam": 59.13,
+        "tasarruf_yuzde": 86
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "cyberghost": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
+      "6ay_plan": { "fiyat": 6.99, "donem": "6 ay", "toplam": 41.94 },
+      "2yil_plan": {
+        "fiyat": 2.03,
+        "donem": "24 ay + 4 ay ücretsiz",
+        "toplam": 56.94,
+        "tasarruf_yuzde": 84
+      },
+      "para_iade_gun": 45,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "protonvpn": {
+      "para_birimi": "USD",
+      "ucretsiz_plan": { "fiyat": 0 },
+      "aylik_plan": { "fiyat": 9.99, "donem": "1 ay" },
+      "1yil_plan": {
+        "fiyat": 4.99,
+        "donem": "12 ay",
+        "toplam": 59.88,
+        "tasarruf_yuzde": 50
+      },
+      "2yil_plan": {
+        "fiyat": 3.99,
+        "donem": "24 ay",
+        "toplam": 95.76,
+        "tasarruf_yuzde": 60
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "pia": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 11.99, "donem": "1 ay" },
+      "1yil_plan": {
+        "fiyat": 3.33,
+        "donem": "12 ay",
+        "toplam": 39.95,
+        "tasarruf_yuzde": 72
+      },
+      "3yil_plan": {
+        "fiyat": 1.98,
+        "donem": "36 ay + 3 ay ücretsiz",
+        "toplam": 79.00,
+        "tasarruf_yuzde": 83
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "ipvanish": {
+      "para_birimi": "USD",
+      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
+      "1yil_plan": {
+        "fiyat": 3.75,
+        "donem": "12 ay",
+        "toplam": 45.00,
+        "tasarruf_yuzde": 71
+      },
+      "para_iade_gun": 30,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    },
+    "mullvad": {
+      "para_birimi": "EUR",
+      "aylik_plan": {
+        "fiyat": 5.00,
+        "donem": "1 ay",
+        "not": "Sabit fiyat, indirim yok"
+      },
+      "para_iade_gun": 0,
+      "ucretsiz_deneme": false,
+      "guncelleme": "2026-04-01"
+    }
+  }
+}

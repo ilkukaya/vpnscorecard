@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import VPNCard from '../../components/VPNCard.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import { getStreamingVPNs, getPricing } from '../../lib/vpnData';
+import { getBestAffiliateLink } from '../../lib/affiliateLinks';
+
+const vpns = getStreamingVPNs();
+const title = 'Best VPN for Streaming in 2026: Netflix, Disney+, HBO Max';
+const description = 'We tested every VPN with Netflix, Disney+, BBC iPlayer, and more. Here are the best VPNs for streaming in 2026.';
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <AffiliateDisclosure />
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6"><ol class="flex items-center gap-1"><li><a href="/" class="hover:text-brand">Home</a></li><li><span class="mx-1">/</span></li><li><a href="/best/" class="hover:text-brand">Best For</a></li><li><span class="mx-1">/</span></li><li class="text-gray-700">Streaming</li></ol></nav>
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN for Streaming in 2026</h1>
+    <p class="text-gray-600 mb-8">We tested every major VPN with Netflix, Disney+, BBC iPlayer, Hulu, and HBO Max. These are the ones that work reliably.</p>
+    <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8">
+      <h2 class="font-bold text-brand-dark mb-2">Quick Answer: NordVPN</h2>
+      <p class="text-gray-700">NordVPN unblocks all 7 streaming services we test, has the fastest speeds (887 Mbps), and costs from $3.09/mo. It's our top pick for streaming.</p>
+      <CTAButton href={getBestAffiliateLink(vpns[0], 'best-streaming')} vpnId={vpns[0].id} pageType="best-streaming" variant="primary" size="md" class="mt-3">Get NordVPN — 76% Off</CTAButton>
+    </div>
+    <div class="space-y-4 mb-8">
+      {vpns.map((vpn, i) => {
+        const pricing = getPricing(vpn.id);
+        return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-streaming" />;
+      })}
+    </div>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+      <h2 class="text-xl font-bold text-brand-dark mb-4">Streaming Test Results (March 2026)</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-gray-200"><th class="text-left py-2 px-3">VPN</th><th class="text-center py-2 px-3">Netflix US</th><th class="text-center py-2 px-3">Disney+</th><th class="text-center py-2 px-3">BBC iPlayer</th><th class="text-center py-2 px-3">HBO Max</th></tr></thead>
+          <tbody class="divide-y divide-gray-100">
+            {vpns.map((vpn) => (
+              <tr><td class="py-2 px-3 font-medium">{vpn.ad}</td><td class="text-center py-2 px-3">{vpn.streaming.netflix_us ? '✅' : '❌'}</td><td class="text-center py-2 px-3">{vpn.streaming.disney_plus ? '✅' : '❌'}</td><td class="text-center py-2 px-3">{vpn.streaming.bbc_iplayer ? '✅' : '❌'}</td><td class="text-center py-2 px-3">{vpn.streaming.hbo_max ? '✅' : '❌'}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <FAQAccordion questions={[
+      { question: 'Why do I need a VPN for streaming?', answer: 'Streaming services restrict content by region. A VPN lets you access libraries from other countries, like Netflix US from anywhere in the world.' },
+      { question: 'Do free VPNs work with Netflix?', answer: 'Most free VPNs are blocked by Netflix. Proton VPN\'s free tier works occasionally but is unreliable. For consistent streaming, a paid VPN is necessary.' },
+      { question: 'Will a VPN slow down streaming?', answer: 'With a good VPN like NordVPN (887 Mbps), you won\'t notice any speed reduction. 4K streaming requires only 25 Mbps.' },
+    ]} />
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

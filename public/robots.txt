@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vpnscorecard.com/sitemap-index.xml
+
+Disallow: /assets/
+Disallow: /logos/

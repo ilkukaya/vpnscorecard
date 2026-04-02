@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Our Testing Methodology | VPNScorecard';
+const description = 'Transparent look at how we test, score, and rank every VPN. Speed tests, privacy audits, and pricing verification.';
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Our Testing Methodology</h1>
+    <p class="text-gray-600 mb-8">How we test, score, and rank every VPN. Full transparency.</p>
+
+    <div class="prose max-w-none">
+      <h2>1. Test Environment</h2>
+      <p>All speed tests are conducted from a dedicated Hetzner server in Frankfurt, Germany with a 1 Gbps baseline connection. Tests run during peak hours (20:00-22:00 CET) to simulate real-world conditions. Each test is repeated 5 times and averaged.</p>
+
+      <h2>2. Scoring System</h2>
+      <p>Every VPN is scored out of 100 points across 6 weighted categories:</p>
+      <ul>
+        <li><strong>Speed & Performance (25 pts)</strong> — Download speed, upload speed, ping, consistency</li>
+        <li><strong>Privacy & Security (25 pts)</strong> — No-logs audit, encryption, kill switch, DNS leak protection, jurisdiction</li>
+        <li><strong>Ease of Use (15 pts)</strong> — App quality, setup time, platform support, customer service</li>
+        <li><strong>Server Network (15 pts)</strong> — Country count, server count, specialized servers</li>
+        <li><strong>Price & Value (15 pts)</strong> — Monthly cost, refund policy, simultaneous connections</li>
+        <li><strong>Streaming Support (5 pts)</strong> — Netflix, Disney+, BBC iPlayer, Hulu, HBO Max</li>
+      </ul>
+
+      <h2>3. Speed Test Methodology</h2>
+      <p>We use iperf3 for raw throughput testing and fast.com for real-world speed measurement. Tests are run on the VPN's default protocol (usually WireGuard or a proprietary variant like NordLynx or Lightway).</p>
+
+      <h2>4. Privacy Verification</h2>
+      <p>We verify each VPN's no-logs claim by checking for independent audits, reviewing their privacy policy, and testing for DNS/IP leaks using ipleak.net and dnsleaktest.com.</p>
+
+      <h2>5. Price Verification</h2>
+      <p>Pricing is verified weekly through automated scripts and manual spot-checks. We always show the best available long-term plan price.</p>
+
+      <h2>6. Update Policy</h2>
+      <p>Every VPN is re-tested at least quarterly. Speed tests are re-run monthly. Prices are verified weekly. Major changes (new protocols, audits, features) are updated immediately.</p>
+
+      <h2>7. Affiliate Disclosure</h2>
+      <p>VPNScorecard earns commissions through affiliate links. This does not influence our rankings, which are based entirely on independent testing. No VPN can pay for a better position. We disclose all affiliate relationships transparently.</p>
+
+      <h2>8. Independence Commitment</h2>
+      <p>We buy every VPN subscription ourselves. We never accept free accounts from VPN companies for testing purposes. Our test results are raw data — we don't adjust scores based on affiliate relationships.</p>
+    </div>
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,31 @@
+{
+  "name": "vpnscorecard",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Independent VPN testing, scoring, and ranking platform",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate": "python scripts/validate_data.py"
+  },
+  "dependencies": {
+    "@astrojs/react": "^3.0.0",
+    "@astrojs/sitemap": "^3.1.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.5.0",
+    "astro-pagefind": "^1.4.0",
+    "chart.js": "^4.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.4.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "pagefind": "^1.1.0"
+  }
+}

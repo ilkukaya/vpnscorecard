@@ -1,0 +1,38 @@
+name: Aylık Hız Testleri
+
+on:
+  schedule:
+    - cron: '0 20 15 * *'
+  workflow_dispatch:
+
+jobs:
+  speed-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: iperf3 Kur
+        run: sudo apt-get install -y iperf3
+
+      - run: pip install requests speedtest-cli
+
+      - name: Hız Testlerini Çalıştır
+        run: python scripts/run_speed_tests.py
+        env:
+          IPERF_SERVER: ${{ secrets.IPERF_SERVER }}
+        continue-on-error: true
+
+      - name: Sonuçları Kaydet
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "VPNScorecard Bot"
+          git add data/speed-tests.json
+          git diff --staged --quiet || git commit -m \
+            "📊 Hız testleri güncellendi: $(date '+%Y-%m-%d')"
+          git push

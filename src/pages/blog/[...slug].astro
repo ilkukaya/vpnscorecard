@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import blogPosts from '../../../data/blog-posts.json';
+
+export function getStaticPaths() {
+  return (blogPosts as any).posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const title = `${post.title} | VPNScorecard`;
+const description = post.description;
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-gray-500 mb-6">
+      <ol class="flex items-center gap-1">
+        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li><a href="/blog/" class="hover:text-brand">Blog</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li class="text-gray-700">{post.title}</li>
+      </ol>
+    </nav>
+    <header class="mb-8">
+      <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+        <time datetime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+        <span>•</span>
+        <span>{post.readTime} min read</span>
+        <span>•</span>
+        <span class="capitalize">{post.category}</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">{post.title}</h1>
+      <p class="text-lg text-gray-600">{post.description}</p>
+    </header>
+    <div class="prose max-w-none">
+      <p>Full article content will be added here. This is a placeholder for the blog post: <strong>{post.title}</strong>.</p>
+      <p>Tags: {post.tags.join(', ')}</p>
+    </div>
+  </article>
+  <Footer slot="footer" />
+</BaseLayout>

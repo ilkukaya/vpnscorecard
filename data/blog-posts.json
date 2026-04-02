@@ -1,0 +1,85 @@
+{
+  "son_guncelleme": "2026-04-01",
+  "posts": [
+    {
+      "slug": "what-is-a-vpn-explained-simply",
+      "title": "What is a VPN? A Simple Explanation (2026)",
+      "description": "Learn what a VPN does, how it works, and why you might need one — explained in plain English.",
+      "date": "2026-03-20",
+      "author": "VPNScorecard Team",
+      "category": "basics",
+      "tags": ["what is a VPN", "VPN explained", "VPN basics"],
+      "readTime": 8
+    },
+    {
+      "slug": "vpn-speed-test-methodology",
+      "title": "How We Test VPN Speeds: Our Methodology",
+      "description": "A transparent look at our VPN speed testing process, equipment, and scoring system.",
+      "date": "2026-03-15",
+      "author": "VPNScorecard Team",
+      "category": "methodology",
+      "tags": ["VPN speed test", "methodology", "how we test"],
+      "readTime": 12
+    },
+    {
+      "slug": "free-vpn-risks",
+      "title": "Why Free VPNs Are Dangerous (And What to Use Instead)",
+      "description": "Most free VPNs sell your data or serve malware. Here's what to avoid and the one free VPN we trust.",
+      "date": "2026-03-10",
+      "author": "VPNScorecard Team",
+      "category": "security",
+      "tags": ["free VPN", "VPN risks", "safe VPN"],
+      "readTime": 10
+    },
+    {
+      "slug": "vpn-for-beginners-2026",
+      "title": "How to Set Up a VPN: Complete Beginner's Guide",
+      "description": "Step-by-step guide to installing and using a VPN on any device, even if you're not technical.",
+      "date": "2026-03-05",
+      "author": "VPNScorecard Team",
+      "category": "basics",
+      "tags": ["how to use VPN", "VPN setup", "VPN guide"],
+      "readTime": 15
+    },
+    {
+      "slug": "nordvpn-coupon-2026",
+      "title": "NordVPN Coupon & Discount Codes (April 2026 — Verified)",
+      "description": "All working NordVPN discount codes and deals for April 2026. Verified and updated weekly.",
+      "date": "2026-04-01",
+      "author": "VPNScorecard Team",
+      "category": "deals",
+      "tags": ["NordVPN coupon", "NordVPN discount", "NordVPN deal"],
+      "readTime": 5
+    },
+    {
+      "slug": "vpn-for-netflix-guide",
+      "title": "How to Watch Netflix with a VPN: Works in 2026",
+      "description": "Which VPNs still work with Netflix in 2026? We test them all and share the results.",
+      "date": "2026-03-25",
+      "author": "VPNScorecard Team",
+      "category": "streaming",
+      "tags": ["VPN Netflix", "Netflix VPN", "streaming VPN"],
+      "readTime": 10
+    },
+    {
+      "slug": "wireguard-vs-openvpn",
+      "title": "WireGuard vs OpenVPN: Which Protocol is Better in 2026?",
+      "description": "A technical comparison of the two most popular VPN protocols, with real speed and security tests.",
+      "date": "2026-03-18",
+      "author": "VPNScorecard Team",
+      "category": "technical",
+      "tags": ["WireGuard", "OpenVPN", "VPN protocol"],
+      "readTime": 12
+    },
+    {
+      "slug": "14-eyes-vpn-explained",
+      "title": "14 Eyes Alliance: Does It Matter Which Country Your VPN is Based In?",
+      "description": "The 14 Eyes surveillance alliance explained and which VPN jurisdictions are safest for privacy.",
+      "date": "2026-03-12",
+      "author": "VPNScorecard Team",
+      "category": "privacy",
+      "tags": ["14 Eyes", "VPN jurisdiction", "privacy"],
+      "readTime": 11
+    }
+  ]
+}

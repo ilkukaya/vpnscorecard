@@ -1,0 +1,100 @@
+---
+interface Props {
+  vpns: any[];
+  pricing: Record<string, any>;
+  pageType?: string;
+}
+
+const { vpns, pricing, pageType = 'compare' } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-gray-200">
+        <th class="text-left py-3 px-4 font-semibold text-gray-600">Feature</th>
+        {vpns.map((vpn) => (
+          <th class="text-center py-3 px-4">
+            <div class="flex flex-col items-center gap-1">
+              <img src={vpn.logo} alt={vpn.ad} class="w-8 h-8 object-contain" loading="lazy" />
+              <span class="font-bold text-brand-dark">{vpn.ad}</span>
+              <span class="text-lg font-bold" style="color: {vpn.puanlar.toplam >= 90 ? '#10B981' : vpn.puanlar.toplam >= 80 ? '#3B82F6' : '#8B5CF6'}">
+                {vpn.puanlar.toplam}/100
+              </span>
+            </div>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Speed (WireGuard)</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">
+            {vpn.hiz_testleri?.nordlynx ? `${vpn.hiz_testleri.nordlynx.indirme_mbps} Mbps` :
+             vpn.hiz_testleri?.lightway ? `${vpn.hiz_testleri.lightway.indirme_mbps} Mbps` :
+             vpn.hiz_testleri?.wireguard ? `${vpn.hiz_testleri.wireguard.indirme_mbps} Mbps` : '—'}
+          </td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">No-Logs Audit</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">
+            {vpn.guvenlik.no_logs_bagimsiz_denetim
+              ? `<span class="text-green-600">✓ ${vpn.guvenlik.denetim_firmasi}</span>`
+              : '<span class="text-gray-400">Not audited</span>'}
+          </td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Countries</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">{vpn.sunucu_agi.ulke_sayisi}</td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Servers</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">{vpn.sunucu_agi.toplam_sunucu.toLocaleString()}</td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Devices</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">
+            {vpn.platform_destegi.es_zamani_baglanti || 'Unlimited'}
+          </td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">RAM-only</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">
+            {vpn.guvenlik.ram_only ? '<span class="text-green-600">✓</span>' : '<span class="text-gray-400">✗</span>'}
+          </td>
+        ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Best Price</td>
+        {vpns.map((vpn) => {
+          const p = pricing[vpn.id];
+          const bestPlan = p?.['2yil_plan'] || p?.['1yil_plan'] || p?.['aylik_plan'];
+          return (
+            <td class="py-3 px-4 text-center font-bold text-brand-dark">
+              {bestPlan ? `$${bestPlan.fiat}/mo` : '—'}
+            </td>
+          );
+        })}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Netflix</td>
+        {vpns.map((vpn) => (
+          <td class="py-3 px-4 text-center">
+            {vpn.streaming.netflix_us ? '<span class="text-green-600">✓</span>' : '<span class="text-red-500">✗</span>'}
+          </td>
+        ))}
+      </tr>
+    </tbody>
+  </table>
+</div>

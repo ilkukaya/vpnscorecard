@@ -1,0 +1,65 @@
+{
+  "son_guncelleme": "2026-04-01",
+  "kampanyalar": [
+    {
+      "vpn_id": "nordvpn",
+      "baslik": "NordVPN 2-Year Deal — 76% Off",
+      "aciklama": "Get NordVPN's best price with 2-year plan + 3 months free",
+      "indirim_yuzde": 76,
+      "aylik_fiyat_usd": 3.09,
+      "son_gecerlilik": "2026-05-31",
+      "link": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=901",
+      "dogrulama_tarihi": "2026-04-01"
+    },
+    {
+      "vpn_id": "surfshark",
+      "baslik": "Surfshark 2-Year Deal — 86% Off",
+      "aciklama": "Surfshark's lowest ever price — 86% off + 3 months free",
+      "indirim_yuzde": 86,
+      "aylik_fiyat_usd": 2.19,
+      "son_gecerlilik": "2026-06-30",
+      "link": "https://surfshark.com/affiliates?ref=YOURID",
+      "dogrulama_tarihi": "2026-04-01"
+    },
+    {
+      "vpn_id": "cyberghost",
+      "baslik": "CyberGhost 2-Year Deal — 84% Off",
+      "aciklama": "CyberGhost's best deal — 2 years + 4 months free",
+      "indirim_yuzde": 84,
+      "aylik_fiyat_usd": 2.03,
+      "son_gecerlilik": "2026-06-30",
+      "link": "https://www.cyberghostvpn.com/affiliates?ref=YOURID",
+      "dogrulama_tarihi": "2026-04-01"
+    },
+    {
+      "vpn_id": "pia",
+      "baslik": "PIA 3-Year Deal — 83% Off",
+      "aciklama": "Private Internet Access lowest price — 3 years + 3 months free",
+      "indirim_yuzde": 83,
+      "aylik_fiyat_usd": 1.98,
+      "son_gecerlilik": "2026-06-30",
+      "link": "https://www.privateinternetaccess.com/affiliate",
+      "dogrulama_tarihi": "2026-04-01"
+    },
+    {
+      "vpn_id": "expressvpn",
+      "baslik": "ExpressVPN 1-Year Deal — 49% Off",
+      "aciklama": "ExpressVPN annual plan + 3 months free",
+      "indirim_yuzde": 49,
+      "aylik_fiyat_usd": 6.67,
+      "son_gecerlilik": "2026-05-31",
+      "link": "https://www.expressvpn.com/vpn-service/refer-a-friend?ref=YOURID",
+      "dogrulama_tarihi": "2026-04-01"
+    },
+    {
+      "vpn_id": "protonvpn",
+      "baslik": "Proton VPN Plus — 60% Off",
+      "aciklama": "Proton VPN 2-year plan at lowest price",
+      "indirim_yuzde": 60,
+      "aylik_fiyat_usd": 3.99,
+      "son_gecerlilik": "2026-05-31",
+      "link": "https://protonvpn.com",
+      "dogrulama_tarihi": "2026-04-01"
+    }
+  ]
+}

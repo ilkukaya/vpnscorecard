@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getAllVPNs } from '../../lib/vpnData';
+
+const vpns = getAllVPNs().sort((a, b) => b.puanlar.toplam - a.puanlar.toplam);
+const title = 'All VPN Reviews — VPNScorecard';
+const description = 'Independent reviews of every major VPN. Speed tests, privacy audits, pricing, and scores.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-brand-dark mb-2">All VPN Reviews</h1>
+    <p class="text-gray-600 mb-8">In-depth reviews of every major VPN, tested and scored independently.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {vpns.map((vpn) => (
+        <a href={`/reviews/${vpn.slug}`} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-4">
+            <img src={vpn.logo} alt={vpn.ad} class="w-10 h-10 object-contain" loading="lazy" />
+            <div>
+              <h2 class="font-bold text-brand-dark">{vpn.ad}</h2>
+              <p class="text-sm text-gray-500">{vpn.tagline}</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold" style="color: {vpn.puanlar.toplam >= 90 ? '#10B981' : vpn.puanlar.toplam >= 80 ? '#3B82F6' : '#8B5CF6'}">
+              {vpn.puanlar.toplam}/100
+            </span>
+            <span class="text-brand font-medium text-sm hover:underline">Read Review →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

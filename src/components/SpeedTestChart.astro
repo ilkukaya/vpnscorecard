@@ -1,0 +1,65 @@
+---
+interface Props {
+  vpnId: string;
+  speedTest: any;
+}
+
+const { vpnId, speedTest } = Astro.props;
+---
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="text-center p-4 bg-blue-50 rounded-lg">
+      <p class="text-2xl font-bold text-blue-600">{speedTest.indirme_mbps}</p>
+      <p class="text-xs text-gray-600 mt-1">Download (Mbps)</p>
+    </div>
+    <div class="text-center p-4 bg-green-50 rounded-lg">
+      <p class="text-2xl font-bold text-green-600">{speedTest.yukleme_mbps}</p>
+      <p class="text-xs text-gray-600 mt-1">Upload (Mbps)</p>
+    </div>
+    <div class="text-center p-4 bg-purple-50 rounded-lg">
+      <p class="text-2xl font-bold text-purple-600">{speedTest.ping_ms}</p>
+      <p class="text-xs text-gray-600 mt-1">Ping (ms)</p>
+    </div>
+    <div class="text-center p-4 bg-amber-50 rounded-lg">
+      <p class="text-2xl font-bold text-amber-600">{speedTest.tutarlilik_yuzde}%</p>
+      <p class="text-xs text-gray-600 mt-1">Consistency</p>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <div>
+      <div class="flex items-center justify-between text-sm mb-1">
+        <span class="text-gray-600">Download Speed</span>
+        <span class="font-medium">{speedTest.indirme_mbps} / 1000 Mbps</span>
+      </div>
+      <div class="w-full bg-gray-100 rounded-full h-4">
+        <div
+          class="bg-blue-500 h-4 rounded-full transition-all duration-700"
+          style="width: {speedTest.indirme_mbps / 10}%"
+        ></div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center justify-between text-sm mb-1">
+        <span class="text-gray-600">Upload Speed</span>
+        <span class="font-medium">{speedTest.yukleme_mbps} / 1000 Mbps</span>
+      </div>
+      <div class="w-full bg-gray-100 rounded-full h-4">
+        <div
+          class="bg-green-500 h-4 rounded-full transition-all duration-700"
+          style="width: {speedTest.yukleme_mbps / 10}%"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 flex flex-wrap gap-4 text-xs text-gray-500">
+    <span>Protocol: {speedTest.protokol}</span>
+    <span>Jitter: {speedTest.jitter_ms}ms</span>
+    <span>Packet Loss: {speedTest.paket_kaybi_yuzde}%</span>
+    <span>Rank: #{speedTest.siralamasi}</span>
+  </div>
+
+  <p class="text-xs text-gray-400 mt-4">Tested on Hetzner Frankfurt, 1 Gbps baseline | March 15, 2026 | 5-run average</p>
+</div>

@@ -1,0 +1,7 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
+const vpn = getVPNBySlug('expressvpn');
+if (!vpn) throw new Error('ExpressVPN not found');
+---
+<ReviewLayout vpn={vpn} />

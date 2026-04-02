@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import VPNCard from '../../components/VPNCard.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import { getPrivacyVPNs, getPricing } from '../../lib/vpnData';
+
+const vpns = getPrivacyVPNs();
+const title = 'Best VPN for Privacy in 2026: No-Logs, Audited, Anonymous';
+const description = 'The most private VPNs with independently audited no-logs policies, strong encryption, and privacy-friendly jurisdictions.';
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <AffiliateDisclosure />
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN for Privacy in 2026</h1>
+    <p class="text-gray-600 mb-8">Independently audited no-logs, strong encryption, and privacy-friendly jurisdictions.</p>
+    <div class="space-y-4 mb-8">
+      {vpns.map((vpn, i) => { const pricing = getPricing(vpn.id); return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-privacy" />; })}
+    </div>
+    <FAQAccordion questions={[
+      { question: 'What makes a VPN private?', answer: 'A private VPN has: independently audited no-logs policy, strong encryption (AES-256), kill switch, DNS leak protection, and is based outside the 14 Eyes alliance.' },
+      { question: 'Is Mullvad the most private VPN?', answer: 'Mullvad is the most anonymous — no email required, cash payments, RAM-only servers. However, it doesn\'t support streaming.' },
+      { question: 'Does jurisdiction matter?', answer: 'Yes. VPNs based in 14 Eyes countries (US, UK, etc.) can be legally compelled to hand over data. Panama, Switzerland, and BVI are safer jurisdictions.' },
+    ]} />
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

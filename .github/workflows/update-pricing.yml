@@ -1,0 +1,36 @@
+name: Haftalık VPN Fiyat Güncelleme
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests beautifulsoup4 lxml
+
+      - name: Fiyatları Güncelle
+        run: python scripts/update_pricing.py
+        continue-on-error: true
+
+      - name: Doğrula
+        run: python scripts/validate_data.py
+
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "VPNScorecard Bot"
+          git add data/pricing.json data/deals.json
+          git diff --staged --quiet || git commit -m \
+            "💰 VPN fiyatları güncellendi: $(date '+%Y-%m-%d')"
+          git push

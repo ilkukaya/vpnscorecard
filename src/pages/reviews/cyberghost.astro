@@ -1,0 +1,7 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
+const vpn = getVPNBySlug('cyberghost');
+if (!vpn) throw new Error('CyberGhost not found');
+---
+<ReviewLayout vpn={vpn} />

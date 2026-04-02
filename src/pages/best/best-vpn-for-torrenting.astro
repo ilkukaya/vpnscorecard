@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import VPNCard from '../../components/VPNCard.astro';
+import FAQAccordion from '../../components/FAQAccordion.astro';
+import { getTorrentVPNs, getPricing } from '../../lib/vpnData';
+
+const vpns = getTorrentVPNs();
+const title = 'Best VPN for Torrenting in 2026: P2P, No Logs, Fast';
+const description = 'The best VPNs for torrenting with P2P-optimized servers, no-logs policies, and fast speeds.';
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <AffiliateDisclosure />
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN for Torrenting in 2026</h1>
+    <p class="text-gray-600 mb-8">P2P-optimized servers, no-logs policies, and fast speeds for safe torrenting.</p>
+    <div class="space-y-4 mb-8">
+      {vpns.map((vpn, i) => { const pricing = getPricing(vpn.id); return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-torrenting" />; })}
+    </div>
+    <FAQAccordion questions={[
+      { question: 'Do I need a VPN for torrenting?', answer: 'Yes. Your ISP can see your torrenting activity and may throttle your connection or send copyright notices. A VPN hides your activity.' },
+      { question: 'Are all VPNs safe for torrenting?', answer: 'No. Only use VPNs with a verified no-logs policy and dedicated P2P servers. Avoid free VPNs for torrenting.' },
+      { question: 'Which is the best free VPN for torrenting?', answer: 'We don\'t recommend any free VPN for torrenting. Most have data limits or sell your data. Proton VPN\'s free tier doesn\'t support P2P.' },
+    ]} />
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

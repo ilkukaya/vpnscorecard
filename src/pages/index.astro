@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import VPNCard from '../components/VPNCard.astro';
+import ScoreGauge from '../components/ScoreGauge.astro';
+import CTAButton from '../components/CTAButton.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import TrustBadge from '../components/TrustBadge.astro';
+import { getRankedVPNs, getPricing, getActiveDeals, getSonGuncelleme } from '../lib/vpnData';
+import { getScoreLabel } from '../lib/scoring';
+import { formatPrice } from '../lib/formatters';
+
+const vpns = getRankedVPNs();
+const deals = getActiveDeals();
+const lastUpdate = getSonGuncelleme();
+
+const title = 'Best VPN 2026: Tested, Scored, Ranked | VPNScorecard';
+const description = 'We independently test and score every major VPN. NordVPN tops our 2026 rankings with 91/100. See full speed tests, privacy audits, and pricing for all 8 VPNs.';
+
+const schemaMarkup = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "VPNScorecard",
+  "url": "https://vpnscorecard.com",
+  "description": "Independent VPN testing, scoring, and ranking platform",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://vpnscorecard.com/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+});
+
+const itemListSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best VPNs 2026",
+  "itemListElement": vpns.map((vpn, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "name": vpn.ad,
+      "url": `https://vpnscorecard.com/reviews/${vpn.slug}`,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": (vpn.puanlar.toplam / 10).toFixed(1),
+        "bestRating": "10",
+        "worstRating": "1"
+      }
+    }
+  }))
+});
+---
+
+<BaseLayout title={title} description={description} schemaMarkup={`${schemaMarkup}\n${itemListSchema}`}>
+  <Header slot="header" />
+
+  <section class="bg-brand-dark text-white py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+        Best VPN 2026: Tested, Scored, Ranked
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        We test every VPN with real speed measurements and independent audits. No sponsored rankings. Just data.
+      </p>
+      <TrustBadge />
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        {vpns.length > 0 && (
+          <CTAButton href={`/reviews/${vpns[0].slug}`} vpnId={vpns[0].id} pageType="hero" variant="light" size="lg">
+            See #{1} Pick: {vpns[0].ad}
+          </CTAButton>
+        )}
+        <a href="/quiz" class="inline-flex items-center px-8 py-3.5 border-2 border-white/30 hover:border-white text-white font-semibold rounded-lg transition-colors duration-200 text-base">
+          Take the Quiz →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <AffiliateDisclosure />
+
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-brand-dark">VPN Rankings — April 2026</h2>
+      <span class="text-sm text-gray-500">{vpns.length} VPNs reviewed</span>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6" id="usecase-filters">
+      <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-brand text-white" data-filter="all">All VPNs</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="streaming">🎬 Streaming</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="gizlilik">🔒 Privacy</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="butce_dostu">💰 Budget</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="torrent">⬇️ Torrent</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="yeni_baslayanlar">👶 Beginners</button>
+    </div>
+
+    <div class="space-y-4" id="vpn-list">
+      {vpns.map((vpn, index) => {
+        const pricing = getPricing(vpn.id);
+        return <VPNCard vpn={vpn} rank={index + 1} pricing={pricing} pageType="index" />;
+      })}
+    </div>
+  </section>
+
+  <section class="bg-white border-y border-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">Speed Test Results — March 2026</h2>
+      <div class="max-w-3xl mx-auto space-y-3">
+        {vpns.filter(v => v.hiz_testleri).sort((a, b) => {
+          const aSpeed = a.hiz_testleri?.nordlynx?.indirme_mbps || a.hiz_testleri?.lightway?.indirme_mbps || a.hiz_testleri?.wireguard?.indirme_mbps || 0;
+          const bSpeed = b.hiz_testleri?.nordlynx?.indirme_mbps || b.hiz_testleri?.lightway?.indirme_mbps || b.hiz_testleri?.wireguard?.indirme_mbps || 0;
+          return bSpeed - aSpeed;
+        }).map((vpn, i) => {
+          const testData = vpn.hiz_testleri;
+          const speed = testData?.nordlynx?.indirme_mbps || testData?.lightway?.indirme_mbps || testData?.wireguard?.indirme_mbps || 0;
+          const protocol = testData?.nordlynx ? 'NordLynx' : testData?.lightway ? 'Lightway' : 'WireGuard';
+          return (
+            <div class="flex items-center gap-4">
+              <span class="text-sm font-bold text-gray-400 w-6 text-right">#{i + 1}</span>
+              <img src={vpn.logo} alt={vpn.ad} class="w-6 h-6 object-contain" loading="lazy" />
+              <span class="text-sm font-medium w-28">{vpn.ad}</span>
+              <div class="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
+                <div class="h-6 rounded-full flex items-center justify-end pr-2 transition-all duration-700" style="width: {speed / 10}%; background-color: {vpn.renk_hex}">
+                  <span class="text-xs font-bold text-white">{speed} Mbps</span>
+                </div>
+              </div>
+              <span class="text-xs text-gray-500 w-20">{protocol}</span>
+            </div>
+          );
+        })}
+      </div>
+      <p class="text-center text-xs text-gray-500 mt-6">Tested on Hetzner Frankfurt, 1 Gbps baseline | March 15, 2026 | <a href="/methodology" class="text-brand hover:underline">Full methodology</a></p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 py-16">
+    <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">Featured Comparisons</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="/compare/nordvpn-vs-expressvpn" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-center gap-4 mb-4">
+          <img src="/logos/nordvpn.svg" alt="NordVPN" class="w-12 h-12 object-contain" loading="lazy" />
+          <span class="text-gray-400 font-bold">VS</span>
+          <img src="/logos/expressvpn.svg" alt="ExpressVPN" class="w-12 h-12 object-contain" loading="lazy" />
+        </div>
+        <h3 class="text-lg font-bold text-center text-brand-dark">NordVPN vs ExpressVPN</h3>
+        <p class="text-sm text-gray-500 text-center mt-2">The most searched VPN comparison</p>
+      </a>
+      <a href="/compare/nordvpn-vs-surfshark" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-center gap-4 mb-4">
+          <img src="/logos/nordvpn.svg" alt="NordVPN" class="w-12 h-12 object-contain" loading="lazy" />
+          <span class="text-gray-400 font-bold">VS</span>
+          <img src="/logos/surfshark.svg" alt="Surfshark" class="w-12 h-12 object-contain" loading="lazy" />
+        </div>
+        <h3 class="text-lg font-bold text-center text-brand-dark">NordVPN vs Surfshark</h3>
+        <p class="text-sm text-gray-500 text-center mt-2">Same parent company, different strengths</p>
+      </a>
+      <a href="/best/best-cheap-vpn" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-center mb-4">
+          <span class="text-4xl">💰</span>
+        </div>
+        <h3 class="text-lg font-bold text-center text-brand-dark">Best Cheap VPN</h3>
+        <p class="text-sm text-gray-500 text-center mt-2">Under $2.50/mo without sacrificing quality</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 border-y border-gray-100 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-brand-dark mb-8">Why Trust VPNScorecard?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <div class="text-3xl mb-3">🔬</div>
+          <h3 class="font-bold text-brand-dark mb-2">Lab-Tested</h3>
+          <p class="text-sm text-gray-600">Real speed tests from a dedicated 1 Gbps server in Frankfurt</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <div class="text-3xl mb-3">📅</div>
+          <h3 class="font-bold text-brand-dark mb-2">Updated Monthly</h3>
+          <p class="text-sm text-gray-600">Prices verified weekly, speed tests re-run monthly</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <div class="text-3xl mb-3">🚫</div>
+          <h3 class="font-bold text-brand-dark mb-2">No Paid Rankings</h3>
+          <p class="text-sm text-gray-600">No VPN can pay for a better position. Period.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+          <div class="text-3xl mb-3">🔍</div>
+          <h3 class="font-bold text-brand-dark mb-2">Transparent</h3>
+          <p class="text-sm text-gray-600">Full methodology, raw data, and affiliate disclosure</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {deals.length > 0 && (
+    <section class="max-w-7xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">Current VPN Deals</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {deals.slice(0, 6).map((deal) => (
+          <a href={deal.link} rel="nofollow noopener sponsored" target="_blank" class="block bg-white rounded-xl border-2 border-green-200 p-6 hover:border-green-400 transition-colors">
+            <div class="flex items-center justify-between mb-2">
+              <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded-full">{deal.indirim_yuzde}% OFF</span>
+              <span class="text-xs text-gray-500">Verified {deal.dogrulama_tarihi}</span>
+            </div>
+            <h3 class="font-bold text-brand-dark">{deal.baslik}</h3>
+            <p class="text-sm text-gray-600 mt-1">{deal.aciklama}</p>
+            <p class="text-lg font-bold text-brand mt-2">${deal.aylik_fiyat_usd}/mo</p>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-6">
+        <a href="/deals" class="text-brand font-medium hover:underline">View all deals →</a>
+      </div>
+    </section>
+  )}
+
+  <section class="bg-brand-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">Not sure which VPN to choose?</h2>
+      <p class="text-gray-300 mb-8">Answer 5 quick questions and we'll recommend the best VPN for your needs.</p>
+      <a href="/quiz" class="inline-flex items-center px-8 py-3.5 bg-brand-light hover:bg-brand text-white font-semibold rounded-lg transition-colors duration-200 text-lg">
+        Take the VPN Quiz →
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-brand', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-700');
+      });
+      btn.classList.remove('bg-gray-100', 'text-gray-700');
+      btn.classList.add('bg-brand', 'text-white');
+
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('#vpn-list > div').forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          const tags = card.getAttribute('data-tags') || '';
+          card.style.display = tags.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>

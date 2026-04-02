@@ -1,0 +1,292 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import TrustBadge from '../components/TrustBadge.astro';
+import CTAButton from '../components/CTAButton.astro';
+import ScoreGauge from '../components/ScoreGauge.astro';
+import ScoreBreakdown from '../components/ScoreBreakdown.astro';
+import ProConList from '../components/ProConList.astro';
+import PricingTable from '../components/PricingTable.astro';
+import SpeedTestChart from '../components/SpeedTestChart.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import { getVPNBySlug, getPricing, getSpeedTestResult, getDealForVPN } from '../lib/vpnData';
+import { getBestAffiliateLink, getCTAText } from '../lib/affiliateLinks';
+import { getScoreLabel, getScoreColor } from '../lib/scoring';
+import { formatPrice, formatDate, getUseCaseLabel } from '../lib/formatters';
+
+interface Props {
+  vpn: any;
+}
+
+const { vpn } = Astro.props;
+const pricing = getPricing(vpn.id);
+const speedTest = getSpeedTestResult(vpn.id);
+const deal = getDealForVPN(vpn.id);
+const affiliateLink = getBestAffiliateLink(vpn, 'review');
+const ctaText = getCTAText({ ...vpn, pricingData: pricing }, 'review');
+const scoreLabel = getScoreLabel(vpn.puanlar.toplam);
+const scoreColorClass = getScoreColor(vpn.puanlar.toplam);
+
+const title = `${vpn.ad} Review 2026: Speed Tests, Scores & Pricing | VPNScorecard`;
+const description = `${vpn.ad} scores ${vpn.puanlar.toplam}/100 in our independent review. ${speedTest ? `${speedTest.indirme_mbps} Mbps in speed tests` : 'Tested speeds'}. ${vpn.guvenlik.no_logs_bagimsiz_denetim ? `${vpn.guvenlik.denetim_firmasi}-audited no-logs policy` : 'No-logs policy'}. Full test results inside.`;
+
+const schemaMarkup = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "SoftwareApplication",
+    "name": vpn.ad,
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Windows, Mac, iOS, Android, Linux"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": (vpn.puanlar.toplam / 10).toFixed(1),
+    "bestRating": "10",
+    "worstRating": "1"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "VPNScorecard"
+  },
+  "datePublished": "2026-04-01",
+  "dateModified": "2026-04-01",
+  "reviewBody": `${vpn.ad} scores ${vpn.puanlar.toplam}/100 in our testing. ${vpn.tagline}.`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "VPNScorecard",
+    "url": "https://vpnscorecard.com"
+  }
+});
+
+const faqData = [
+  {
+    question: `Is ${vpn.ad} safe to use?`,
+    answer: vpn.guvenlik.no_logs_bagimsiz_denetim
+      ? `Yes. ${vpn.ad} has an independently audited no-logs policy verified by ${vpn.guvenlik.denetim_firmasi}. It uses AES-256 encryption and includes a kill switch and DNS leak protection.`
+      : `Yes. ${vpn.ad} uses AES-256 encryption and includes standard security features like a kill switch and DNS leak protection.`
+  },
+  {
+    question: `Does ${vpn.ad} work with Netflix?`,
+    answer: vpn.streaming.netflix_us
+      ? `Yes, ${vpn.ad} works with Netflix US, UK, and most other regional libraries in our March 2026 testing.`
+      : `In our March 2026 testing, ${vpn.ad} had limited Netflix support. We recommend NordVPN or ExpressVPN for reliable Netflix access.`
+  },
+  {
+    question: `How much does ${vpn.ad} cost?`,
+    answer: pricing
+      ? `${vpn.ad} starts from ${formatPrice(pricing.aylik_plan?.fiyat || 0)}/month. The best value is the ${pricing['2yil_plan'] ? '2-year plan at ' + formatPrice(pricing['2yil_plan'].fiyat) + '/mo' : pricing['1yil_plan'] ? '1-year plan at ' + formatPrice(pricing['1yil_plan'].fiyat) + '/mo' : 'monthly plan'}.`
+      : `Check the pricing table below for current ${vpn.ad} plans.`
+  },
+  {
+    question: `How many devices can I use with ${vpn.ad}?`,
+    answer: vpn.platform_destegi.es_zamani_baglanti
+      ? `${vpn.ad} supports ${vpn.platform_destegi.es_zamani_baglanti} simultaneous connections.`
+      : `${vpn.ad} supports unlimited simultaneous connections.`
+  },
+  {
+    question: `Is there a money-back guarantee?`,
+    answer: pricing?.para_iade_gun
+      ? `Yes, ${vpn.ad} offers a ${pricing.para_iade_gun}-day money-back guarantee. No questions asked.`
+      : `Check ${vpn.ad}'s website for their current refund policy.`
+  }
+];
+---
+
+<BaseLayout title={title} description={description} schemaMarkup={schemaMarkup}>
+  <Header slot="header" />
+
+  <AffiliateDisclosure />
+
+  <article class="max-w-4xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <ol class="flex items-center gap-1">
+        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li><a href="/reviews" class="hover:text-brand">Reviews</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li class="text-gray-700 font-medium">{vpn.ad}</li>
+      </ol>
+    </nav>
+
+    <header class="mb-8">
+      <div class="flex items-center gap-4 mb-4">
+        <img src={vpn.logo} alt={`${vpn.ad} logo`} class="w-16 h-16 object-contain" loading="lazy" />
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-brand-dark">{vpn.ad} Review 2026</h1>
+          <p class="text-lg text-gray-600 mt-1">{vpn.tagline}</p>
+        </div>
+      </div>
+
+      <TrustBadge vpnId={vpn.id} />
+    </header>
+
+    <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Quick Summary">
+      <div class="flex flex-col md:flex-row gap-6 items-start">
+        <div class="flex-shrink-0">
+          <ScoreGauge score={vpn.puanlar.toplam} size={120} />
+          <p class="text-center text-sm font-semibold mt-2 {scoreColorClass}">{scoreLabel.label}</p>
+        </div>
+        <div class="flex-1">
+          <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
+            <h2 class="font-semibold text-brand-dark mb-2">TL;DR — Our Verdict</h2>
+            <p class="text-gray-700">{vpn.tagline}. Scored <strong>{vpn.puanlar.toplam}/100</strong> in our independent testing. {vpn.guvenlik.no_logs_bagimsiz_denetim ? `Independently audited by ${vpn.guvenlik.denetim_firmasi}.` : ''} {pricing ? `From ${formatPrice(pricing['2yil_plan']?.fiyat || pricing['1yil_plan']?.fiyat || pricing.aylik_plan?.fiyat || 0)}/mo.` : ''}</p>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {vpn.en_iyi_icin.map((useCase: string) => (
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-light/10 text-brand-dark">
+                Best for: {getUseCaseLabel(useCase)}
+              </span>
+            ))}
+          </div>
+          <CTAButton href={affiliateLink} vpnId={vpn.id} pageType="review" variant="primary" size="lg">
+            {ctaText}
+          </CTAButton>
+          {pricing?.para_iade_gun && (
+            <p class="text-xs text-gray-500 mt-2">{pricing.para_iade_gun}-day money-back guarantee. No questions asked.</p>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8" aria-label="Score Breakdown">
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Score Breakdown</h2>
+      <ScoreBreakdown scores={vpn.puanlar} />
+    </section>
+
+    {pricing && (
+      <section class="mb-8" aria-label="Pricing">
+        <h2 class="text-2xl font-bold text-brand-dark mb-4">Pricing & Plans</h2>
+        <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.ad} pageType="review" />
+      </section>
+    )}
+
+    {speedTest && (
+      <section class="mb-8" aria-label="Speed Test Results">
+        <h2 class="text-2xl font-bold text-brand-dark mb-4">Speed Test Results</h2>
+        <SpeedTestChart vpnId={vpn.id} speedTest={speedTest} />
+      </section>
+    )}
+
+    <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Security Analysis">
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Security & Privacy</h2>
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-green-500 font-bold">✓</span>
+            <div>
+              <p class="font-medium">Encryption</p>
+              <p class="text-sm text-gray-600">{vpn.guvenlik.sifreleme}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class={vpn.guvenlik.no_logs_bagimsiz_denetim ? 'text-green-500 font-bold' : 'text-yellow-500 font-bold'}>
+              {vpn.guvenlik.no_logs_bagimsiz_denetim ? '✓' : '~'}
+            </span>
+            <div>
+              <p class="font-medium">No-Logs Policy</p>
+              <p class="text-sm text-gray-600">
+                {vpn.guvenlik.no_logs_bagimsiz_denetim
+                  ? `Audited by ${vpn.guvenlik.denetim_firmasi} (${vpn.guvenlik.denetim_tarihi})`
+                  : 'Claimed (no independent audit)'}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class={vpn.guvenlik.kill_switch ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
+              {vpn.guvenlik.kill_switch ? '✓' : '✗'}
+            </span>
+            <div>
+              <p class="font-medium">Kill Switch</p>
+              <p class="text-sm text-gray-600">{vpn.guvenlik.kill_switch ? 'Yes — tested working' : 'Not available'}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class={vpn.guvenlik.dns_sizinti_korumasi ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
+              {vpn.guvenlik.dns_sizinti_korumasi ? '✓' : '✗'}
+            </span>
+            <div>
+              <p class="font-medium">DNS Leak Protection</p>
+              <p class="text-sm text-gray-600">{vpn.guvenlik.dns_sizinti_korumasi ? 'Yes — no leaks detected' : 'Not available'}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class={vpn.is14Eyes ? 'text-yellow-500 font-bold' : 'text-green-500 font-bold'}>
+              {vpn.is14Eyes ? '~' : '✓'}
+            </span>
+            <div>
+              <p class="font-medium">Jurisdiction</p>
+              <p class="text-sm text-gray-600">{vpn.kurucu_ulke} {vpn.is14Eyes ? '(14 Eyes member)' : '(Outside 14 Eyes)'}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 font-bold">—</span>
+            <div>
+              <p class="font-medium">Protocols</p>
+              <p class="text-sm text-gray-600">{vpn.guvenlik.protokoller.join(', ')}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Streaming Support">
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Streaming Support</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {Object.entries(vpn.streaming).map(([service, works]) => (
+          <div class="flex items-center gap-2 p-3 rounded-lg {works ? 'bg-green-50' : 'bg-red-50'}">
+            <span class="text-lg">{works ? '✅' : '❌'}</span>
+            <span class="text-sm font-medium capitalize">{service.replace(/_/g, ' ')}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-xs text-gray-500 mt-3">Tested March 2026</p>
+    </section>
+
+    <section class="mb-8" aria-label="Pros and Cons">
+      <ProConList pros={vpn.artilari} cons={vpn.eksileri} />
+    </section>
+
+    <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Who is this VPN for?">
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Who is {vpn.ad} Best For?</h2>
+      <div class="prose max-w-none">
+        <p class="text-gray-700">
+          {vpn.ad} is best for users who prioritize {vpn.en_iyi_icin.map((u: string) => getUseCaseLabel(u)).join(', ').toLowerCase()}.
+          {vpn.puanlar.hiz >= 20 ? ' With excellent speed test results, it handles 4K streaming and large downloads without issues.' : ''}
+          {vpn.guvenlik.no_logs_bagimsiz_denetim ? ' The independently audited no-logs policy means your browsing data stays private.' : ''}
+        </p>
+        <p class="text-gray-700 mt-3">
+          Consider alternatives if you need {vpn.streaming.netflix_us ? '' : 'reliable Netflix access (try NordVPN instead)'}
+          {vpn.platform_destegi.es_zamani_baglanti && vpn.platform_destegi.es_zamani_baglanti < 10 ? ' more simultaneous connections (try Surfshark for unlimited)' : ''}.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-8" aria-label="Frequently Asked Questions">
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
+      <FAQAccordion questions={faqData} />
+    </section>
+
+    <section class="bg-brand-dark rounded-xl p-8 text-center text-white mb-8" aria-label="Call to Action">
+      <h2 class="text-2xl font-bold mb-2">Get the Best Price on {vpn.ad}</h2>
+      <p class="text-gray-300 mb-6">Exclusive deal through VPNScorecard — verified April 2026</p>
+      <CTAButton href={affiliateLink} vpnId={vpn.id} pageType="review" variant="light" size="lg">
+        {ctaText}
+      </CTAButton>
+      {pricing?.para_iade_gun && (
+        <p class="text-sm text-gray-400 mt-4">{pricing.para_iade_gun}-day money-back guarantee. No questions asked.</p>
+      )}
+    </section>
+
+    <footer class="text-sm text-gray-500 border-t border-gray-200 pt-6">
+      <p>Last updated: April 1, 2026 | Next review: July 2026</p>
+      <p class="mt-1">
+        <a href="/methodology" class="text-brand hover:underline">Our testing methodology</a>
+      </p>
+    </footer>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>

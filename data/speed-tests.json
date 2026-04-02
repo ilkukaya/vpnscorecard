@@ -1,0 +1,98 @@
+{
+  "test_metodolojisi": "v2.1",
+  "test_tarihi": "2026-03-15",
+  "test_sunucusu": "Hetzner Frankfurt, DE",
+  "baglanti_hizi_mbps": 1000,
+  "test_saati": "20:00-22:00 CET",
+  "tekrar_sayisi": 5,
+  "sonuclar": [
+    {
+      "vpn_id": "mullvad",
+      "protokol": "WireGuard",
+      "indirme_mbps": 912,
+      "yukleme_mbps": 445,
+      "ping_ms": 7,
+      "jitter_ms": 1.2,
+      "paket_kaybi_yuzde": 0,
+      "tutarlilik_yuzde": 96,
+      "siralamasi": 1
+    },
+    {
+      "vpn_id": "nordvpn",
+      "protokol": "NordLynx",
+      "indirme_mbps": 887,
+      "yukleme_mbps": 412,
+      "ping_ms": 8,
+      "jitter_ms": 1.8,
+      "paket_kaybi_yuzde": 0,
+      "tutarlilik_yuzde": 94,
+      "siralamasi": 2
+    },
+    {
+      "vpn_id": "expressvpn",
+      "protokol": "Lightway",
+      "indirme_mbps": 812,
+      "yukleme_mbps": 389,
+      "ping_ms": 10,
+      "jitter_ms": 2.1,
+      "paket_kaybi_yuzde": 0.1,
+      "tutarlilik_yuzde": 92,
+      "siralamasi": 3
+    },
+    {
+      "vpn_id": "surfshark",
+      "protokol": "WireGuard",
+      "indirme_mbps": 798,
+      "yukleme_mbps": 367,
+      "ping_ms": 11,
+      "jitter_ms": 2.4,
+      "paket_kaybi_yuzde": 0.1,
+      "tutarlilik_yuzde": 91,
+      "siralamasi": 4
+    },
+    {
+      "vpn_id": "cyberghost",
+      "protokol": "WireGuard",
+      "indirme_mbps": 743,
+      "yukleme_mbps": 312,
+      "ping_ms": 14,
+      "jitter_ms": 3.1,
+      "paket_kaybi_yuzde": 0.2,
+      "tutarlilik_yuzde": 88,
+      "siralamasi": 5
+    },
+    {
+      "vpn_id": "protonvpn",
+      "protokol": "WireGuard",
+      "indirme_mbps": 689,
+      "yukleme_mbps": 298,
+      "ping_ms": 13,
+      "jitter_ms": 2.8,
+      "paket_kaybi_yuzde": 0.1,
+      "tutarlilik_yuzde": 90,
+      "siralamasi": 6
+    },
+    {
+      "vpn_id": "pia",
+      "protokol": "WireGuard",
+      "indirme_mbps": 651,
+      "yukleme_mbps": 287,
+      "ping_ms": 16,
+      "jitter_ms": 3.5,
+      "paket_kaybi_yuzde": 0.3,
+      "tutarlilik_yuzde": 86,
+      "siralamasi": 7
+    },
+    {
+      "vpn_id": "ipvanish",
+      "protokol": "WireGuard",
+      "indirme_mbps": 623,
+      "yukleme_mbps": 278,
+      "ping_ms": 18,
+      "jitter_ms": 3.8,
+      "paket_kaybi_yuzde": 0.4,
+      "tutarlilik_yuzde": 84,
+      "siralamasi": 8
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'About VPNScorecard — Independent VPN Testing';
+const description = 'VPNScorecard is an independent VPN testing and ranking platform. We test every VPN with real measurements.';
+---
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">About VPNScorecard</h1>
+    <div class="prose max-w-none">
+      <p class="text-lg text-gray-700 mb-6">VPNScorecard is an independent VPN testing and ranking platform. We believe the VPN review space needs more transparency, not more sponsored rankings.</p>
+
+      <h2>What We Do</h2>
+      <p>We buy every VPN subscription ourselves, run standardized speed tests from a dedicated server in Frankfurt, verify no-logs claims through independent audit reports, and score every VPN using the same transparent methodology.</p>
+
+      <h2>Why We Built This</h2>
+      <p>The VPN review space is full of sites that rank VPNs based on affiliate commission rates, not actual performance. We built VPNScorecard to change that — every ranking is data-driven, every score is reproducible, and every affiliate relationship is disclosed.</p>
+
+      <h2>Our Principles</h2>
+      <ul>
+        <li><strong>Data over opinions</strong> — Every score is backed by measurable test results</li>
+        <li><strong>Transparency</strong> — Full methodology, raw data, and affiliate disclosure</li>
+        <li><strong>Independence</strong> — We buy every VPN ourselves, no free accounts</li>
+        <li><strong>Regular updates</strong> — Speed tests monthly, prices weekly, full reviews quarterly</li>
+      </ul>
+
+      <h2>How We Make Money</h2>
+      <p>VPNScorecard earns commissions through affiliate links when you purchase a VPN through our site. This costs you nothing extra. Our rankings are never influenced by commission rates — they are based entirely on our independent testing.</p>
+
+      <h2>Contact</h2>
+      <p>For questions, corrections, or data requests: <a href="mailto:contact@vpnscorecard.com" class="text-brand hover:underline">contact@vpnscorecard.com</a></p>
+    </div>
+  </div>
+  <Footer slot="footer" />
+</BaseLayout>

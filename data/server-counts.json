@@ -1,0 +1,13 @@
+{
+  "son_guncelleme": "2026-04-01",
+  "sunucu_sayilari": {
+    "nordvpn": { "sunucu": 6400, "ulke": 111, "kaynak": "nordvpn.com", "tarih": "2026-04-01" },
+    "expressvpn": { "sunucu": 3000, "ulke": 105, "kaynak": "expressvpn.com", "tarih": "2026-04-01" },
+    "surfshark": { "sunucu": 3200, "ulke": 100, "kaynak": "surfshark.com", "tarih": "2026-04-01" },
+    "cyberghost": { "sunucu": 9600, "ulke": 91, "kaynak": "cyberghostvpn.com", "tarih": "2026-04-01" },
+    "protonvpn": { "sunucu": 7700, "ulke": 91, "kaynak": "protonvpn.com", "tarih": "2026-04-01" },
+    "pia": { "sunucu": 18651, "ulke": 91, "kaynak": "privateinternetaccess.com", "tarih": "2026-04-01" },
+    "ipvanish": { "sunucu": 2400, "ulke": 52, "kaynak": "ipvanish.com", "tarih": "2026-04-01" },
+    "mullvad": { "sunucu": 700, "ulke": 49, "kaynak": "mullvad.net", "tarih": "2026-04-01" }
+  }
+}

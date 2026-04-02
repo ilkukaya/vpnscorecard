@@ -1,0 +1,52 @@
+---
+interface Props {
+  score: number;
+  size?: number;
+  strokeWidth?: number;
+}
+
+const { score, size = 80, strokeWidth = 6 } = Astro.props;
+
+const radius = (size - strokeWidth) / 2;
+const circumference = 2 * Math.PI * radius;
+const offset = circumference - (score / 100) * circumference;
+
+function getScoreColor(score: number): string {
+  if (score >= 90) return '#10B981';
+  if (score >= 80) return '#3B82F6';
+  if (score >= 70) return '#8B5CF6';
+  if (score >= 60) return '#F59E0B';
+  return '#EF4444';
+}
+
+const color = getScoreColor(score);
+---
+
+<div class="relative inline-flex items-center justify-center" style="width: {size}px; height: {size}px">
+  <svg width={size} height={size} class="transform -rotate-90">
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      fill="none"
+      stroke="#E5E7EB"
+      stroke-width={strokeWidth}
+    />
+    <circle
+      cx={size / 2}
+      cy={size / 2}
+      r={radius}
+      fill="none"
+      stroke={color}
+      stroke-width={strokeWidth}
+      stroke-linecap="round"
+      stroke-dasharray={circumference}
+      stroke-dashoffset={offset}
+      class="animate-gauge-fill"
+      style="transition: stroke-dashoffset 1.5s ease-out"
+    />
+  </svg>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <span class="text-lg font-bold" style="color: {color}">{score}</span>
+  </div>
+</div>

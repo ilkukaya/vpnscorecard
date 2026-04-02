@@ -1,0 +1,56 @@
+---
+import { getBestAffiliateLink } from '../lib/affiliateLinks';
+import { formatPrice } from '../lib/formatters';
+
+interface Props {
+  pricing: any;
+  vpnId: string;
+  vpnName: string;
+  pageType?: string;
+}
+
+const { pricing, vpnId, vpnName, pageType = 'review' } = Astro.props;
+const affiliateLink = getBestAffiliateLink({ id: vpnId, affiliate: pricing }, pageType);
+
+const plans = [];
+if (pricing.aylik_plan) plans.push({ ...pricing.aylik_plan, label: 'Monthly', popular: false });
+if (pricing['6ay_plan']) plans.push({ ...pricing['6ay_plan'], label: '6 Months', popular: false });
+if (pricing['1yil_plan']) plans.push({ ...pricing['1yil_plan'], label: '1 Year', popular: true });
+if (pricing['2yil_plan']) plans.push({ ...pricing['2yil_plan'], label: '2 Years', popular: true });
+if (pricing['3yil_plan']) plans.push({ ...pricing['3yil_plan'], label: '3 Years', popular: true });
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {plans.map((plan) => (
+    <div class="relative bg-white rounded-xl border-2 {plan.popular ? 'border-brand shadow-md' : 'border-gray-200'} p-6">
+      {plan.popular && (
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</span>
+        </div>
+      )}
+      <h3 class="text-lg font-bold text-brand-dark mb-2">{plan.label}</h3>
+      <div class="mb-4">
+        <span class="text-3xl font-bold text-brand-dark">${plan.fiyat}</span>
+        <span class="text-gray-500">/mo</span>
+      </div>
+      {plan.toplam && (
+        <p class="text-sm text-gray-500 mb-2">Billed ${plan.toplam} total</p>
+      )}
+      {plan.tasarruf_yuzde && (
+        <p class="text-sm text-green-600 font-medium mb-4">Save {plan.tasarruf_yuzde}%</p>
+      )}
+      <a
+        href={affiliateLink}
+        rel="nofollow noopener sponsored"
+        target="_blank"
+        class="block w-full text-center py-2.5 rounded-lg font-semibold transition-colors duration-200 {plan.popular ? 'bg-brand hover:bg-brand-dark text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}"
+      >
+        Get {vpnName}
+      </a>
+    </div>
+  ))}
+</div>
+
+{pricing.para_iade_gun && (
+  <p class="text-sm text-gray-500 mt-4 text-center">{pricing.para_iade_gun}-day money-back guarantee</p>
+)}

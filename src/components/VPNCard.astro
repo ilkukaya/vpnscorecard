@@ -1,0 +1,141 @@
+---
+import { getBestAffiliateLink } from '../lib/affiliateLinks';
+import { getScoreLabel, getScoreColor } from '../lib/scoring';
+import { formatPrice, getUseCaseLabel } from '../lib/formatters';
+
+interface Props {
+  vpn: any;
+  rank: number;
+  pricing?: any;
+  pageType?: string;
+}
+
+const { vpn, rank, pricing, pageType = 'index' } = Astro.props;
+const affiliateLink = getBestAffiliateLink(vpn, pageType);
+const ctaText = pricing
+  ? `Get ${vpn.ad} — ${pricing['2yil_plan']?.tasarruf_yuzde || pricing['1yil_plan']?.tasarruf_yuzde || 0}% Off`
+  : `Visit ${vpn.ad}`;
+const scoreColorClass = getScoreColor(vpn.puanlar.toplam);
+const scoreLabel = getScoreLabel(vpn.puanlar.toplam);
+
+const rankColors: Record<number, string> = {
+  1: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+  2: 'bg-gray-100 text-gray-700 border-gray-200',
+  3: 'bg-orange-100 text-orange-800 border-orange-200',
+};
+const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200';
+---
+
+<div
+  class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200"
+  style="border-left: 4px solid {vpn.renk_hex}"
+  data-tags={vpn.en_iyi_icin.join(',')}
+>
+  <div class="p-4 md:p-6">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg border text-lg font-bold {rankClass}">
+          {rank}
+        </span>
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-3 mb-2">
+          <img src={vpn.logo} alt={`${vpn.ad} logo`} class="w-8 h-8 object-contain" loading="lazy" />
+          <div>
+            <h3 class="text-lg font-bold text-brand-dark">{vpn.ad}</h3>
+            <p class="text-sm text-gray-500 hidden md:block">{vpn.tagline}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl font-bold {scoreColorClass}">{vpn.puanlar.toplam}</span>
+          <span class="text-sm text-gray-500">/100</span>
+          <span class="text-xs px-2 py-0.5 rounded-full font-medium" style="background-color: {scoreLabel.color}20; color: {scoreLabel.color}">
+            {scoreLabel.label}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-3">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-gray-500">Speed</span>
+              <span class="font-medium">{vpn.puanlar.hiz}/25</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-1.5">
+              <div class="bg-blue-500 h-1.5 rounded-full" style="width: {(vpn.puanlar.hiz / 25) * 100}%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-gray-500">Privacy</span>
+              <span class="font-medium">{vpn.puanlar.gizlilik}/25</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-1.5">
+              <div class="bg-green-500 h-1.5 rounded-full" style="width: {(vpn.puanlar.gizlilik / 25) * 100}%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-gray-500">Value</span>
+              <span class="font-medium">{vpn.puanlar.fiyat_deger}/15</span>
+            </div>
+            <div class="w-full bg-gray-100 rounded-full h-1.5">
+              <div class="bg-amber-500 h-1.5 rounded-full" style="width: {(vpn.puanlar.fiyat_deger / 15) * 100}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 mb-3">
+          {vpn.en_iyi_icin.slice(0, 3).map((useCase: string) => (
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+              {getUseCaseLabel(useCase)}
+            </span>
+          ))}
+        </div>
+
+        {pricing && (
+          <div class="mb-3">
+            <span class="text-2xl font-bold text-brand-dark">
+              {formatPrice(pricing['2yil_plan']?.fiyat || pricing['1yil_plan']?.fiyat || pricing.aylik_plan?.fiyat || 0)}
+            </span>
+            <span class="text-sm text-gray-500">/mo</span>
+            {pricing['2yil_plan'] && (
+              <span class="ml-2 text-xs text-green-600 font-medium">Save {pricing['2yil_plan'].tasarruf_yuzde}%</span>
+            )}
+          </div>
+        )}
+
+        {vpn.guvenlik.no_logs_bagimsiz_denetim && (
+          <div class="flex items-center gap-1 text-xs text-gray-500 mb-3">
+            <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>{vpn.guvenlik.denetim_firmasi}-audited no-logs</span>
+          </div>
+        )}
+      </div>
+
+      <div class="flex-shrink-0 flex flex-col gap-2">
+        <a
+          href={affiliateLink}
+          rel="nofollow noopener sponsored"
+          target="_blank"
+          class="inline-flex items-center justify-center px-5 py-2.5 bg-brand hover:bg-brand-dark text-white font-semibold rounded-lg transition-colors duration-200 text-sm whitespace-nowrap"
+        >
+          {ctaText}
+        </a>
+        <a
+          href={`/reviews/${vpn.slug}`}
+          class="inline-flex items-center justify-center px-5 py-2 text-brand hover:text-brand-dark font-medium text-sm transition-colors duration-200 whitespace-nowrap"
+        >
+          Full Review →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-4 md:px-6 py-2 bg-gray-50 border-t border-gray-100">
+    <p class="text-xs text-gray-400">Affiliate link — we may earn a commission at no extra cost to you</p>
+  </div>
+</div>

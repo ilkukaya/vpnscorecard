@@ -1,0 +1,846 @@
+{
+  "son_guncelleme": "2026-04-01",
+  "test_metodolojisi_versiyon": "2.1",
+  "vpnler": [
+    {
+      "id": "nordvpn",
+      "ad": "NordVPN",
+      "slug": "nordvpn",
+      "logo": "/logos/nordvpn.svg",
+      "renk_hex": "#4687FF",
+      "tagline": "En hızlı ve en güvenilir VPN",
+      "website": "https://nordvpn.com",
+      "kurucu_ulke": "Panama",
+      "is14Eyes": false,
+      "kurulus_yili": 2012,
+      "guvenlik": {
+        "sifreleme": "AES-256-GCM",
+        "protokoller": ["NordLynx (WireGuard)", "OpenVPN", "IKEv2/IPSec"],
+        "varsayilan_protokol": "NordLynx",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Deloitte",
+        "denetim_tarihi": "2023-11",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "double_vpn": true,
+        "onion_over_vpn": true,
+        "obfuscated_sunucu": true,
+        "threat_protection": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 6400,
+        "ulke_sayisi": 111,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "nordlynx": {
+          "indirme_mbps": 887,
+          "yukleme_mbps": 412,
+          "ping_ms": 8,
+          "tutarlilik_yuzde": 94
+        },
+        "openvpn": {
+          "indirme_mbps": 312,
+          "yukleme_mbps": 180,
+          "ping_ms": 22,
+          "tutarlilik_yuzde": 89
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": true,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": true
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 2,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 23,
+        "gizlilik": 24,
+        "kullanim_kolayligi": 13,
+        "sunucu_agi": 14,
+        "fiyat_deger": 12,
+        "streaming": 5,
+        "toplam": 91
+      },
+      "affiliate": {
+        "program": "NordVPN Affiliate",
+        "komisyon_tipi": "recurring",
+        "komisyon_oran": 40,
+        "cookie_gun": 30,
+        "link_1ay": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=902",
+        "link_1yil": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=900",
+        "link_2yil": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=901"
+      },
+      "artilari": [
+        "Bağımsız denetimli no-logs politikası (Deloitte)",
+        "NordLynx ile piyasanın en hızlı VPN'i",
+        "111 ülkede 6.400+ sunucu",
+        "Threat Protection ile reklam ve malware engelleme",
+        "10 eş zamanlı bağlantı hakkı"
+      ],
+      "eksileri": [
+        "Router uygulaması kurulumu karmaşık",
+        "Türkçe müşteri hizmeti yok",
+        "RAM-only sunucu altyapısı henüz yok"
+      ],
+      "en_iyi_icin": ["streaming", "gizlilik", "hiz", "genel_kullanim"],
+      "onerilen_plan": "2 yıllık plan (en düşük aylık maliyet)",
+      "aktif": true
+    },
+    {
+      "id": "expressvpn",
+      "ad": "ExpressVPN",
+      "slug": "expressvpn",
+      "logo": "/logos/expressvpn.svg",
+      "renk_hex": "#DA3940",
+      "tagline": "Hız ve güvenilirlikte dünya standardı",
+      "website": "https://www.expressvpn.com",
+      "kurucu_ulke": "Britanya Virjin Adaları",
+      "is14Eyes": false,
+      "kurulus_yili": 2009,
+      "guvenlik": {
+        "sifreleme": "AES-256-GCM",
+        "protokoller": ["Lightway (WireGuard tabanlı)", "OpenVPN", "IKEv2", "L2TP"],
+        "varsayilan_protokol": "Lightway",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "KPMG",
+        "denetim_tarihi": "2024-02",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "double_vpn": false,
+        "obfuscated_sunucu": true,
+        "ram_only": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 3000,
+        "ulke_sayisi": 105,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": false,
+        "ram_only": true
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "lightway": {
+          "indirme_mbps": 812,
+          "yukleme_mbps": 389,
+          "ping_ms": 10,
+          "tutarlilik_yuzde": 92
+        },
+        "openvpn": {
+          "indirme_mbps": 289,
+          "yukleme_mbps": 167,
+          "ping_ms": 25,
+          "tutarlilik_yuzde": 87
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": 8
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": true,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": true
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 1,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 22,
+        "gizlilik": 23,
+        "kullanim_kolayligi": 15,
+        "sunucu_agi": 12,
+        "fiyat_deger": 9,
+        "streaming": 5,
+        "toplam": 86
+      },
+      "affiliate": {
+        "program": "ExpressVPN Affiliate",
+        "komisyon_tipi": "flat",
+        "komisyon_usd": 13,
+        "cookie_gun": 90,
+        "link_ana": "https://www.expressvpn.com/vpn-service/refer-a-friend?ref=YOURID"
+      },
+      "artilari": [
+        "RAM-only sunucu altyapısı (TrustedServer teknolojisi)",
+        "Lightway protokolü ile yüksek hız",
+        "105 ülkede geniş sunucu ağı",
+        "En iyi router VPN desteği",
+        "KPMG bağımsız no-logs denetimi"
+      ],
+      "eksileri": [
+        "Piyasanın en pahalı VPN'lerinden",
+        "Dedicated IP özelliği yok",
+        "Double VPN yok",
+        "8 eş zamanlı bağlantı limiti"
+      ],
+      "en_iyi_icin": ["streaming", "router_kullanimi", "kurumsal"],
+      "onerilen_plan": "1 yıllık plan",
+      "aktif": true
+    },
+    {
+      "id": "surfshark",
+      "ad": "Surfshark",
+      "slug": "surfshark",
+      "logo": "/logos/surfshark.svg",
+      "renk_hex": "#1DB9C3",
+      "tagline": "Sınırsız cihaz, sınırsız özgürlük",
+      "website": "https://surfshark.com",
+      "kurucu_ulke": "Hollanda",
+      "is14Eyes": true,
+      "kurulus_yili": 2018,
+      "guvenlik": {
+        "sifreleme": "AES-256-GCM",
+        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Deloitte",
+        "denetim_tarihi": "2023-09",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "double_vpn": true,
+        "obfuscated_sunucu": true,
+        "ram_only": false,
+        "nexus_teknoloji": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 3200,
+        "ulke_sayisi": 100,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 798,
+          "yukleme_mbps": 367,
+          "ping_ms": 11,
+          "tutarlilik_yuzde": 91
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": null
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": true,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 3,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 21,
+        "gizlilik": 21,
+        "kullanim_kolayligi": 14,
+        "sunucu_agi": 12,
+        "fiyat_deger": 15,
+        "streaming": 4,
+        "toplam": 87
+      },
+      "affiliate": {
+        "program": "Surfshark Affiliate",
+        "komisyon_tipi": "recurring",
+        "komisyon_oran": 40,
+        "cookie_gun": 30,
+        "link_ana": "https://surfshark.com/affiliates?ref=YOURID"
+      },
+      "artilari": [
+        "Sınırsız eş zamanlı cihaz bağlantısı",
+        "Fiyat/performans oranında piyasanın en iyisi",
+        "Nexus teknolojisi ile IP rotasyonu",
+        "Deloitte bağımsız no-logs denetimi",
+        "CleanWeb ile reklam engelleme"
+      ],
+      "eksileri": [
+        "Hollanda merkezli (14 Eyes ülkesi)",
+        "RAM-only sunucu altyapısı yok",
+        "NordVPN'e kıyasla daha az sunucu"
+      ],
+      "en_iyi_icin": ["butce_dostu", "cok_cihaz", "aile"],
+      "onerilen_plan": "2 yıllık plan",
+      "aktif": true
+    },
+    {
+      "id": "cyberghost",
+      "ad": "CyberGhost",
+      "slug": "cyberghost",
+      "logo": "/logos/cyberghost.svg",
+      "renk_hex": "#FFCC00",
+      "renk_text_hex": "#1A1A1A",
+      "tagline": "Yeni başlayanlar için en kolay VPN",
+      "website": "https://www.cyberghostvpn.com",
+      "kurucu_ulke": "Romanya",
+      "is14Eyes": false,
+      "kurulus_yili": 2011,
+      "guvenlik": {
+        "sifreleme": "AES-256",
+        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Deloitte",
+        "denetim_tarihi": "2023-06",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "double_vpn": false,
+        "obfuscated_sunucu": false
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 9600,
+        "ulke_sayisi": 91,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 743,
+          "yukleme_mbps": 312,
+          "ping_ms": 14,
+          "tutarlilik_yuzde": 88
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": 7
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 4,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 19,
+        "gizlilik": 20,
+        "kullanim_kolayligi": 15,
+        "sunucu_agi": 15,
+        "fiyat_deger": 13,
+        "streaming": 3,
+        "toplam": 85
+      },
+      "affiliate": {
+        "program": "CyberGhost Affiliate",
+        "komisyon_tipi": "recurring",
+        "komisyon_oran": 45,
+        "cookie_gun": 45,
+        "link_ana": "https://www.cyberghostvpn.com/affiliates?ref=YOURID"
+      },
+      "artilari": [
+        "9.600+ sunucu ile piyasanın en geniş ağı",
+        "Yeni başlayanlar için en kolay arayüz",
+        "Streaming için optimize sunucular",
+        "45 günlük para iade garantisi",
+        "%45 tekrarlayan komisyon (en yüksek)"
+      ],
+      "eksileri": [
+        "BBC iPlayer ve bazı streaming hizmetleri çalışmayabiliyor",
+        "Hız performansı rakiplerine kıyasla biraz düşük",
+        "7 cihaz limiti"
+      ],
+      "en_iyi_icin": ["yeni_baslayanlar", "streaming", "torrent"],
+      "onerilen_plan": "2 yıllık plan",
+      "aktif": true
+    },
+    {
+      "id": "protonvpn",
+      "ad": "Proton VPN",
+      "slug": "protonvpn",
+      "logo": "/logos/protonvpn.svg",
+      "renk_hex": "#6D4AFF",
+      "tagline": "Gazeteciler ve aktivistler için güvenli seçim",
+      "website": "https://protonvpn.com",
+      "kurucu_ulke": "İsviçre",
+      "is14Eyes": false,
+      "kurulus_yili": 2017,
+      "guvenlik": {
+        "sifreleme": "AES-256",
+        "protokoller": ["WireGuard", "OpenVPN", "IKEv2", "Stealth"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Securitum",
+        "denetim_tarihi": "2024-01",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "tor_over_vpn": true,
+        "double_vpn": true,
+        "uygulama_acik_kaynak": true,
+        "netshield": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 7700,
+        "ulke_sayisi": 91,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 689,
+          "yukleme_mbps": 298,
+          "ping_ms": 13,
+          "tutarlilik_yuzde": 90
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": true,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": true
+      },
+      "musteri_hizmeti": {
+        "live_chat": false,
+        "email": true,
+        "response_time_saat": 12,
+        "turkce_destek": false
+      },
+      "ucretsiz_plan": {
+        "mevcut": true,
+        "hiz_siniri_mbps": null,
+        "ulke_sayisi": 5,
+        "veri_siniri_gb": null,
+        "reklam": false
+      },
+      "puanlar": {
+        "hiz": 18,
+        "gizlilik": 25,
+        "kullanim_kolayligi": 12,
+        "sunucu_agi": 13,
+        "fiyat_deger": 11,
+        "streaming": 4,
+        "toplam": 83
+      },
+      "affiliate": {
+        "program": "Proton VPN Affiliate",
+        "komisyon_tipi": "flat",
+        "komisyon_usd": 10,
+        "cookie_gun": 60
+      },
+      "artilari": [
+        "İsviçre merkezli, güçlü gizlilik yasaları",
+        "Açık kaynak uygulamalar (herkes denetleyebilir)",
+        "Ücretsiz plan mevcut (sınırsız veri)",
+        "Tor over VPN desteği",
+        "Gazeteciler ve aktivistler için ideal"
+      ],
+      "eksileri": [
+        "Rakiplerine göre daha pahalı premium plan",
+        "Browser extension yok",
+        "Hız performansı NordVPN/ExpressVPN'in gerisinde"
+      ],
+      "en_iyi_icin": ["gizlilik", "gazetecilik", "ucretsiz_baslangic"],
+      "onerilen_plan": "Proton VPN Plus yıllık",
+      "aktif": true
+    },
+    {
+      "id": "pia",
+      "ad": "Private Internet Access",
+      "slug": "pia",
+      "logo": "/logos/pia.svg",
+      "renk_hex": "#4CBB17",
+      "tagline": "Özelleştirme tutkunları için VPN",
+      "website": "https://www.privateinternetaccess.com",
+      "kurucu_ulke": "Amerika Birleşik Devletleri",
+      "is14Eyes": true,
+      "kurulus_yili": 2010,
+      "guvenlik": {
+        "sifreleme": "AES-128 / AES-256 (seçilebilir)",
+        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Deloitte",
+        "denetim_tarihi": "2022-08",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "mace_reklam_engelleyici": true,
+        "uygulama_acik_kaynak": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 18651,
+        "ulke_sayisi": 91,
+        "p2p_sunucu": true,
+        "streaming_sunucu": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 651,
+          "yukleme_mbps": 287,
+          "ping_ms": 16,
+          "tutarlilik_yuzde": 86
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": null
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 6,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 17,
+        "gizlilik": 20,
+        "kullanim_kolayligi": 11,
+        "sunucu_agi": 15,
+        "fiyat_deger": 14,
+        "streaming": 3,
+        "toplam": 80
+      },
+      "affiliate": {
+        "program": "PIA Affiliate",
+        "komisyon_tipi": "recurring",
+        "komisyon_oran": 33,
+        "cookie_gun": 45
+      },
+      "artilari": [
+        "18.000+ sunucu ile dünyanın en büyük VPN ağı",
+        "Sınırsız eş zamanlı cihaz bağlantısı",
+        "Açık kaynak, mahkemede no-logs kanıtlandı",
+        "MACE ile reklam ve malware engelleme",
+        "Çok uygun fiyatlı uzun dönem planlar"
+      ],
+      "eksileri": [
+        "ABD merkezli (14 Eyes ülkesi)",
+        "Streaming performansı rakiplerine göre zayıf",
+        "Arayüz yeni başlayanlar için karmaşık"
+      ],
+      "en_iyi_icin": ["torrent", "gizlilik", "ileri_duzey_kullanici"],
+      "onerilen_plan": "3 yıllık plan (en ucuz seçenek)",
+      "aktif": true
+    },
+    {
+      "id": "ipvanish",
+      "ad": "IPVanish",
+      "slug": "ipvanish",
+      "logo": "/logos/ipvanish.svg",
+      "renk_hex": "#F47920",
+      "tagline": "Güvenilir ve uygun fiyatlı VPN",
+      "website": "https://www.ipvanish.com",
+      "kurucu_ulke": "Amerika Birleşik Devletleri",
+      "is14Eyes": true,
+      "kurulus_yili": 2012,
+      "guvenlik": {
+        "sifreleme": "AES-256",
+        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": false,
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "ipv6_korumasi": true,
+        "scramble_obfuscation": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 2400,
+        "ulke_sayisi": 52,
+        "p2p_sunucu": true,
+        "streaming_sunucu": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 623,
+          "yukleme_mbps": 278,
+          "ping_ms": 18,
+          "tutarlilik_yuzde": 84
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": true,
+        "smart_tv": true,
+        "es_zamani_baglanti": null
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "musteri_hizmeti": {
+        "live_chat": true,
+        "email": true,
+        "response_time_saat": 8,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 16,
+        "gizlilik": 18,
+        "kullanim_kolayligi": 12,
+        "sunucu_agi": 10,
+        "fiyat_deger": 13,
+        "streaming": 2,
+        "toplam": 71
+      },
+      "affiliate": {
+        "program": "IPVanish Affiliate",
+        "komisyon_tipi": "recurring",
+        "komisyon_oran": 30,
+        "cookie_gun": 30
+      },
+      "artilari": [
+        "Sınırsız eş zamanlı bağlantı",
+        "Kendi sunucu altyapısına sahip (kiralama değil)",
+        "Uygun fiyatlı uzun dönem planlar",
+        "Scramble özelliği ile sansür aşımı"
+      ],
+      "eksileri": [
+        "ABD merkezli (14 Eyes ülkesi)",
+        "Bağımsız denetim yok",
+        "Streaming desteği sınırlı",
+        "Daha az ülke kapsamı"
+      ],
+      "en_iyi_icin": ["torrent", "butce_dostu", "cok_cihaz"],
+      "onerilen_plan": "1 yıllık plan",
+      "aktif": true
+    },
+    {
+      "id": "mullvad",
+      "ad": "Mullvad VPN",
+      "slug": "mullvad",
+      "logo": "/logos/mullvad.svg",
+      "renk_hex": "#FFCA5E",
+      "renk_text_hex": "#1A1A1A",
+      "tagline": "Anonim ödeme, maksimum gizlilik",
+      "website": "https://mullvad.net",
+      "kurucu_ulke": "İsveç",
+      "is14Eyes": true,
+      "kurulus_yili": 2009,
+      "guvenlik": {
+        "sifreleme": "AES-256",
+        "protokoller": ["WireGuard", "OpenVPN"],
+        "varsayilan_protokol": "WireGuard",
+        "no_logs_politikasi": true,
+        "no_logs_bagimsiz_denetim": true,
+        "denetim_firmasi": "Cure53",
+        "denetim_tarihi": "2024-03",
+        "kill_switch": true,
+        "dns_sizinti_korumasi": true,
+        "anonim_hesap": true,
+        "nakit_odeme": true,
+        "kripto_odeme": true,
+        "ram_only": true,
+        "uygulama_acik_kaynak": true
+      },
+      "sunucu_agi": {
+        "toplam_sunucu": 700,
+        "ulke_sayisi": 49,
+        "p2p_sunucu": true,
+        "streaming_sunucu": false,
+        "dedicated_ip": false,
+        "ram_only": true
+      },
+      "hiz_testleri": {
+        "test_tarihi": "2026-03-15",
+        "test_lokasyonu": "Frankfurt",
+        "test_baglantisi_mbps": 1000,
+        "wireguard": {
+          "indirme_mbps": 912,
+          "yukleme_mbps": 445,
+          "ping_ms": 7,
+          "tutarlilik_yuzde": 96
+        }
+      },
+      "platform_destegi": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": false,
+        "smart_tv": false,
+        "es_zamani_baglanti": 5
+      },
+      "streaming": {
+        "netflix_us": false,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": false,
+        "hbo_max": false
+      },
+      "musteri_hizmeti": {
+        "live_chat": false,
+        "email": true,
+        "response_time_saat": 24,
+        "turkce_destek": false
+      },
+      "puanlar": {
+        "hiz": 24,
+        "gizlilik": 25,
+        "kullanim_kolayligi": 10,
+        "sunucu_agi": 7,
+        "fiyat_deger": 13,
+        "streaming": 0,
+        "toplam": 79
+      },
+      "affiliate": {
+        "program": null,
+        "not": "Mullvad affiliate programı yoktur. Editoryal içerik olarak dahil et."
+      },
+      "artilari": [
+        "Test ettiklerimiz arasında en hızlı WireGuard bağlantısı",
+        "Hesap açmak için e-posta gerekmez",
+        "Nakit ve kripto para ile anonim ödeme",
+        "RAM-only sunucu altyapısı",
+        "Şeffaf fiyatlandırma: sabit €5/ay, indirim yok"
+      ],
+      "eksileri": [
+        "Streaming hizmetlerinin hiçbirini açmıyor",
+        "Affiliate programı yok (editoryal güven için dahil ediyoruz)",
+        "Sınırlı ülke ve sunucu sayısı",
+        "Router ve Smart TV desteği yok"
+      ],
+      "en_iyi_icin": ["ileri_duzey_gizlilik", "gazeteci", "aktivist"],
+      "onerilen_plan": "Aylık plan (taahhütsüz)",
+      "aktif": true
+    }
+  ]
+}

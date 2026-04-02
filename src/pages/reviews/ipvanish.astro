@@ -1,0 +1,7 @@
+---
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
+const vpn = getVPNBySlug('ipvanish');
+if (!vpn) throw new Error('IPVanish not found');
+---
+<ReviewLayout vpn={vpn} />
