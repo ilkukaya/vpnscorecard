@@ -95,7 +95,7 @@ const faqData = [
 ];
 ---
 
-<BaseLayout title={title} description={description} schemaMarkup={schemaMarkup}>
+<BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>`}>
   <Header slot="header" />
 
   <AffiliateDisclosure />
