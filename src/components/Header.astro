@@ -1,5 +1,5 @@
 ---
-import { languages, type Lang, defaultLang, getLocalizedPath } from '../i18n/index';
+import { languages, type Lang, defaultLang, getLocalizedPath, t } from '../i18n/index';
 
 interface Props {
   lang?: Lang;
@@ -25,12 +25,12 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <nav class="hidden md:flex items-center gap-6" aria-label="Main navigation">
-        <a href={getLocalizedPath('/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Home</a>
-        <a href={getLocalizedPath('/reviews/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Reviews</a>
-        <a href={getLocalizedPath('/compare/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Compare</a>
-        <a href={getLocalizedPath('/deals', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Deals</a>
-        <a href={getLocalizedPath('/quiz', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Quiz</a>
-        <a href={getLocalizedPath('/methodology', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Methodology</a>
+        <a href={getLocalizedPath('/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.home')}</a>
+        <a href={getLocalizedPath('/reviews/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.reviews')}</a>
+        <a href={getLocalizedPath('/compare/', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.compare')}</a>
+        <a href={getLocalizedPath('/deals', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.deals')}</a>
+        <a href={getLocalizedPath('/quiz', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.quiz')}</a>
+        <a href={getLocalizedPath('/methodology', lang)} class="text-gray-300 hover:text-white text-sm font-medium transition-colors">{t(lang, 'nav.methodology')}</a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -68,7 +68,7 @@ const currentPath = Astro.url.pathname;
         </div>
 
         <a href={getLocalizedPath('/deals', lang)} class="hidden sm:inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors">
-          Best Deals
+          {t(lang, 'nav.bestDeals')}
         </a>
         <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-white" aria-label="Toggle menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,12 +80,12 @@ const currentPath = Astro.url.pathname;
 
     <div id="mobile-menu" class="hidden md:hidden pb-4">
       <nav class="flex flex-col gap-2" aria-label="Mobile navigation">
-        <a href={getLocalizedPath('/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Home</a>
-        <a href={getLocalizedPath('/reviews/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Reviews</a>
-        <a href={getLocalizedPath('/compare/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Compare</a>
-        <a href={getLocalizedPath('/deals', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Deals</a>
-        <a href={getLocalizedPath('/quiz', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Quiz</a>
-        <a href={getLocalizedPath('/methodology', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">Methodology</a>
+        <a href={getLocalizedPath('/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.home')}</a>
+        <a href={getLocalizedPath('/reviews/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.reviews')}</a>
+        <a href={getLocalizedPath('/compare/', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.compare')}</a>
+        <a href={getLocalizedPath('/deals', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.deals')}</a>
+        <a href={getLocalizedPath('/quiz', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.quiz')}</a>
+        <a href={getLocalizedPath('/methodology', lang)} class="text-gray-300 hover:text-white text-sm font-medium py-2 transition-colors">{t(lang, 'nav.methodology')}</a>
         <div class="flex gap-2 pt-2 border-t border-gray-700">
           {Object.entries(languages).map(([code, { label, flag }]) => {
             const cleanPath = currentPath.replace(/^\/(en|es|tr)/, '') || '/';

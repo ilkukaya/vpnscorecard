@@ -1,0 +1,21 @@
+---
+import BestForLayout from '../../../layouts/BestForLayout.astro';
+import { getPrivacyVPNs } from '../../../lib/vpnData';
+
+const vpns = getPrivacyVPNs();
+---
+<BestForLayout
+  vpns={vpns}
+  lang="tr"
+  category="Gizlilik"
+  title="2026 En İyi Gizlilik VPN'i: Denetimli No-Logs"
+  description="Yalnızca bağımsız denetimli no-logs politikasına sahip VPN'ler. DNS sızıntıları, kill switch güvenilirliği ve yetki alanı güvenliği test edildi."
+  quickAnswer="Mullvad VPN"
+  quickAnswerDetail="Mullvad gizlilikte 25/25 puan alıyor — e-posta gerekmiyor, anonim ödeme, RAM-only sunucular ve Cure53 denetimli no-logs politikası. Gizlilik ve özellik dengesi için NordVPN (24/25) daha iyi bir genel seçimdir."
+  faqs={[
+    { question: 'Bir VPN\'i gizli yapan nedir?', answer: 'Gerçekten gizli bir VPN\'de şunlar olmalı: bağımsız denetimli no-logs politikası, güçlü şifreleme (AES-256), kill switch, DNS sızıntı koruması ve 14 Eyes yetki alanları dışında merkez.' },
+    { question: 'Mullvad en gizli VPN mi?', answer: 'Mullvad en anonim olanıdır — e-posta gerektirmez, nakit ödeme kabul eder, RAM-only sunucular kullanır. Ancak yayın desteği yoktur.' },
+    { question: 'Yetki alanı önemli mi?', answer: 'Evet. 14 Eyes ülkelerinde (ABD, İngiltere vb.) merkezli VPN\'ler yasal olarak veri teslim etmeye zorlanabilir. Panama, İsviçre ve BVI daha güvenli yetki alanlarıdır.' },
+    { question: 'Gizlilik için ücretsiz VPN kullanmalı mıyım?', answer: 'Çoğu ücretsiz VPN verilerinizi kaydeder ve reklamcılara satar. Proton VPN\'in ücretsiz planı, denetimli no-logs politikasına sahip tek ücretsiz VPN\'dir.' },
+  ]}
+/>

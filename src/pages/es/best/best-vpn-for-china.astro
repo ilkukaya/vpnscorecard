@@ -1,0 +1,26 @@
+---
+import BestForLayout from '../../../layouts/BestForLayout.astro';
+import { getRankedVPNs } from '../../../lib/vpnData';
+
+const vpns = getRankedVPNs().filter(v =>
+  v.security.obfuscated_servers ||
+  v.security.scramble_obfuscation ||
+  v.best_for.includes('china') ||
+  v.security.stealth_protocol
+);
+---
+<BestForLayout
+  vpns={vpns}
+  lang="es"
+  category="China"
+  title="Mejor VPN para China en 2026: Evita el Gran Cortafuegos"
+  description="VPNs con tecnología de ofuscación que funcionan en China, Emiratos Árabes Unidos y otros países restrictivos. Probadas y verificadas."
+  quickAnswer="Astrill VPN"
+  quickAnswerDetail="Astrill VPN es la VPN más confiable para China con su protocolo StealthVPN. Para una opción más económica, los servidores ofuscados de NordVPN también funcionan bien. Siempre instala antes de viajar."
+  faqs={[
+    { question: '¿Es legal usar una VPN en China?', answer: 'El uso de VPNs no autorizadas es técnicamente ilegal en China, pero millones de personas las usan a diario. El gobierno principalmente bloquea las VPNs en lugar de perseguir a usuarios individuales.' },
+    { question: '¿Qué VPN funciona mejor en China?', answer: 'Astrill VPN con el protocolo StealthVPN y NordVPN con servidores ofuscados son las más confiables. ExpressVPN con el protocolo Lightway también funciona. Instala antes de viajar.' },
+    { question: '¿Qué es la ofuscación?', answer: 'La ofuscación hace que el tráfico VPN parezca tráfico HTTPS normal, ayudando a eludir la inspección profunda de paquetes utilizada por el Gran Cortafuegos.' },
+    { question: '¿Puedo usar una VPN gratuita en China?', answer: 'Las VPN gratuitas están casi universalmente bloqueadas en China. Necesitas una VPN premium con tecnología de ofuscación.' },
+  ]}
+/>

@@ -1,0 +1,21 @@
+---
+import BestForLayout from '../../../layouts/BestForLayout.astro';
+import { getBudgetVPNs } from '../../../lib/vpnData';
+
+const vpns = getBudgetVPNs();
+---
+<BestForLayout
+  vpns={vpns}
+  lang="tr"
+  category="Bütçe"
+  title="2026 En İyi Ucuz VPN: Aylık $2.50 Altı"
+  description="Kaliteden ödün vermeyen en iyi bütçe VPN'leri. Hepsi hız, gizlilik ve yayın için test edildi. Aylık $1.00'dan başlayan fiyatlar."
+  quickAnswer="Surfshark"
+  quickAnswerDetail="Surfshark aylık sadece $2.19 (2 yıllık plan) ve 87/100 puan — sınırsız cihaz, Netflix desteği ve Deloitte denetimli no-logs politikası. VPN dünyasında en iyi değer."
+  faqs={[
+    { question: 'En ucuz iyi VPN hangisi?', answer: 'Surfshark aylık $2.19 (2 yıllık plan) ile testimizde 80+ puan alan en ucuz VPN\'dir. Daha düşük fiyat için Ivacy aylık $1.00\'dan planlar sunuyor.' },
+    { question: 'Ucuz VPN\'ler güvenli mi?', answer: 'Evet, doğrulanmış no-logs politikası olanlar güvenlidir. Surfshark ve CyberGhost\'un ikisi de Deloitte denetimli no-logs politikalarına sahiptir.' },
+    { question: 'Ucuz VPN\'ler Netflix ile çalışır mı?', answer: 'Surfshark ($2.19/ay) ve CyberGhost ($2.03/ay) ikisi de Netflix ABD ve diğer çoğu yayın hizmetiyle çalışır.' },
+    { question: 'Sadece ücretsiz VPN kullanmalı mıyım?', answer: 'Ücretsiz VPN\'lerin genellikle veri limitleri, daha yavaş hızları vardır ve bazıları verilerinizi satar. Surfshark gibi aylık $2.19\'luk bir bütçe VPN çok daha iyi değer ve gizlilik sunar.' },
+  ]}
+/>

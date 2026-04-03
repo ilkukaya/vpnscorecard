@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import blogPosts from '../../../../data/blog-posts.json';
+import { getLocalizedPath } from '../../../i18n/index';
+
+const lang = 'es';
+
+export function getStaticPaths() {
+  return (blogPosts as any).posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const title = `${post.title} | VPNScorecard`;
+const description = post.description;
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <nav class="text-sm text-gray-500 mb-6">
+      <ol class="flex items-center gap-1">
+        <li><a href={getLocalizedPath('/', lang)} class="hover:text-brand">Inicio</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li><a href={getLocalizedPath('/blog/', lang)} class="hover:text-brand">Blog</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li class="text-gray-700">{post.title}</li>
+      </ol>
+    </nav>
+    <header class="mb-8">
+      <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+        <time datetime={post.date}>{new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+        <span>•</span>
+        <span>{post.readTime} min de lectura</span>
+        <span>•</span>
+        <span class="capitalize">{post.category}</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">{post.title}</h1>
+      <p class="text-lg text-gray-600">{post.description}</p>
+    </header>
+    <div class="prose max-w-none">
+      <p>El contenido completo del artículo se añadirá aquí. Este es un marcador de posición para la entrada del blog: <strong>{post.title}</strong>.</p>
+      <p>Etiquetas: {post.tags.join(', ')}</p>
+    </div>
+  </article>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

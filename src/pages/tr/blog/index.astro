@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import blogPosts from '../../../../data/blog-posts.json';
+import { getLocalizedPath } from '../../../i18n/index';
+
+const lang = 'tr';
+const title = 'VPN Blog — Rehberler, Haberler ve Analizler | VPNScorecard';
+const description = 'Uzman VPN rehberleri, haberleri ve analizleri. VPN teknolojisi, gizlilik ve güvenlik hakkında bilgi edinin.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-brand-dark mb-2">VPN Blog</h1>
+    <p class="text-gray-600 mb-8">VPN teknolojisi ve çevrimiçi gizlilik hakkında rehberler, haberler ve analizler.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {(blogPosts as any).posts.map((post: any) => (
+        <a href={getLocalizedPath(`/blog/${post.slug}`, lang)} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+            <span class="capitalize bg-slate-100 px-2 py-0.5 rounded">{post.category}</span>
+            <span>{post.readTime} dk okuma</span>
+          </div>
+          <h2 class="font-bold text-brand-dark mb-2">{post.title}</h2>
+          <p class="text-sm text-gray-600">{post.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

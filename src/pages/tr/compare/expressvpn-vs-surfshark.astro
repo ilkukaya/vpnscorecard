@@ -1,0 +1,9 @@
+---
+import CompareLayout from '../../../layouts/CompareLayout.astro';
+import { getVPNBySlug } from '../../../lib/vpnData';
+
+const vpn1 = getVPNBySlug('expressvpn')!;
+const vpn2 = getVPNBySlug('surfshark')!;
+---
+
+<CompareLayout vpn1={vpn1} vpn2={vpn2} lang="tr" />

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import QuizWidget from '../../components/QuizWidget';
+
+const lang = 'es';
+const title = '¿Qué VPN es la Adecuada para Ti? Haz el Quiz | VPNScorecard';
+const description = 'Responde 5 preguntas rápidas y te recomendaremos la mejor VPN para tus necesidades.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-2xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-brand-dark mb-2 text-center">¿Qué VPN es la Adecuada para Ti?</h1>
+    <p class="text-gray-600 mb-8 text-center">Responde 5 preguntas rápidas y te recomendaremos la VPN perfecta.</p>
+    <QuizWidget client:load lang={lang} />
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

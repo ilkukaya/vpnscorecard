@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'tr';
+const title = 'Test Metodolojimiz | VPNScorecard';
+const description = 'Her VPN\'i nasıl test ettiğimize, puanladığımıza ve sıraladığımıza şeffaf bir bakış.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Test Metodolojimiz</h1>
+    <p class="text-gray-600 mb-8">Her VPN'i nasıl test ediyor, puanlıyor ve sıralıyoruz. Tam şeffaflık.</p>
+
+    <div class="prose max-w-none">
+      <h2>1. Test Ortamı</h2>
+      <p>Tüm hız testleri, Almanya Frankfurt'taki 1 Gbps temel bağlantıya sahip özel bir Hetzner sunucusundan yapılır. Testler gerçek dünya koşullarını simüle etmek için yoğun saatlerde (20:00-22:00 CET) çalıştırılır. Her test 5 kez tekrarlanır ve ortalaması alınır.</p>
+
+      <h2>2. Puanlama Sistemi</h2>
+      <p>Her VPN, 6 ağırlıklı kategoride 100 üzerinden puanlanır:</p>
+      <ul>
+        <li><strong>Hız ve Performans (25 puan)</strong> — İndirme hızı, yükleme hızı, ping, tutarlılık</li>
+        <li><strong>Gizlilik ve Güvenlik (25 puan)</strong> — No-logs denetimi, şifreleme, kill switch, DNS sızıntı koruması, yetki alanı</li>
+        <li><strong>Kullanım Kolaylığı (15 puan)</strong> — Uygulama kalitesi, kurulum süresi, platform desteği, müşteri hizmetleri</li>
+        <li><strong>Sunucu Ağı (15 puan)</strong> — Ülke sayısı, sunucu sayısı, özel sunucular</li>
+        <li><strong>Fiyat ve Değer (15 puan)</strong> — Aylık maliyet, iade politikası, eş zamanlı bağlantılar</li>
+        <li><strong>Yayın Desteği (5 puan)</strong> — Netflix, Disney+, BBC iPlayer, Hulu, HBO Max</li>
+      </ul>
+
+      <h2>3. Hız Testi Metodolojisi</h2>
+      <p>Ham verimlilik testi için iperf3 ve gerçek dünya hız ölçümü için fast.com kullanıyoruz. Testler VPN'in varsayılan protokolünde (genellikle WireGuard veya NordLynx, Lightway gibi özel varyantlar) çalıştırılır.</p>
+
+      <h2>4. Gizlilik Doğrulama</h2>
+      <p>Her VPN'in no-logs iddiasını bağımsız denetimleri kontrol ederek, gizlilik politikasını inceleyerek ve ipleak.net ile dnsleaktest.com kullanarak DNS/IP sızıntıları test ederek doğruluyoruz.</p>
+
+      <h2>5. Fiyat Doğrulama</h2>
+      <p>Fiyatlar, otomatik komut dosyaları ve manuel kontroller aracılığıyla haftalık olarak doğrulanır. Her zaman mevcut en iyi uzun vadeli plan fiyatını gösteriyoruz.</p>
+
+      <h2>6. Güncelleme Politikası</h2>
+      <p>Her VPN en az üç ayda bir yeniden test edilir. Hız testleri aylık olarak yenilenir. Fiyatlar haftalık olarak doğrulanır. Büyük değişiklikler (yeni protokoller, denetimler, özellikler) anında güncellenir.</p>
+
+      <h2>7. Affiliate Açıklaması</h2>
+      <p>VPNScorecard, affiliate bağlantılar aracılığıyla komisyon kazanır. Bu, tamamen bağımsız testlere dayanan sıralamalarımızı etkilemez. Hiçbir VPN daha iyi bir pozisyon için ödeme yapamaz. Tüm affiliate ilişkilerini şeffaf bir şekilde açıklıyoruz.</p>
+
+      <h2>8. Bağımsızlık Taahhüdü</h2>
+      <p>Her VPN aboneliğini kendimiz satın alıyoruz. Test amaçlı VPN şirketlerinden asla ücretsiz hesap kabul etmiyoruz. Test sonuçlarımız ham veridir — affiliate ilişkilerine göre puanları ayarlamıyoruz.</p>
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

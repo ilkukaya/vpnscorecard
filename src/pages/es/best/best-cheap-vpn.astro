@@ -1,0 +1,21 @@
+---
+import BestForLayout from '../../../layouts/BestForLayout.astro';
+import { getBudgetVPNs } from '../../../lib/vpnData';
+
+const vpns = getBudgetVPNs();
+---
+<BestForLayout
+  vpns={vpns}
+  lang="es"
+  category="Económico"
+  title="Mejor VPN Económica en 2026: Menos de $2.50/Mes"
+  description="Las mejores VPNs económicas que no comprometen la calidad. Todas probadas en velocidad, privacidad y streaming. Desde $1.00/mes."
+  quickAnswer="Surfshark"
+  quickAnswerDetail="Surfshark cuesta solo $2.19/mes (plan de 2 años) y obtiene 87/100 — dispositivos ilimitados, soporte para Netflix y política de no-registros auditada por Deloitte. La mejor relación calidad-precio en VPN."
+  faqs={[
+    { question: '¿Cuál es la VPN buena más barata?', answer: 'Surfshark a $2.19/mes (plan de 2 años) es la VPN más barata que obtuvo más de 80 en nuestras pruebas. Para un precio aún menor, Ivacy ofrece planes desde $1.00/mes.' },
+    { question: '¿Las VPN baratas son seguras?', answer: 'Sí, si tienen una política de no-registros verificada. Surfshark y CyberGhost tienen políticas de no-registros auditadas por Deloitte.' },
+    { question: '¿Las VPN baratas funcionan con Netflix?', answer: 'Surfshark ($2.19/mes) y CyberGhost ($2.03/mes) funcionan con Netflix US y la mayoría de otros servicios de streaming.' },
+    { question: '¿Debería simplemente usar una VPN gratuita?', answer: 'Las VPN gratuitas típicamente tienen límites de datos, velocidades más lentas, y algunas venden tus datos. Una VPN económica como Surfshark a $2.19/mes ofrece mucho mejor valor y privacidad.' },
+  ]}
+/>
