@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import VPNCard from '../../components/VPNCard.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import TrustBadge from '../../components/TrustBadge.astro';
+import { getRankedVPNs, getPricing, getActiveDeals } from '../../lib/vpnData';
+import { t } from '../../i18n/index';
+
+const lang = 'tr';
+const vpns = getRankedVPNs();
+const deals = getActiveDeals();
+
+const title = t(lang, 'meta.homeTitle', { year: '2026' });
+const description = t(lang, 'meta.homeDesc', { count: String(vpns.length) });
+
+function getDownloadSpeed(vpn: any): number {
+  const st = vpn.speed_tests;
+  if (!st) return 0;
+  return st.nordlynx?.download_mbps || st.lightway?.download_mbps || st.wireguard?.download_mbps || st.hydra?.download_mbps || 0;
+}
+
+function getProtocolName(vpn: any): string {
+  const st = vpn.speed_tests;
+  if (!st) return 'WireGuard';
+  if (st.nordlynx) return 'NordLynx';
+  if (st.lightway) return 'Lightway';
+  if (st.hydra) return 'Hydra';
+  return 'WireGuard';
+}
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+
+  <section class="bg-brand-dark text-white py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+        {t(lang, 'hero.title', { year: '2026' })}
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        {t(lang, 'hero.subtitle')}
+      </p>
+      <TrustBadge />
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        {vpns.length > 0 && (
+          <CTAButton href={`/tr/reviews/${vpns[0].slug}`} vpnId={vpns[0].id} pageType="hero" variant="light" size="lg">
+            {t(lang, 'hero.seePick', { rank: '1', vpn: vpns[0].name })}
+          </CTAButton>
+        )}
+        <a href="/tr/quiz" class="inline-flex items-center px-8 py-3.5 border-2 border-white/30 hover:border-white text-white font-semibold rounded-lg transition-colors duration-200 text-base">
+          {t(lang, 'hero.takeQuiz')} &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <AffiliateDisclosure />
+
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-brand-dark">{t(lang, 'rankings.title', { month: 'Nisan', year: '2026' })}</h2>
+      <span class="text-sm text-gray-500">{t(lang, 'rankings.count', { count: String(vpns.length) })}</span>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-brand text-white" data-filter="all">{t(lang, 'rankings.allVpns')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="streaming">{t(lang, 'rankings.streaming')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="privacy">{t(lang, 'rankings.privacy')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="budget">{t(lang, 'rankings.budget')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="torrent">{t(lang, 'rankings.torrent')}</button>
+    </div>
+
+    <div class="space-y-4" id="vpn-list">
+      {vpns.map((vpn, index) => {
+        const pricing = getPricing(vpn.id);
+        return <VPNCard vpn={vpn} rank={index + 1} pricing={pricing} pageType="index" />;
+      })}
+    </div>
+  </section>
+
+  <section class="bg-white border-y border-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">{t(lang, 'speedTest.title', { month: 'Mart', year: '2026' })}</h2>
+      <div class="max-w-3xl mx-auto space-y-3">
+        {vpns.filter(v => v.speed_tests).sort((a, b) => getDownloadSpeed(b) - getDownloadSpeed(a)).slice(0, 10).map((vpn, i) => {
+          const speed = getDownloadSpeed(vpn);
+          const protocol = getProtocolName(vpn);
+          return (
+            <div class="flex items-center gap-4">
+              <span class="text-sm font-bold text-gray-400 w-6 text-right">#{i + 1}</span>
+              <img src={vpn.logo} alt={vpn.name} class="w-6 h-6 object-contain" loading="lazy" />
+              <span class="text-sm font-medium w-28 truncate">{vpn.name}</span>
+              <div class="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
+                <div class="h-6 rounded-full flex items-center justify-end pr-2" style={`width: ${speed / 10}%; background-color: ${vpn.color_hex}`}>
+                  <span class="text-xs font-bold text-white">{speed} Mbps</span>
+                </div>
+              </div>
+              <span class="text-xs text-gray-500 w-20">{protocol}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-brand-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">{t(lang, 'quiz.title')}</h2>
+      <p class="text-gray-300 mb-8">{t(lang, 'quiz.subtitle')}</p>
+      <a href="/tr/quiz" class="inline-flex items-center px-8 py-3.5 bg-brand-light hover:bg-brand text-white font-semibold rounded-lg transition-colors duration-200 text-lg">
+        {t(lang, 'quiz.cta')} &rarr;
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-brand', 'text-white');
+        b.classList.add('bg-gray-100', 'text-gray-700');
+      });
+      btn.classList.remove('bg-gray-100', 'text-gray-700');
+      btn.classList.add('bg-brand', 'text-white');
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('#vpn-list > div').forEach(card => {
+        if (filter === 'all') { (card as HTMLElement).style.display = ''; }
+        else { const tags = card.getAttribute('data-tags') || ''; (card as HTMLElement).style.display = tags.includes(filter!) ? '' : 'none'; }
+      });
+    });
+  });
+</script>

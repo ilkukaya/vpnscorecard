@@ -1,7 +1,0 @@
----
-import ReviewLayout from '../../layouts/ReviewLayout.astro';
-import { getVPNBySlug } from '../../lib/vpnData';
-const vpn = getVPNBySlug('mullvad');
-if (!vpn) throw new Error('Mullvad not found');
----
-<ReviewLayout vpn={vpn} />

@@ -9,7 +9,7 @@ export function buildAffiliateLink(
   params: AffiliateLinkParams
 ): string {
   const separator = baseUrl.includes('?') ? '&' : '?';
-  const utmParams = [
+  let utmParams = [
     `utm_source=vpnscorecard`,
     `utm_medium=review`,
     `utm_campaign=${params.vpnId}`,
@@ -17,7 +17,7 @@ export function buildAffiliateLink(
   ].join('&');
 
   if (params.linkVariant) {
-    utmParams.concat(`&utm_variant=${params.linkVariant}`);
+    utmParams += `&utm_variant=${params.linkVariant}`;
   }
 
   return `${baseUrl}${separator}${utmParams}`;
@@ -27,17 +27,17 @@ export function getBestAffiliateLink(
   vpn: any,
   pageType: string
 ): string {
-  if (!vpn.affiliate) return vpn.website || '#';
+  if (!vpn.affiliate || !vpn.affiliate.program) return vpn.website || '#';
 
   const affiliate = vpn.affiliate;
 
   let baseUrl: string;
-  if (vpn.id === 'nordvpn' && affiliate.link_2yil) {
-    baseUrl = affiliate.link_2yil;
-  } else if (affiliate.link_ana) {
-    baseUrl = affiliate.link_ana;
-  } else if (affiliate.link_1yil) {
-    baseUrl = affiliate.link_1yil;
+  if (affiliate.link_2year) {
+    baseUrl = affiliate.link_2year;
+  } else if (affiliate.link_main) {
+    baseUrl = affiliate.link_main;
+  } else if (affiliate.link_1year) {
+    baseUrl = affiliate.link_1year;
   } else {
     return vpn.website || '#';
   }
@@ -48,21 +48,17 @@ export function getBestAffiliateLink(
   });
 }
 
-export function getCTAText(vpn: any, context: string = 'default'): string {
-  const pricing = vpn.pricingData;
-  if (!pricing) return `Visit ${vpn.ad}`;
+export function getCTAText(vpn: any, pricing: any, context: string = 'default'): string {
+  if (!pricing) return `Visit ${vpn.name}`;
 
-  const bestPlan = pricing['2yil_plan'] || pricing['1yil_plan'] || pricing['aylik_plan'];
-  if (!bestPlan) return `Visit ${vpn.ad}`;
+  const bestPlan = pricing.two_year || pricing.yearly || pricing.three_year || pricing.monthly;
+  if (!bestPlan) return `Visit ${vpn.name}`;
 
-  const savings = bestPlan.tasarruf_yuzde;
-  if (savings && savings >= 70) {
-    return `Get ${vpn.ad} — ${savings}% Off`;
-  }
+  const savings = bestPlan.savings_percent;
   if (savings && savings >= 50) {
-    return `Get ${vpn.ad} — ${savings}% Off`;
+    return `Get ${vpn.name} — ${savings}% Off`;
   }
-  return `Visit ${vpn.ad} →`;
+  return `Visit ${vpn.name} →`;
 }
 
 export function addNoFollow(attrs: Record<string, string>): Record<string, string> {

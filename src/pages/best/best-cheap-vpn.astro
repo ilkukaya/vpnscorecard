@@ -1,30 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
-import VPNCard from '../../components/VPNCard.astro';
-import FAQAccordion from '../../components/FAQAccordion.astro';
-import { getBudgetVPNs, getPricing } from '../../lib/vpnData';
+import BestForLayout from '../../layouts/BestForLayout.astro';
+import { getBudgetVPNs } from '../../lib/vpnData';
 
 const vpns = getBudgetVPNs();
-const title = 'Best Cheap VPN in 2026: Under $2.50/Month';
-const description = 'The best budget VPNs that don\'t compromise on quality. All under $2.50/month.';
 ---
-<BaseLayout title={title} description={description}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
-  <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best Cheap VPN in 2026</h1>
-    <p class="text-gray-600 mb-8">Quality VPNs under $2.50/month. No compromises on speed or privacy.</p>
-    <div class="space-y-4 mb-8">
-      {vpns.map((vpn, i) => { const pricing = getPricing(vpn.id); return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-cheap" />; })}
-    </div>
-    <FAQAccordion questions={[
-      { question: 'What is the cheapest good VPN?', answer: 'Surfshark at $2.19/mo (2-year plan) is the cheapest VPN that scored 80+ in our testing.' },
-      { question: 'Are cheap VPNs safe?', answer: 'Yes, if they have a verified no-logs policy. All VPNs on this list have independent security audits.' },
-      { question: 'Do cheap VPNs work with Netflix?', answer: 'Surfshark ($2.19/mo) and CyberGhost ($2.03/mo) both work with Netflix US and most other streaming services.' },
-    ]} />
-  </div>
-  <Footer slot="footer" />
-</BaseLayout>
+<BestForLayout
+  vpns={vpns}
+  category="Budget"
+  title="Best Cheap VPN in 2026: Under $2.50/Month"
+  description="The best budget VPNs that don't compromise on quality. All tested for speed, privacy, and streaming. Starting from $1.00/mo."
+  quickAnswer="Surfshark"
+  quickAnswerDetail="Surfshark costs just $2.19/mo (2-year plan) and scores 87/100 — unlimited devices, Netflix support, and a Deloitte-audited no-logs policy. Best value in VPN."
+  faqs={[
+    { question: 'What is the cheapest good VPN?', answer: 'Surfshark at $2.19/mo (2-year plan) is the cheapest VPN that scored 80+ in our testing. For an even lower price, Ivacy offers plans at $1.00/mo.' },
+    { question: 'Are cheap VPNs safe?', answer: 'Yes, if they have a verified no-logs policy. Surfshark and CyberGhost both have Deloitte-audited no-logs policies.' },
+    { question: 'Do cheap VPNs work with Netflix?', answer: 'Surfshark ($2.19/mo) and CyberGhost ($2.03/mo) both work with Netflix US and most other streaming services.' },
+    { question: 'Should I just use a free VPN?', answer: "Free VPNs typically have data limits, slower speeds, and some sell your data. A budget VPN like Surfshark at $2.19/mo offers much better value and privacy." },
+  ]}
+/>

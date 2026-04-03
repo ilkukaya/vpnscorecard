@@ -1,33 +1,25 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
-import VPNCard from '../../components/VPNCard.astro';
-import FAQAccordion from '../../components/FAQAccordion.astro';
-import { getRankedVPNs, getPricing } from '../../lib/vpnData';
+import BestForLayout from '../../layouts/BestForLayout.astro';
+import { getRankedVPNs } from '../../lib/vpnData';
 
-const vpns = getRankedVPNs().filter(v => v.guvenlik.obfuscated_sunucu || v.guvenlik.scramble_obfuscation);
-const title = 'Best VPN for China in 2026: Bypass the Great Firewall';
-const description = 'VPNs with obfuscation technology that work in China, UAE, and other restrictive countries.';
+const vpns = getRankedVPNs().filter(v =>
+  v.security.obfuscated_servers ||
+  v.security.scramble_obfuscation ||
+  v.best_for.includes('china') ||
+  v.security.stealth_protocol
+);
 ---
-<BaseLayout title={title} description={description}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
-  <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN for China in 2026</h1>
-    <p class="text-gray-600 mb-8">VPNs with obfuscation technology that can bypass the Great Firewall.</p>
-    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8">
-      <p class="text-sm text-amber-800">⚠️ Note: VPN availability in China changes frequently. Always have a backup option. We recommend installing the VPN before traveling.</p>
-    </div>
-    <div class="space-y-4 mb-8">
-      {vpns.map((vpn, i) => { const pricing = getPricing(vpn.id); return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-china" />; })}
-    </div>
-    <FAQAccordion questions={[
-      { question: 'Is it legal to use a VPN in China?', answer: 'Using unauthorized VPNs is technically illegal in China, but millions of people use them daily. The government primarily blocks VPNs rather than prosecuting users.' },
-      { question: 'Which VPN works best in China?', answer: 'NordVPN with obfuscated servers and ExpressVPN with Lightway protocol are the most reliable. Install before you travel.' },
-      { question: 'What is obfuscation?', answer: 'Obfuscation makes VPN traffic look like regular HTTPS traffic, helping it bypass deep packet inspection used by the Great Firewall.' },
-    ]} />
-  </div>
-  <Footer slot="footer" />
-</BaseLayout>
+<BestForLayout
+  vpns={vpns}
+  category="China"
+  title="Best VPN for China in 2026: Bypass the Great Firewall"
+  description="VPNs with obfuscation technology that work in China, UAE, and other restrictive countries. Tested and verified."
+  quickAnswer="Astrill VPN"
+  quickAnswerDetail="Astrill VPN is the most reliable VPN for China with its StealthVPN protocol. For a more affordable option, NordVPN's obfuscated servers also work well. Always install before traveling."
+  faqs={[
+    { question: 'Is it legal to use a VPN in China?', answer: "Using unauthorized VPNs is technically illegal in China, but millions of people use them daily. The government primarily blocks VPNs rather than prosecuting individual users." },
+    { question: 'Which VPN works best in China?', answer: 'Astrill VPN with StealthVPN protocol and NordVPN with obfuscated servers are the most reliable. ExpressVPN with Lightway protocol also works. Install before you travel.' },
+    { question: 'What is obfuscation?', answer: 'Obfuscation makes VPN traffic look like regular HTTPS traffic, helping it bypass deep packet inspection used by the Great Firewall.' },
+    { question: 'Can I use a free VPN in China?', answer: 'Free VPNs are almost universally blocked in China. You need a premium VPN with obfuscation technology.' },
+  ]}
+/>

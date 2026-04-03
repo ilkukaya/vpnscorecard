@@ -1,0 +1,137 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import VPNCard from '../components/VPNCard.astro';
+import CTAButton from '../components/CTAButton.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import { getPricing } from '../lib/vpnData';
+import { getBestAffiliateLink } from '../lib/affiliateLinks';
+import { formatPrice, getBestPrice } from '../lib/formatters';
+
+interface Props {
+  vpns: any[];
+  category: string;
+  title: string;
+  description: string;
+  quickAnswer: string;
+  quickAnswerDetail: string;
+  faqs: { question: string; answer: string }[];
+  streamingTable?: boolean;
+}
+
+const { vpns, category, title, description, quickAnswer, quickAnswerDetail, faqs, streamingTable = false } = Astro.props;
+const topVpn = vpns[0];
+const topPricing = getPricing(topVpn?.id);
+const topBest = getBestPrice(topPricing);
+
+const schemaMarkup = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": title,
+  "itemListElement": vpns.map((vpn, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "name": vpn.name,
+      "url": `https://vpnscorecard.com/reviews/${vpn.slug}`,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": (vpn.scores.total / 10).toFixed(1),
+        "bestRating": "10",
+        "worstRating": "1"
+      }
+    }
+  }))
+});
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+  }))
+};
+---
+
+<BaseLayout title={`${title} | VPNScorecard`} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
+  <Header slot="header" />
+  <AffiliateDisclosure />
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+      <ol class="flex items-center gap-1">
+        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li><a href="/best/" class="hover:text-brand">Best For</a></li>
+        <li><span class="mx-1">/</span></li>
+        <li class="text-gray-700">{category}</li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">{title}</h1>
+    <p class="text-gray-600 mb-8">{description}</p>
+
+    {topVpn && (
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8">
+        <h2 class="font-bold text-brand-dark mb-2">Quick Answer: {quickAnswer}</h2>
+        <p class="text-gray-700">{quickAnswerDetail}</p>
+        <div class="mt-3">
+          <CTAButton href={getBestAffiliateLink(topVpn, `best-${category.toLowerCase()}`)} vpnId={topVpn.id} pageType={`best-${category.toLowerCase()}`} variant="primary" size="md">
+            Get {topVpn.name} {topBest?.savings ? `— ${topBest.savings}% Off` : ''}
+          </CTAButton>
+        </div>
+      </div>
+    )}
+
+    <div class="space-y-4 mb-8">
+      {vpns.map((vpn, i) => {
+        const pricing = getPricing(vpn.id);
+        return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType={`best-${category.toLowerCase()}`} />;
+      })}
+    </div>
+
+    {streamingTable && (
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <h2 class="text-xl font-bold text-brand-dark mb-4">Streaming Test Results (March 2026)</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-gray-200">
+                <th class="text-left py-2 px-3">VPN</th>
+                <th class="text-center py-2 px-3">Netflix US</th>
+                <th class="text-center py-2 px-3">Disney+</th>
+                <th class="text-center py-2 px-3">BBC iPlayer</th>
+                <th class="text-center py-2 px-3">HBO Max</th>
+                <th class="text-center py-2 px-3">Amazon Prime</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {vpns.map((vpn) => (
+                <tr>
+                  <td class="py-2 px-3 font-medium">{vpn.name}</td>
+                  <td class="text-center py-2 px-3">{vpn.streaming.netflix_us ? '✅' : '❌'}</td>
+                  <td class="text-center py-2 px-3">{vpn.streaming.disney_plus ? '✅' : '❌'}</td>
+                  <td class="text-center py-2 px-3">{vpn.streaming.bbc_iplayer ? '✅' : '❌'}</td>
+                  <td class="text-center py-2 px-3">{vpn.streaming.hbo_max ? '✅' : '❌'}</td>
+                  <td class="text-center py-2 px-3">{vpn.streaming.amazon_prime ? '✅' : '❌'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )}
+
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
+      <FAQAccordion questions={faqs} />
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

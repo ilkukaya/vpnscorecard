@@ -3,20 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import VPNCard from '../components/VPNCard.astro';
-import ScoreGauge from '../components/ScoreGauge.astro';
 import CTAButton from '../components/CTAButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import TrustBadge from '../components/TrustBadge.astro';
-import { getRankedVPNs, getPricing, getActiveDeals, getSonGuncelleme } from '../lib/vpnData';
+import { getRankedVPNs, getPricing, getActiveDeals, getLastUpdated } from '../lib/vpnData';
 import { getScoreLabel } from '../lib/scoring';
 import { formatPrice } from '../lib/formatters';
 
 const vpns = getRankedVPNs();
 const deals = getActiveDeals();
-const lastUpdate = getSonGuncelleme();
+const lastUpdate = getLastUpdated();
 
-const title = 'Best VPN 2026: Tested, Scored, Ranked | VPNScorecard';
-const description = 'We independently test and score every major VPN. NordVPN tops our 2026 rankings with 91/100. See full speed tests, privacy audits, and pricing for all 8 VPNs.';
+const title = `Best VPN 2026: Tested, Scored, Ranked | VPNScorecard`;
+const description = `We independently test and score every major VPN. NordVPN tops our 2026 rankings with 91/100. See full speed tests, privacy audits, and pricing for all ${vpns.length} VPNs.`;
 
 const schemaMarkup = JSON.stringify({
   "@context": "https://schema.org",
@@ -40,17 +39,32 @@ const itemListSchema = JSON.stringify({
     "position": i + 1,
     "item": {
       "@type": "SoftwareApplication",
-      "name": vpn.ad,
+      "name": vpn.name,
       "url": `https://vpnscorecard.com/reviews/${vpn.slug}`,
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": (vpn.puanlar.toplam / 10).toFixed(1),
+        "ratingValue": (vpn.scores.total / 10).toFixed(1),
         "bestRating": "10",
         "worstRating": "1"
       }
     }
   }))
 });
+
+function getDownloadSpeed(vpn: any): number {
+  const st = vpn.speed_tests;
+  if (!st) return 0;
+  return st.nordlynx?.download_mbps || st.lightway?.download_mbps || st.wireguard?.download_mbps || st.hydra?.download_mbps || 0;
+}
+
+function getProtocolName(vpn: any): string {
+  const st = vpn.speed_tests;
+  if (!st) return 'WireGuard';
+  if (st.nordlynx) return 'NordLynx';
+  if (st.lightway) return 'Lightway';
+  if (st.hydra) return 'Hydra';
+  return 'WireGuard';
+}
 ---
 
 <BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${itemListSchema}</script>`}>
@@ -68,11 +82,11 @@ const itemListSchema = JSON.stringify({
       <div class="flex flex-wrap justify-center gap-3 mt-8">
         {vpns.length > 0 && (
           <CTAButton href={`/reviews/${vpns[0].slug}`} vpnId={vpns[0].id} pageType="hero" variant="light" size="lg">
-            See #{1} Pick: {vpns[0].ad}
+            See #1 Pick: {vpns[0].name}
           </CTAButton>
         )}
         <a href="/quiz" class="inline-flex items-center px-8 py-3.5 border-2 border-white/30 hover:border-white text-white font-semibold rounded-lg transition-colors duration-200 text-base">
-          Take the Quiz →
+          Take the Quiz &rarr;
         </a>
       </div>
     </div>
@@ -88,11 +102,12 @@ const itemListSchema = JSON.stringify({
 
     <div class="flex flex-wrap gap-2 mb-6" id="usecase-filters">
       <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-brand text-white" data-filter="all">All VPNs</button>
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="streaming">🎬 Streaming</button>
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="gizlilik">🔒 Privacy</button>
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="butce_dostu">💰 Budget</button>
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="torrent">⬇️ Torrent</button>
-      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="yeni_baslayanlar">👶 Beginners</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="streaming">Streaming</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="privacy">Privacy</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="budget">Budget</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="torrent">Torrent</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="beginners">Beginners</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="china">China</button>
     </div>
 
     <div class="space-y-4" id="vpn-list">
@@ -107,21 +122,16 @@ const itemListSchema = JSON.stringify({
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">Speed Test Results — March 2026</h2>
       <div class="max-w-3xl mx-auto space-y-3">
-        {vpns.filter(v => v.hiz_testleri).sort((a, b) => {
-          const aSpeed = a.hiz_testleri?.nordlynx?.indirme_mbps || a.hiz_testleri?.lightway?.indirme_mbps || a.hiz_testleri?.wireguard?.indirme_mbps || 0;
-          const bSpeed = b.hiz_testleri?.nordlynx?.indirme_mbps || b.hiz_testleri?.lightway?.indirme_mbps || b.hiz_testleri?.wireguard?.indirme_mbps || 0;
-          return bSpeed - aSpeed;
-        }).map((vpn, i) => {
-          const testData = vpn.hiz_testleri;
-          const speed = testData?.nordlynx?.indirme_mbps || testData?.lightway?.indirme_mbps || testData?.wireguard?.indirme_mbps || 0;
-          const protocol = testData?.nordlynx ? 'NordLynx' : testData?.lightway ? 'Lightway' : 'WireGuard';
+        {vpns.filter(v => v.speed_tests).sort((a, b) => getDownloadSpeed(b) - getDownloadSpeed(a)).slice(0, 15).map((vpn, i) => {
+          const speed = getDownloadSpeed(vpn);
+          const protocol = getProtocolName(vpn);
           return (
             <div class="flex items-center gap-4">
               <span class="text-sm font-bold text-gray-400 w-6 text-right">#{i + 1}</span>
-              <img src={vpn.logo} alt={vpn.ad} class="w-6 h-6 object-contain" loading="lazy" />
-              <span class="text-sm font-medium w-28">{vpn.ad}</span>
+              <img src={vpn.logo} alt={vpn.name} class="w-6 h-6 object-contain" loading="lazy" />
+              <span class="text-sm font-medium w-28 truncate">{vpn.name}</span>
               <div class="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
-                <div class="h-6 rounded-full flex items-center justify-end pr-2 transition-all duration-700" style="width: {speed / 10}%; background-color: {vpn.renk_hex}">
+                <div class="h-6 rounded-full flex items-center justify-end pr-2 transition-all duration-700" style={`width: ${speed / 10}%; background-color: ${vpn.color_hex}`}>
                   <span class="text-xs font-bold text-white">{speed} Mbps</span>
                 </div>
               </div>
@@ -197,20 +207,20 @@ const itemListSchema = JSON.stringify({
     <section class="max-w-7xl mx-auto px-4 py-16">
       <h2 class="text-2xl font-bold text-brand-dark mb-8 text-center">Current VPN Deals</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {deals.slice(0, 6).map((deal) => (
+        {deals.slice(0, 9).map((deal) => (
           <a href={deal.link} rel="nofollow noopener sponsored" target="_blank" class="block bg-white rounded-xl border-2 border-green-200 p-6 hover:border-green-400 transition-colors">
             <div class="flex items-center justify-between mb-2">
-              <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded-full">{deal.indirim_yuzde}% OFF</span>
-              <span class="text-xs text-gray-500">Verified {deal.dogrulama_tarihi}</span>
+              <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded-full">{deal.discount_percent}% OFF</span>
+              <span class="text-xs text-gray-500">Verified {deal.verified_date}</span>
             </div>
-            <h3 class="font-bold text-brand-dark">{deal.baslik}</h3>
-            <p class="text-sm text-gray-600 mt-1">{deal.aciklama}</p>
-            <p class="text-lg font-bold text-brand mt-2">${deal.aylik_fiyat_usd}/mo</p>
+            <h3 class="font-bold text-brand-dark">{deal.title}</h3>
+            <p class="text-sm text-gray-600 mt-1">{deal.description}</p>
+            <p class="text-lg font-bold text-brand mt-2">${deal.monthly_price_usd}/mo</p>
           </a>
         ))}
       </div>
       <div class="text-center mt-6">
-        <a href="/deals" class="text-brand font-medium hover:underline">View all deals →</a>
+        <a href="/deals" class="text-brand font-medium hover:underline">View all deals &rarr;</a>
       </div>
     </section>
   )}
@@ -220,7 +230,7 @@ const itemListSchema = JSON.stringify({
       <h2 class="text-2xl font-bold mb-4">Not sure which VPN to choose?</h2>
       <p class="text-gray-300 mb-8">Answer 5 quick questions and we'll recommend the best VPN for your needs.</p>
       <a href="/quiz" class="inline-flex items-center px-8 py-3.5 bg-brand-light hover:bg-brand text-white font-semibold rounded-lg transition-colors duration-200 text-lg">
-        Take the VPN Quiz →
+        Take the VPN Quiz &rarr;
       </a>
     </div>
   </section>
@@ -241,10 +251,10 @@ const itemListSchema = JSON.stringify({
       const filter = btn.getAttribute('data-filter');
       document.querySelectorAll('#vpn-list > div').forEach(card => {
         if (filter === 'all') {
-          card.style.display = '';
+          (card as HTMLElement).style.display = '';
         } else {
           const tags = card.getAttribute('data-tags') || '';
-          card.style.display = tags.includes(filter) ? '' : 'none';
+          (card as HTMLElement).style.display = tags.includes(filter!) ? '' : 'none';
         }
       });
     });

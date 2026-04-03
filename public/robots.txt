@@ -3,5 +3,5 @@ Allow: /
 
 Sitemap: https://vpnscorecard.com/sitemap-index.xml
 
-Disallow: /assets/
-Disallow: /logos/
+# Allow logo crawling for rich snippets
+# Disallow: /assets/

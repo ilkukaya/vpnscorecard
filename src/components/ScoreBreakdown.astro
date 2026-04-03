@@ -1,11 +1,11 @@
 ---
 interface Props {
   scores: {
-    hiz: number;
-    gizlilik: number;
-    kullanim_kolayligi: number;
-    sunucu_agi: number;
-    fiyat_deger: number;
+    speed: number;
+    privacy: number;
+    ease_of_use: number;
+    server_network: number;
+    value: number;
     streaming: number;
   };
 }
@@ -13,13 +13,15 @@ interface Props {
 const { scores } = Astro.props;
 
 const categories = [
-  { label: 'Speed & Performance', score: scores.hiz, max: 25, color: 'bg-blue-500' },
-  { label: 'Privacy & Security', score: scores.gizlilik, max: 25, color: 'bg-green-500' },
-  { label: 'Ease of Use', score: scores.kullanim_kolayligi, max: 15, color: 'bg-purple-500' },
-  { label: 'Server Network', score: scores.sunucu_agi, max: 15, color: 'bg-amber-500' },
-  { label: 'Price & Value', score: scores.fiyat_deger, max: 15, color: 'bg-orange-500' },
+  { label: 'Speed & Performance', score: scores.speed, max: 25, color: 'bg-blue-500' },
+  { label: 'Privacy & Security', score: scores.privacy, max: 25, color: 'bg-green-500' },
+  { label: 'Ease of Use', score: scores.ease_of_use, max: 15, color: 'bg-purple-500' },
+  { label: 'Server Network', score: scores.server_network, max: 15, color: 'bg-amber-500' },
+  { label: 'Price & Value', score: scores.value, max: 15, color: 'bg-orange-500' },
   { label: 'Streaming Support', score: scores.streaming, max: 5, color: 'bg-pink-500' },
 ];
+
+const total = scores.speed + scores.privacy + scores.ease_of_use + scores.server_network + scores.value + scores.streaming;
 ---
 
 <div class="space-y-4">
@@ -31,8 +33,8 @@ const categories = [
       </div>
       <div class="w-full bg-gray-100 rounded-full h-3">
         <div
-          class="{cat.color} h-3 rounded-full transition-all duration-500"
-          style="width: {(cat.score / cat.max) * 100}%"
+          class={`${cat.color} h-3 rounded-full transition-all duration-500`}
+          style={`width: ${(cat.score / cat.max) * 100}%`}
         ></div>
       </div>
     </div>
@@ -40,7 +42,7 @@ const categories = [
   <div class="pt-4 border-t border-gray-200">
     <div class="flex items-center justify-between">
       <span class="text-lg font-bold text-gray-900">Total Score</span>
-      <span class="text-2xl font-bold text-brand">{scores.hiz + scores.gizlilik + scores.kullanim_kolayligi + scores.sunucu_agi + scores.fiyat_deger + scores.streaming}/100</span>
+      <span class="text-2xl font-bold text-brand">{total}/100</span>
     </div>
   </div>
 </div>

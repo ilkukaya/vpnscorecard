@@ -10,30 +10,31 @@ const useCaseDescriptions: Record<string, string> = {
   streaming: 'Unblocks Netflix, Disney+, and other streaming services reliably',
   gaming: 'Low ping and stable connections for online gaming',
   torrent: 'P2P-optimized servers with no bandwidth limits',
-  gizlilik: 'Independently audited no-logs, strong encryption',
-  butce_dostu: 'Best price-to-performance ratio under $3/mo',
-  yeni_baslayanlar: 'Simple interface, one-click connect, easy setup',
-  genel_kullanim: 'Well-rounded for everyday use',
-  router_kullanimi: 'Native router app or excellent router support',
-  kurumsal: 'Dedicated IPs and team management features',
-  cok_cihaz: 'Unlimited or high simultaneous connections',
-  aile: 'Great for families with multiple devices',
-  gazetecilik: 'Strong privacy for journalists and whistleblowers',
-  ucretsiz_baslangic: 'Free tier available with no data limits',
-  ileri_duzey_kullanici: 'Advanced configuration options and open-source apps',
-  ileri_duzey_gizlilik: 'Maximum anonymity with cash payments and no account needed',
-  gazeteci: 'Trusted by journalists worldwide',
-  aktivist: 'Used by activists in restrictive countries',
-  hiz: 'Top-tier speed test results',
+  privacy: 'Independently audited no-logs, strong encryption',
+  budget: 'Best price-to-performance ratio under $3/mo',
+  beginners: 'Simple interface, one-click connect, easy setup',
+  overall: 'Well-rounded for everyday use',
+  router: 'Native router app or excellent router support',
+  business: 'Dedicated IPs and team management features',
+  multi_device: 'Unlimited or high simultaneous connections',
+  family: 'Great for families with multiple devices',
+  journalism: 'Strong privacy for journalists and whistleblowers',
+  free_tier: 'Free tier available with no data limits',
+  advanced: 'Advanced configuration options and open-source apps',
+  max_privacy: 'Maximum anonymity with cash payments and no account needed',
+  journalist: 'Trusted by journalists worldwide',
+  activist: 'Used by activists in restrictive countries',
+  speed: 'Top-tier speed test results',
+  china: 'Obfuscation technology to bypass censorship',
 };
 ---
 
 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-  <h3 class="text-lg font-bold text-brand-dark mb-4">Is {vpn.ad} Right for You?</h3>
+  <h3 class="text-lg font-bold text-brand-dark mb-4">Is {vpn.name} Right for You?</h3>
   <div class="space-y-3">
     {useCases.map((uc) => (
       <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-50">
-        <span class="text-green-500 font-bold flex-shrink-0">✓</span>
+        <span class="text-green-500 font-bold flex-shrink-0">&#10003;</span>
         <div>
           <p class="font-medium text-gray-900 capitalize">{uc.replace(/_/g, ' ')}</p>
           <p class="text-sm text-gray-600">{useCaseDescriptions[uc] || ''}</p>

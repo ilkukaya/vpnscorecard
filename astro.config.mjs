@@ -12,10 +12,25 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.8,
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          es: 'es-ES',
+          tr: 'tr-TR',
+        },
+      },
     }),
     pagefind()
   ],
   output: 'static',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'tr'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   markdown: {
     shikiConfig: {
       theme: 'github-dark',

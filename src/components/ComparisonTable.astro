@@ -1,4 +1,6 @@
 ---
+import { formatPrice, getBestPrice } from '../lib/formatters';
+
 interface Props {
   vpns: any[];
   pricing: Record<string, any>;
@@ -6,6 +8,12 @@ interface Props {
 }
 
 const { vpns, pricing, pageType = 'compare' } = Astro.props;
+
+function getDownloadSpeed(vpn: any): number {
+  const st = vpn.speed_tests;
+  if (!st) return 0;
+  return st.nordlynx?.download_mbps || st.lightway?.download_mbps || st.wireguard?.download_mbps || st.hydra?.download_mbps || 0;
+}
 ---
 
 <div class="overflow-x-auto">
@@ -16,10 +24,10 @@ const { vpns, pricing, pageType = 'compare' } = Astro.props;
         {vpns.map((vpn) => (
           <th class="text-center py-3 px-4">
             <div class="flex flex-col items-center gap-1">
-              <img src={vpn.logo} alt={vpn.ad} class="w-8 h-8 object-contain" loading="lazy" />
-              <span class="font-bold text-brand-dark">{vpn.ad}</span>
-              <span class="text-lg font-bold" style="color: {vpn.puanlar.toplam >= 90 ? '#10B981' : vpn.puanlar.toplam >= 80 ? '#3B82F6' : '#8B5CF6'}">
-                {vpn.puanlar.toplam}/100
+              <img src={vpn.logo} alt={vpn.name} class="w-8 h-8 object-contain" loading="lazy" />
+              <span class="font-bold text-brand-dark">{vpn.name}</span>
+              <span class="text-lg font-bold" style={`color: ${vpn.scores.total >= 90 ? '#10B981' : vpn.scores.total >= 80 ? '#3B82F6' : '#8B5CF6'}`}>
+                {vpn.scores.total}/100
               </span>
             </div>
           </th>
@@ -28,12 +36,10 @@ const { vpns, pricing, pageType = 'compare' } = Astro.props;
     </thead>
     <tbody class="divide-y divide-gray-100">
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Speed (WireGuard)</td>
+        <td class="py-3 px-4 font-medium text-gray-700">Speed (Best Protocol)</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.hiz_testleri?.nordlynx ? `${vpn.hiz_testleri.nordlynx.indirme_mbps} Mbps` :
-             vpn.hiz_testleri?.lightway ? `${vpn.hiz_testleri.lightway.indirme_mbps} Mbps` :
-             vpn.hiz_testleri?.wireguard ? `${vpn.hiz_testleri.wireguard.indirme_mbps} Mbps` : '—'}
+            {getDownloadSpeed(vpn) > 0 ? `${getDownloadSpeed(vpn)} Mbps` : '—'}
           </td>
         ))}
       </tr>
@@ -41,37 +47,37 @@ const { vpns, pricing, pageType = 'compare' } = Astro.props;
         <td class="py-3 px-4 font-medium text-gray-700">No-Logs Audit</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.guvenlik.no_logs_bagimsiz_denetim
-              ? `<span class="text-green-600">✓ ${vpn.guvenlik.denetim_firmasi}</span>`
-              : '<span class="text-gray-400">Not audited</span>'}
+            {vpn.security.no_logs_audited
+              ? <span class="text-green-600">&#10003; {vpn.security.audit_firm}</span>
+              : <span class="text-gray-400">Not audited</span>}
           </td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 font-medium text-gray-700">Countries</td>
         {vpns.map((vpn) => (
-          <td class="py-3 px-4 text-center">{vpn.sunucu_agi.ulke_sayisi}</td>
+          <td class="py-3 px-4 text-center">{vpn.server_network.country_count}</td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 font-medium text-gray-700">Servers</td>
         {vpns.map((vpn) => (
-          <td class="py-3 px-4 text-center">{vpn.sunucu_agi.toplam_sunucu.toLocaleString()}</td>
+          <td class="py-3 px-4 text-center">{vpn.server_network.total_servers.toLocaleString()}</td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
         <td class="py-3 px-4 font-medium text-gray-700">Devices</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.platform_destegi.es_zamani_baglanti || 'Unlimited'}
+            {vpn.platform_support.simultaneous_connections || 'Unlimited'}
           </td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">RAM-only</td>
+        <td class="py-3 px-4 font-medium text-gray-700">Kill Switch</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.guvenlik.ram_only ? '<span class="text-green-600">✓</span>' : '<span class="text-gray-400">✗</span>'}
+            {vpn.security.kill_switch ? <span class="text-green-600">&#10003;</span> : <span class="text-gray-400">&#10007;</span>}
           </td>
         ))}
       </tr>
@@ -79,10 +85,10 @@ const { vpns, pricing, pageType = 'compare' } = Astro.props;
         <td class="py-3 px-4 font-medium text-gray-700">Best Price</td>
         {vpns.map((vpn) => {
           const p = pricing[vpn.id];
-          const bestPlan = p?.['2yil_plan'] || p?.['1yil_plan'] || p?.['aylik_plan'];
+          const best = getBestPrice(p);
           return (
             <td class="py-3 px-4 text-center font-bold text-brand-dark">
-              {bestPlan ? `$${bestPlan.fiat}/mo` : '—'}
+              {best ? `${formatPrice(best.price, p?.currency || 'USD')}/mo` : '—'}
             </td>
           );
         })}
@@ -91,9 +97,20 @@ const { vpns, pricing, pageType = 'compare' } = Astro.props;
         <td class="py-3 px-4 font-medium text-gray-700">Netflix</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.streaming.netflix_us ? '<span class="text-green-600">✓</span>' : '<span class="text-red-500">✗</span>'}
+            {vpn.streaming.netflix_us ? <span class="text-green-600">&#10003;</span> : <span class="text-red-500">&#10007;</span>}
           </td>
         ))}
+      </tr>
+      <tr class="hover:bg-gray-50">
+        <td class="py-3 px-4 font-medium text-gray-700">Refund Policy</td>
+        {vpns.map((vpn) => {
+          const p = pricing[vpn.id];
+          return (
+            <td class="py-3 px-4 text-center">
+              {p?.refund_days ? `${p.refund_days} days` : 'N/A'}
+            </td>
+          );
+        })}
       </tr>
     </tbody>
   </table>
