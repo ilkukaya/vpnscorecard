@@ -1,13 +1,26 @@
 {
-  "son_guncelleme": "2026-04-01",
-  "sunucu_sayilari": {
-    "nordvpn": { "sunucu": 6400, "ulke": 111, "kaynak": "nordvpn.com", "tarih": "2026-04-01" },
-    "expressvpn": { "sunucu": 3000, "ulke": 105, "kaynak": "expressvpn.com", "tarih": "2026-04-01" },
-    "surfshark": { "sunucu": 3200, "ulke": 100, "kaynak": "surfshark.com", "tarih": "2026-04-01" },
-    "cyberghost": { "sunucu": 9600, "ulke": 91, "kaynak": "cyberghostvpn.com", "tarih": "2026-04-01" },
-    "protonvpn": { "sunucu": 7700, "ulke": 91, "kaynak": "protonvpn.com", "tarih": "2026-04-01" },
-    "pia": { "sunucu": 18651, "ulke": 91, "kaynak": "privateinternetaccess.com", "tarih": "2026-04-01" },
-    "ipvanish": { "sunucu": 2400, "ulke": 52, "kaynak": "ipvanish.com", "tarih": "2026-04-01" },
-    "mullvad": { "sunucu": 700, "ulke": 49, "kaynak": "mullvad.net", "tarih": "2026-04-01" }
+  "last_updated": "2026-04-01",
+  "server_counts": {
+    "nordvpn": { "servers": 6400, "countries": 111, "source": "nordvpn.com", "date": "2026-04-01" },
+    "expressvpn": { "servers": 3000, "countries": 105, "source": "expressvpn.com", "date": "2026-04-01" },
+    "surfshark": { "servers": 3200, "countries": 100, "source": "surfshark.com", "date": "2026-04-01" },
+    "cyberghost": { "servers": 9600, "countries": 91, "source": "cyberghostvpn.com", "date": "2026-04-01" },
+    "protonvpn": { "servers": 7700, "countries": 91, "source": "protonvpn.com", "date": "2026-04-01" },
+    "pia": { "servers": 18651, "countries": 91, "source": "privateinternetaccess.com", "date": "2026-04-01" },
+    "ipvanish": { "servers": 2400, "countries": 52, "source": "ipvanish.com", "date": "2026-04-01" },
+    "mullvad": { "servers": 700, "countries": 49, "source": "mullvad.net", "date": "2026-04-01" },
+    "purevpn": { "servers": 6500, "countries": 65, "source": "purevpn.com", "date": "2026-04-01" },
+    "torguard": { "servers": 3000, "countries": 50, "source": "torguard.net", "date": "2026-04-01" },
+    "hideme": { "servers": 2100, "countries": 75, "source": "hide.me", "date": "2026-04-01" },
+    "astrill": { "servers": 300, "countries": 56, "source": "astrill.com", "date": "2026-04-01" },
+    "fastestvpn": { "servers": 800, "countries": 40, "source": "fastestvpn.com", "date": "2026-04-01" },
+    "tunnelbear": { "servers": 5000, "countries": 47, "source": "tunnelbear.com", "date": "2026-04-01" },
+    "hotspotshield": { "servers": 3200, "countries": 80, "source": "hotspotshield.com", "date": "2026-04-01" },
+    "fsecure": { "servers": 200, "countries": 30, "source": "f-secure.com", "date": "2026-04-01" },
+    "privatevpn": { "servers": 200, "countries": 63, "source": "privatevpn.com", "date": "2026-04-01" },
+    "ivacy": { "servers": 5700, "countries": 100, "source": "ivacy.com", "date": "2026-04-01" },
+    "vyprvpn": { "servers": 700, "countries": 70, "source": "vyprvpn.com", "date": "2026-04-01" },
+    "cactusvpn": { "servers": 40, "countries": 22, "source": "cactusvpn.com", "date": "2026-04-01" },
+    "avast": { "servers": 700, "countries": 55, "source": "avast.com", "date": "2026-04-01" }
   }
 }

@@ -1,61 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
-import ComparisonTable from '../../components/ComparisonTable.astro';
-import CTAButton from '../../components/CTAButton.astro';
-import FAQAccordion from '../../components/FAQAccordion.astro';
-import { getVPNBySlug, getPricing } from '../../lib/vpnData';
-import { getBestAffiliateLink } from '../../lib/affiliateLinks';
+import CompareLayout from '../../layouts/CompareLayout.astro';
+import { getVPNBySlug } from '../../lib/vpnData';
 
-const vpn1 = getVPNBySlug('expressvpn');
-const vpn2 = getVPNBySlug('surfshark');
-const pricing1 = getPricing('expressvpn');
-const pricing2 = getPricing('surfshark');
-const link1 = getBestAffiliateLink(vpn1, 'compare');
-const link2 = getBestAffiliateLink(vpn2, 'compare');
-const title = 'ExpressVPN vs Surfshark 2026: Premium vs Budget';
-const description = 'ExpressVPN costs 3x more but offers RAM-only servers. Surfshark gives unlimited devices at $2.19/mo.';
+const vpn1 = getVPNBySlug('expressvpn')!;
+const vpn2 = getVPNBySlug('surfshark')!;
 ---
-<BaseLayout title={title} description={description}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
-  <div class="max-w-5xl mx-auto px-4 py-8">
-    <nav class="text-sm text-gray-500 mb-6"><ol class="flex items-center gap-1"><li><a href="/" class="hover:text-brand">Home</a></li><li><span class="mx-1">/</span></li><li><a href="/compare/" class="hover:text-brand">Compare</a></li><li><span class="mx-1">/</span></li><li class="text-gray-700">ExpressVPN vs Surfshark</li></ol></nav>
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">ExpressVPN vs Surfshark: Premium vs Budget</h1>
-    <p class="text-gray-600 mb-8">Is ExpressVPN worth 3x the price? Let the data decide.</p>
-    <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
-      <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🏆</span><h2 class="text-xl font-bold text-green-800">Winner: {vpn1.ad} ({vpn1.puanlar.toplam} vs {vpn2.puanlar.toplam})</h2></div>
-      <p class="text-green-700">{vpn1.ad} wins on quality and features. {vpn2.ad} wins on price and device limits.</p>
-    </div>
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
-      <ComparisonTable vpns={[vpn1, vpn2]} pricing={{ expressvpn: pricing1, surfshark: pricing2 }} pageType="compare" />
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-bold text-brand-dark mb-3">Choose {vpn1.ad} if:</h3>
-        <ul class="space-y-2 text-gray-700">
-          <li class="flex gap-2"><span class="text-green-500">✓</span> You want RAM-only servers</li>
-          <li class="flex gap-2"><span class="text-green-500">✓</span> Router support is important</li>
-          <li class="flex gap-2"><span class="text-green-500">✓</span> You want the most polished experience</li>
-        </ul>
-        <CTAButton href={link1} vpnId={vpn1.id} pageType="compare" variant="primary" size="md" class="mt-4" fullWidth>Get {vpn1.ad}</CTAButton>
-      </div>
-      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-bold text-brand-dark mb-3">Choose {vpn2.ad} if:</h3>
-        <ul class="space-y-2 text-gray-700">
-          <li class="flex gap-2"><span class="text-green-500">✓</span> You need unlimited devices</li>
-          <li class="flex gap-2"><span class="text-green-500">✓</span> You want the best price ($2.19/mo)</li>
-          <li class="flex gap-2"><span class="text-green-500">✓</span> You want ad blocking (CleanWeb)</li>
-        </ul>
-        <CTAButton href={link2} vpnId={vpn2.id} pageType="compare" variant="primary" size="md" class="mt-4" fullWidth>Get {vpn2.ad}</CTAButton>
-      </div>
-    </div>
-    <FAQAccordion questions={[
-      { question: 'Is ExpressVPN worth 3x more than Surfshark?', answer: 'For most users, no. Surfshark offers 90% of the experience at 30% of the price. ExpressVPN\'s RAM-only servers and router app are the main differentiators.' },
-      { question: 'Which is faster?', answer: 'ExpressVPN (812 Mbps) is slightly faster than Surfshark (798 Mbps) but the difference is negligible for most users.' },
-    ]} />
-  </div>
-  <Footer slot="footer" />
-</BaseLayout>
+
+<CompareLayout vpn1={vpn1} vpn2={vpn2} />

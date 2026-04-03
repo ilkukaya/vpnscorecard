@@ -2,41 +2,40 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CTAButton from '../components/CTAButton.astro';
 import { getActiveDeals, getVPNById } from '../lib/vpnData';
 
 const deals = getActiveDeals();
 const title = 'Best VPN Deals & Discounts — April 2026 | VPNScorecard';
-const description = 'All verified VPN deals and discount codes for April 2026. Updated weekly.';
+const description = `${deals.length} verified VPN deals and discount codes for April 2026. Save up to 90%. Updated weekly.`;
 ---
 <BaseLayout title={title} description={description}>
   <Header slot="header" />
   <div class="max-w-5xl mx-auto px-4 py-12">
     <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN Deals — April 2026</h1>
-    <p class="text-gray-600 mb-8">All verified VPN deals and discounts. Updated weekly.</p>
+    <p class="text-gray-600 mb-8">{deals.length} verified VPN deals and discounts. Updated weekly.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       {deals.map((deal) => {
         const vpn = getVPNById(deal.vpn_id);
         return (
           <div class="bg-white rounded-xl shadow-sm border-2 border-green-200 p-6 hover:border-green-400 transition-colors">
             <div class="flex items-center justify-between mb-3">
-              <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">{deal.indirim_yuzde}% OFF</span>
-              <span class="text-xs text-gray-500">Verified {deal.dogrulama_tarihi}</span>
+              <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">{deal.discount_percent}% OFF</span>
+              <span class="text-xs text-gray-500">Verified {deal.verified_date}</span>
             </div>
             <div class="flex items-center gap-3 mb-3">
-              {vpn && <img src={vpn.logo} alt={vpn.ad} class="w-10 h-10 object-contain" loading="lazy" />}
+              {vpn && <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />}
               <div>
-                <h3 class="font-bold text-brand-dark">{deal.baslik}</h3>
-                <p class="text-sm text-gray-600">{deal.aciklama}</p>
+                <h3 class="font-bold text-brand-dark">{deal.title}</h3>
+                <p class="text-sm text-gray-600">{deal.description}</p>
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-brand">${deal.aylik_fiyat_usd}<span class="text-sm text-gray-500">/mo</span></span>
+              <span class="text-2xl font-bold text-brand">${deal.monthly_price_usd}<span class="text-sm text-gray-500">/mo</span></span>
               <a href={deal.link} rel="nofollow noopener sponsored" target="_blank" class="px-5 py-2.5 bg-brand hover:bg-brand-dark text-white font-semibold rounded-lg transition-colors text-sm">
-                Get Deal →
+                Get Deal &rarr;
               </a>
             </div>
-            <p class="text-xs text-gray-400 mt-2">Expires: {deal.son_gecerlilik}</p>
+            <p class="text-xs text-gray-400 mt-2">Expires: {deal.expiry}</p>
           </div>
         );
       })}

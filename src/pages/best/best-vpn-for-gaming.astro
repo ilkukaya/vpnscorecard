@@ -1,32 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
-import VPNCard from '../../components/VPNCard.astro';
-import CTAButton from '../../components/CTAButton.astro';
-import FAQAccordion from '../../components/FAQAccordion.astro';
-import { getRankedVPNs, getPricing } from '../../lib/vpnData';
-import { getBestAffiliateLink } from '../../lib/affiliateLinks';
+import BestForLayout from '../../layouts/BestForLayout.astro';
+import { getRankedVPNs } from '../../lib/vpnData';
 
-const vpns = getRankedVPNs().filter(v => v.puanlar.hiz >= 17).sort((a, b) => b.puanlar.hiz - a.puanlar.hiz);
-const title = 'Best VPN for Gaming in 2026: Low Ping, No Lag';
-const description = 'The best VPNs for gaming with low ping, stable connections, and DDoS protection.';
+const vpns = getRankedVPNs().filter(v => v.scores.speed >= 15).sort((a, b) => b.scores.speed - a.scores.speed);
 ---
-<BaseLayout title={title} description={description}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
-  <div class="max-w-5xl mx-auto px-4 py-8">
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Best VPN for Gaming in 2026</h1>
-    <p class="text-gray-600 mb-8">Low ping, stable connections, and DDoS protection. Here are the best VPNs for gaming.</p>
-    <div class="space-y-4 mb-8">
-      {vpns.map((vpn, i) => { const pricing = getPricing(vpn.id); return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType="best-gaming" />; })}
-    </div>
-    <FAQAccordion questions={[
-      { question: 'Does a VPN increase gaming ping?', answer: 'A good VPN adds only 5-15ms. With NordVPN at 8ms ping, you won\'t notice the difference. A bad VPN can add 100ms+.' },
-      { question: 'Should I use a VPN for gaming?', answer: 'Yes, if you want DDoS protection on PC gaming or need to access region-locked game servers.' },
-      { question: 'Which protocol is best for gaming?', answer: 'WireGuard or its variants (NordLynx, Lightway) offer the lowest latency. Avoid OpenVPN for gaming.' },
-    ]} />
-  </div>
-  <Footer slot="footer" />
-</BaseLayout>
+<BestForLayout
+  vpns={vpns}
+  category="Gaming"
+  title="Best VPN for Gaming in 2026: Low Ping, No Lag"
+  description="The best VPNs for gaming with low ping, stable connections, and DDoS protection. Tested with real latency measurements."
+  quickAnswer="NordVPN"
+  quickAnswerDetail="NordVPN has the lowest ping (8ms) and highest consistency (94%) of all VPNs we tested. NordLynx protocol ensures minimal latency for competitive gaming."
+  faqs={[
+    { question: 'Does a VPN increase gaming ping?', answer: "A good VPN adds only 5-15ms. With NordVPN at 8ms ping, you won't notice the difference. A bad VPN can add 100ms+." },
+    { question: 'Should I use a VPN for gaming?', answer: 'Yes, if you want DDoS protection on PC gaming or need to access region-locked game servers.' },
+    { question: 'Which protocol is best for gaming?', answer: 'WireGuard or its variants (NordLynx, Lightway) offer the lowest latency. Avoid OpenVPN for gaming.' },
+    { question: 'Can I use a VPN on my gaming console?', answer: 'Yes, by setting up the VPN on your router. NordVPN and ExpressVPN both have router apps that work with PlayStation and Xbox.' },
+  ]}
+/>

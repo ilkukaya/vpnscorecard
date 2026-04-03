@@ -3,35 +3,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getAllVPNs } from '../../lib/vpnData';
+import { getScoreLabel } from '../../lib/scoring';
 
-const vpns = getAllVPNs().sort((a, b) => b.puanlar.toplam - a.puanlar.toplam);
-const title = 'All VPN Reviews — VPNScorecard';
-const description = 'Independent reviews of every major VPN. Speed tests, privacy audits, pricing, and scores.';
+const vpns = getAllVPNs().sort((a, b) => b.scores.total - a.scores.total);
+const title = `All ${vpns.length} VPN Reviews 2026 — Tested & Scored | VPNScorecard`;
+const description = `Independent reviews of ${vpns.length} VPNs. Real speed tests, privacy audits, pricing analysis, and scores. Updated monthly.`;
 ---
 
 <BaseLayout title={title} description={description}>
   <Header slot="header" />
   <div class="max-w-7xl mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold text-brand-dark mb-2">All VPN Reviews</h1>
-    <p class="text-gray-600 mb-8">In-depth reviews of every major VPN, tested and scored independently.</p>
+    <p class="text-gray-600 mb-8">In-depth reviews of {vpns.length} VPNs, tested and scored independently. Updated April 2026.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {vpns.map((vpn) => (
-        <a href={`/reviews/${vpn.slug}`} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-          <div class="flex items-center gap-3 mb-4">
-            <img src={vpn.logo} alt={vpn.ad} class="w-10 h-10 object-contain" loading="lazy" />
-            <div>
-              <h2 class="font-bold text-brand-dark">{vpn.ad}</h2>
-              <p class="text-sm text-gray-500">{vpn.tagline}</p>
+      {vpns.map((vpn, i) => {
+        const scoreLabel = getScoreLabel(vpn.scores.total);
+        return (
+          <a href={`/reviews/${vpn.slug}`} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow group">
+            <div class="flex items-center gap-3 mb-4">
+              <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="font-bold text-brand-dark">{vpn.name}</h2>
+                  {i < 3 && <span class="text-xs px-1.5 py-0.5 rounded bg-yellow-100 text-yellow-800 font-bold">#{i + 1}</span>}
+                </div>
+                <p class="text-sm text-gray-500">{vpn.tagline}</p>
+              </div>
             </div>
-          </div>
-          <div class="flex items-center justify-between">
-            <span class="text-2xl font-bold" style="color: {vpn.puanlar.toplam >= 90 ? '#10B981' : vpn.puanlar.toplam >= 80 ? '#3B82F6' : '#8B5CF6'}">
-              {vpn.puanlar.toplam}/100
-            </span>
-            <span class="text-brand font-medium text-sm hover:underline">Read Review →</span>
-          </div>
-        </a>
-      ))}
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold" style={`color: ${scoreLabel.color}`}>
+                  {vpn.scores.total}/100
+                </span>
+                <span class="text-xs px-2 py-0.5 rounded-full font-medium" style={`background-color: ${scoreLabel.color}15; color: ${scoreLabel.color}`}>
+                  {scoreLabel.label}
+                </span>
+              </div>
+              <span class="text-brand font-medium text-sm group-hover:underline">Read Review &rarr;</span>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
   <Footer slot="footer" />

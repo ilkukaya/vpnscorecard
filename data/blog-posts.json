@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "2026-04-01",
+  "last_updated": "2026-04-01",
   "posts": [
     {
       "slug": "what-is-a-vpn-explained-simply",
@@ -80,6 +80,46 @@
       "category": "privacy",
       "tags": ["14 Eyes", "VPN jurisdiction", "privacy"],
       "readTime": 11
+    },
+    {
+      "slug": "best-vpn-for-china-2026",
+      "title": "Best VPN for China 2026: Tested Inside the Great Firewall",
+      "description": "We tested VPNs from inside China. Here are the ones that actually work to bypass the Great Firewall.",
+      "date": "2026-03-28",
+      "author": "VPNScorecard Team",
+      "category": "guides",
+      "tags": ["VPN China", "Great Firewall", "China VPN"],
+      "readTime": 14
+    },
+    {
+      "slug": "surfshark-vs-nordvpn-comparison",
+      "title": "Surfshark vs NordVPN 2026: Same Owner, Different VPNs",
+      "description": "Both owned by Nord Security, but which is better? We compare speeds, features, and pricing.",
+      "date": "2026-03-22",
+      "author": "VPNScorecard Team",
+      "category": "comparisons",
+      "tags": ["Surfshark vs NordVPN", "VPN comparison", "best VPN"],
+      "readTime": 9
+    },
+    {
+      "slug": "vpn-for-torrenting-safety-guide",
+      "title": "Is Torrenting Safe with a VPN? Complete Safety Guide 2026",
+      "description": "Everything you need to know about using a VPN for torrenting safely and legally.",
+      "date": "2026-03-08",
+      "author": "VPNScorecard Team",
+      "category": "security",
+      "tags": ["VPN torrenting", "P2P VPN", "safe torrenting"],
+      "readTime": 13
+    },
+    {
+      "slug": "cheapest-vpn-deals-2026",
+      "title": "Cheapest VPN Deals in 2026: Under $2/Month",
+      "description": "The best VPN deals available right now. We verify every price weekly so you don't overpay.",
+      "date": "2026-04-01",
+      "author": "VPNScorecard Team",
+      "category": "deals",
+      "tags": ["cheap VPN", "VPN deals", "VPN discount"],
+      "readTime": 7
     }
   ]
 }

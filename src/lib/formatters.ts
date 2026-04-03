@@ -47,21 +47,22 @@ export function getUseCaseLabel(useCase: string): string {
     streaming: 'Streaming',
     gaming: 'Gaming',
     torrent: 'Torrenting',
-    gizlilik: 'Privacy',
-    butce_dostu: 'Budget',
-    yeni_baslayanlar: 'Beginners',
-    genel_kullanim: 'Overall',
-    router_kullanimi: 'Router',
-    kurumsal: 'Business',
-    cok_cihaz: 'Multi-Device',
-    aile: 'Family',
-    gazetecilik: 'Journalism',
-    ucretsiz_baslangic: 'Free Tier',
-    ileri_duzey_kullanici: 'Advanced',
-    ileri_duzey_gizlilik: 'Maximum Privacy',
-    gazeteci: 'Journalist',
-    aktivist: 'Activist',
-    hiz: 'Speed',
+    privacy: 'Privacy',
+    budget: 'Budget',
+    beginners: 'Beginners',
+    overall: 'Overall',
+    router: 'Router',
+    business: 'Business',
+    multi_device: 'Multi-Device',
+    family: 'Family',
+    journalism: 'Journalism',
+    free_tier: 'Free Tier',
+    advanced: 'Advanced',
+    max_privacy: 'Maximum Privacy',
+    journalist: 'Journalist',
+    activist: 'Activist',
+    speed: 'Speed',
+    china: 'China/Censorship',
   };
   return labels[useCase] || useCase;
 }
@@ -79,4 +80,15 @@ export function getRankBadge(rank: number): { label: string; color: string; bg: 
   if (rank === 2) return { label: '2nd', color: 'text-rank-silver', bg: 'bg-gray-50' };
   if (rank === 3) return { label: '3rd', color: 'text-rank-bronze', bg: 'bg-orange-50' };
   return { label: `#${rank}`, color: 'text-gray-600', bg: 'bg-gray-50' };
+}
+
+export function getBestPrice(pricing: any): { price: number; plan: string; savings?: number } | null {
+  if (!pricing) return null;
+  if (pricing.three_year) return { price: pricing.three_year.price, plan: '3-year', savings: pricing.three_year.savings_percent };
+  if (pricing.two_year) return { price: pricing.two_year.price, plan: '2-year', savings: pricing.two_year.savings_percent };
+  if (pricing.five_year) return { price: pricing.five_year.price, plan: '5-year', savings: pricing.five_year.savings_percent };
+  if (pricing.yearly) return { price: pricing.yearly.price, plan: '1-year', savings: pricing.yearly.savings_percent };
+  if (pricing.six_month) return { price: pricing.six_month.price, plan: '6-month' };
+  if (pricing.monthly) return { price: pricing.monthly.price, plan: '1-month' };
+  return null;
 }

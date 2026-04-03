@@ -1,7 +1,0 @@
----
-import ReviewLayout from '../../layouts/ReviewLayout.astro';
-import { getVPNBySlug } from '../../lib/vpnData';
-const vpn = getVPNBySlug('pia');
-if (!vpn) throw new Error('PIA not found');
----
-<ReviewLayout vpn={vpn} />

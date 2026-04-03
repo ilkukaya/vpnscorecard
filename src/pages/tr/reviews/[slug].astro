@@ -1,0 +1,17 @@
+---
+import ReviewLayout from '../../../layouts/ReviewLayout.astro';
+import { getAllVPNs, getVPNBySlug } from '../../../lib/vpnData';
+
+export function getStaticPaths() {
+  const vpns = getAllVPNs();
+  return vpns.map((vpn) => ({
+    params: { slug: vpn.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const vpn = getVPNBySlug(slug!);
+if (!vpn) throw new Error(`VPN not found: ${slug}`);
+---
+
+<ReviewLayout vpn={vpn} />

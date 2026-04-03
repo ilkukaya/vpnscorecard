@@ -1,134 +1,372 @@
 {
-  "son_guncelleme": "2026-04-01",
-  "fiyatlar": {
+  "last_updated": "2026-04-01",
+  "prices": {
     "nordvpn": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
-      "1yil_plan": {
-        "fiyat": 4.99,
-        "donem": "12 ay",
-        "toplam": 59.88,
-        "tasarruf_yuzde": 62
+      "currency": "USD",
+      "monthly": { "price": 12.99, "period": "1 month" },
+      "yearly": {
+        "price": 4.99,
+        "period": "12 months",
+        "total": 59.88,
+        "savings_percent": 62
       },
-      "2yil_plan": {
-        "fiyat": 3.09,
-        "donem": "24 ay + 3 ay ücretsiz",
-        "toplam": 83.43,
-        "tasarruf_yuzde": 76
+      "two_year": {
+        "price": 3.09,
+        "period": "24 months + 3 months free",
+        "total": 83.43,
+        "savings_percent": 76
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "expressvpn": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 12.95, "donem": "1 ay" },
-      "6ay_plan": { "fiyat": 9.99, "donem": "6 ay", "toplam": 59.94 },
-      "1yil_plan": {
-        "fiyat": 6.67,
-        "donem": "12 ay + 3 ay ücretsiz",
-        "toplam": 99.95,
-        "tasarruf_yuzde": 49
+      "currency": "USD",
+      "monthly": { "price": 12.95, "period": "1 month" },
+      "six_month": { "price": 9.99, "period": "6 months", "total": 59.94 },
+      "yearly": {
+        "price": 6.67,
+        "period": "12 months + 3 months free",
+        "total": 99.95,
+        "savings_percent": 49
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "surfshark": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 15.45, "donem": "1 ay" },
-      "1yil_plan": {
-        "fiyat": 2.99,
-        "donem": "12 ay",
-        "toplam": 35.88,
-        "tasarruf_yuzde": 81
+      "currency": "USD",
+      "monthly": { "price": 15.45, "period": "1 month" },
+      "yearly": {
+        "price": 2.99,
+        "period": "12 months",
+        "total": 35.88,
+        "savings_percent": 81
       },
-      "2yil_plan": {
-        "fiyat": 2.19,
-        "donem": "24 ay + 3 ay ücretsiz",
-        "toplam": 59.13,
-        "tasarruf_yuzde": 86
+      "two_year": {
+        "price": 2.19,
+        "period": "24 months + 3 months free",
+        "total": 59.13,
+        "savings_percent": 86
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "cyberghost": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
-      "6ay_plan": { "fiyat": 6.99, "donem": "6 ay", "toplam": 41.94 },
-      "2yil_plan": {
-        "fiyat": 2.03,
-        "donem": "24 ay + 4 ay ücretsiz",
-        "toplam": 56.94,
-        "tasarruf_yuzde": 84
+      "currency": "USD",
+      "monthly": { "price": 12.99, "period": "1 month" },
+      "six_month": { "price": 6.99, "period": "6 months", "total": 41.94 },
+      "two_year": {
+        "price": 2.03,
+        "period": "24 months + 4 months free",
+        "total": 56.94,
+        "savings_percent": 84
       },
-      "para_iade_gun": 45,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 45,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "protonvpn": {
-      "para_birimi": "USD",
-      "ucretsiz_plan": { "fiyat": 0 },
-      "aylik_plan": { "fiyat": 9.99, "donem": "1 ay" },
-      "1yil_plan": {
-        "fiyat": 4.99,
-        "donem": "12 ay",
-        "toplam": 59.88,
-        "tasarruf_yuzde": 50
+      "currency": "USD",
+      "free_plan": { "price": 0 },
+      "monthly": { "price": 9.99, "period": "1 month" },
+      "yearly": {
+        "price": 4.99,
+        "period": "12 months",
+        "total": 59.88,
+        "savings_percent": 50
       },
-      "2yil_plan": {
-        "fiyat": 3.99,
-        "donem": "24 ay",
-        "toplam": 95.76,
-        "tasarruf_yuzde": 60
+      "two_year": {
+        "price": 3.99,
+        "period": "24 months",
+        "total": 95.76,
+        "savings_percent": 60
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "pia": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 11.99, "donem": "1 ay" },
-      "1yil_plan": {
-        "fiyat": 3.33,
-        "donem": "12 ay",
-        "toplam": 39.95,
-        "tasarruf_yuzde": 72
+      "currency": "USD",
+      "monthly": { "price": 11.99, "period": "1 month" },
+      "yearly": {
+        "price": 3.33,
+        "period": "12 months",
+        "total": 39.95,
+        "savings_percent": 72
       },
-      "3yil_plan": {
-        "fiyat": 1.98,
-        "donem": "36 ay + 3 ay ücretsiz",
-        "toplam": 79.00,
-        "tasarruf_yuzde": 83
+      "three_year": {
+        "price": 1.98,
+        "period": "36 months + 3 months free",
+        "total": 79.00,
+        "savings_percent": 83
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "ipvanish": {
-      "para_birimi": "USD",
-      "aylik_plan": { "fiyat": 12.99, "donem": "1 ay" },
-      "1yil_plan": {
-        "fiyat": 3.75,
-        "donem": "12 ay",
-        "toplam": 45.00,
-        "tasarruf_yuzde": 71
+      "currency": "USD",
+      "monthly": { "price": 12.99, "period": "1 month" },
+      "yearly": {
+        "price": 3.75,
+        "period": "12 months",
+        "total": 45.00,
+        "savings_percent": 71
       },
-      "para_iade_gun": 30,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
     },
     "mullvad": {
-      "para_birimi": "EUR",
-      "aylik_plan": {
-        "fiyat": 5.00,
-        "donem": "1 ay",
-        "not": "Sabit fiyat, indirim yok"
+      "currency": "EUR",
+      "monthly": {
+        "price": 5.00,
+        "period": "1 month",
+        "note": "Flat price, no discounts"
       },
-      "para_iade_gun": 0,
-      "ucretsiz_deneme": false,
-      "guncelleme": "2026-04-01"
+      "refund_days": 0,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "purevpn": {
+      "currency": "USD",
+      "monthly": { "price": 10.95, "period": "1 month" },
+      "yearly": {
+        "price": 3.24,
+        "period": "12 months",
+        "total": 38.95,
+        "savings_percent": 70
+      },
+      "two_year": {
+        "price": 1.99,
+        "period": "24 months + 3 months free",
+        "total": 53.95,
+        "savings_percent": 82
+      },
+      "refund_days": 31,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "torguard": {
+      "currency": "USD",
+      "monthly": { "price": 9.99, "period": "1 month" },
+      "yearly": {
+        "price": 4.99,
+        "period": "12 months",
+        "total": 59.99,
+        "savings_percent": 50
+      },
+      "two_year": {
+        "price": 3.89,
+        "period": "24 months",
+        "total": 93.36,
+        "savings_percent": 61
+      },
+      "refund_days": 7,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "hideme": {
+      "currency": "USD",
+      "free_plan": { "price": 0, "note": "10 GB/month, 5 locations" },
+      "monthly": { "price": 9.95, "period": "1 month" },
+      "yearly": {
+        "price": 3.00,
+        "period": "12 months",
+        "total": 35.94,
+        "savings_percent": 70
+      },
+      "two_year": {
+        "price": 2.22,
+        "period": "26 months",
+        "total": 57.72,
+        "savings_percent": 78
+      },
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "astrill": {
+      "currency": "USD",
+      "monthly": { "price": 25.00, "period": "1 month" },
+      "yearly": {
+        "price": 12.50,
+        "period": "12 months",
+        "total": 150.00,
+        "savings_percent": 50
+      },
+      "two_year": {
+        "price": 10.00,
+        "period": "24 months",
+        "total": 240.00,
+        "savings_percent": 60
+      },
+      "refund_days": 7,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "fastestvpn": {
+      "currency": "USD",
+      "monthly": { "price": 10.00, "period": "1 month" },
+      "yearly": {
+        "price": 2.49,
+        "period": "12 months",
+        "total": 29.95,
+        "savings_percent": 75
+      },
+      "three_year": {
+        "price": 1.11,
+        "period": "36 months",
+        "total": 39.95,
+        "savings_percent": 89
+      },
+      "refund_days": 31,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "tunnelbear": {
+      "currency": "USD",
+      "free_plan": { "price": 0, "note": "2 GB/month" },
+      "monthly": { "price": 9.99, "period": "1 month" },
+      "yearly": {
+        "price": 4.99,
+        "period": "12 months",
+        "total": 59.88,
+        "savings_percent": 50
+      },
+      "three_year": {
+        "price": 3.33,
+        "period": "36 months",
+        "total": 119.88,
+        "savings_percent": 67
+      },
+      "refund_days": 0,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "hotspotshield": {
+      "currency": "USD",
+      "free_plan": { "price": 0, "note": "500 MB/day, 1 location" },
+      "monthly": { "price": 12.99, "period": "1 month" },
+      "yearly": {
+        "price": 7.99,
+        "period": "12 months",
+        "total": 95.88,
+        "savings_percent": 38
+      },
+      "refund_days": 45,
+      "free_trial": true,
+      "updated": "2026-04-01"
+    },
+    "fsecure": {
+      "currency": "USD",
+      "monthly": { "price": 4.49, "period": "1 month" },
+      "yearly": {
+        "price": 3.49,
+        "period": "12 months",
+        "total": 41.88,
+        "savings_percent": 22
+      },
+      "refund_days": 30,
+      "free_trial": true,
+      "updated": "2026-04-01"
+    },
+    "privatevpn": {
+      "currency": "USD",
+      "monthly": { "price": 9.90, "period": "1 month" },
+      "yearly": {
+        "price": 3.82,
+        "period": "12 months",
+        "total": 45.84,
+        "savings_percent": 61
+      },
+      "three_year": {
+        "price": 2.00,
+        "period": "36 months",
+        "total": 72.00,
+        "savings_percent": 80
+      },
+      "refund_days": 30,
+      "free_trial": true,
+      "updated": "2026-04-01"
+    },
+    "ivacy": {
+      "currency": "USD",
+      "monthly": { "price": 9.95, "period": "1 month" },
+      "yearly": {
+        "price": 3.50,
+        "period": "12 months",
+        "total": 42.00,
+        "savings_percent": 65
+      },
+      "five_year": {
+        "price": 1.00,
+        "period": "60 months",
+        "total": 60.00,
+        "savings_percent": 90
+      },
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "vyprvpn": {
+      "currency": "USD",
+      "monthly": { "price": 15.00, "period": "1 month" },
+      "yearly": {
+        "price": 5.00,
+        "period": "12 months",
+        "total": 60.00,
+        "savings_percent": 67
+      },
+      "two_year": {
+        "price": 3.00,
+        "period": "24 months",
+        "total": 72.00,
+        "savings_percent": 80
+      },
+      "refund_days": 30,
+      "free_trial": false,
+      "updated": "2026-04-01"
+    },
+    "cactusvpn": {
+      "currency": "USD",
+      "monthly": { "price": 6.99, "period": "1 month" },
+      "yearly": {
+        "price": 3.20,
+        "period": "12 months",
+        "total": 38.49,
+        "savings_percent": 54
+      },
+      "two_year": {
+        "price": 2.77,
+        "period": "24 months",
+        "total": 66.49,
+        "savings_percent": 60
+      },
+      "refund_days": 30,
+      "free_trial": true,
+      "updated": "2026-04-01"
+    },
+    "avast": {
+      "currency": "USD",
+      "monthly": { "price": 7.99, "period": "1 month" },
+      "yearly": {
+        "price": 4.59,
+        "period": "12 months",
+        "total": 55.08,
+        "savings_percent": 43
+      },
+      "two_year": {
+        "price": 3.59,
+        "period": "24 months",
+        "total": 86.16,
+        "savings_percent": 55
+      },
+      "refund_days": 30,
+      "free_trial": true,
+      "updated": "2026-04-01"
     }
   }
 }

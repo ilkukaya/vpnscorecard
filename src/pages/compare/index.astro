@@ -2,50 +2,68 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getVPNsForComparison } from '../../lib/vpnData';
+import { getAllVPNs } from '../../lib/vpnData';
 
-const vpns = getVPNsForComparison();
+const vpns = getAllVPNs().sort((a, b) => b.scores.total - a.scores.total);
+
+const comparisons = [
+  { slug: 'nordvpn-vs-expressvpn', vpn1: 'nordvpn', vpn2: 'expressvpn', label: 'The most searched VPN comparison' },
+  { slug: 'nordvpn-vs-surfshark', vpn1: 'nordvpn', vpn2: 'surfshark', label: 'Same parent company, different strengths' },
+  { slug: 'expressvpn-vs-surfshark', vpn1: 'expressvpn', vpn2: 'surfshark', label: 'Premium vs Budget' },
+  { slug: 'cyberghost-vs-nordvpn', vpn1: 'cyberghost', vpn2: 'nordvpn', label: 'Best for Beginners vs Best Overall' },
+  { slug: 'protonvpn-vs-mullvad', vpn1: 'protonvpn', vpn2: 'mullvad', label: 'Best Privacy VPNs' },
+  { slug: 'surfshark-vs-cyberghost', vpn1: 'surfshark', vpn2: 'cyberghost', label: 'Budget-friendly showdown' },
+  { slug: 'nordvpn-vs-purevpn', vpn1: 'nordvpn', vpn2: 'purevpn', label: 'Top-tier vs value pick' },
+  { slug: 'expressvpn-vs-cyberghost', vpn1: 'expressvpn', vpn2: 'cyberghost', label: 'Premium vs beginner-friendly' },
+  { slug: 'surfshark-vs-pia', vpn1: 'surfshark', vpn2: 'pia', label: 'Unlimited devices vs open source' },
+  { slug: 'nordvpn-vs-protonvpn', vpn1: 'nordvpn', vpn2: 'protonvpn', label: 'Best overall vs best free tier' },
+  { slug: 'purevpn-vs-surfshark', vpn1: 'purevpn', vpn2: 'surfshark', label: 'Value VPN face-off' },
+  { slug: 'pia-vs-cyberghost', vpn1: 'pia', vpn2: 'cyberghost', label: 'Open source vs ease of use' },
+  { slug: 'tunnelbear-vs-protonvpn', vpn1: 'tunnelbear', vpn2: 'protonvpn', label: 'Simple vs feature-rich' },
+];
+
+const vpnMap = Object.fromEntries(vpns.map(v => [v.slug, v]));
+
 const title = 'Compare VPNs Side by Side — VPNScorecard';
-const description = 'Compare any two VPNs side by side. Speed, privacy, pricing, and features.';
+const description = 'Compare any two VPNs side by side. Speed, privacy, pricing, and features — all based on real testing data.';
 ---
+
 <BaseLayout title={title} description={description}>
   <Header slot="header" />
   <div class="max-w-5xl mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold text-brand-dark mb-2">Compare VPNs</h1>
-    <p class="text-gray-600 mb-8">Choose two VPNs to compare side by side.</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <p class="text-gray-600 mb-8">Choose two VPNs to compare side by side based on our real-world testing data.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
       {vpns.map((vpn) => (
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex items-center gap-4">
-          <img src={`/logos/${vpn.slug}.svg`} alt={vpn.ad} class="w-10 h-10 object-contain" loading="lazy" />
-          <div class="flex-1">
-            <h3 class="font-bold text-brand-dark">{vpn.ad}</h3>
-            <p class="text-sm text-gray-500">{vpn.puanlar.toplam}/100</p>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex items-center gap-3">
+          <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-brand-dark text-sm truncate">{vpn.name}</h3>
+            <p class="text-sm text-gray-500">{vpn.scores.total}/100</p>
           </div>
         </div>
       ))}
     </div>
-    <h2 class="text-xl font-bold text-brand-dark mb-4">Popular Comparisons</h2>
+
+    <h2 class="text-xl font-bold text-brand-dark mb-4">All Comparisons</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <a href="/compare/nordvpn-vs-expressvpn" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-        <h3 class="font-bold text-brand-dark">NordVPN vs ExpressVPN</h3>
-        <p class="text-sm text-gray-500 mt-1">The most searched VPN comparison</p>
-      </a>
-      <a href="/compare/nordvpn-vs-surfshark" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-        <h3 class="font-bold text-brand-dark">NordVPN vs Surfshark</h3>
-        <p class="text-sm text-gray-500 mt-1">Same parent company, different strengths</p>
-      </a>
-      <a href="/compare/expressvpn-vs-surfshark" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-        <h3 class="font-bold text-brand-dark">ExpressVPN vs Surfshark</h3>
-        <p class="text-sm text-gray-500 mt-1">Premium vs Budget</p>
-      </a>
-      <a href="/compare/cyberghost-vs-nordvpn" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-        <h3 class="font-bold text-brand-dark">CyberGhost vs NordVPN</h3>
-        <p class="text-sm text-gray-500 mt-1">Best for Beginners vs Best Overall</p>
-      </a>
-      <a href="/compare/protonvpn-vs-mullvad" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-        <h3 class="font-bold text-brand-dark">Proton VPN vs Mullvad</h3>
-        <p class="text-sm text-gray-500 mt-1">Best Privacy VPNs</p>
-      </a>
+      {comparisons.map((comp) => {
+        const v1 = vpnMap[comp.vpn1];
+        const v2 = vpnMap[comp.vpn2];
+        return v1 && v2 ? (
+          <a href={`/compare/${comp.slug}`} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-2">
+              <img src={v1.logo} alt={v1.name} class="w-8 h-8 object-contain" />
+              <span class="text-gray-400 font-bold">vs</span>
+              <img src={v2.logo} alt={v2.name} class="w-8 h-8 object-contain" />
+            </div>
+            <h3 class="font-bold text-brand-dark">{v1.name} vs {v2.name}</h3>
+            <p class="text-sm text-gray-500 mt-1">{comp.label}</p>
+            <p class="text-xs text-gray-400 mt-2">{v1.scores.total}/100 vs {v2.scores.total}/100</p>
+          </a>
+        ) : null;
+      })}
     </div>
   </div>
   <Footer slot="footer" />

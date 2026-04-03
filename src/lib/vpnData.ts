@@ -5,51 +5,61 @@ import dealsData from '../../data/deals.json';
 
 export interface VPN {
   id: string;
-  ad: string;
+  name: string;
   slug: string;
   logo: string;
-  renk_hex: string;
+  color_hex: string;
+  color_text_hex?: string;
   tagline: string;
   website: string;
-  kurucu_ulke: string;
+  headquarters: string;
   is14Eyes: boolean;
-  kurulus_yili: number;
-  guvenlik: any;
-  sunucu_agi: any;
-  hiz_testleri: any;
-  platform_destegi: any;
+  founded_year: number;
+  priority: string;
+  security: any;
+  server_network: any;
+  speed_tests: any;
+  platform_support: any;
   streaming: any;
-  musteri_hizmeti: any;
-  puanlar: any;
+  customer_support: any;
+  scores: {
+    speed: number;
+    privacy: number;
+    ease_of_use: number;
+    server_network: number;
+    value: number;
+    streaming: number;
+    total: number;
+  };
   affiliate: any;
-  artilari: string[];
-  eksileri: string[];
-  en_iyi_icin: string[];
-  onerilen_plan: string;
-  aktif: boolean;
-  ucretsiz_plan?: any;
+  pros: string[];
+  cons: string[];
+  best_for: string[];
+  recommended_plan: string;
+  active: boolean;
+  free_plan?: any;
 }
 
 export function getAllVPNs(): VPN[] {
-  return (vpnsData as any).vpnler.filter((v: VPN) => v.aktif);
+  return (vpnsData as any).vpns.filter((v: VPN) => v.active);
 }
 
 export function getVPNBySlug(slug: string): VPN | undefined {
-  return (vpnsData as any).vpnler.find((v: VPN) => v.slug === slug);
+  return (vpnsData as any).vpns.find((v: VPN) => v.slug === slug);
 }
 
 export function getVPNById(id: string): VPN | undefined {
-  return (vpnsData as any).vpnler.find((v: VPN) => v.id === id);
+  return (vpnsData as any).vpns.find((v: VPN) => v.id === id);
 }
 
 export function getRankedVPNs(): VPN[] {
-  return getAllVPNs().sort((a, b) => b.puanlar.toplam - a.puanlar.toplam);
+  return getAllVPNs().sort((a, b) => b.scores.total - a.scores.total);
 }
 
 export function getVPNsByUseCase(useCase: string): VPN[] {
   return getAllVPNs()
-    .filter((v) => v.en_iyi_icin.includes(useCase))
-    .sort((a, b) => b.puanlar.toplam - a.puanlar.toplam);
+    .filter((v) => v.best_for.includes(useCase))
+    .sort((a, b) => b.scores.total - a.scores.total);
 }
 
 export function getStreamingVPNs(): VPN[] {
@@ -58,25 +68,25 @@ export function getStreamingVPNs(): VPN[] {
       const s = v.streaming;
       return s && (s.netflix_us || s.disney_plus);
     })
-    .sort((a, b) => b.puanlar.streaming - a.puanlar.streaming);
+    .sort((a, b) => b.scores.streaming - a.scores.streaming);
 }
 
 export function getPrivacyVPNs(): VPN[] {
   return getAllVPNs()
-    .filter((v) => v.guvenlik.no_logs_bagimsiz_denetim)
-    .sort((a, b) => b.puanlar.gizlilik - a.puanlar.gizlilik);
+    .filter((v) => v.security.no_logs_audited)
+    .sort((a, b) => b.scores.privacy - a.scores.privacy);
 }
 
 export function getBudgetVPNs(): VPN[] {
-  const prices = (pricingData as any).fiyatlar;
+  const prices = (pricingData as any).prices;
   return getAllVPNs()
     .map((vpn) => {
       const pricing = prices[vpn.id];
       let monthlyPrice = Infinity;
       if (pricing) {
-        if (pricing['2yil_plan']) monthlyPrice = pricing['2yil_plan'].fiyat;
-        else if (pricing['1yil_plan']) monthlyPrice = pricing['1yil_plan'].fiyat;
-        else if (pricing['aylik_plan']) monthlyPrice = pricing['aylik_plan'].fiyat;
+        if (pricing.two_year) monthlyPrice = pricing.two_year.price;
+        else if (pricing.yearly) monthlyPrice = pricing.yearly.price;
+        else if (pricing.monthly) monthlyPrice = pricing.monthly.price;
       }
       return { ...vpn, _monthlyPrice: monthlyPrice };
     })
@@ -85,22 +95,22 @@ export function getBudgetVPNs(): VPN[] {
 
 export function getTorrentVPNs(): VPN[] {
   return getAllVPNs()
-    .filter((v) => v.sunucu_agi.p2p_sunucu)
-    .sort((a, b) => b.puanlar.hiz - a.puanlar.hiz);
+    .filter((v) => v.server_network.p2p_servers)
+    .sort((a, b) => b.scores.speed - a.scores.speed);
 }
 
 export function getPricing(vpnId: string): any {
-  return (pricingData as any).fiyatlar[vpnId] || null;
+  return (pricingData as any).prices[vpnId] || null;
 }
 
 export function getSpeedTestResult(vpnId: string): any {
-  return (speedTestData as any).sonuclar.find(
+  return (speedTestData as any).results.find(
     (r: any) => r.vpn_id === vpnId
   ) || null;
 }
 
 export function getActiveDeals(): any[] {
-  return (dealsData as any).kampanyalar || [];
+  return (dealsData as any).deals || [];
 }
 
 export function getDealForVPN(vpnId: string): any {
@@ -109,28 +119,28 @@ export function getDealForVPN(vpnId: string): any {
 
 export function getSpeedTestMetadata(): any {
   return {
-    test_tarihi: (speedTestData as any).test_tarihi,
-    test_sunucusu: (speedTestData as any).test_sunucusu,
-    baglanti_hizi_mbps: (speedTestData as any).baglanti_hizi_mbps,
-    test_saati: (speedTestData as any).test_saati,
-    tekrar_sayisi: (speedTestData as any).tekrar_sayisi,
-    metodoloji_versiyon: (speedTestData as any).test_metodolojisi,
+    test_date: (speedTestData as any).test_date,
+    test_server: (speedTestData as any).test_server,
+    connection_speed_mbps: (speedTestData as any).connection_speed_mbps,
+    test_time: (speedTestData as any).test_time,
+    repeat_count: (speedTestData as any).repeat_count,
+    methodology: (speedTestData as any).methodology,
   };
 }
 
-export function getVPNsForComparison(): { id: string; ad: string; slug: string; puanlar: any }[] {
+export function getVPNsForComparison(): { id: string; name: string; slug: string; scores: any }[] {
   return getAllVPNs().map((v) => ({
     id: v.id,
-    ad: v.ad,
+    name: v.name,
     slug: v.slug,
-    puanlar: v.puanlar,
+    scores: v.scores,
   }));
 }
 
-export function getSonGuncelleme(): string {
-  return (vpnsData as any).son_guncelleme;
+export function getLastUpdated(): string {
+  return (vpnsData as any).last_updated;
 }
 
-export function getMetodolojiVersion(): string {
-  return (vpnsData as any).test_metodolojisi_versiyon;
+export function getMethodologyVersion(): string {
+  return (vpnsData as any).methodology_version;
 }

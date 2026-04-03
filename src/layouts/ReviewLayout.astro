@@ -11,10 +11,10 @@ import ProConList from '../components/ProConList.astro';
 import PricingTable from '../components/PricingTable.astro';
 import SpeedTestChart from '../components/SpeedTestChart.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
-import { getVPNBySlug, getPricing, getSpeedTestResult, getDealForVPN } from '../lib/vpnData';
+import { getPricing, getSpeedTestResult, getDealForVPN } from '../lib/vpnData';
 import { getBestAffiliateLink, getCTAText } from '../lib/affiliateLinks';
 import { getScoreLabel, getScoreColor } from '../lib/scoring';
-import { formatPrice, formatDate, getUseCaseLabel } from '../lib/formatters';
+import { formatPrice, formatDate, getUseCaseLabel, getBestPrice } from '../lib/formatters';
 
 interface Props {
   vpn: any;
@@ -25,25 +25,26 @@ const pricing = getPricing(vpn.id);
 const speedTest = getSpeedTestResult(vpn.id);
 const deal = getDealForVPN(vpn.id);
 const affiliateLink = getBestAffiliateLink(vpn, 'review');
-const ctaText = getCTAText({ ...vpn, pricingData: pricing }, 'review');
-const scoreLabel = getScoreLabel(vpn.puanlar.toplam);
-const scoreColorClass = getScoreColor(vpn.puanlar.toplam);
+const ctaText = getCTAText(vpn, pricing, 'review');
+const scoreLabel = getScoreLabel(vpn.scores.total);
+const scoreColorClass = getScoreColor(vpn.scores.total);
+const best = getBestPrice(pricing);
 
-const title = `${vpn.ad} Review 2026: Speed Tests, Scores & Pricing | VPNScorecard`;
-const description = `${vpn.ad} scores ${vpn.puanlar.toplam}/100 in our independent review. ${speedTest ? `${speedTest.indirme_mbps} Mbps in speed tests` : 'Tested speeds'}. ${vpn.guvenlik.no_logs_bagimsiz_denetim ? `${vpn.guvenlik.denetim_firmasi}-audited no-logs policy` : 'No-logs policy'}. Full test results inside.`;
+const title = `${vpn.name} Review 2026: Speed Tests, Scores & Pricing | VPNScorecard`;
+const description = `${vpn.name} scores ${vpn.scores.total}/100 in our independent review. ${speedTest ? `${speedTest.download_mbps} Mbps in speed tests` : 'Tested speeds'}. ${vpn.security.no_logs_audited ? `${vpn.security.audit_firm}-audited no-logs policy` : 'No-logs policy'}. Full test results inside.`;
 
 const schemaMarkup = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
     "@type": "SoftwareApplication",
-    "name": vpn.ad,
+    "name": vpn.name,
     "applicationCategory": "SecurityApplication",
     "operatingSystem": "Windows, Mac, iOS, Android, Linux"
   },
   "reviewRating": {
     "@type": "Rating",
-    "ratingValue": (vpn.puanlar.toplam / 10).toFixed(1),
+    "ratingValue": (vpn.scores.total / 10).toFixed(1),
     "bestRating": "10",
     "worstRating": "1"
   },
@@ -53,7 +54,7 @@ const schemaMarkup = JSON.stringify({
   },
   "datePublished": "2026-04-01",
   "dateModified": "2026-04-01",
-  "reviewBody": `${vpn.ad} scores ${vpn.puanlar.toplam}/100 in our testing. ${vpn.tagline}.`,
+  "reviewBody": `${vpn.name} scores ${vpn.scores.total}/100 in our testing. ${vpn.tagline}.`,
   "publisher": {
     "@type": "Organization",
     "name": "VPNScorecard",
@@ -61,41 +62,64 @@ const schemaMarkup = JSON.stringify({
   }
 });
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [] as any[]
+};
+
 const faqData = [
   {
-    question: `Is ${vpn.ad} safe to use?`,
-    answer: vpn.guvenlik.no_logs_bagimsiz_denetim
-      ? `Yes. ${vpn.ad} has an independently audited no-logs policy verified by ${vpn.guvenlik.denetim_firmasi}. It uses AES-256 encryption and includes a kill switch and DNS leak protection.`
-      : `Yes. ${vpn.ad} uses AES-256 encryption and includes standard security features like a kill switch and DNS leak protection.`
+    question: `Is ${vpn.name} safe to use?`,
+    answer: vpn.security.no_logs_audited
+      ? `Yes. ${vpn.name} has an independently audited no-logs policy verified by ${vpn.security.audit_firm}. It uses ${vpn.security.encryption} encryption and includes a kill switch and DNS leak protection.`
+      : `Yes. ${vpn.name} uses ${vpn.security.encryption} encryption and includes standard security features like a kill switch and DNS leak protection.`
   },
   {
-    question: `Does ${vpn.ad} work with Netflix?`,
+    question: `Does ${vpn.name} work with Netflix?`,
     answer: vpn.streaming.netflix_us
-      ? `Yes, ${vpn.ad} works with Netflix US, UK, and most other regional libraries in our March 2026 testing.`
-      : `In our March 2026 testing, ${vpn.ad} had limited Netflix support. We recommend NordVPN or ExpressVPN for reliable Netflix access.`
+      ? `Yes, ${vpn.name} works with Netflix US and most other regional libraries in our March 2026 testing.`
+      : `In our March 2026 testing, ${vpn.name} had limited Netflix support. We recommend NordVPN or ExpressVPN for reliable Netflix access.`
   },
   {
-    question: `How much does ${vpn.ad} cost?`,
-    answer: pricing
-      ? `${vpn.ad} starts from ${formatPrice(pricing.aylik_plan?.fiyat || 0)}/month. The best value is the ${pricing['2yil_plan'] ? '2-year plan at ' + formatPrice(pricing['2yil_plan'].fiyat) + '/mo' : pricing['1yil_plan'] ? '1-year plan at ' + formatPrice(pricing['1yil_plan'].fiyat) + '/mo' : 'monthly plan'}.`
-      : `Check the pricing table below for current ${vpn.ad} plans.`
+    question: `How much does ${vpn.name} cost?`,
+    answer: best
+      ? `${vpn.name} starts from ${formatPrice(best.price)}/month on the ${best.plan} plan. ${best.savings ? `That's ${best.savings}% off the monthly price.` : ''}`
+      : `Check the pricing table below for current ${vpn.name} plans.`
   },
   {
-    question: `How many devices can I use with ${vpn.ad}?`,
-    answer: vpn.platform_destegi.es_zamani_baglanti
-      ? `${vpn.ad} supports ${vpn.platform_destegi.es_zamani_baglanti} simultaneous connections.`
-      : `${vpn.ad} supports unlimited simultaneous connections.`
+    question: `How many devices can I use with ${vpn.name}?`,
+    answer: vpn.platform_support.simultaneous_connections
+      ? `${vpn.name} supports ${vpn.platform_support.simultaneous_connections} simultaneous connections.`
+      : `${vpn.name} supports unlimited simultaneous connections.`
   },
   {
     question: `Is there a money-back guarantee?`,
-    answer: pricing?.para_iade_gun
-      ? `Yes, ${vpn.ad} offers a ${pricing.para_iade_gun}-day money-back guarantee. No questions asked.`
-      : `Check ${vpn.ad}'s website for their current refund policy.`
+    answer: pricing?.refund_days
+      ? `Yes, ${vpn.name} offers a ${pricing.refund_days}-day money-back guarantee. No questions asked.`
+      : `Check ${vpn.name}'s website for their current refund policy.`
+  },
+  {
+    question: `Is ${vpn.name} good for streaming?`,
+    answer: vpn.streaming.netflix_us && vpn.streaming.disney_plus
+      ? `Yes, ${vpn.name} unblocks Netflix US, Disney+, and other major streaming platforms. It scored ${vpn.scores.streaming}/5 in our streaming tests.`
+      : vpn.streaming.netflix_us
+        ? `${vpn.name} works with Netflix US but may have limited support for other streaming platforms.`
+        : `${vpn.name} has limited streaming support. For the best streaming experience, we recommend NordVPN or ExpressVPN.`
   }
 ];
+
+faqSchema.mainEntity = faqData.map(faq => ({
+  "@type": "Question",
+  "name": faq.question,
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": faq.answer
+  }
+}));
 ---
 
-<BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>`}>
+<BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
   <Header slot="header" />
 
   <AffiliateDisclosure />
@@ -105,17 +129,17 @@ const faqData = [
       <ol class="flex items-center gap-1">
         <li><a href="/" class="hover:text-brand">Home</a></li>
         <li><span class="mx-1">/</span></li>
-        <li><a href="/reviews" class="hover:text-brand">Reviews</a></li>
+        <li><a href="/reviews/" class="hover:text-brand">Reviews</a></li>
         <li><span class="mx-1">/</span></li>
-        <li class="text-gray-700 font-medium">{vpn.ad}</li>
+        <li class="text-gray-700 font-medium">{vpn.name}</li>
       </ol>
     </nav>
 
     <header class="mb-8">
       <div class="flex items-center gap-4 mb-4">
-        <img src={vpn.logo} alt={`${vpn.ad} logo`} class="w-16 h-16 object-contain" loading="lazy" />
+        <img src={vpn.logo} alt={`${vpn.name} logo`} class="w-16 h-16 object-contain" loading="lazy" />
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-brand-dark">{vpn.ad} Review 2026</h1>
+          <h1 class="text-3xl md:text-4xl font-bold text-brand-dark">{vpn.name} Review 2026</h1>
           <p class="text-lg text-gray-600 mt-1">{vpn.tagline}</p>
         </div>
       </div>
@@ -126,16 +150,16 @@ const faqData = [
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Quick Summary">
       <div class="flex flex-col md:flex-row gap-6 items-start">
         <div class="flex-shrink-0">
-          <ScoreGauge score={vpn.puanlar.toplam} size={120} />
-          <p class="text-center text-sm font-semibold mt-2 {scoreColorClass}">{scoreLabel.label}</p>
+          <ScoreGauge score={vpn.scores.total} size={120} />
+          <p class={`text-center text-sm font-semibold mt-2 ${scoreColorClass}`}>{scoreLabel.label}</p>
         </div>
         <div class="flex-1">
           <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
             <h2 class="font-semibold text-brand-dark mb-2">TL;DR — Our Verdict</h2>
-            <p class="text-gray-700">{vpn.tagline}. Scored <strong>{vpn.puanlar.toplam}/100</strong> in our independent testing. {vpn.guvenlik.no_logs_bagimsiz_denetim ? `Independently audited by ${vpn.guvenlik.denetim_firmasi}.` : ''} {pricing ? `From ${formatPrice(pricing['2yil_plan']?.fiyat || pricing['1yil_plan']?.fiyat || pricing.aylik_plan?.fiyat || 0)}/mo.` : ''}</p>
+            <p class="text-gray-700">{vpn.tagline}. Scored <strong>{vpn.scores.total}/100</strong> in our independent testing. {vpn.security.no_logs_audited ? `Independently audited by ${vpn.security.audit_firm}.` : ''} {best ? `From ${formatPrice(best.price)}/mo.` : ''}</p>
           </div>
           <div class="flex flex-wrap gap-2 mb-4">
-            {vpn.en_iyi_icin.map((useCase: string) => (
+            {vpn.best_for.map((useCase: string) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-light/10 text-brand-dark">
                 Best for: {getUseCaseLabel(useCase)}
               </span>
@@ -144,8 +168,8 @@ const faqData = [
           <CTAButton href={affiliateLink} vpnId={vpn.id} pageType="review" variant="primary" size="lg">
             {ctaText}
           </CTAButton>
-          {pricing?.para_iade_gun && (
-            <p class="text-xs text-gray-500 mt-2">{pricing.para_iade_gun}-day money-back guarantee. No questions asked.</p>
+          {pricing?.refund_days > 0 && (
+            <p class="text-xs text-gray-500 mt-2">{pricing.refund_days}-day money-back guarantee. No questions asked.</p>
           )}
         </div>
       </div>
@@ -153,13 +177,13 @@ const faqData = [
 
     <section class="mb-8" aria-label="Score Breakdown">
       <h2 class="text-2xl font-bold text-brand-dark mb-4">Score Breakdown</h2>
-      <ScoreBreakdown scores={vpn.puanlar} />
+      <ScoreBreakdown scores={vpn.scores} />
     </section>
 
     {pricing && (
       <section class="mb-8" aria-label="Pricing">
         <h2 class="text-2xl font-bold text-brand-dark mb-4">Pricing & Plans</h2>
-        <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.ad} pageType="review" />
+        <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.name} pageType="review" />
       </section>
     )}
 
@@ -175,41 +199,41 @@ const faqData = [
       <div class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex items-center gap-3">
-            <span class="text-green-500 font-bold">✓</span>
+            <span class="text-green-500 font-bold">&#10003;</span>
             <div>
               <p class="font-medium">Encryption</p>
-              <p class="text-sm text-gray-600">{vpn.guvenlik.sifreleme}</p>
+              <p class="text-sm text-gray-600">{vpn.security.encryption}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <span class={vpn.guvenlik.no_logs_bagimsiz_denetim ? 'text-green-500 font-bold' : 'text-yellow-500 font-bold'}>
-              {vpn.guvenlik.no_logs_bagimsiz_denetim ? '✓' : '~'}
+            <span class={vpn.security.no_logs_audited ? 'text-green-500 font-bold' : 'text-yellow-500 font-bold'}>
+              {vpn.security.no_logs_audited ? '✓' : '~'}
             </span>
             <div>
               <p class="font-medium">No-Logs Policy</p>
               <p class="text-sm text-gray-600">
-                {vpn.guvenlik.no_logs_bagimsiz_denetim
-                  ? `Audited by ${vpn.guvenlik.denetim_firmasi} (${vpn.guvenlik.denetim_tarihi})`
+                {vpn.security.no_logs_audited
+                  ? `Audited by ${vpn.security.audit_firm} (${vpn.security.audit_date})`
                   : 'Claimed (no independent audit)'}
               </p>
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <span class={vpn.guvenlik.kill_switch ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
-              {vpn.guvenlik.kill_switch ? '✓' : '✗'}
+            <span class={vpn.security.kill_switch ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
+              {vpn.security.kill_switch ? '✓' : '✗'}
             </span>
             <div>
               <p class="font-medium">Kill Switch</p>
-              <p class="text-sm text-gray-600">{vpn.guvenlik.kill_switch ? 'Yes — tested working' : 'Not available'}</p>
+              <p class="text-sm text-gray-600">{vpn.security.kill_switch ? 'Yes — tested working' : 'Not available'}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <span class={vpn.guvenlik.dns_sizinti_korumasi ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
-              {vpn.guvenlik.dns_sizinti_korumasi ? '✓' : '✗'}
+            <span class={vpn.security.dns_leak_protection ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>
+              {vpn.security.dns_leak_protection ? '✓' : '✗'}
             </span>
             <div>
               <p class="font-medium">DNS Leak Protection</p>
-              <p class="text-sm text-gray-600">{vpn.guvenlik.dns_sizinti_korumasi ? 'Yes — no leaks detected' : 'Not available'}</p>
+              <p class="text-sm text-gray-600">{vpn.security.dns_leak_protection ? 'Yes — no leaks detected' : 'Not available'}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -218,14 +242,14 @@ const faqData = [
             </span>
             <div>
               <p class="font-medium">Jurisdiction</p>
-              <p class="text-sm text-gray-600">{vpn.kurucu_ulke} {vpn.is14Eyes ? '(14 Eyes member)' : '(Outside 14 Eyes)'}</p>
+              <p class="text-sm text-gray-600">{vpn.headquarters} {vpn.is14Eyes ? '(14 Eyes member)' : '(Outside 14 Eyes)'}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-gray-400 font-bold">—</span>
             <div>
               <p class="font-medium">Protocols</p>
-              <p class="text-sm text-gray-600">{vpn.guvenlik.protokoller.join(', ')}</p>
+              <p class="text-sm text-gray-600">{vpn.security.protocols.join(', ')}</p>
             </div>
           </div>
         </div>
@@ -236,7 +260,7 @@ const faqData = [
       <h2 class="text-2xl font-bold text-brand-dark mb-4">Streaming Support</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Object.entries(vpn.streaming).map(([service, works]) => (
-          <div class="flex items-center gap-2 p-3 rounded-lg {works ? 'bg-green-50' : 'bg-red-50'}">
+          <div class={`flex items-center gap-2 p-3 rounded-lg ${works ? 'bg-green-50' : 'bg-red-50'}`}>
             <span class="text-lg">{works ? '✅' : '❌'}</span>
             <span class="text-sm font-medium capitalize">{service.replace(/_/g, ' ')}</span>
           </div>
@@ -246,20 +270,20 @@ const faqData = [
     </section>
 
     <section class="mb-8" aria-label="Pros and Cons">
-      <ProConList pros={vpn.artilari} cons={vpn.eksileri} />
+      <ProConList pros={vpn.pros} cons={vpn.cons} />
     </section>
 
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Who is this VPN for?">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Who is {vpn.ad} Best For?</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">Who is {vpn.name} Best For?</h2>
       <div class="prose max-w-none">
         <p class="text-gray-700">
-          {vpn.ad} is best for users who prioritize {vpn.en_iyi_icin.map((u: string) => getUseCaseLabel(u)).join(', ').toLowerCase()}.
-          {vpn.puanlar.hiz >= 20 ? ' With excellent speed test results, it handles 4K streaming and large downloads without issues.' : ''}
-          {vpn.guvenlik.no_logs_bagimsiz_denetim ? ' The independently audited no-logs policy means your browsing data stays private.' : ''}
+          {vpn.name} is best for users who prioritize {vpn.best_for.map((u: string) => getUseCaseLabel(u)).join(', ').toLowerCase()}.
+          {vpn.scores.speed >= 20 ? ' With excellent speed test results, it handles 4K streaming and large downloads without issues.' : ''}
+          {vpn.security.no_logs_audited ? ' The independently audited no-logs policy means your browsing data stays private.' : ''}
         </p>
         <p class="text-gray-700 mt-3">
           Consider alternatives if you need {vpn.streaming.netflix_us ? '' : 'reliable Netflix access (try NordVPN instead)'}
-          {vpn.platform_destegi.es_zamani_baglanti && vpn.platform_destegi.es_zamani_baglanti < 10 ? ' more simultaneous connections (try Surfshark for unlimited)' : ''}.
+          {vpn.platform_support.simultaneous_connections && vpn.platform_support.simultaneous_connections < 10 ? ' more simultaneous connections (try Surfshark for unlimited)' : ''}.
         </p>
       </div>
     </section>
@@ -270,13 +294,13 @@ const faqData = [
     </section>
 
     <section class="bg-brand-dark rounded-xl p-8 text-center text-white mb-8" aria-label="Call to Action">
-      <h2 class="text-2xl font-bold mb-2">Get the Best Price on {vpn.ad}</h2>
+      <h2 class="text-2xl font-bold mb-2">Get the Best Price on {vpn.name}</h2>
       <p class="text-gray-300 mb-6">Exclusive deal through VPNScorecard — verified April 2026</p>
       <CTAButton href={affiliateLink} vpnId={vpn.id} pageType="review" variant="light" size="lg">
         {ctaText}
       </CTAButton>
-      {pricing?.para_iade_gun && (
-        <p class="text-sm text-gray-400 mt-4">{pricing.para_iade_gun}-day money-back guarantee. No questions asked.</p>
+      {pricing?.refund_days > 0 && (
+        <p class="text-sm text-gray-400 mt-4">{pricing.refund_days}-day money-back guarantee. No questions asked.</p>
       )}
     </section>
 

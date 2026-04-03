@@ -1,18 +1,23 @@
 ---
+import { getLangFromUrl, getAlternateLinks, type Lang, defaultLang } from '../i18n/index';
+
 interface Props {
   title: string;
   description: string;
   canonical?: string;
   ogImage?: string;
   schemaMarkup?: string;
+  lang?: Lang;
 }
 
-const { title, description, canonical, ogImage = '/og-image.png', schemaMarkup } = Astro.props;
+const { title, description, canonical, ogImage = '/og-image.png', schemaMarkup, lang: propLang } = Astro.props;
+const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalUrl = canonical || Astro.url?.href || 'https://vpnscorecard.com';
+const alternateLinks = getAlternateLinks(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,13 +26,26 @@ const canonicalUrl = canonical || Astro.url?.href || 'https://vpnscorecard.com';
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Alternate Language Links -->
+    {alternateLinks.map(({ lang: altLang, href }) => (
+      <link rel="alternate" hreflang={altLang} href={`https://vpnscorecard.com${href}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`https://vpnscorecard.com${alternateLinks.find(l => l.lang === 'en')?.href || '/'}`} />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : lang === 'tr' ? 'tr_TR' : 'en_US'} />
+    <meta property="og:site_name" content="VPNScorecard" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+
     <meta name="theme-color" content="#1a1f36" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

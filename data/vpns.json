@@ -1,60 +1,65 @@
 {
-  "son_guncelleme": "2026-04-01",
-  "test_metodolojisi_versiyon": "2.1",
-  "vpnler": [
+  "last_updated": "2026-04-01",
+  "methodology_version": "2.1",
+  "vpns": [
     {
       "id": "nordvpn",
-      "ad": "NordVPN",
+      "name": "NordVPN",
       "slug": "nordvpn",
       "logo": "/logos/nordvpn.svg",
-      "renk_hex": "#4687FF",
-      "tagline": "En hızlı ve en güvenilir VPN",
+      "color_hex": "#4687FF",
+      "tagline": "The fastest and most reliable VPN",
       "website": "https://nordvpn.com",
-      "kurucu_ulke": "Panama",
+      "headquarters": "Panama",
       "is14Eyes": false,
-      "kurulus_yili": 2012,
-      "guvenlik": {
-        "sifreleme": "AES-256-GCM",
-        "protokoller": ["NordLynx (WireGuard)", "OpenVPN", "IKEv2/IPSec"],
-        "varsayilan_protokol": "NordLynx",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Deloitte",
-        "denetim_tarihi": "2023-11",
+      "founded_year": 2012,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256-GCM",
+        "protocols": [
+          "NordLynx (WireGuard)",
+          "OpenVPN",
+          "IKEv2/IPSec"
+        ],
+        "default_protocol": "NordLynx",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Deloitte",
+        "audit_date": "2023-11",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
         "double_vpn": true,
         "onion_over_vpn": true,
-        "obfuscated_sunucu": true,
+        "obfuscated_servers": true,
         "threat_protection": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 6400,
-        "ulke_sayisi": 111,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 6400,
+        "country_count": 111,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": true,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "nordlynx": {
-          "indirme_mbps": 887,
-          "yukleme_mbps": 412,
+          "download_mbps": 887,
+          "upload_mbps": 412,
           "ping_ms": 8,
-          "tutarlilik_yuzde": 94
+          "consistency_percent": 94
         },
         "openvpn": {
-          "indirme_mbps": 312,
-          "yukleme_mbps": 180,
+          "download_mbps": 312,
+          "upload_mbps": 180,
           "ping_ms": 22,
-          "tutarlilik_yuzde": 89
+          "consistency_percent": 89
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -63,7 +68,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": 10
+        "simultaneous_connections": 10
       },
       "streaming": {
         "netflix_us": true,
@@ -74,98 +79,108 @@
         "amazon_prime": true,
         "hbo_max": true
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 2,
-        "turkce_destek": false
+        "response_time_hours": 2
       },
-      "puanlar": {
-        "hiz": 23,
-        "gizlilik": 24,
-        "kullanim_kolayligi": 13,
-        "sunucu_agi": 14,
-        "fiyat_deger": 12,
+      "scores": {
+        "speed": 23,
+        "privacy": 24,
+        "ease_of_use": 13,
+        "server_network": 14,
+        "value": 12,
         "streaming": 5,
-        "toplam": 91
+        "total": 91
       },
       "affiliate": {
         "program": "NordVPN Affiliate",
-        "komisyon_tipi": "recurring",
-        "komisyon_oran": 40,
-        "cookie_gun": 30,
-        "link_1ay": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=902",
-        "link_1yil": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=900",
-        "link_2yil": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=901"
+        "commission_type": "recurring",
+        "commission_percent": 40,
+        "cookie_days": 30,
+        "link_1month": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=902",
+        "link_1year": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=900",
+        "link_2year": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=901"
       },
-      "artilari": [
-        "Bağımsız denetimli no-logs politikası (Deloitte)",
-        "NordLynx ile piyasanın en hızlı VPN'i",
-        "111 ülkede 6.400+ sunucu",
-        "Threat Protection ile reklam ve malware engelleme",
-        "10 eş zamanlı bağlantı hakkı"
+      "pros": [
+        "Independently audited no-logs policy (Deloitte)",
+        "Fastest VPN with NordLynx protocol (887 Mbps)",
+        "6,400+ servers in 111 countries",
+        "Threat Protection blocks ads and malware",
+        "10 simultaneous connections"
       ],
-      "eksileri": [
-        "Router uygulaması kurulumu karmaşık",
-        "Türkçe müşteri hizmeti yok",
-        "RAM-only sunucu altyapısı henüz yok"
+      "cons": [
+        "Router app setup is complex",
+        "No RAM-only server infrastructure yet",
+        "Slightly more expensive than budget options"
       ],
-      "en_iyi_icin": ["streaming", "gizlilik", "hiz", "genel_kullanim"],
-      "onerilen_plan": "2 yıllık plan (en düşük aylık maliyet)",
-      "aktif": true
+      "best_for": [
+        "streaming",
+        "privacy",
+        "speed",
+        "overall"
+      ],
+      "recommended_plan": "2-year plan (lowest monthly cost)",
+      "active": true
     },
     {
       "id": "expressvpn",
-      "ad": "ExpressVPN",
+      "name": "ExpressVPN",
       "slug": "expressvpn",
       "logo": "/logos/expressvpn.svg",
-      "renk_hex": "#DA3940",
-      "tagline": "Hız ve güvenilirlikte dünya standardı",
+      "color_hex": "#DA3940",
+      "tagline": "World standard in speed and reliability",
       "website": "https://www.expressvpn.com",
-      "kurucu_ulke": "Britanya Virjin Adaları",
+      "headquarters": "British Virgin Islands",
       "is14Eyes": false,
-      "kurulus_yili": 2009,
-      "guvenlik": {
-        "sifreleme": "AES-256-GCM",
-        "protokoller": ["Lightway (WireGuard tabanlı)", "OpenVPN", "IKEv2", "L2TP"],
-        "varsayilan_protokol": "Lightway",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "KPMG",
-        "denetim_tarihi": "2024-02",
+      "founded_year": 2009,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256-GCM",
+        "protocols": [
+          "Lightway (WireGuard tabanlı)",
+          "OpenVPN",
+          "IKEv2",
+          "L2TP"
+        ],
+        "default_protocol": "Lightway",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "KPMG",
+        "audit_date": "2024-02",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
         "double_vpn": false,
-        "obfuscated_sunucu": true,
+        "obfuscated_servers": true,
         "ram_only": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 3000,
-        "ulke_sayisi": 105,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 3000,
+        "country_count": 105,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": false,
         "ram_only": true
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "lightway": {
-          "indirme_mbps": 812,
-          "yukleme_mbps": 389,
+          "download_mbps": 812,
+          "upload_mbps": 389,
           "ping_ms": 10,
-          "tutarlilik_yuzde": 92
+          "consistency_percent": 92
         },
         "openvpn": {
-          "indirme_mbps": 289,
-          "yukleme_mbps": 167,
+          "download_mbps": 289,
+          "upload_mbps": 167,
           "ping_ms": 25,
-          "tutarlilik_yuzde": 87
+          "consistency_percent": 87
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -174,7 +189,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": 8
+        "simultaneous_connections": 8
       },
       "streaming": {
         "netflix_us": true,
@@ -185,91 +200,98 @@
         "amazon_prime": true,
         "hbo_max": true
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 1,
-        "turkce_destek": false
+        "response_time_hours": 1
       },
-      "puanlar": {
-        "hiz": 22,
-        "gizlilik": 23,
-        "kullanim_kolayligi": 15,
-        "sunucu_agi": 12,
-        "fiyat_deger": 9,
+      "scores": {
+        "speed": 22,
+        "privacy": 23,
+        "ease_of_use": 15,
+        "server_network": 12,
+        "value": 9,
         "streaming": 5,
-        "toplam": 86
+        "total": 86
       },
       "affiliate": {
         "program": "ExpressVPN Affiliate",
-        "komisyon_tipi": "flat",
-        "komisyon_usd": 13,
-        "cookie_gun": 90,
-        "link_ana": "https://www.expressvpn.com/vpn-service/refer-a-friend?ref=YOURID"
+        "commission_type": "flat",
+        "commission_usd": 13,
+        "cookie_days": 90,
+        "link_main": "https://www.expressvpn.com/vpn-service/refer-a-friend?ref=YOURID"
       },
-      "artilari": [
-        "RAM-only sunucu altyapısı (TrustedServer teknolojisi)",
-        "Lightway protokolü ile yüksek hız",
-        "105 ülkede geniş sunucu ağı",
-        "En iyi router VPN desteği",
-        "KPMG bağımsız no-logs denetimi"
+      "pros": [
+        "RAM-only server infrastructure (TrustedServer)",
+        "High speed with Lightway protocol",
+        "Wide server network in 105 countries",
+        "Best router VPN support",
+        "KPMG-audited no-logs policy"
       ],
-      "eksileri": [
-        "Piyasanın en pahalı VPN'lerinden",
-        "Dedicated IP özelliği yok",
-        "Double VPN yok",
-        "8 eş zamanlı bağlantı limiti"
+      "cons": [
+        "One of the most expensive VPNs",
+        "No dedicated IP feature",
+        "No Double VPN",
+        "8 simultaneous connection limit"
       ],
-      "en_iyi_icin": ["streaming", "router_kullanimi", "kurumsal"],
-      "onerilen_plan": "1 yıllık plan",
-      "aktif": true
+      "best_for": [
+        "streaming",
+        "router",
+        "business"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true
     },
     {
       "id": "surfshark",
-      "ad": "Surfshark",
+      "name": "Surfshark",
       "slug": "surfshark",
       "logo": "/logos/surfshark.svg",
-      "renk_hex": "#1DB9C3",
-      "tagline": "Sınırsız cihaz, sınırsız özgürlük",
+      "color_hex": "#1DB9C3",
+      "tagline": "Unlimited devices, unlimited freedom",
       "website": "https://surfshark.com",
-      "kurucu_ulke": "Hollanda",
+      "headquarters": "Netherlands",
       "is14Eyes": true,
-      "kurulus_yili": 2018,
-      "guvenlik": {
-        "sifreleme": "AES-256-GCM",
-        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Deloitte",
-        "denetim_tarihi": "2023-09",
+      "founded_year": 2018,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256-GCM",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Deloitte",
+        "audit_date": "2023-09",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
+        "dns_leak_protection": true,
         "double_vpn": true,
-        "obfuscated_sunucu": true,
-        "ram_only": false,
-        "nexus_teknoloji": true
+        "obfuscated_servers": true,
+        "nexus_technology": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 3200,
-        "ulke_sayisi": 100,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 3200,
+        "country_count": 100,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": true,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 798,
-          "yukleme_mbps": 367,
+          "download_mbps": 798,
+          "upload_mbps": 367,
           "ping_ms": 11,
-          "tutarlilik_yuzde": 91
+          "consistency_percent": 91
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -278,7 +300,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": null
+        "simultaneous_connections": null
       },
       "streaming": {
         "netflix_us": true,
@@ -289,90 +311,97 @@
         "amazon_prime": true,
         "hbo_max": false
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 3,
-        "turkce_destek": false
+        "response_time_hours": 3
       },
-      "puanlar": {
-        "hiz": 21,
-        "gizlilik": 21,
-        "kullanim_kolayligi": 14,
-        "sunucu_agi": 12,
-        "fiyat_deger": 15,
+      "scores": {
+        "speed": 21,
+        "privacy": 21,
+        "ease_of_use": 14,
+        "server_network": 12,
+        "value": 15,
         "streaming": 4,
-        "toplam": 87
+        "total": 87
       },
       "affiliate": {
         "program": "Surfshark Affiliate",
-        "komisyon_tipi": "recurring",
-        "komisyon_oran": 40,
-        "cookie_gun": 30,
-        "link_ana": "https://surfshark.com/affiliates?ref=YOURID"
+        "commission_type": "recurring",
+        "commission_percent": 40,
+        "cookie_days": 30,
+        "link_main": "https://surfshark.com/affiliates?ref=YOURID"
       },
-      "artilari": [
-        "Sınırsız eş zamanlı cihaz bağlantısı",
-        "Fiyat/performans oranında piyasanın en iyisi",
-        "Nexus teknolojisi ile IP rotasyonu",
-        "Deloitte bağımsız no-logs denetimi",
-        "CleanWeb ile reklam engelleme"
+      "pros": [
+        "Unlimited simultaneous device connections",
+        "Best price-performance ratio on the market",
+        "Nexus technology with IP rotation",
+        "Deloitte-audited no-logs policy",
+        "CleanWeb ad blocker included"
       ],
-      "eksileri": [
-        "Hollanda merkezli (14 Eyes ülkesi)",
-        "RAM-only sunucu altyapısı yok",
-        "NordVPN'e kıyasla daha az sunucu"
+      "cons": [
+        "Based in Netherlands (14 Eyes country)",
+        "No RAM-only server infrastructure",
+        "Fewer servers compared to NordVPN"
       ],
-      "en_iyi_icin": ["butce_dostu", "cok_cihaz", "aile"],
-      "onerilen_plan": "2 yıllık plan",
-      "aktif": true
+      "best_for": [
+        "budget",
+        "multi_device",
+        "family"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
     },
     {
       "id": "cyberghost",
-      "ad": "CyberGhost",
+      "name": "CyberGhost",
       "slug": "cyberghost",
       "logo": "/logos/cyberghost.svg",
-      "renk_hex": "#FFCC00",
-      "renk_text_hex": "#1A1A1A",
-      "tagline": "Yeni başlayanlar için en kolay VPN",
+      "color_hex": "#FFCC00",
+      "tagline": "The easiest VPN for beginners",
       "website": "https://www.cyberghostvpn.com",
-      "kurucu_ulke": "Romanya",
+      "headquarters": "Romania",
       "is14Eyes": false,
-      "kurulus_yili": 2011,
-      "guvenlik": {
-        "sifreleme": "AES-256",
-        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Deloitte",
-        "denetim_tarihi": "2023-06",
+      "founded_year": 2011,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Deloitte",
+        "audit_date": "2023-06",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
         "double_vpn": false,
-        "obfuscated_sunucu": false
+        "obfuscated_servers": false
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 9600,
-        "ulke_sayisi": 91,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 9600,
+        "country_count": 91,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": true,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 743,
-          "yukleme_mbps": 312,
+          "download_mbps": 743,
+          "upload_mbps": 312,
           "ping_ms": 14,
-          "tutarlilik_yuzde": 88
+          "consistency_percent": 88
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -381,7 +410,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": 7
+        "simultaneous_connections": 7
       },
       "streaming": {
         "netflix_us": true,
@@ -392,91 +421,101 @@
         "amazon_prime": true,
         "hbo_max": false
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 4,
-        "turkce_destek": false
+        "response_time_hours": 4
       },
-      "puanlar": {
-        "hiz": 19,
-        "gizlilik": 20,
-        "kullanim_kolayligi": 15,
-        "sunucu_agi": 15,
-        "fiyat_deger": 13,
+      "scores": {
+        "speed": 19,
+        "privacy": 20,
+        "ease_of_use": 15,
+        "server_network": 15,
+        "value": 13,
         "streaming": 3,
-        "toplam": 85
+        "total": 85
       },
       "affiliate": {
         "program": "CyberGhost Affiliate",
-        "komisyon_tipi": "recurring",
-        "komisyon_oran": 45,
-        "cookie_gun": 45,
-        "link_ana": "https://www.cyberghostvpn.com/affiliates?ref=YOURID"
+        "commission_type": "recurring",
+        "commission_percent": 45,
+        "cookie_days": 45,
+        "link_main": "https://www.cyberghostvpn.com/affiliates?ref=YOURID"
       },
-      "artilari": [
-        "9.600+ sunucu ile piyasanın en geniş ağı",
-        "Yeni başlayanlar için en kolay arayüz",
-        "Streaming için optimize sunucular",
-        "45 günlük para iade garantisi",
-        "%45 tekrarlayan komisyon (en yüksek)"
+      "pros": [
+        "9,600+ servers — largest VPN network",
+        "Easiest interface for beginners",
+        "Streaming-optimized servers",
+        "45-day money-back guarantee",
+        "45% recurring affiliate commission"
       ],
-      "eksileri": [
-        "BBC iPlayer ve bazı streaming hizmetleri çalışmayabiliyor",
-        "Hız performansı rakiplerine kıyasla biraz düşük",
-        "7 cihaz limiti"
+      "cons": [
+        "BBC iPlayer and some streaming services may not work",
+        "Speed performance slightly below competitors",
+        "7 device limit"
       ],
-      "en_iyi_icin": ["yeni_baslayanlar", "streaming", "torrent"],
-      "onerilen_plan": "2 yıllık plan",
-      "aktif": true
+      "best_for": [
+        "beginners",
+        "streaming",
+        "torrent"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true,
+      "color_text_hex": "#1A1A1A"
     },
     {
       "id": "protonvpn",
-      "ad": "Proton VPN",
+      "name": "Proton VPN",
       "slug": "protonvpn",
       "logo": "/logos/protonvpn.svg",
-      "renk_hex": "#6D4AFF",
-      "tagline": "Gazeteciler ve aktivistler için güvenli seçim",
+      "color_hex": "#6D4AFF",
+      "tagline": "The secure choice for journalists and activists",
       "website": "https://protonvpn.com",
-      "kurucu_ulke": "İsviçre",
+      "headquarters": "Switzerland",
       "is14Eyes": false,
-      "kurulus_yili": 2017,
-      "guvenlik": {
-        "sifreleme": "AES-256",
-        "protokoller": ["WireGuard", "OpenVPN", "IKEv2", "Stealth"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Securitum",
-        "denetim_tarihi": "2024-01",
+      "founded_year": 2017,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2",
+          "Stealth"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Securitum",
+        "audit_date": "2024-01",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
-        "tor_over_vpn": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
         "double_vpn": true,
-        "uygulama_acik_kaynak": true,
+        "tor_over_vpn": true,
+        "open_source": true,
         "netshield": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 7700,
-        "ulke_sayisi": 91,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 7700,
+        "country_count": 91,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": false,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 689,
-          "yukleme_mbps": 298,
+          "download_mbps": 689,
+          "upload_mbps": 298,
           "ping_ms": 13,
-          "tutarlilik_yuzde": 90
+          "consistency_percent": 90
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -485,7 +524,7 @@
         "browser_extension": false,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": 10
+        "simultaneous_connections": 10
       },
       "streaming": {
         "netflix_us": true,
@@ -496,95 +535,103 @@
         "amazon_prime": true,
         "hbo_max": true
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": false,
         "email": true,
-        "response_time_saat": 12,
-        "turkce_destek": false
+        "response_time_hours": 12
       },
-      "ucretsiz_plan": {
-        "mevcut": true,
-        "hiz_siniri_mbps": null,
-        "ulke_sayisi": 5,
-        "veri_siniri_gb": null,
-        "reklam": false
-      },
-      "puanlar": {
-        "hiz": 18,
-        "gizlilik": 25,
-        "kullanim_kolayligi": 12,
-        "sunucu_agi": 13,
-        "fiyat_deger": 11,
+      "scores": {
+        "speed": 18,
+        "privacy": 25,
+        "ease_of_use": 12,
+        "server_network": 13,
+        "value": 11,
         "streaming": 4,
-        "toplam": 83
+        "total": 83
       },
       "affiliate": {
         "program": "Proton VPN Affiliate",
-        "komisyon_tipi": "flat",
-        "komisyon_usd": 10,
-        "cookie_gun": 60
+        "commission_type": "flat",
+        "commission_usd": 10,
+        "cookie_days": 60
       },
-      "artilari": [
-        "İsviçre merkezli, güçlü gizlilik yasaları",
-        "Açık kaynak uygulamalar (herkes denetleyebilir)",
-        "Ücretsiz plan mevcut (sınırsız veri)",
-        "Tor over VPN desteği",
-        "Gazeteciler ve aktivistler için ideal"
+      "pros": [
+        "Swiss-based, strong privacy laws",
+        "Open-source apps (auditable by anyone)",
+        "Free plan with unlimited data",
+        "Tor over VPN support",
+        "Ideal for journalists and activists"
       ],
-      "eksileri": [
-        "Rakiplerine göre daha pahalı premium plan",
-        "Browser extension yok",
-        "Hız performansı NordVPN/ExpressVPN'in gerisinde"
+      "cons": [
+        "Premium plan more expensive than competitors",
+        "No browser extension",
+        "Speed behind NordVPN/ExpressVPN"
       ],
-      "en_iyi_icin": ["gizlilik", "gazetecilik", "ucretsiz_baslangic"],
-      "onerilen_plan": "Proton VPN Plus yıllık",
-      "aktif": true
+      "best_for": [
+        "privacy",
+        "journalism",
+        "free_tier"
+      ],
+      "recommended_plan": "Proton VPN Plus yearly",
+      "active": true,
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 5,
+        "data_limit_gb": null,
+        "ads": false
+      }
     },
     {
       "id": "pia",
-      "ad": "Private Internet Access",
+      "name": "Private Internet Access",
       "slug": "pia",
       "logo": "/logos/pia.svg",
-      "renk_hex": "#4CBB17",
-      "tagline": "Özelleştirme tutkunları için VPN",
+      "color_hex": "#4CBB17",
+      "tagline": "The customization lovers VPN",
       "website": "https://www.privateinternetaccess.com",
-      "kurucu_ulke": "Amerika Birleşik Devletleri",
+      "headquarters": "United States",
       "is14Eyes": true,
-      "kurulus_yili": 2010,
-      "guvenlik": {
-        "sifreleme": "AES-128 / AES-256 (seçilebilir)",
-        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Deloitte",
-        "denetim_tarihi": "2022-08",
+      "founded_year": 2010,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-128 / AES-256 (seçilebilir)",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Deloitte",
+        "audit_date": "2022-08",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
-        "mace_reklam_engelleyici": true,
-        "uygulama_acik_kaynak": true
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
+        "open_source": true,
+        "mace_ad_blocker": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 18651,
-        "ulke_sayisi": 91,
-        "p2p_sunucu": true,
-        "streaming_sunucu": true,
+      "server_network": {
+        "total_servers": 18651,
+        "country_count": 91,
+        "p2p_servers": true,
+        "streaming_servers": true,
         "dedicated_ip": true,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 651,
-          "yukleme_mbps": 287,
+          "download_mbps": 651,
+          "upload_mbps": 287,
           "ping_ms": 16,
-          "tutarlilik_yuzde": 86
+          "consistency_percent": 86
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -593,7 +640,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": null
+        "simultaneous_connections": null
       },
       "streaming": {
         "netflix_us": true,
@@ -604,85 +651,93 @@
         "amazon_prime": true,
         "hbo_max": false
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 6,
-        "turkce_destek": false
+        "response_time_hours": 6
       },
-      "puanlar": {
-        "hiz": 17,
-        "gizlilik": 20,
-        "kullanim_kolayligi": 11,
-        "sunucu_agi": 15,
-        "fiyat_deger": 14,
+      "scores": {
+        "speed": 17,
+        "privacy": 20,
+        "ease_of_use": 11,
+        "server_network": 15,
+        "value": 14,
         "streaming": 3,
-        "toplam": 80
+        "total": 80
       },
       "affiliate": {
         "program": "PIA Affiliate",
-        "komisyon_tipi": "recurring",
-        "komisyon_oran": 33,
-        "cookie_gun": 45
+        "commission_type": "recurring",
+        "commission_percent": 33,
+        "cookie_days": 45
       },
-      "artilari": [
-        "18.000+ sunucu ile dünyanın en büyük VPN ağı",
-        "Sınırsız eş zamanlı cihaz bağlantısı",
-        "Açık kaynak, mahkemede no-logs kanıtlandı",
-        "MACE ile reklam ve malware engelleme",
-        "Çok uygun fiyatlı uzun dönem planlar"
+      "pros": [
+        "18,000+ servers — worlds largest VPN network",
+        "Unlimited simultaneous connections",
+        "Open-source, court-proven no-logs",
+        "MACE ad and malware blocker",
+        "Very affordable long-term plans"
       ],
-      "eksileri": [
-        "ABD merkezli (14 Eyes ülkesi)",
-        "Streaming performansı rakiplerine göre zayıf",
-        "Arayüz yeni başlayanlar için karmaşık"
+      "cons": [
+        "US-based (14 Eyes country)",
+        "Streaming performance weaker than competitors",
+        "Interface complex for beginners"
       ],
-      "en_iyi_icin": ["torrent", "gizlilik", "ileri_duzey_kullanici"],
-      "onerilen_plan": "3 yıllık plan (en ucuz seçenek)",
-      "aktif": true
+      "best_for": [
+        "torrent",
+        "privacy",
+        "advanced"
+      ],
+      "recommended_plan": "3-year plan (cheapest option)",
+      "active": true
     },
     {
       "id": "ipvanish",
-      "ad": "IPVanish",
+      "name": "IPVanish",
       "slug": "ipvanish",
       "logo": "/logos/ipvanish.svg",
-      "renk_hex": "#F47920",
-      "tagline": "Güvenilir ve uygun fiyatlı VPN",
+      "color_hex": "#F47920",
+      "tagline": "Reliable and affordable VPN",
       "website": "https://www.ipvanish.com",
-      "kurucu_ulke": "Amerika Birleşik Devletleri",
+      "headquarters": "United States",
       "is14Eyes": true,
-      "kurulus_yili": 2012,
-      "guvenlik": {
-        "sifreleme": "AES-256",
-        "protokoller": ["WireGuard", "OpenVPN", "IKEv2"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": false,
+      "founded_year": 2012,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "ipv6_korumasi": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true,
         "scramble_obfuscation": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 2400,
-        "ulke_sayisi": 52,
-        "p2p_sunucu": true,
-        "streaming_sunucu": false,
+      "server_network": {
+        "total_servers": 2400,
+        "country_count": 52,
+        "p2p_servers": true,
+        "streaming_servers": false,
         "dedicated_ip": false,
         "ram_only": false
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 623,
-          "yukleme_mbps": 278,
+          "download_mbps": 623,
+          "upload_mbps": 278,
           "ping_ms": 18,
-          "tutarlilik_yuzde": 84
+          "consistency_percent": 84
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -691,7 +746,7 @@
         "browser_extension": false,
         "router": true,
         "smart_tv": true,
-        "es_zamani_baglanti": null
+        "simultaneous_connections": null
       },
       "streaming": {
         "netflix_us": true,
@@ -702,91 +757,97 @@
         "amazon_prime": true,
         "hbo_max": false
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": true,
         "email": true,
-        "response_time_saat": 8,
-        "turkce_destek": false
+        "response_time_hours": 8
       },
-      "puanlar": {
-        "hiz": 16,
-        "gizlilik": 18,
-        "kullanim_kolayligi": 12,
-        "sunucu_agi": 10,
-        "fiyat_deger": 13,
+      "scores": {
+        "speed": 16,
+        "privacy": 18,
+        "ease_of_use": 12,
+        "server_network": 10,
+        "value": 13,
         "streaming": 2,
-        "toplam": 71
+        "total": 71
       },
       "affiliate": {
         "program": "IPVanish Affiliate",
-        "komisyon_tipi": "recurring",
-        "komisyon_oran": 30,
-        "cookie_gun": 30
+        "commission_type": "recurring",
+        "commission_percent": 30,
+        "cookie_days": 30
       },
-      "artilari": [
-        "Sınırsız eş zamanlı bağlantı",
-        "Kendi sunucu altyapısına sahip (kiralama değil)",
-        "Uygun fiyatlı uzun dönem planlar",
-        "Scramble özelliği ile sansür aşımı"
+      "pros": [
+        "Unlimited simultaneous connections",
+        "Owns its own server infrastructure",
+        "Affordable long-term plans",
+        "Scramble feature for censorship bypass"
       ],
-      "eksileri": [
-        "ABD merkezli (14 Eyes ülkesi)",
-        "Bağımsız denetim yok",
-        "Streaming desteği sınırlı",
-        "Daha az ülke kapsamı"
+      "cons": [
+        "US-based (14 Eyes country)",
+        "No independent audit",
+        "Limited streaming support",
+        "Fewer country coverage"
       ],
-      "en_iyi_icin": ["torrent", "butce_dostu", "cok_cihaz"],
-      "onerilen_plan": "1 yıllık plan",
-      "aktif": true
+      "best_for": [
+        "torrent",
+        "budget",
+        "multi_device"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true
     },
     {
       "id": "mullvad",
-      "ad": "Mullvad VPN",
+      "name": "Mullvad VPN",
       "slug": "mullvad",
       "logo": "/logos/mullvad.svg",
-      "renk_hex": "#FFCA5E",
-      "renk_text_hex": "#1A1A1A",
-      "tagline": "Anonim ödeme, maksimum gizlilik",
+      "color_hex": "#FFCA5E",
+      "tagline": "Anonymous payment, maximum privacy",
       "website": "https://mullvad.net",
-      "kurucu_ulke": "İsveç",
+      "headquarters": "Sweden",
       "is14Eyes": true,
-      "kurulus_yili": 2009,
-      "guvenlik": {
-        "sifreleme": "AES-256",
-        "protokoller": ["WireGuard", "OpenVPN"],
-        "varsayilan_protokol": "WireGuard",
-        "no_logs_politikasi": true,
-        "no_logs_bagimsiz_denetim": true,
-        "denetim_firmasi": "Cure53",
-        "denetim_tarihi": "2024-03",
+      "founded_year": 2009,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Cure53",
+        "audit_date": "2024-03",
         "kill_switch": true,
-        "dns_sizinti_korumasi": true,
-        "anonim_hesap": true,
-        "nakit_odeme": true,
-        "kripto_odeme": true,
+        "dns_leak_protection": true,
         "ram_only": true,
-        "uygulama_acik_kaynak": true
+        "open_source": true,
+        "anonymous_account": true,
+        "cash_payment": true,
+        "crypto_payment": true
       },
-      "sunucu_agi": {
-        "toplam_sunucu": 700,
-        "ulke_sayisi": 49,
-        "p2p_sunucu": true,
-        "streaming_sunucu": false,
+      "server_network": {
+        "total_servers": 700,
+        "country_count": 49,
+        "p2p_servers": true,
+        "streaming_servers": false,
         "dedicated_ip": false,
         "ram_only": true
       },
-      "hiz_testleri": {
-        "test_tarihi": "2026-03-15",
-        "test_lokasyonu": "Frankfurt",
-        "test_baglantisi_mbps": 1000,
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
         "wireguard": {
-          "indirme_mbps": 912,
-          "yukleme_mbps": 445,
+          "download_mbps": 912,
+          "upload_mbps": 445,
           "ping_ms": 7,
-          "tutarlilik_yuzde": 96
+          "consistency_percent": 96
         }
       },
-      "platform_destegi": {
+      "platform_support": {
         "windows": true,
         "mac": true,
         "linux": true,
@@ -795,7 +856,7 @@
         "browser_extension": false,
         "router": false,
         "smart_tv": false,
-        "es_zamani_baglanti": 5
+        "simultaneous_connections": 5
       },
       "streaming": {
         "netflix_us": false,
@@ -806,41 +867,1449 @@
         "amazon_prime": false,
         "hbo_max": false
       },
-      "musteri_hizmeti": {
+      "customer_support": {
         "live_chat": false,
         "email": true,
-        "response_time_saat": 24,
-        "turkce_destek": false
+        "response_time_hours": 24
       },
-      "puanlar": {
-        "hiz": 24,
-        "gizlilik": 25,
-        "kullanim_kolayligi": 10,
-        "sunucu_agi": 7,
-        "fiyat_deger": 13,
+      "scores": {
+        "speed": 24,
+        "privacy": 25,
+        "ease_of_use": 10,
+        "server_network": 7,
+        "value": 13,
         "streaming": 0,
-        "toplam": 79
+        "total": 79
       },
       "affiliate": {
         "program": null,
-        "not": "Mullvad affiliate programı yoktur. Editoryal içerik olarak dahil et."
+        "note": "Mullvad affiliate programı yoktur. Editoryal içerik olarak dahil et."
       },
-      "artilari": [
-        "Test ettiklerimiz arasında en hızlı WireGuard bağlantısı",
-        "Hesap açmak için e-posta gerekmez",
-        "Nakit ve kripto para ile anonim ödeme",
-        "RAM-only sunucu altyapısı",
-        "Şeffaf fiyatlandırma: sabit €5/ay, indirim yok"
+      "pros": [
+        "Fastest WireGuard speeds in our testing (912 Mbps)",
+        "No email required for signup",
+        "Anonymous payment via cash and crypto",
+        "RAM-only server infrastructure",
+        "Flat pricing: fixed 5 EUR/mo, no discounts"
       ],
-      "eksileri": [
-        "Streaming hizmetlerinin hiçbirini açmıyor",
-        "Affiliate programı yok (editoryal güven için dahil ediyoruz)",
-        "Sınırlı ülke ve sunucu sayısı",
-        "Router ve Smart TV desteği yok"
+      "cons": [
+        "Does not unblock any streaming service",
+        "No affiliate program",
+        "Limited server and country count",
+        "No router or Smart TV support"
       ],
-      "en_iyi_icin": ["ileri_duzey_gizlilik", "gazeteci", "aktivist"],
-      "onerilen_plan": "Aylık plan (taahhütsüz)",
-      "aktif": true
+      "best_for": [
+        "max_privacy",
+        "journalist",
+        "activist"
+      ],
+      "recommended_plan": "Monthly plan (no commitment)",
+      "active": true,
+      "color_text_hex": "#1A1A1A"
+    },
+    {
+      "id": "purevpn",
+      "name": "PureVPN",
+      "slug": "purevpn",
+      "logo": "/logos/purevpn.svg",
+      "color_hex": "#6F2DA8",
+      "tagline": "Affordable VPN with global reach",
+      "website": "https://www.purevpn.com",
+      "headquarters": "British Virgin Islands",
+      "is14Eyes": false,
+      "founded_year": 2007,
+      "priority": "A",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "KPMG",
+        "audit_date": "2023-06",
+        "kill_switch": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true
+      },
+      "server_network": {
+        "total_servers": 6500,
+        "country_count": 65,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 580,
+          "upload_mbps": 256,
+          "ping_ms": 19,
+          "consistency_percent": 83
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 4
+      },
+      "scores": {
+        "speed": 16,
+        "privacy": 17,
+        "ease_of_use": 13,
+        "server_network": 11,
+        "value": 13,
+        "streaming": 4,
+        "total": 74
+      },
+      "affiliate": {
+        "program": "PureVPN Affiliate",
+        "commission_type": "hybrid",
+        "commission_percent": 40,
+        "cookie_days": 90,
+        "link_main": "https://www.purevpn.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "KPMG-audited no-logs policy",
+        "6,500+ servers in 65+ countries",
+        "Dedicated IP available",
+        "Affordable long-term plans from $1.99/mo",
+        "10 simultaneous connections"
+      ],
+      "cons": [
+        "Fewer countries than top competitors",
+        "Streaming support inconsistent for some services",
+        "Speed behind NordVPN and ExpressVPN"
+      ],
+      "best_for": [
+        "streaming",
+        "budget",
+        "multi_device"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
+    },
+    {
+      "id": "torguard",
+      "name": "TorGuard",
+      "slug": "torguard",
+      "logo": "/logos/torguard.svg",
+      "color_hex": "#2C3E50",
+      "tagline": "Advanced privacy for power users",
+      "website": "https://torguard.net",
+      "headquarters": "United States",
+      "is14Eyes": true,
+      "founded_year": 2012,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true
+      },
+      "server_network": {
+        "total_servers": 3000,
+        "country_count": 50,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 540,
+          "upload_mbps": 234,
+          "ping_ms": 20,
+          "consistency_percent": 82
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": false,
+        "simultaneous_connections": 8
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 6
+      },
+      "scores": {
+        "speed": 15,
+        "privacy": 18,
+        "ease_of_use": 10,
+        "server_network": 10,
+        "value": 11,
+        "streaming": 4,
+        "total": 68
+      },
+      "affiliate": {
+        "program": "TorGuard Affiliate",
+        "commission_type": "recurring",
+        "commission_percent": 30,
+        "cookie_days": 60,
+        "link_main": "https://torguard.net/aff.php?aff=YOURID"
+      },
+      "pros": [
+        "30% lifetime recurring commissions",
+        "Dedicated IP options for streaming",
+        "Strong privacy focus with no-logs",
+        "Good P2P/torrenting support",
+        "Customizable encryption settings"
+      ],
+      "cons": [
+        "US-based (14 Eyes country)",
+        "No independent no-logs audit",
+        "Interface not beginner-friendly",
+        "Only 8 simultaneous connections"
+      ],
+      "best_for": [
+        "torrent",
+        "privacy",
+        "advanced"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
+    },
+    {
+      "id": "hideme",
+      "name": "hide.me",
+      "slug": "hideme",
+      "logo": "/logos/hideme.svg",
+      "color_hex": "#F7B731",
+      "tagline": "Privacy-first VPN with a free plan",
+      "website": "https://hide.me",
+      "headquarters": "Malaysia",
+      "is14Eyes": false,
+      "founded_year": 2012,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "DefenseCode",
+        "audit_date": "2023-05",
+        "kill_switch": true,
+        "dns_leak_protection": true,
+        "ipv6_protection": true
+      },
+      "server_network": {
+        "total_servers": 2100,
+        "country_count": 75,
+        "p2p_servers": true,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 510,
+          "upload_mbps": 221,
+          "ping_ms": 18,
+          "consistency_percent": 84
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": false,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 5
+      },
+      "scores": {
+        "speed": 14,
+        "privacy": 17,
+        "ease_of_use": 12,
+        "server_network": 10,
+        "value": 10,
+        "streaming": 3,
+        "total": 66
+      },
+      "affiliate": {
+        "program": "hide.me Affiliate",
+        "commission_type": "recurring",
+        "commission_percent": 30,
+        "cookie_days": 30,
+        "link_main": "https://hide.me/en/affiliate?ref=YOURID"
+      },
+      "pros": [
+        "Free plan with 10 GB/month",
+        "Independently audited no-logs policy",
+        "75+ country coverage",
+        "Malaysia-based (outside 14 Eyes)",
+        "10 simultaneous connections"
+      ],
+      "cons": [
+        "Streaming support limited",
+        "No dedicated streaming servers",
+        "Speed behind top-tier competitors",
+        "Free plan has location restrictions"
+      ],
+      "best_for": [
+        "privacy",
+        "free_tier",
+        "beginners"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true,
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 5,
+        "data_limit_gb": 10,
+        "ads": false
+      }
+    },
+    {
+      "id": "astrill",
+      "name": "Astrill VPN",
+      "slug": "astrill",
+      "logo": "/logos/astrill.svg",
+      "color_hex": "#FF6600",
+      "tagline": "The go-to VPN for China and censored regions",
+      "website": "https://www.astrill.com",
+      "headquarters": "Seychelles",
+      "is14Eyes": false,
+      "founded_year": 2009,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "OpenVPN",
+          "StealthVPN",
+          "WireGuard"
+        ],
+        "default_protocol": "StealthVPN",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true,
+        "stealth_protocol": true
+      },
+      "server_network": {
+        "total_servers": 300,
+        "country_count": 56,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 490,
+          "upload_mbps": 198,
+          "ping_ms": 22,
+          "consistency_percent": 80
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": true,
+        "smart_tv": false,
+        "simultaneous_connections": 5
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": true
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 3
+      },
+      "scores": {
+        "speed": 15,
+        "privacy": 16,
+        "ease_of_use": 9,
+        "server_network": 7,
+        "value": 8,
+        "streaming": 7,
+        "total": 62
+      },
+      "affiliate": {
+        "program": "Astrill Affiliate",
+        "commission_type": "flat",
+        "commission_usd": 21,
+        "cookie_days": 30,
+        "link_main": "https://www.astrill.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Most reliable VPN for China (StealthVPN)",
+        "Unblocks Netflix, Disney+, HBO Max",
+        "Seychelles-based (strong privacy)",
+        "Dedicated IP available",
+        "Works in UAE, Iran, and other censored regions"
+      ],
+      "cons": [
+        "Very expensive ($10-25/mo)",
+        "Only 300 servers",
+        "Only 5 simultaneous connections",
+        "No independent no-logs audit"
+      ],
+      "best_for": [
+        "china",
+        "streaming",
+        "privacy"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true
+    },
+    {
+      "id": "fastestvpn",
+      "name": "FastestVPN",
+      "slug": "fastestvpn",
+      "logo": "/logos/fastestvpn.svg",
+      "color_hex": "#00B894",
+      "tagline": "Ultra-affordable VPN with lifetime deals",
+      "website": "https://fastestvpn.com",
+      "headquarters": "Cayman Islands",
+      "is14Eyes": false,
+      "founded_year": 2017,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 800,
+        "country_count": 40,
+        "p2p_servers": true,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 420,
+          "upload_mbps": 185,
+          "ping_ms": 24,
+          "consistency_percent": 78
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "simultaneous_connections": 15
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 8
+      },
+      "scores": {
+        "speed": 12,
+        "privacy": 14,
+        "ease_of_use": 11,
+        "server_network": 8,
+        "value": 10,
+        "streaming": 3,
+        "total": 58
+      },
+      "affiliate": {
+        "program": "FastestVPN Affiliate",
+        "commission_type": "hybrid",
+        "commission_percent": 35,
+        "cookie_days": 30,
+        "link_main": "https://fastestvpn.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Extremely cheap — $1.11/mo on 3-year plan",
+        "15 simultaneous connections",
+        "Cayman Islands jurisdiction (privacy-friendly)",
+        "Ad blocker included",
+        "60-100% commission on new sales"
+      ],
+      "cons": [
+        "Only 800 servers in 40 countries",
+        "No independent security audit",
+        "Speed below average in testing",
+        "Limited streaming support"
+      ],
+      "best_for": [
+        "budget",
+        "multi_device"
+      ],
+      "recommended_plan": "3-year plan",
+      "active": true
+    },
+    {
+      "id": "tunnelbear",
+      "name": "TunnelBear",
+      "slug": "tunnelbear",
+      "logo": "/logos/tunnelbear.svg",
+      "color_hex": "#F5A623",
+      "tagline": "The friendliest VPN for beginners",
+      "website": "https://www.tunnelbear.com",
+      "headquarters": "Canada",
+      "is14Eyes": true,
+      "founded_year": 2011,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "OpenVPN",
+          "IKEv2",
+          "WireGuard"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Cure53",
+        "audit_date": "2024-01",
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 5000,
+        "country_count": 47,
+        "p2p_servers": false,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 480,
+          "upload_mbps": 210,
+          "ping_ms": 17,
+          "consistency_percent": 83
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": false,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": false,
+        "smart_tv": false,
+        "simultaneous_connections": null
+      },
+      "streaming": {
+        "netflix_us": false,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": false,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": false,
+        "email": true,
+        "response_time_hours": 24
+      },
+      "scores": {
+        "speed": 13,
+        "privacy": 16,
+        "ease_of_use": 15,
+        "server_network": 9,
+        "value": 9,
+        "streaming": 3,
+        "total": 65
+      },
+      "affiliate": {
+        "program": "TunnelBear Affiliate (CJ)",
+        "commission_type": "flat_percent",
+        "commission_percent": 50,
+        "cookie_days": 30,
+        "link_main": "https://www.tunnelbear.com/affiliate?ref=YOURID"
+      },
+      "pros": [
+        "Most beginner-friendly VPN interface",
+        "Cure53-audited no-logs policy",
+        "Free plan with 2 GB/month",
+        "Unlimited simultaneous connections",
+        "Fun and approachable brand"
+      ],
+      "cons": [
+        "Canada-based (14 Eyes country)",
+        "Poor streaming support",
+        "No P2P/torrenting servers",
+        "No Linux or router support",
+        "No live chat support"
+      ],
+      "best_for": [
+        "beginners",
+        "free_tier",
+        "privacy"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true,
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 47,
+        "data_limit_gb": 2,
+        "ads": false
+      }
+    },
+    {
+      "id": "hotspotshield",
+      "name": "Hotspot Shield",
+      "slug": "hotspotshield",
+      "logo": "/logos/hotspotshield.svg",
+      "color_hex": "#6EC1E4",
+      "tagline": "Blazing fast speeds with Hydra protocol",
+      "website": "https://www.hotspotshield.com",
+      "headquarters": "United States",
+      "is14Eyes": true,
+      "founded_year": 2008,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "Hydra",
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "Hydra",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 3200,
+        "country_count": 80,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "hydra": {
+          "download_mbps": 620,
+          "upload_mbps": 265,
+          "ping_ms": 15,
+          "consistency_percent": 85
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": true,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 4
+      },
+      "scores": {
+        "speed": 17,
+        "privacy": 13,
+        "ease_of_use": 14,
+        "server_network": 10,
+        "value": 7,
+        "streaming": 3,
+        "total": 64
+      },
+      "affiliate": {
+        "program": "Hotspot Shield Affiliate",
+        "commission_type": "flat",
+        "commission_usd": 50,
+        "cookie_days": 45,
+        "link_main": "https://www.hotspotshield.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Proprietary Hydra protocol — very fast (620 Mbps)",
+        "3,200+ servers in 80 countries",
+        "Free plan available (500 MB/day)",
+        "Good mainstream recognition",
+        "10 simultaneous connections"
+      ],
+      "cons": [
+        "US-based (14 Eyes country)",
+        "No independent no-logs audit",
+        "Some data logging concerns historically",
+        "Premium plan relatively expensive"
+      ],
+      "best_for": [
+        "speed",
+        "streaming",
+        "beginners"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true,
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 1,
+        "data_limit_gb": 0.5,
+        "ads": true
+      }
+    },
+    {
+      "id": "fsecure",
+      "name": "F-Secure VPN",
+      "slug": "fsecure",
+      "logo": "/logos/fsecure.svg",
+      "color_hex": "#5C2D91",
+      "tagline": "Security suite VPN from a trusted brand",
+      "website": "https://www.f-secure.com",
+      "headquarters": "Finland",
+      "is14Eyes": false,
+      "founded_year": 1988,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "OpenVPN",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 200,
+        "country_count": 30,
+        "p2p_servers": false,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "openvpn": {
+          "download_mbps": 380,
+          "upload_mbps": 165,
+          "ping_ms": 22,
+          "consistency_percent": 78
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": false,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": false,
+        "smart_tv": false,
+        "simultaneous_connections": 7
+      },
+      "streaming": {
+        "netflix_us": false,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": false,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": false,
+        "email": true,
+        "response_time_hours": 24
+      },
+      "scores": {
+        "speed": 11,
+        "privacy": 14,
+        "ease_of_use": 13,
+        "server_network": 6,
+        "value": 8,
+        "streaming": 3,
+        "total": 55
+      },
+      "affiliate": {
+        "program": "F-Secure Affiliate",
+        "commission_type": "recurring",
+        "commission_percent": 30,
+        "cookie_days": 30,
+        "link_main": "https://www.f-secure.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Finland-based — strong privacy jurisdiction",
+        "Part of trusted F-Secure security brand",
+        "Simple and clean interface",
+        "Affordable pricing ($3.49/mo yearly)",
+        "Free trial available"
+      ],
+      "cons": [
+        "Only 30 countries covered",
+        "No streaming support",
+        "No WireGuard protocol",
+        "No Linux or router support",
+        "Limited server count"
+      ],
+      "best_for": [
+        "beginners",
+        "privacy"
+      ],
+      "recommended_plan": "1-year plan",
+      "active": true
+    },
+    {
+      "id": "privatevpn",
+      "name": "PrivateVPN",
+      "slug": "privatevpn",
+      "logo": "/logos/privatevpn.svg",
+      "color_hex": "#4A90D9",
+      "tagline": "Small but reliable budget VPN",
+      "website": "https://privatevpn.com",
+      "headquarters": "Sweden",
+      "is14Eyes": true,
+      "founded_year": 2009,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "OpenVPN",
+          "IKEv2",
+          "WireGuard"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 200,
+        "country_count": 63,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 440,
+          "upload_mbps": 192,
+          "ping_ms": 21,
+          "consistency_percent": 80
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": true,
+        "smart_tv": false,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": true,
+        "disney_plus": true,
+        "bbc_iplayer": true,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 6
+      },
+      "scores": {
+        "speed": 13,
+        "privacy": 15,
+        "ease_of_use": 12,
+        "server_network": 7,
+        "value": 10,
+        "streaming": 3,
+        "total": 60
+      },
+      "affiliate": {
+        "program": "PrivateVPN Affiliate",
+        "commission_type": "recurring",
+        "commission_percent": 30,
+        "cookie_days": 30,
+        "link_main": "https://privatevpn.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Good streaming support (Netflix, Disney+, BBC iPlayer)",
+        "Very affordable at $2.00/mo (3-year)",
+        "63 country coverage despite small size",
+        "Free trial available",
+        "10 simultaneous connections"
+      ],
+      "cons": [
+        "Sweden-based (14 Eyes)",
+        "Only 200 servers",
+        "No independent audit",
+        "No browser extension"
+      ],
+      "best_for": [
+        "budget",
+        "streaming"
+      ],
+      "recommended_plan": "3-year plan",
+      "active": true
+    },
+    {
+      "id": "ivacy",
+      "name": "Ivacy VPN",
+      "slug": "ivacy",
+      "logo": "/logos/ivacy.svg",
+      "color_hex": "#00C853",
+      "tagline": "Ultra-cheap VPN with massive server network",
+      "website": "https://www.ivacy.com",
+      "headquarters": "Singapore",
+      "is14Eyes": false,
+      "founded_year": 2007,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 5700,
+        "country_count": 100,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": true,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 410,
+          "upload_mbps": 178,
+          "ping_ms": 23,
+          "consistency_percent": 79
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": true,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 8
+      },
+      "scores": {
+        "speed": 12,
+        "privacy": 14,
+        "ease_of_use": 11,
+        "server_network": 10,
+        "value": 10,
+        "streaming": 2,
+        "total": 59
+      },
+      "affiliate": {
+        "program": "Ivacy Affiliate",
+        "commission_type": "hybrid",
+        "commission_percent": 40,
+        "cookie_days": 60,
+        "link_main": "https://www.ivacy.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Incredibly cheap — $1.00/mo on 5-year plan",
+        "5,700+ servers in 100+ countries",
+        "Dedicated IP available",
+        "Singapore-based (outside 14 Eyes)",
+        "40-100% commission for affiliates"
+      ],
+      "cons": [
+        "No independent security audit",
+        "Streaming support inconsistent",
+        "Speed below average in tests",
+        "Long-term plans lock you in"
+      ],
+      "best_for": [
+        "budget",
+        "multi_device"
+      ],
+      "recommended_plan": "5-year plan",
+      "active": true
+    },
+    {
+      "id": "vyprvpn",
+      "name": "VyprVPN",
+      "slug": "vyprvpn",
+      "logo": "/logos/vyprvpn.svg",
+      "color_hex": "#1B75BC",
+      "tagline": "Swiss privacy with proprietary Chameleon protocol",
+      "website": "https://www.vyprvpn.com",
+      "headquarters": "Switzerland",
+      "is14Eyes": false,
+      "founded_year": 2010,
+      "priority": "B",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "Chameleon",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": true,
+        "audit_firm": "Leviathan Security",
+        "audit_date": "2023-03",
+        "kill_switch": true,
+        "dns_leak_protection": true,
+        "chameleon_protocol": true
+      },
+      "server_network": {
+        "total_servers": 700,
+        "country_count": 70,
+        "p2p_servers": true,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 470,
+          "upload_mbps": 205,
+          "ping_ms": 19,
+          "consistency_percent": 81
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": true,
+        "smart_tv": true,
+        "simultaneous_connections": 5
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 4
+      },
+      "scores": {
+        "speed": 14,
+        "privacy": 17,
+        "ease_of_use": 12,
+        "server_network": 8,
+        "value": 9,
+        "streaming": 3,
+        "total": 63
+      },
+      "affiliate": {
+        "program": "VyprVPN Affiliate",
+        "commission_type": "flat",
+        "commission_usd": 20,
+        "cookie_days": 30,
+        "link_main": "https://www.vyprvpn.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Switzerland-based — excellent privacy jurisdiction",
+        "Leviathan Security-audited no-logs policy",
+        "Chameleon protocol for censorship bypass",
+        "Owns its entire server infrastructure",
+        "70 country coverage"
+      ],
+      "cons": [
+        "Only 5 simultaneous connections on basic plan",
+        "Only 700 servers",
+        "More expensive than budget options",
+        "No browser extension"
+      ],
+      "best_for": [
+        "privacy",
+        "china"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
+    },
+    {
+      "id": "cactusvpn",
+      "name": "CactusVPN",
+      "slug": "cactusvpn",
+      "logo": "/logos/cactusvpn.svg",
+      "color_hex": "#4CAF50",
+      "tagline": "Simple and affordable small-scale VPN",
+      "website": "https://www.cactusvpn.com",
+      "headquarters": "Moldova",
+      "is14Eyes": false,
+      "founded_year": 2011,
+      "priority": "C",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "WireGuard",
+          "OpenVPN",
+          "IKEv2"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 40,
+        "country_count": 22,
+        "p2p_servers": true,
+        "streaming_servers": false,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 350,
+          "upload_mbps": 152,
+          "ping_ms": 25,
+          "consistency_percent": 76
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": true,
+        "ios": true,
+        "android": true,
+        "browser_extension": true,
+        "router": true,
+        "smart_tv": false,
+        "simultaneous_connections": null
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": false,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": false,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 12
+      },
+      "scores": {
+        "speed": 10,
+        "privacy": 12,
+        "ease_of_use": 11,
+        "server_network": 5,
+        "value": 9,
+        "streaming": 3,
+        "total": 50
+      },
+      "affiliate": {
+        "program": "CactusVPN Affiliate",
+        "commission_type": "flat_percent",
+        "commission_percent": 25,
+        "cookie_days": 30,
+        "link_main": "https://www.cactusvpn.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Unlimited simultaneous connections",
+        "Moldova-based (outside 14 Eyes)",
+        "Simple direct affiliate program (25%)",
+        "Free trial available",
+        "Affordable pricing"
+      ],
+      "cons": [
+        "Only 40 servers in 22 countries",
+        "No independent audit",
+        "Below-average speed performance",
+        "Very small provider"
+      ],
+      "best_for": [
+        "budget"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
+    },
+    {
+      "id": "avast",
+      "name": "Avast SecureLine VPN",
+      "slug": "avast",
+      "logo": "/logos/avast.svg",
+      "color_hex": "#FF6A00",
+      "tagline": "Mass-market VPN from a trusted security brand",
+      "website": "https://www.avast.com",
+      "headquarters": "Czech Republic",
+      "is14Eyes": true,
+      "founded_year": 1988,
+      "priority": "C",
+      "security": {
+        "encryption": "AES-256",
+        "protocols": [
+          "OpenVPN",
+          "WireGuard"
+        ],
+        "default_protocol": "WireGuard",
+        "no_logs_policy": true,
+        "no_logs_audited": false,
+        "kill_switch": true,
+        "dns_leak_protection": true
+      },
+      "server_network": {
+        "total_servers": 700,
+        "country_count": 55,
+        "p2p_servers": true,
+        "streaming_servers": true,
+        "dedicated_ip": false,
+        "ram_only": false
+      },
+      "speed_tests": {
+        "test_date": "2026-03-15",
+        "test_location": "Frankfurt",
+        "test_connection_mbps": 1000,
+        "wireguard": {
+          "download_mbps": 390,
+          "upload_mbps": 170,
+          "ping_ms": 20,
+          "consistency_percent": 80
+        }
+      },
+      "platform_support": {
+        "windows": true,
+        "mac": true,
+        "linux": false,
+        "ios": true,
+        "android": true,
+        "browser_extension": false,
+        "router": false,
+        "smart_tv": true,
+        "simultaneous_connections": 10
+      },
+      "streaming": {
+        "netflix_us": true,
+        "netflix_uk": false,
+        "disney_plus": true,
+        "bbc_iplayer": false,
+        "hulu": false,
+        "amazon_prime": true,
+        "hbo_max": false
+      },
+      "customer_support": {
+        "live_chat": true,
+        "email": true,
+        "response_time_hours": 8
+      },
+      "scores": {
+        "speed": 12,
+        "privacy": 11,
+        "ease_of_use": 13,
+        "server_network": 7,
+        "value": 7,
+        "streaming": 3,
+        "total": 53
+      },
+      "affiliate": {
+        "program": "Avast Affiliate (CJ)",
+        "commission_type": "flat_percent",
+        "commission_percent": 35,
+        "cookie_days": 45,
+        "link_main": "https://www.avast.com/affiliates?ref=YOURID"
+      },
+      "pros": [
+        "Trusted Avast security brand recognition",
+        "Easy to use for non-technical users",
+        "Free trial available",
+        "Netflix and Disney+ support",
+        "10 simultaneous connections"
+      ],
+      "cons": [
+        "Czech Republic (14 Eyes via EU)",
+        "VPN is not the core product",
+        "No independent no-logs audit",
+        "No Linux or router support",
+        "Historical privacy controversies"
+      ],
+      "best_for": [
+        "beginners"
+      ],
+      "recommended_plan": "2-year plan",
+      "active": true
     }
   ]
 }
