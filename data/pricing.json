@@ -1,9 +1,12 @@
 {
-  "last_updated": "2026-04-01",
+  "last_updated": "2026-04-03",
   "prices": {
     "nordvpn": {
       "currency": "USD",
-      "monthly": { "price": 12.99, "period": "1 month" },
+      "monthly": {
+        "price": 12.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 4.99,
         "period": "12 months",
@@ -22,8 +25,15 @@
     },
     "expressvpn": {
       "currency": "USD",
-      "monthly": { "price": 12.95, "period": "1 month" },
-      "six_month": { "price": 9.99, "period": "6 months", "total": 59.94 },
+      "monthly": {
+        "price": 12.95,
+        "period": "1 month"
+      },
+      "six_month": {
+        "price": 9.99,
+        "period": "6 months",
+        "total": 59.94
+      },
       "yearly": {
         "price": 6.67,
         "period": "12 months + 3 months free",
@@ -36,7 +46,10 @@
     },
     "surfshark": {
       "currency": "USD",
-      "monthly": { "price": 15.45, "period": "1 month" },
+      "monthly": {
+        "price": 15.45,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 2.99,
         "period": "12 months",
@@ -55,8 +68,15 @@
     },
     "cyberghost": {
       "currency": "USD",
-      "monthly": { "price": 12.99, "period": "1 month" },
-      "six_month": { "price": 6.99, "period": "6 months", "total": 41.94 },
+      "monthly": {
+        "price": 12.99,
+        "period": "1 month"
+      },
+      "six_month": {
+        "price": 6.99,
+        "period": "6 months",
+        "total": 41.94
+      },
       "two_year": {
         "price": 2.03,
         "period": "24 months + 4 months free",
@@ -69,8 +89,13 @@
     },
     "protonvpn": {
       "currency": "USD",
-      "free_plan": { "price": 0 },
-      "monthly": { "price": 9.99, "period": "1 month" },
+      "free_plan": {
+        "price": 0
+      },
+      "monthly": {
+        "price": 9.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 4.99,
         "period": "12 months",
@@ -89,7 +114,10 @@
     },
     "pia": {
       "currency": "USD",
-      "monthly": { "price": 11.99, "period": "1 month" },
+      "monthly": {
+        "price": 11.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 3.33,
         "period": "12 months",
@@ -99,7 +127,7 @@
       "three_year": {
         "price": 1.98,
         "period": "36 months + 3 months free",
-        "total": 79.00,
+        "total": 79.0,
         "savings_percent": 83
       },
       "refund_days": 30,
@@ -108,11 +136,14 @@
     },
     "ipvanish": {
       "currency": "USD",
-      "monthly": { "price": 12.99, "period": "1 month" },
+      "monthly": {
+        "price": 12.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 3.75,
         "period": "12 months",
-        "total": 45.00,
+        "total": 45.0,
         "savings_percent": 71
       },
       "refund_days": 30,
@@ -122,7 +153,7 @@
     "mullvad": {
       "currency": "EUR",
       "monthly": {
-        "price": 5.00,
+        "price": 5.0,
         "period": "1 month",
         "note": "Flat price, no discounts"
       },
@@ -132,7 +163,10 @@
     },
     "purevpn": {
       "currency": "USD",
-      "monthly": { "price": 10.95, "period": "1 month" },
+      "monthly": {
+        "price": 10.95,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 3.24,
         "period": "12 months",
@@ -151,7 +185,10 @@
     },
     "torguard": {
       "currency": "USD",
-      "monthly": { "price": 9.99, "period": "1 month" },
+      "monthly": {
+        "price": 9.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 4.99,
         "period": "12 months",
@@ -170,10 +207,16 @@
     },
     "hideme": {
       "currency": "USD",
-      "free_plan": { "price": 0, "note": "10 GB/month, 5 locations" },
-      "monthly": { "price": 9.95, "period": "1 month" },
+      "free_plan": {
+        "price": 0,
+        "note": "10 GB/month, 5 locations"
+      },
+      "monthly": {
+        "price": 9.95,
+        "period": "1 month"
+      },
       "yearly": {
-        "price": 3.00,
+        "price": 3.0,
         "period": "12 months",
         "total": 35.94,
         "savings_percent": 70
@@ -190,17 +233,20 @@
     },
     "astrill": {
       "currency": "USD",
-      "monthly": { "price": 25.00, "period": "1 month" },
+      "monthly": {
+        "price": 25.0,
+        "period": "1 month"
+      },
       "yearly": {
-        "price": 12.50,
+        "price": 12.5,
         "period": "12 months",
-        "total": 150.00,
+        "total": 150.0,
         "savings_percent": 50
       },
       "two_year": {
-        "price": 10.00,
+        "price": 10.0,
         "period": "24 months",
-        "total": 240.00,
+        "total": 240.0,
         "savings_percent": 60
       },
       "refund_days": 7,
@@ -209,7 +255,10 @@
     },
     "fastestvpn": {
       "currency": "USD",
-      "monthly": { "price": 10.00, "period": "1 month" },
+      "monthly": {
+        "price": 10.0,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 2.49,
         "period": "12 months",
@@ -228,8 +277,14 @@
     },
     "tunnelbear": {
       "currency": "USD",
-      "free_plan": { "price": 0, "note": "2 GB/month" },
-      "monthly": { "price": 9.99, "period": "1 month" },
+      "free_plan": {
+        "price": 0,
+        "note": "2 GB/month"
+      },
+      "monthly": {
+        "price": 9.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 4.99,
         "period": "12 months",
@@ -248,8 +303,14 @@
     },
     "hotspotshield": {
       "currency": "USD",
-      "free_plan": { "price": 0, "note": "500 MB/day, 1 location" },
-      "monthly": { "price": 12.99, "period": "1 month" },
+      "free_plan": {
+        "price": 0,
+        "note": "500 MB/day, 1 location"
+      },
+      "monthly": {
+        "price": 12.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 7.99,
         "period": "12 months",
@@ -262,7 +323,10 @@
     },
     "fsecure": {
       "currency": "USD",
-      "monthly": { "price": 4.49, "period": "1 month" },
+      "monthly": {
+        "price": 4.49,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 3.49,
         "period": "12 months",
@@ -275,7 +339,10 @@
     },
     "privatevpn": {
       "currency": "USD",
-      "monthly": { "price": 9.90, "period": "1 month" },
+      "monthly": {
+        "price": 9.9,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 3.82,
         "period": "12 months",
@@ -283,9 +350,9 @@
         "savings_percent": 61
       },
       "three_year": {
-        "price": 2.00,
+        "price": 2.0,
         "period": "36 months",
-        "total": 72.00,
+        "total": 72.0,
         "savings_percent": 80
       },
       "refund_days": 30,
@@ -294,17 +361,20 @@
     },
     "ivacy": {
       "currency": "USD",
-      "monthly": { "price": 9.95, "period": "1 month" },
+      "monthly": {
+        "price": 9.95,
+        "period": "1 month"
+      },
       "yearly": {
-        "price": 3.50,
+        "price": 3.5,
         "period": "12 months",
-        "total": 42.00,
+        "total": 42.0,
         "savings_percent": 65
       },
       "five_year": {
-        "price": 1.00,
+        "price": 1.0,
         "period": "60 months",
-        "total": 60.00,
+        "total": 60.0,
         "savings_percent": 90
       },
       "refund_days": 30,
@@ -313,17 +383,20 @@
     },
     "vyprvpn": {
       "currency": "USD",
-      "monthly": { "price": 15.00, "period": "1 month" },
+      "monthly": {
+        "price": 15.0,
+        "period": "1 month"
+      },
       "yearly": {
-        "price": 5.00,
+        "price": 5.0,
         "period": "12 months",
-        "total": 60.00,
+        "total": 60.0,
         "savings_percent": 67
       },
       "two_year": {
-        "price": 3.00,
+        "price": 3.0,
         "period": "24 months",
-        "total": 72.00,
+        "total": 72.0,
         "savings_percent": 80
       },
       "refund_days": 30,
@@ -332,9 +405,12 @@
     },
     "cactusvpn": {
       "currency": "USD",
-      "monthly": { "price": 6.99, "period": "1 month" },
+      "monthly": {
+        "price": 6.99,
+        "period": "1 month"
+      },
       "yearly": {
-        "price": 3.20,
+        "price": 3.2,
         "period": "12 months",
         "total": 38.49,
         "savings_percent": 54
@@ -351,7 +427,10 @@
     },
     "avast": {
       "currency": "USD",
-      "monthly": { "price": 7.99, "period": "1 month" },
+      "monthly": {
+        "price": 7.99,
+        "period": "1 month"
+      },
       "yearly": {
         "price": 4.59,
         "period": "12 months",
