@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'es';
+const title = 'Acerca de VPNScorecard — Pruebas VPN Independientes';
+const description = 'VPNScorecard es una plataforma independiente de pruebas y clasificación de VPNs. Probamos cada VPN con mediciones reales.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">Acerca de VPNScorecard</h1>
+    <div class="prose max-w-none">
+      <p class="text-lg text-gray-700 mb-6">VPNScorecard es una plataforma independiente de pruebas y clasificación de VPNs. Creemos que el espacio de reseñas de VPN necesita más transparencia, no más rankings patrocinados.</p>
+
+      <h2>Lo Que Hacemos</h2>
+      <p>Compramos cada suscripción VPN nosotros mismos, ejecutamos pruebas de velocidad estandarizadas desde un servidor dedicado en Frankfurt, verificamos las afirmaciones de no-registros a través de informes de auditoría independientes, y puntuamos cada VPN usando la misma metodología transparente.</p>
+
+      <h2>Por Qué Lo Construimos</h2>
+      <p>El espacio de reseñas de VPN está lleno de sitios que clasifican las VPNs basándose en las tasas de comisión de afiliados, no en el rendimiento real. Construimos VPNScorecard para cambiar eso — cada clasificación está basada en datos, cada puntuación es reproducible, y cada relación de afiliado se divulga.</p>
+
+      <h2>Nuestros Principios</h2>
+      <ul>
+        <li><strong>Datos sobre opiniones</strong> — Cada puntuación está respaldada por resultados de pruebas medibles</li>
+        <li><strong>Transparencia</strong> — Metodología completa, datos brutos y divulgación de afiliados</li>
+        <li><strong>Independencia</strong> — Compramos cada VPN nosotros mismos, sin cuentas gratuitas</li>
+        <li><strong>Actualizaciones regulares</strong> — Pruebas de velocidad mensuales, precios semanales, reseñas completas trimestrales</li>
+      </ul>
+
+      <h2>Cómo Ganamos Dinero</h2>
+      <p>VPNScorecard gana comisiones a través de enlaces de afiliados cuando compras una VPN a través de nuestro sitio. Esto no te cuesta nada extra. Nuestros rankings nunca son influenciados por las tasas de comisión — se basan enteramente en nuestras pruebas independientes.</p>
+
+      <h2>Contacto</h2>
+      <p>Para preguntas, correcciones o solicitudes de datos: <a href="mailto:contact@vpnscorecard.com" class="text-brand hover:underline">contact@vpnscorecard.com</a></p>
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

@@ -43,7 +43,7 @@ function getProtocolName(vpn: any): string {
       <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
         {t(lang, 'hero.subtitle')}
       </p>
-      <TrustBadge />
+      <TrustBadge lang={lang} />
       <div class="flex flex-wrap justify-center gap-3 mt-8">
         {vpns.length > 0 && (
           <CTAButton href={`/es/reviews/${vpns[0].slug}`} vpnId={vpns[0].id} pageType="hero" variant="light" size="lg">
@@ -57,7 +57,7 @@ function getProtocolName(vpn: any): string {
     </div>
   </section>
 
-  <AffiliateDisclosure />
+  <AffiliateDisclosure lang={lang} />
 
   <section class="max-w-7xl mx-auto px-4 py-8">
     <div class="flex items-center justify-between mb-6">
@@ -76,7 +76,7 @@ function getProtocolName(vpn: any): string {
     <div class="space-y-4" id="vpn-list">
       {vpns.map((vpn, index) => {
         const pricing = getPricing(vpn.id);
-        return <VPNCard vpn={vpn} rank={index + 1} pricing={pricing} pageType="index" />;
+        return <VPNCard vpn={vpn} rank={index + 1} pricing={pricing} pageType="index" lang={lang} />;
       })}
     </div>
   </section>

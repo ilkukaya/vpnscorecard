@@ -1,6 +1,6 @@
 ---
 import { getAllVPNs } from '../lib/vpnData';
-import { type Lang, defaultLang, getLocalizedPath } from '../i18n/index';
+import { type Lang, defaultLang, getLocalizedPath, t } from '../i18n/index';
 
 interface Props {
   lang?: Lang;
@@ -25,12 +25,12 @@ const topVpns = getAllVPNs()
           </svg>
           <span class="text-lg font-bold text-white">VPN<span class="text-brand-light">Scorecard</span></span>
         </a>
-        <p class="text-sm">We test. We score. You choose.</p>
-        <p class="text-xs mt-2">Independent VPN testing and ranking since 2026.</p>
+        <p class="text-sm">{t(lang, 'site.tagline')}</p>
+        <p class="text-xs mt-2">{t(lang, 'site.since')}</p>
       </div>
 
       <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">Reviews</h3>
+        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.reviews')}</h3>
         <ul class="space-y-2 text-sm">
           {topVpns.map(vpn => (
             <li><a href={getLocalizedPath(`/reviews/${vpn.slug}`, lang)} class="hover:text-white transition-colors">{vpn.name}</a></li>
@@ -39,7 +39,7 @@ const topVpns = getAllVPNs()
       </div>
 
       <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">Compare</h3>
+        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.compare')}</h3>
         <ul class="space-y-2 text-sm">
           <li><a href={getLocalizedPath('/compare/nordvpn-vs-expressvpn', lang)} class="hover:text-white transition-colors">NordVPN vs ExpressVPN</a></li>
           <li><a href={getLocalizedPath('/compare/nordvpn-vs-surfshark', lang)} class="hover:text-white transition-colors">NordVPN vs Surfshark</a></li>
@@ -50,26 +50,26 @@ const topVpns = getAllVPNs()
       </div>
 
       <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">Best For</h3>
+        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.bestFor')}</h3>
         <ul class="space-y-2 text-sm">
-          <li><a href={getLocalizedPath('/best/best-vpn-for-streaming', lang)} class="hover:text-white transition-colors">Streaming</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-gaming', lang)} class="hover:text-white transition-colors">Gaming</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-torrenting', lang)} class="hover:text-white transition-colors">Torrenting</a></li>
-          <li><a href={getLocalizedPath('/best/best-cheap-vpn', lang)} class="hover:text-white transition-colors">Cheap VPN</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-privacy', lang)} class="hover:text-white transition-colors">Privacy</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-netflix', lang)} class="hover:text-white transition-colors">Netflix</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-china', lang)} class="hover:text-white transition-colors">China</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-streaming', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.streaming')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-gaming', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.gaming')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-torrenting', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.torrenting')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-cheap-vpn', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.cheapVPN')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-privacy', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.privacy')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-netflix', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.netflix')}</a></li>
+          <li><a href={getLocalizedPath('/best/best-vpn-for-china', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.china')}</a></li>
         </ul>
       </div>
     </div>
 
     <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-xs">&copy; 2026 VPNScorecard. All rights reserved.</p>
+      <p class="text-xs">&copy; 2026 VPNScorecard. {t(lang, 'footer.allRightsReserved')}</p>
       <div class="flex items-center gap-4 text-xs">
-        <a href={getLocalizedPath('/methodology', lang)} class="hover:text-white transition-colors">Methodology</a>
-        <a href={getLocalizedPath('/about', lang)} class="hover:text-white transition-colors">About</a>
+        <a href={getLocalizedPath('/methodology', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.methodology')}</a>
+        <a href={getLocalizedPath('/about', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.about')}</a>
         <span class="text-gray-600">|</span>
-        <span class="text-gray-500">We earn commissions from affiliate links</span>
+        <span class="text-gray-500">{t(lang, 'footer.affiliateDisclosure')}</span>
       </div>
     </div>
   </div>

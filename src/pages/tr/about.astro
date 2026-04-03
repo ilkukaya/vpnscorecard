@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'tr';
+const title = 'Hakkımızda — Bağımsız VPN Testi | VPNScorecard';
+const description = 'VPNScorecard bağımsız bir VPN test ve sıralama platformudur. Her VPN\'i gerçek ölçümlerle test ediyoruz.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">VPNScorecard Hakkında</h1>
+    <div class="prose max-w-none">
+      <p class="text-lg text-gray-700 mb-6">VPNScorecard bağımsız bir VPN test ve sıralama platformudur. VPN inceleme alanının daha fazla sponsorlu sıralama değil, daha fazla şeffaflık gerektirdiğine inanıyoruz.</p>
+
+      <h2>Ne Yapıyoruz</h2>
+      <p>Her VPN aboneliğini kendimiz satın alıyoruz, Frankfurt'taki özel bir sunucudan standart hız testleri yapıyoruz, bağımsız denetim raporlarıyla no-logs iddialarını doğruluyoruz ve her VPN'i aynı şeffaf metodolojiyle puanlıyoruz.</p>
+
+      <h2>Neden Bunu Kurduk</h2>
+      <p>VPN inceleme alanı, VPN'leri gerçek performansa değil affiliate komisyon oranlarına göre sıralayan sitelerle dolu. VPNScorecard'ı bunu değiştirmek için kurduk — her sıralama veriye dayalı, her puan tekrarlanabilir ve her affiliate ilişkisi açıklanmıştır.</p>
+
+      <h2>İlkelerimiz</h2>
+      <ul>
+        <li><strong>Görüş değil, veri</strong> — Her puan ölçülebilir test sonuçlarıyla desteklenir</li>
+        <li><strong>Şeffaflık</strong> — Tam metodoloji, ham veri ve affiliate açıklaması</li>
+        <li><strong>Bağımsızlık</strong> — Her VPN'i kendimiz satın alıyoruz, ücretsiz hesap kabul etmiyoruz</li>
+        <li><strong>Düzenli güncellemeler</strong> — Hız testleri aylık, fiyatlar haftalık, tam incelemeler üç aylık</li>
+      </ul>
+
+      <h2>Nasıl Para Kazanıyoruz</h2>
+      <p>VPNScorecard, sitemiz üzerinden VPN satın aldığınızda affiliate bağlantılar aracılığıyla komisyon kazanır. Bu size ekstra maliyet getirmez. Sıralamalarımız asla komisyon oranlarından etkilenmez — tamamen bağımsız testlerimize dayanır.</p>
+
+      <h2>İletişim</h2>
+      <p>Sorular, düzeltmeler veya veri talepleri için: <a href="mailto:contact@vpnscorecard.com" class="text-brand hover:underline">contact@vpnscorecard.com</a></p>
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

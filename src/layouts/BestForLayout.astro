@@ -9,6 +9,7 @@ import FAQAccordion from '../components/FAQAccordion.astro';
 import { getPricing } from '../lib/vpnData';
 import { getBestAffiliateLink } from '../lib/affiliateLinks';
 import { formatPrice, getBestPrice } from '../lib/formatters';
+import { type Lang, defaultLang, t, getLocalizedPath } from '../i18n/index';
 
 interface Props {
   vpns: any[];
@@ -19,9 +20,10 @@ interface Props {
   quickAnswerDetail: string;
   faqs: { question: string; answer: string }[];
   streamingTable?: boolean;
+  lang?: Lang;
 }
 
-const { vpns, category, title, description, quickAnswer, quickAnswerDetail, faqs, streamingTable = false } = Astro.props;
+const { vpns, category, title, description, quickAnswer, quickAnswerDetail, faqs, streamingTable = false, lang = defaultLang } = Astro.props;
 const topVpn = vpns[0];
 const topPricing = getPricing(topVpn?.id);
 const topBest = getBestPrice(topPricing);
@@ -58,16 +60,16 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title={`${title} | VPNScorecard`} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
+<BaseLayout title={`${title} | VPNScorecard`} description={description} lang={lang} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
+  <Header slot="header" lang={lang} />
+  <AffiliateDisclosure lang={lang} />
 
   <div class="max-w-5xl mx-auto px-4 py-8">
     <nav class="text-sm text-gray-500 mb-6">
       <ol class="flex items-center gap-1">
-        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><a href={getLocalizedPath('/', lang)} class="hover:text-brand">{t(lang, 'nav.home')}</a></li>
         <li><span class="mx-1">/</span></li>
-        <li><a href="/best/" class="hover:text-brand">Best For</a></li>
+        <li><a href={getLocalizedPath('/best/', lang)} class="hover:text-brand">{t(lang, 'footer.bestFor')}</a></li>
         <li><span class="mx-1">/</span></li>
         <li class="text-gray-700">{category}</li>
       </ol>
@@ -91,7 +93,7 @@ const faqSchema = {
     <div class="space-y-4 mb-8">
       {vpns.map((vpn, i) => {
         const pricing = getPricing(vpn.id);
-        return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType={`best-${category.toLowerCase()}`} />;
+        return <VPNCard vpn={vpn} rank={i + 1} pricing={pricing} pageType={`best-${category.toLowerCase()}`} lang={lang} />;
       })}
     </div>
 
@@ -128,10 +130,10 @@ const faqSchema = {
     )}
 
     <div class="mb-8">
-      <h2 class="text-xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
+      <h2 class="text-xl font-bold text-brand-dark mb-4">{t(lang, 'review.faq')}</h2>
       <FAQAccordion questions={faqs} />
     </div>
   </div>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 </BaseLayout>

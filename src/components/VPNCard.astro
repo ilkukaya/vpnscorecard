@@ -2,20 +2,22 @@
 import { getBestAffiliateLink } from '../lib/affiliateLinks';
 import { getScoreLabel, getScoreColor } from '../lib/scoring';
 import { formatPrice, getUseCaseLabel, getBestPrice } from '../lib/formatters';
+import { type Lang, defaultLang, t, getLocalizedPath } from '../i18n/index';
 
 interface Props {
   vpn: any;
   rank: number;
   pricing?: any;
   pageType?: string;
+  lang?: Lang;
 }
 
-const { vpn, rank, pricing, pageType = 'index' } = Astro.props;
+const { vpn, rank, pricing, pageType = 'index', lang = defaultLang } = Astro.props;
 const affiliateLink = getBestAffiliateLink(vpn, pageType);
 const best = getBestPrice(pricing);
 const ctaText = best?.savings && best.savings >= 50
-  ? `Get ${vpn.name} — ${best.savings}% Off`
-  : `Visit ${vpn.name}`;
+  ? t(lang, 'vpnCard.get', { vpn: vpn.name }) + ` — ${best.savings}% ${t(lang, 'vpnCard.off')}`
+  : t(lang, 'vpnCard.visit', { vpn: vpn.name });
 const scoreColorClass = getScoreColor(vpn.scores.total);
 const scoreLabel = getScoreLabel(vpn.scores.total);
 
@@ -60,7 +62,7 @@ const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200'
         <div class="grid grid-cols-3 gap-3 mb-3">
           <div>
             <div class="flex items-center justify-between text-xs mb-1">
-              <span class="text-gray-500">Speed</span>
+              <span class="text-gray-500">{t(lang, 'vpnCard.speed')}</span>
               <span class="font-medium">{vpn.scores.speed}/25</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-1.5">
@@ -69,7 +71,7 @@ const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200'
           </div>
           <div>
             <div class="flex items-center justify-between text-xs mb-1">
-              <span class="text-gray-500">Privacy</span>
+              <span class="text-gray-500">{t(lang, 'vpnCard.privacy')}</span>
               <span class="font-medium">{vpn.scores.privacy}/25</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-1.5">
@@ -78,7 +80,7 @@ const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200'
           </div>
           <div>
             <div class="flex items-center justify-between text-xs mb-1">
-              <span class="text-gray-500">Value</span>
+              <span class="text-gray-500">{t(lang, 'vpnCard.value')}</span>
               <span class="font-medium">{vpn.scores.value}/15</span>
             </div>
             <div class="w-full bg-gray-100 rounded-full h-1.5">
@@ -102,7 +104,7 @@ const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200'
             </span>
             <span class="text-sm text-gray-500">/mo</span>
             {best.savings && (
-              <span class="ml-2 text-xs text-green-600 font-medium">Save {best.savings}%</span>
+              <span class="ml-2 text-xs text-green-600 font-medium">{t(lang, 'vpnCard.save', { percent: String(best.savings) })}</span>
             )}
           </div>
         )}
@@ -127,16 +129,16 @@ const rankClass = rankColors[rank] || 'bg-gray-50 text-gray-600 border-gray-200'
           {ctaText}
         </a>
         <a
-          href={`/reviews/${vpn.slug}`}
+          href={getLocalizedPath(`/reviews/${vpn.slug}`, lang)}
           class="inline-flex items-center justify-center px-5 py-2 text-brand hover:text-brand-dark font-medium text-sm transition-colors duration-200 whitespace-nowrap"
         >
-          Full Review &rarr;
+          {t(lang, 'vpnCard.fullReview')} &rarr;
         </a>
       </div>
     </div>
   </div>
 
   <div class="px-4 md:px-6 py-2 bg-gray-50 border-t border-gray-100">
-    <p class="text-xs text-gray-400">Affiliate link — we may earn a commission at no extra cost to you</p>
+    <p class="text-xs text-gray-400">{t(lang, 'vpnCard.affiliateNote')}</p>
   </div>
 </div>

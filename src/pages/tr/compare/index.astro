@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getAllVPNs } from '../../../lib/vpnData';
+import { t, getLocalizedPath } from '../../../i18n/index';
+
+const lang = 'tr';
+const vpns = getAllVPNs().sort((a, b) => b.scores.total - a.scores.total);
+
+const comparisons = [
+  { slug: 'nordvpn-vs-expressvpn', vpn1: 'nordvpn', vpn2: 'expressvpn', label: 'En çok aranan VPN karşılaştırması' },
+  { slug: 'nordvpn-vs-surfshark', vpn1: 'nordvpn', vpn2: 'surfshark', label: 'Aynı ana şirket, farklı güçlü yanlar' },
+  { slug: 'expressvpn-vs-surfshark', vpn1: 'expressvpn', vpn2: 'surfshark', label: 'Premium vs Bütçe' },
+  { slug: 'cyberghost-vs-nordvpn', vpn1: 'cyberghost', vpn2: 'nordvpn', label: 'Yeni Başlayanlar vs En İyi Genel' },
+  { slug: 'protonvpn-vs-mullvad', vpn1: 'protonvpn', vpn2: 'mullvad', label: 'En İyi Gizlilik VPN\'leri' },
+  { slug: 'surfshark-vs-cyberghost', vpn1: 'surfshark', vpn2: 'cyberghost', label: 'Bütçe dostu kapışma' },
+  { slug: 'nordvpn-vs-purevpn', vpn1: 'nordvpn', vpn2: 'purevpn', label: 'Üst düzey vs ekonomik seçenek' },
+  { slug: 'expressvpn-vs-cyberghost', vpn1: 'expressvpn', vpn2: 'cyberghost', label: 'Premium vs yeni başlayan dostu' },
+  { slug: 'surfshark-vs-pia', vpn1: 'surfshark', vpn2: 'pia', label: 'Sınırsız cihaz vs açık kaynak' },
+  { slug: 'nordvpn-vs-protonvpn', vpn1: 'nordvpn', vpn2: 'protonvpn', label: 'En iyi genel vs en iyi ücretsiz plan' },
+  { slug: 'purevpn-vs-surfshark', vpn1: 'purevpn', vpn2: 'surfshark', label: 'Ekonomik VPN kapışması' },
+  { slug: 'pia-vs-cyberghost', vpn1: 'pia', vpn2: 'cyberghost', label: 'Açık kaynak vs kullanım kolaylığı' },
+  { slug: 'tunnelbear-vs-protonvpn', vpn1: 'tunnelbear', vpn2: 'protonvpn', label: 'Basit vs özellik zengini' },
+];
+
+const vpnMap = Object.fromEntries(vpns.map(v => [v.slug, v]));
+
+const title = t(lang, 'meta.compareTitle', { year: '2026' });
+const description = t(lang, 'meta.compareDesc');
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-brand-dark mb-2">{t(lang, 'nav.compare')} VPN</h1>
+    <p class="text-gray-600 mb-8">Gerçek test verilerimize göre iki VPN'i yan yana karşılaştırın.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+      {vpns.map((vpn) => (
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex items-center gap-3">
+          <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-brand-dark text-sm truncate">{vpn.name}</h3>
+            <p class="text-sm text-gray-500">{vpn.scores.total}/100</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="text-xl font-bold text-brand-dark mb-4">Tüm Karşılaştırmalar</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {comparisons.map((comp) => {
+        const v1 = vpnMap[comp.vpn1];
+        const v2 = vpnMap[comp.vpn2];
+        return v1 && v2 ? (
+          <a href={getLocalizedPath(`/compare/${comp.slug}`, lang)} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-2">
+              <img src={v1.logo} alt={v1.name} class="w-8 h-8 object-contain" />
+              <span class="text-gray-400 font-bold">vs</span>
+              <img src={v2.logo} alt={v2.name} class="w-8 h-8 object-contain" />
+            </div>
+            <h3 class="font-bold text-brand-dark">{v1.name} vs {v2.name}</h3>
+            <p class="text-sm text-gray-500 mt-1">{comp.label}</p>
+            <p class="text-xs text-gray-400 mt-2">{v1.scores.total}/100 vs {v2.scores.total}/100</p>
+          </a>
+        ) : null;
+      })}
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

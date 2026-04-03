@@ -15,12 +15,14 @@ import { getPricing, getSpeedTestResult, getDealForVPN } from '../lib/vpnData';
 import { getBestAffiliateLink, getCTAText } from '../lib/affiliateLinks';
 import { getScoreLabel, getScoreColor } from '../lib/scoring';
 import { formatPrice, formatDate, getUseCaseLabel, getBestPrice } from '../lib/formatters';
+import { type Lang, defaultLang, t, getLocalizedPath } from '../i18n/index';
 
 interface Props {
   vpn: any;
+  lang?: Lang;
 }
 
-const { vpn } = Astro.props;
+const { vpn, lang = defaultLang } = Astro.props;
 const pricing = getPricing(vpn.id);
 const speedTest = getSpeedTestResult(vpn.id);
 const deal = getDealForVPN(vpn.id);
@@ -30,7 +32,7 @@ const scoreLabel = getScoreLabel(vpn.scores.total);
 const scoreColorClass = getScoreColor(vpn.scores.total);
 const best = getBestPrice(pricing);
 
-const title = `${vpn.name} Review 2026: Speed Tests, Scores & Pricing | VPNScorecard`;
+const title = t(lang, 'review.title', { vpn: vpn.name, year: '2026' }) + ' | VPNScorecard';
 const description = `${vpn.name} scores ${vpn.scores.total}/100 in our independent review. ${speedTest ? `${speedTest.download_mbps} Mbps in speed tests` : 'Tested speeds'}. ${vpn.security.no_logs_audited ? `${vpn.security.audit_firm}-audited no-logs policy` : 'No-logs policy'}. Full test results inside.`;
 
 const schemaMarkup = JSON.stringify({
@@ -119,17 +121,17 @@ faqSchema.mainEntity = faqData.map(faq => ({
 }));
 ---
 
-<BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
-  <Header slot="header" />
+<BaseLayout title={title} description={description} lang={lang} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
+  <Header slot="header" lang={lang} />
 
-  <AffiliateDisclosure />
+  <AffiliateDisclosure lang={lang} />
 
   <article class="max-w-4xl mx-auto px-4 py-8">
     <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
       <ol class="flex items-center gap-1">
-        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><a href={getLocalizedPath('/', lang)} class="hover:text-brand">{t(lang, 'nav.home')}</a></li>
         <li><span class="mx-1">/</span></li>
-        <li><a href="/reviews/" class="hover:text-brand">Reviews</a></li>
+        <li><a href={getLocalizedPath('/reviews/', lang)} class="hover:text-brand">{t(lang, 'nav.reviews')}</a></li>
         <li><span class="mx-1">/</span></li>
         <li class="text-gray-700 font-medium">{vpn.name}</li>
       </ol>
@@ -139,12 +141,12 @@ faqSchema.mainEntity = faqData.map(faq => ({
       <div class="flex items-center gap-4 mb-4">
         <img src={vpn.logo} alt={`${vpn.name} logo`} class="w-16 h-16 object-contain" loading="lazy" />
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-brand-dark">{vpn.name} Review 2026</h1>
+          <h1 class="text-3xl md:text-4xl font-bold text-brand-dark">{t(lang, 'review.title', { vpn: vpn.name, year: '2026' })}</h1>
           <p class="text-lg text-gray-600 mt-1">{vpn.tagline}</p>
         </div>
       </div>
 
-      <TrustBadge vpnId={vpn.id} />
+      <TrustBadge vpnId={vpn.id} lang={lang} />
     </header>
 
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Quick Summary">
@@ -155,13 +157,13 @@ faqSchema.mainEntity = faqData.map(faq => ({
         </div>
         <div class="flex-1">
           <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
-            <h2 class="font-semibold text-brand-dark mb-2">TL;DR — Our Verdict</h2>
+            <h2 class="font-semibold text-brand-dark mb-2">{t(lang, 'review.verdict')}</h2>
             <p class="text-gray-700">{vpn.tagline}. Scored <strong>{vpn.scores.total}/100</strong> in our independent testing. {vpn.security.no_logs_audited ? `Independently audited by ${vpn.security.audit_firm}.` : ''} {best ? `From ${formatPrice(best.price)}/mo.` : ''}</p>
           </div>
           <div class="flex flex-wrap gap-2 mb-4">
             {vpn.best_for.map((useCase: string) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-light/10 text-brand-dark">
-                Best for: {getUseCaseLabel(useCase)}
+                {t(lang, 'review.bestForLabel')} {getUseCaseLabel(useCase)}
               </span>
             ))}
           </div>
@@ -169,39 +171,39 @@ faqSchema.mainEntity = faqData.map(faq => ({
             {ctaText}
           </CTAButton>
           {pricing?.refund_days > 0 && (
-            <p class="text-xs text-gray-500 mt-2">{pricing.refund_days}-day money-back guarantee. No questions asked.</p>
+            <p class="text-xs text-gray-500 mt-2">{t(lang, 'review.moneyBackGuarantee', { days: String(pricing.refund_days) })}</p>
           )}
         </div>
       </div>
     </section>
 
     <section class="mb-8" aria-label="Score Breakdown">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Score Breakdown</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.scoreBreakdown')}</h2>
       <ScoreBreakdown scores={vpn.scores} />
     </section>
 
     {pricing && (
       <section class="mb-8" aria-label="Pricing">
-        <h2 class="text-2xl font-bold text-brand-dark mb-4">Pricing & Plans</h2>
+        <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.pricing')}</h2>
         <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.name} pageType="review" />
       </section>
     )}
 
     {speedTest && (
       <section class="mb-8" aria-label="Speed Test Results">
-        <h2 class="text-2xl font-bold text-brand-dark mb-4">Speed Test Results</h2>
+        <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.speedResults')}</h2>
         <SpeedTestChart vpnId={vpn.id} speedTest={speedTest} />
       </section>
     )}
 
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Security Analysis">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Security & Privacy</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.security')}</h2>
       <div class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex items-center gap-3">
             <span class="text-green-500 font-bold">&#10003;</span>
             <div>
-              <p class="font-medium">Encryption</p>
+              <p class="font-medium">{t(lang, 'review.encryption')}</p>
               <p class="text-sm text-gray-600">{vpn.security.encryption}</p>
             </div>
           </div>
@@ -210,11 +212,11 @@ faqSchema.mainEntity = faqData.map(faq => ({
               {vpn.security.no_logs_audited ? '✓' : '~'}
             </span>
             <div>
-              <p class="font-medium">No-Logs Policy</p>
+              <p class="font-medium">{t(lang, 'review.noLogsPolicy')}</p>
               <p class="text-sm text-gray-600">
                 {vpn.security.no_logs_audited
-                  ? `Audited by ${vpn.security.audit_firm} (${vpn.security.audit_date})`
-                  : 'Claimed (no independent audit)'}
+                  ? t(lang, 'review.audited', { firm: vpn.security.audit_firm, date: vpn.security.audit_date })
+                  : t(lang, 'review.notAudited')}
               </p>
             </div>
           </div>
@@ -223,8 +225,8 @@ faqSchema.mainEntity = faqData.map(faq => ({
               {vpn.security.kill_switch ? '✓' : '✗'}
             </span>
             <div>
-              <p class="font-medium">Kill Switch</p>
-              <p class="text-sm text-gray-600">{vpn.security.kill_switch ? 'Yes — tested working' : 'Not available'}</p>
+              <p class="font-medium">{t(lang, 'review.killSwitch')}</p>
+              <p class="text-sm text-gray-600">{vpn.security.kill_switch ? t(lang, 'review.killSwitchYes') : t(lang, 'review.killSwitchNo')}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -232,8 +234,8 @@ faqSchema.mainEntity = faqData.map(faq => ({
               {vpn.security.dns_leak_protection ? '✓' : '✗'}
             </span>
             <div>
-              <p class="font-medium">DNS Leak Protection</p>
-              <p class="text-sm text-gray-600">{vpn.security.dns_leak_protection ? 'Yes — no leaks detected' : 'Not available'}</p>
+              <p class="font-medium">{t(lang, 'review.dnsLeak')}</p>
+              <p class="text-sm text-gray-600">{vpn.security.dns_leak_protection ? t(lang, 'review.dnsLeakYes') : t(lang, 'review.dnsLeakNo')}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -241,14 +243,14 @@ faqSchema.mainEntity = faqData.map(faq => ({
               {vpn.is14Eyes ? '~' : '✓'}
             </span>
             <div>
-              <p class="font-medium">Jurisdiction</p>
-              <p class="text-sm text-gray-600">{vpn.headquarters} {vpn.is14Eyes ? '(14 Eyes member)' : '(Outside 14 Eyes)'}</p>
+              <p class="font-medium">{t(lang, 'review.jurisdiction')}</p>
+              <p class="text-sm text-gray-600">{vpn.headquarters} {vpn.is14Eyes ? t(lang, 'review.fourteenEyes') : t(lang, 'review.outsideFourteenEyes')}</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-gray-400 font-bold">—</span>
             <div>
-              <p class="font-medium">Protocols</p>
+              <p class="font-medium">{t(lang, 'review.protocols')}</p>
               <p class="text-sm text-gray-600">{vpn.security.protocols.join(', ')}</p>
             </div>
           </div>
@@ -257,7 +259,7 @@ faqSchema.mainEntity = faqData.map(faq => ({
     </section>
 
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Streaming Support">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Streaming Support</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.streamingSupport')}</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Object.entries(vpn.streaming).map(([service, works]) => (
           <div class={`flex items-center gap-2 p-3 rounded-lg ${works ? 'bg-green-50' : 'bg-red-50'}`}>
@@ -266,15 +268,15 @@ faqSchema.mainEntity = faqData.map(faq => ({
           </div>
         ))}
       </div>
-      <p class="text-xs text-gray-500 mt-3">Tested March 2026</p>
+      <p class="text-xs text-gray-500 mt-3">{t(lang, 'review.tested', { date: 'March 2026' })}</p>
     </section>
 
     <section class="mb-8" aria-label="Pros and Cons">
-      <ProConList pros={vpn.pros} cons={vpn.cons} />
+      <ProConList pros={vpn.pros} cons={vpn.cons} lang={lang} />
     </section>
 
     <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-label="Who is this VPN for?">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Who is {vpn.name} Best For?</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.bestFor', { vpn: vpn.name })}</h2>
       <div class="prose max-w-none">
         <p class="text-gray-700">
           {vpn.name} is best for users who prioritize {vpn.best_for.map((u: string) => getUseCaseLabel(u)).join(', ').toLowerCase()}.
@@ -289,28 +291,28 @@ faqSchema.mainEntity = faqData.map(faq => ({
     </section>
 
     <section class="mb-8" aria-label="Frequently Asked Questions">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.faq')}</h2>
       <FAQAccordion questions={faqData} />
     </section>
 
     <section class="bg-brand-dark rounded-xl p-8 text-center text-white mb-8" aria-label="Call to Action">
-      <h2 class="text-2xl font-bold mb-2">Get the Best Price on {vpn.name}</h2>
-      <p class="text-gray-300 mb-6">Exclusive deal through VPNScorecard — verified April 2026</p>
+      <h2 class="text-2xl font-bold mb-2">{t(lang, 'review.getBestPrice', { vpn: vpn.name })}</h2>
+      <p class="text-gray-300 mb-6">{t(lang, 'review.exclusiveDeal', { month: 'April', year: '2026' })}</p>
       <CTAButton href={affiliateLink} vpnId={vpn.id} pageType="review" variant="light" size="lg">
         {ctaText}
       </CTAButton>
       {pricing?.refund_days > 0 && (
-        <p class="text-sm text-gray-400 mt-4">{pricing.refund_days}-day money-back guarantee. No questions asked.</p>
+        <p class="text-sm text-gray-400 mt-4">{t(lang, 'review.moneyBackGuarantee', { days: String(pricing.refund_days) })}</p>
       )}
     </section>
 
     <footer class="text-sm text-gray-500 border-t border-gray-200 pt-6">
-      <p>Last updated: April 1, 2026 | Next review: July 2026</p>
+      <p>{t(lang, 'review.lastUpdated', { date: 'April 1, 2026' })} | {t(lang, 'review.nextReview', { date: 'July 2026' })}</p>
       <p class="mt-1">
-        <a href="/methodology" class="text-brand hover:underline">Our testing methodology</a>
+        <a href={getLocalizedPath('/methodology', lang)} class="text-brand hover:underline">{t(lang, 'review.testingMethodology')}</a>
       </p>
     </footer>
   </article>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 </BaseLayout>

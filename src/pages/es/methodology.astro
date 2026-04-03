@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'es';
+const title = 'Nuestra Metodología de Pruebas | VPNScorecard';
+const description = 'Una mirada transparente a cómo probamos, puntuamos y clasificamos cada VPN.';
+---
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Nuestra Metodología de Pruebas</h1>
+    <p class="text-gray-600 mb-8">Cómo probamos, puntuamos y clasificamos cada VPN. Transparencia total.</p>
+
+    <div class="prose max-w-none">
+      <h2>1. Entorno de Pruebas</h2>
+      <p>Todas las pruebas de velocidad se realizan desde un servidor dedicado Hetzner en Frankfurt, Alemania, con una conexión base de 1 Gbps. Las pruebas se ejecutan durante horas pico (20:00-22:00 CET) para simular condiciones reales. Cada prueba se repite 5 veces y se promedia.</p>
+
+      <h2>2. Sistema de Puntuación</h2>
+      <p>Cada VPN se puntúa sobre 100 puntos en 6 categorías ponderadas:</p>
+      <ul>
+        <li><strong>Velocidad y Rendimiento (25 pts)</strong> — Velocidad de descarga, velocidad de subida, ping, consistencia</li>
+        <li><strong>Privacidad y Seguridad (25 pts)</strong> — Auditoría sin registros, cifrado, kill switch, protección contra fugas DNS, jurisdicción</li>
+        <li><strong>Facilidad de Uso (15 pts)</strong> — Calidad de la app, tiempo de configuración, soporte de plataformas, servicio al cliente</li>
+        <li><strong>Red de Servidores (15 pts)</strong> — Cantidad de países, cantidad de servidores, servidores especializados</li>
+        <li><strong>Precio y Valor (15 pts)</strong> — Costo mensual, política de reembolso, conexiones simultáneas</li>
+        <li><strong>Soporte de Streaming (5 pts)</strong> — Netflix, Disney+, BBC iPlayer, Hulu, HBO Max</li>
+      </ul>
+
+      <h2>3. Metodología de Pruebas de Velocidad</h2>
+      <p>Usamos iperf3 para pruebas de rendimiento bruto y fast.com para medición de velocidad real. Las pruebas se ejecutan en el protocolo predeterminado del VPN (generalmente WireGuard o variantes como NordLynx o Lightway).</p>
+
+      <h2>4. Verificación de Privacidad</h2>
+      <p>Verificamos las afirmaciones de no-registros de cada VPN comprobando auditorías independientes, revisando su política de privacidad y probando fugas DNS/IP usando ipleak.net y dnsleaktest.com.</p>
+
+      <h2>5. Verificación de Precios</h2>
+      <p>Los precios se verifican semanalmente mediante scripts automatizados y verificaciones manuales. Siempre mostramos el mejor precio disponible del plan a largo plazo.</p>
+
+      <h2>6. Política de Actualización</h2>
+      <p>Cada VPN se vuelve a probar al menos trimestralmente. Las pruebas de velocidad se repiten mensualmente. Los precios se verifican semanalmente. Los cambios importantes se actualizan inmediatamente.</p>
+
+      <h2>7. Divulgación de Afiliados</h2>
+      <p>VPNScorecard gana comisiones a través de enlaces de afiliados. Esto no influye en nuestros rankings, que se basan enteramente en pruebas independientes. Ningún VPN puede pagar por una mejor posición.</p>
+
+      <h2>8. Compromiso de Independencia</h2>
+      <p>Compramos cada suscripción VPN nosotros mismos. Nunca aceptamos cuentas gratuitas de compañías VPN para propósitos de prueba. Nuestros resultados son datos sin procesar.</p>
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

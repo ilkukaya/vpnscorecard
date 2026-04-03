@@ -9,14 +9,16 @@ import FAQAccordion from '../components/FAQAccordion.astro';
 import { getPricing } from '../lib/vpnData';
 import { getBestAffiliateLink } from '../lib/affiliateLinks';
 import { formatPrice, getBestPrice } from '../lib/formatters';
+import { type Lang, defaultLang, t, getLocalizedPath } from '../i18n/index';
 
 interface Props {
   vpn1: any;
   vpn2: any;
   customFaq?: { question: string; answer: string }[];
+  lang?: Lang;
 }
 
-const { vpn1, vpn2, customFaq } = Astro.props;
+const { vpn1, vpn2, customFaq, lang = defaultLang } = Astro.props;
 const pricing1 = getPricing(vpn1.id);
 const pricing2 = getPricing(vpn2.id);
 const link1 = getBestAffiliateLink(vpn1, 'compare');
@@ -90,23 +92,23 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
-  <Header slot="header" />
-  <AffiliateDisclosure />
+<BaseLayout title={title} description={description} lang={lang} schemaMarkup={`<script type="application/ld+json">${schemaMarkup}</script>\n<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}>
+  <Header slot="header" lang={lang} />
+  <AffiliateDisclosure lang={lang} />
 
   <div class="max-w-5xl mx-auto px-4 py-8">
     <nav class="text-sm text-gray-500 mb-6">
       <ol class="flex items-center gap-1">
-        <li><a href="/" class="hover:text-brand">Home</a></li>
+        <li><a href={getLocalizedPath('/', lang)} class="hover:text-brand">{t(lang, 'nav.home')}</a></li>
         <li><span class="mx-1">/</span></li>
-        <li><a href="/compare/" class="hover:text-brand">Compare</a></li>
+        <li><a href={getLocalizedPath('/compare/', lang)} class="hover:text-brand">{t(lang, 'nav.compare')}</a></li>
         <li><span class="mx-1">/</span></li>
         <li class="text-gray-700">{vpn1.name} vs {vpn2.name}</li>
       </ol>
     </nav>
 
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">{vpn1.name} vs {vpn2.name}: Which is Better in 2026?</h1>
-    <p class="text-gray-600 mb-8">We tested both VPNs side by side. Here's the data-driven verdict.</p>
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">{t(lang, 'compare.title', { vpn1: vpn1.name, vpn2: vpn2.name, year: '2026' })}</h1>
+    <p class="text-gray-600 mb-8">{t(lang, 'compare.subtitle')}</p>
 
     <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
       <div class="flex items-center gap-3 mb-2">
@@ -120,7 +122,7 @@ const faqSchema = {
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
-      <h2 class="text-xl font-bold text-brand-dark mb-6">Head-to-Head Comparison</h2>
+      <h2 class="text-xl font-bold text-brand-dark mb-6">{t(lang, 'compare.headToHead')}</h2>
       <ComparisonTable vpns={[vpn1, vpn2]} pricing={{ [vpn1.id]: pricing1, [vpn2.id]: pricing2 }} pageType="compare" />
     </div>
 
@@ -128,7 +130,7 @@ const faqSchema = {
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div class="flex items-center gap-3 mb-3">
           <img src={vpn1.logo} alt={vpn1.name} class="w-8 h-8 object-contain" />
-          <h3 class="text-lg font-bold text-brand-dark">Choose {vpn1.name} if:</h3>
+          <h3 class="text-lg font-bold text-brand-dark">{t(lang, 'compare.choose', { vpn: vpn1.name })}</h3>
         </div>
         <ul class="space-y-2 text-gray-700 mb-4">
           {vpn1.pros.slice(0, 4).map((pro: string) => (
@@ -136,12 +138,12 @@ const faqSchema = {
           ))}
         </ul>
         {best1 && <p class="text-lg font-bold text-brand-dark mb-3">From {formatPrice(best1.price)}/mo {best1.savings ? `(${best1.savings}% off)` : ''}</p>}
-        <CTAButton href={link1} vpnId={vpn1.id} pageType="compare" variant="primary" size="md" fullWidth>Get {vpn1.name}</CTAButton>
+        <CTAButton href={link1} vpnId={vpn1.id} pageType="compare" variant="primary" size="md" fullWidth>{t(lang, 'vpnCard.get', { vpn: vpn1.name })}</CTAButton>
       </div>
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div class="flex items-center gap-3 mb-3">
           <img src={vpn2.logo} alt={vpn2.name} class="w-8 h-8 object-contain" />
-          <h3 class="text-lg font-bold text-brand-dark">Choose {vpn2.name} if:</h3>
+          <h3 class="text-lg font-bold text-brand-dark">{t(lang, 'compare.choose', { vpn: vpn2.name })}</h3>
         </div>
         <ul class="space-y-2 text-gray-700 mb-4">
           {vpn2.pros.slice(0, 4).map((pro: string) => (
@@ -149,15 +151,15 @@ const faqSchema = {
           ))}
         </ul>
         {best2 && <p class="text-lg font-bold text-brand-dark mb-3">From {formatPrice(best2.price)}/mo {best2.savings ? `(${best2.savings}% off)` : ''}</p>}
-        <CTAButton href={link2} vpnId={vpn2.id} pageType="compare" variant="primary" size="md" fullWidth>Get {vpn2.name}</CTAButton>
+        <CTAButton href={link2} vpnId={vpn2.id} pageType="compare" variant="primary" size="md" fullWidth>{t(lang, 'vpnCard.get', { vpn: vpn2.name })}</CTAButton>
       </div>
     </div>
 
     <div class="mb-8">
-      <h2 class="text-xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
+      <h2 class="text-xl font-bold text-brand-dark mb-4">{t(lang, 'review.faq')}</h2>
       <FAQAccordion questions={faqData} />
     </div>
   </div>
 
-  <Footer slot="footer" />
+  <Footer slot="footer" lang={lang} />
 </BaseLayout>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getAllVPNs } from '../../../lib/vpnData';
+import { getScoreLabel } from '../../../lib/scoring';
+import { getLocalizedPath } from '../../../i18n/index';
+
+const lang = 'es';
+const vpns = getAllVPNs().sort((a, b) => b.scores.total - a.scores.total);
+const title = `Las ${vpns.length} Reseñas VPN 2026 — Probadas y Puntuadas | VPNScorecard`;
+const description = `Reseñas independientes de ${vpns.length} VPNs. Pruebas de velocidad reales, auditorías de privacidad, análisis de precios y puntuaciones. Actualizado mensualmente.`;
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <Header slot="header" lang={lang} />
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-brand-dark mb-2">Todas las Reseñas VPN</h1>
+    <p class="text-gray-600 mb-8">Reseñas detalladas de {vpns.length} VPNs, probadas y puntuadas de forma independiente. Actualizado abril 2026.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {vpns.map((vpn, i) => {
+        const scoreLabel = getScoreLabel(vpn.scores.total);
+        return (
+          <a href={getLocalizedPath(`/reviews/${vpn.slug}`, lang)} class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow group">
+            <div class="flex items-center gap-3 mb-4">
+              <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="font-bold text-brand-dark">{vpn.name}</h2>
+                  {i < 3 && <span class="text-xs px-1.5 py-0.5 rounded bg-yellow-100 text-yellow-800 font-bold">#{i + 1}</span>}
+                </div>
+                <p class="text-sm text-gray-500">{vpn.tagline}</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl font-bold" style={`color: ${scoreLabel.color}`}>
+                  {vpn.scores.total}/100
+                </span>
+                <span class="text-xs px-2 py-0.5 rounded-full font-medium" style={`background-color: ${scoreLabel.color}15; color: ${scoreLabel.color}`}>
+                  {scoreLabel.label}
+                </span>
+              </div>
+              <span class="text-brand font-medium text-sm group-hover:underline">Leer Reseña &rarr;</span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>
