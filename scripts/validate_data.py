@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-JSON Doğrulama Scripti
-Tüm data/*.json dosyalarını doğrular ve gerekli alanların varlığını kontrol eder.
+JSON Validation Script
+Validates all data/*.json files and checks required fields.
 
-Kullanım: python scripts/validate_data.py
+Usage: python scripts/validate_data.py
 """
 
 import json
@@ -12,125 +12,129 @@ import sys
 
 
 def load_json(filepath):
-    """JSON dosyasını yükle."""
+    """Load a JSON file."""
     with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def validate_vpns():
-    """vpns.json doğrulama."""
+    """Validate vpns.json."""
     filepath = os.path.join("data", "vpns.json")
     data = load_json(filepath)
 
     required_fields = [
-        "id", "ad", "slug", "logo", "renk_hex", "tagline", "website",
-        "kurucu_ulke", "is14Eyes", "kurulus_yili", "guvenlik", "sunucu_agi",
-        "hiz_testleri", "platform_destegi", "streaming", "puanlar", "affiliate",
-        "artilari", "eksileri", "en_iyi_icin", "aktif",
+        "id", "name", "slug", "logo", "color_hex", "tagline", "website",
+        "headquarters", "is14Eyes", "founded_year", "security", "server_network",
+        "speed_tests", "platform_support", "streaming", "scores", "affiliate",
+        "pros", "cons", "best_for", "active",
     ]
 
     errors = []
     vpn_ids = set()
 
-    for vpn in data["vpnler"]:
+    for vpn in data["vpns"]:
         if vpn["id"] in vpn_ids:
             errors.append(f"Duplicate VPN id: {vpn['id']}")
         vpn_ids.add(vpn["id"])
 
         for field in required_fields:
             if field not in vpn:
-                errors.append(f"VPN {vpn.get('id', 'unknown')} eksik alan: {field}")
+                errors.append(f"VPN {vpn.get('id', 'unknown')} missing field: {field}")
 
-        if "puanlar" in vpn:
-            total = sum(vpn["puanlar"].values()) - vpn["puanlar"].get("toplam", 0)
-            if vpn["puanlar"].get("toplam") != total:
+        if "scores" in vpn:
+            s = vpn["scores"]
+            calculated = (
+                s.get("speed", 0) + s.get("privacy", 0) + s.get("ease_of_use", 0)
+                + s.get("server_network", 0) + s.get("value", 0) + s.get("streaming", 0)
+            )
+            if s.get("total") != calculated:
                 errors.append(
-                    f"VPN {vpn['id']}: toplam puan uyuşmazlığı "
-                    f"(hesaplanan: {total}, bildirilen: {vpn['puanlar']['toplam']})"
+                    f"VPN {vpn['id']}: score mismatch "
+                    f"(calculated: {calculated}, reported: {s.get('total')})"
                 )
 
-        if "guvenlik" in vpn:
-            for sec_field in ["sifreleme", "protokoller", "no_logs_politikasi", "kill_switch"]:
-                if sec_field not in vpn["guvenlik"]:
-                    errors.append(f"VPN {vpn['id']} güvenlik eksik: {sec_field}")
+        if "security" in vpn:
+            for sec_field in ["encryption", "protocols", "no_logs_policy", "kill_switch"]:
+                if sec_field not in vpn["security"]:
+                    errors.append(f"VPN {vpn['id']} security missing: {sec_field}")
 
     return errors
 
 
 def validate_pricing():
-    """pricing.json doğrulama."""
+    """Validate pricing.json."""
     filepath = os.path.join("data", "pricing.json")
     data = load_json(filepath)
 
     errors = []
-    for vpn_id, pricing in data["fiyatlar"].items():
-        if "para_birimi" not in pricing:
-            errors.append(f"Pricing {vpn_id}: para_birimi eksik")
-        if "aylik_plan" not in pricing and "ucretsiz_plan" not in pricing:
-            errors.append(f"Pricing {vpn_id}: en az bir plan olmalı")
+    for vpn_id, pricing in data["prices"].items():
+        if "currency" not in pricing:
+            errors.append(f"Pricing {vpn_id}: currency missing")
+        if "monthly" not in pricing and "free_plan" not in pricing:
+            errors.append(f"Pricing {vpn_id}: at least one plan required")
 
     return errors
 
 
 def validate_speed_tests():
-    """speed-tests.json doğrulama."""
+    """Validate speed-tests.json."""
     filepath = os.path.join("data", "speed-tests.json")
     data = load_json(filepath)
 
     errors = []
     required_fields = [
-        "vpn_id", "protokol", "indirme_mbps", "yukleme_mbps",
-        "ping_ms", "tutarlilik_yuzde", "siralamasi",
+        "vpn_id", "protocol", "download_mbps", "upload_mbps",
+        "ping_ms", "consistency_percent", "rank",
     ]
 
-    for result in data["sonuclar"]:
+    for result in data["results"]:
         for field in required_fields:
             if field not in result:
-                errors.append(f"Speed test {result.get('vpn_id', 'unknown')} eksik: {field}")
+                errors.append(f"Speed test {result.get('vpn_id', 'unknown')} missing: {field}")
 
-    rankings = [r["siralamasi"] for r in data["sonuclar"]]
+    rankings = [r["rank"] for r in data["results"]]
     if rankings != sorted(rankings):
-        errors.append("Speed test sıralaması tutarsız")
+        errors.append("Speed test rankings are inconsistent")
 
     return errors
 
 
 def validate_deals():
-    """deals.json doğrulama."""
+    """Validate deals.json."""
     filepath = os.path.join("data", "deals.json")
     data = load_json(filepath)
 
     errors = []
     required_fields = [
-        "vpn_id", "baslik", "aciklama", "indirim_yuzde",
-        "aylik_fiyat_usd", "link", "dogrulama_tarihi",
+        "vpn_id", "title", "description", "discount_percent",
+        "monthly_price_usd", "link", "verified_date",
     ]
 
-    for deal in data["kampanyalar"]:
+    for deal in data["deals"]:
         for field in required_fields:
             if field not in deal:
-                errors.append(f"Deal {deal.get('vpn_id', 'unknown')} eksik: {field}")
+                errors.append(f"Deal {deal.get('vpn_id', 'unknown')} missing: {field}")
 
     return errors
 
 
 def validate_server_counts():
-    """server-counts.json doğrulama."""
+    """Validate server-counts.json."""
     filepath = os.path.join("data", "server-counts.json")
     data = load_json(filepath)
 
     errors = []
-    for vpn_id, counts in data["sunucu_sayilari"].items():
-        if "sunucu" not in counts:
-            errors.append(f"Server counts {vpn_id}: sunucu eksik")
-        if "ulke" not in counts:
-            errors.append(f"Server counts {vpn_id}: ulke eksik")
+    for vpn_id, counts in data["server_counts"].items():
+        if "servers" not in counts:
+            errors.append(f"Server counts {vpn_id}: servers missing")
+        if "countries" not in counts:
+            errors.append(f"Server counts {vpn_id}: countries missing")
 
     return errors
 
 
 def main():
-    print("🔍 JSON doğrulama başlatıldı...\n")
+    print("Validating JSON data files...\n")
 
     all_errors = []
 
@@ -146,25 +150,25 @@ def main():
         try:
             errors = validator()
             if errors:
-                print(f"❌ {name}: {len(errors)} hata")
+                print(f"FAIL {name}: {len(errors)} error(s)")
                 for err in errors:
                     print(f"   - {err}")
                 all_errors.extend(errors)
             else:
-                print(f"✅ {name}: Geçerli")
+                print(f"OK   {name}: Valid")
         except FileNotFoundError:
-            print(f"❌ {name}: Dosya bulunamadı")
-            all_errors.append(f"{name} dosyası bulunamadı")
+            print(f"FAIL {name}: File not found")
+            all_errors.append(f"{name} file not found")
         except json.JSONDecodeError as e:
-            print(f"❌ {name}: JSON parse hatası: {e}")
-            all_errors.append(f"{name} JSON parse hatası")
+            print(f"FAIL {name}: JSON parse error: {e}")
+            all_errors.append(f"{name} JSON parse error")
 
     print()
     if all_errors:
-        print(f"❌ Toplam {len(all_errors)} hata bulundu!")
+        print(f"FAILED: {len(all_errors)} error(s) found!")
         sys.exit(1)
     else:
-        print("✅ Tüm JSON dosyaları geçerli!")
+        print("ALL PASSED: All JSON files are valid!")
         sys.exit(0)
 
 
