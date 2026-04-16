@@ -2,25 +2,27 @@
 import { getBestAffiliateLink } from '../lib/affiliateLinks';
 import { formatPrice } from '../lib/formatters';
 import { getVPNById } from '../lib/vpnData';
+import { type Lang, defaultLang, t } from '../i18n/index';
 
 interface Props {
   pricing: any;
   vpnId: string;
   vpnName: string;
   pageType?: string;
+  lang?: Lang;
 }
 
-const { pricing, vpnId, vpnName, pageType = 'review' } = Astro.props;
+const { pricing, vpnId, vpnName, pageType = 'review', lang = defaultLang } = Astro.props;
 const vpn = getVPNById(vpnId);
 const affiliateLink = getBestAffiliateLink(vpn || { id: vpnId, website: '#' }, pageType);
 
 const plans: any[] = [];
-if (pricing.monthly) plans.push({ ...pricing.monthly, key: 'monthly', label: 'Monthly', popular: false });
-if (pricing.six_month) plans.push({ ...pricing.six_month, key: 'six_month', label: '6 Months', popular: false });
-if (pricing.yearly) plans.push({ ...pricing.yearly, key: 'yearly', label: '1 Year', popular: !pricing.two_year && !pricing.three_year });
-if (pricing.two_year) plans.push({ ...pricing.two_year, key: 'two_year', label: '2 Years', popular: true });
-if (pricing.three_year) plans.push({ ...pricing.three_year, key: 'three_year', label: '3 Years', popular: true });
-if (pricing.five_year) plans.push({ ...pricing.five_year, key: 'five_year', label: '5 Years', popular: true });
+if (pricing.monthly) plans.push({ ...pricing.monthly, key: 'monthly', label: t(lang, 'pricing.monthly'), popular: false });
+if (pricing.six_month) plans.push({ ...pricing.six_month, key: 'six_month', label: t(lang, 'pricing.sixMonths'), popular: false });
+if (pricing.yearly) plans.push({ ...pricing.yearly, key: 'yearly', label: t(lang, 'pricing.oneYear'), popular: !pricing.two_year && !pricing.three_year });
+if (pricing.two_year) plans.push({ ...pricing.two_year, key: 'two_year', label: t(lang, 'pricing.twoYears'), popular: true });
+if (pricing.three_year) plans.push({ ...pricing.three_year, key: 'three_year', label: t(lang, 'pricing.threeYears'), popular: true });
+if (pricing.five_year) plans.push({ ...pricing.five_year, key: 'five_year', label: t(lang, 'pricing.fiveYears'), popular: true });
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -28,7 +30,7 @@ if (pricing.five_year) plans.push({ ...pricing.five_year, key: 'five_year', labe
     <div class={`relative bg-white rounded-xl border-2 ${plan.popular ? 'border-brand shadow-md' : 'border-gray-200'} p-6`}>
       {plan.popular && (
         <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</span>
+          <span class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">{t(lang, 'pricing.bestValue')}</span>
         </div>
       )}
       <h3 class="text-lg font-bold text-brand-dark mb-2">{plan.label}</h3>
@@ -37,10 +39,10 @@ if (pricing.five_year) plans.push({ ...pricing.five_year, key: 'five_year', labe
         <span class="text-gray-500">/mo</span>
       </div>
       {plan.total && (
-        <p class="text-sm text-gray-500 mb-2">Billed {formatPrice(plan.total, pricing.currency || 'USD')} total</p>
+        <p class="text-sm text-gray-500 mb-2">{t(lang, 'pricing.billedTotal', { price: formatPrice(plan.total, pricing.currency || 'USD') })}</p>
       )}
       {plan.savings_percent && (
-        <p class="text-sm text-green-600 font-medium mb-4">Save {plan.savings_percent}%</p>
+        <p class="text-sm text-green-600 font-medium mb-4">{t(lang, 'pricing.save', { percent: String(plan.savings_percent) })}</p>
       )}
       <a
         href={affiliateLink}
@@ -48,12 +50,12 @@ if (pricing.five_year) plans.push({ ...pricing.five_year, key: 'five_year', labe
         target="_blank"
         class={`block w-full text-center py-2.5 rounded-lg font-semibold transition-colors duration-200 ${plan.popular ? 'bg-brand hover:bg-brand-dark text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
       >
-        Get {vpnName}
+        {t(lang, 'pricing.get', { vpn: vpnName })}
       </a>
     </div>
   ))}
 </div>
 
 {pricing.refund_days > 0 && (
-  <p class="text-sm text-gray-500 mt-4 text-center">{pricing.refund_days}-day money-back guarantee</p>
+  <p class="text-sm text-gray-500 mt-4 text-center">{t(lang, 'pricing.moneyBackGuarantee', { days: String(pricing.refund_days) })}</p>
 )}

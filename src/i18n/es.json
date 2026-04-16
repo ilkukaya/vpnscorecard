@@ -79,6 +79,19 @@
     "save": "Ahorra {percent}%",
     "affiliateNote": "Enlace de afiliado — podemos ganar una comisión sin costo adicional para ti"
   },
+  "pricing": {
+    "bestValue": "Mejor Valor",
+    "monthly": "Mensual",
+    "sixMonths": "6 Meses",
+    "oneYear": "1 Año",
+    "twoYears": "2 Años",
+    "threeYears": "3 Años",
+    "fiveYears": "5 Años",
+    "billedTotal": "Facturado {price} total",
+    "save": "Ahorra {percent}%",
+    "get": "Obtener {vpn}",
+    "moneyBackGuarantee": "Garantía de devolución de {days} días"
+  },
   "review": {
     "title": "Reseña de {vpn} {year}: Pruebas de Velocidad, Puntuaciones y Precios",
     "verdict": "Resumen — Nuestro Veredicto",
@@ -133,7 +146,9 @@
     "netflix": "Netflix",
     "notAudited": "Sin auditar",
     "winner": "Ganador",
-    "viewAllComparisons": "Ver todas las comparaciones"
+    "viewAllComparisons": "Ver todas las comparaciones",
+    "refundPolicy": "Política de Reembolso",
+    "days": "días"
   },
   "bestFor": {
     "streaming": "Mejor VPN para Streaming {year}",

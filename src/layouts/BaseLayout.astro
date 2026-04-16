@@ -10,7 +10,7 @@ interface Props {
   lang?: Lang;
 }
 
-const { title, description, canonical, ogImage = '/og-image.png', schemaMarkup, lang: propLang } = Astro.props;
+const { title, description, canonical, ogImage = '/og-image.svg', schemaMarkup, lang: propLang } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const canonicalUrl = canonical || Astro.url?.href || 'https://vpnscorecard.com';
 const alternateLinks = getAlternateLinks(Astro.url.pathname);
@@ -36,7 +36,8 @@ const alternateLinks = getAlternateLinks(Astro.url.pathname);
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={`https://vpnscorecard.com${ogImage}`} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : lang === 'tr' ? 'tr_TR' : 'en_US'} />
     <meta property="og:site_name" content="VPNScorecard" />
@@ -45,6 +46,7 @@ const alternateLinks = getAlternateLinks(Astro.url.pathname);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://vpnscorecard.com${ogImage}`} />
 
     <meta name="theme-color" content="#1a1f36" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

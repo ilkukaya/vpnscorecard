@@ -3,25 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getActiveDeals, getVPNById } from '../../lib/vpnData';
+import { t } from '../../i18n/index';
 
 const lang = 'es';
 const deals = getActiveDeals();
-const title = 'Mejores Ofertas y Descuentos VPN — Abril 2026 | VPNScorecard';
-const description = `${deals.length} ofertas VPN verificadas y códigos de descuento para abril 2026. Ahorra hasta un 90%. Actualizado semanalmente.`;
+const title = t(lang, 'meta.dealsTitle', { month: 'Abril', year: '2026' });
+const description = t(lang, 'meta.dealsDesc');
 ---
 <BaseLayout title={title} description={description} lang={lang}>
   <Header slot="header" lang={lang} />
   <div class="max-w-5xl mx-auto px-4 py-12">
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">Mejores Ofertas VPN — Abril 2026</h1>
-    <p class="text-gray-600 mb-8">{deals.length} ofertas y descuentos VPN verificados. Actualizado semanalmente.</p>
+    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark mb-2">{t(lang, 'deals.pageTitle', { month: 'Abril', year: '2026' })}</h1>
+    <p class="text-gray-600 mb-8">{deals.length} {t(lang, 'deals.pageDesc')}</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       {deals.map((deal) => {
         const vpn = getVPNById(deal.vpn_id);
         return (
           <div class="bg-white rounded-xl shadow-sm border-2 border-green-200 p-6 hover:border-green-400 transition-colors">
             <div class="flex items-center justify-between mb-3">
-              <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">{deal.discount_percent}% DESCUENTO</span>
-              <span class="text-xs text-gray-500">Verificado {deal.verified_date}</span>
+              <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">{deal.discount_percent}% {t(lang, 'deals.off')}</span>
+              <span class="text-xs text-gray-500">{t(lang, 'deals.verified')} {deal.verified_date}</span>
             </div>
             <div class="flex items-center gap-3 mb-3">
               {vpn && <img src={vpn.logo} alt={vpn.name} class="w-10 h-10 object-contain" loading="lazy" />}
@@ -31,9 +32,9 @@ const description = `${deals.length} ofertas VPN verificadas y códigos de descu
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-brand">${deal.monthly_price_usd}<span class="text-sm text-gray-500">/mes</span></span>
+              <span class="text-2xl font-bold text-brand">${deal.monthly_price_usd}<span class="text-sm text-gray-500">{t(lang, 'deals.perMonth')}</span></span>
               <a href={deal.link} rel="nofollow noopener sponsored" target="_blank" class="px-5 py-2.5 bg-brand hover:bg-brand-dark text-white font-semibold rounded-lg transition-colors text-sm">
-                Obtener Oferta &rarr;
+                {t(lang, 'deals.viewAll')} &rarr;
               </a>
             </div>
             <p class="text-xs text-gray-400 mt-2">Expira: {deal.expiry}</p>

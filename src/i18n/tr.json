@@ -79,6 +79,19 @@
     "save": "%{percent} Tasarruf",
     "affiliateNote": "Affiliate bağlantı — size ekstra maliyet olmadan komisyon kazanabiliriz"
   },
+  "pricing": {
+    "bestValue": "En İyi Değer",
+    "monthly": "Aylık",
+    "sixMonths": "6 Ay",
+    "oneYear": "1 Yıl",
+    "twoYears": "2 Yıl",
+    "threeYears": "3 Yıl",
+    "fiveYears": "5 Yıl",
+    "billedTotal": "Toplam {price} faturalandırılır",
+    "save": "%{percent} Tasarruf",
+    "get": "{vpn} Al",
+    "moneyBackGuarantee": "{days} gün para iade garantisi"
+  },
   "review": {
     "title": "{vpn} İncelemesi {year}: Hız Testleri, Puanlar ve Fiyatlar",
     "verdict": "Özet — Kararımız",
@@ -133,7 +146,9 @@
     "netflix": "Netflix",
     "notAudited": "Denetlenmemiş",
     "winner": "Kazanan",
-    "viewAllComparisons": "Tüm karşılaştırmaları gör"
+    "viewAllComparisons": "Tüm karşılaştırmaları gör",
+    "refundPolicy": "İade Politikası",
+    "days": "gün"
   },
   "bestFor": {
     "streaming": "En İyi Yayın VPN'i {year}",

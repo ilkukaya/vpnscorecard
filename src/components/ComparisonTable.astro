@@ -1,13 +1,15 @@
 ---
 import { formatPrice, getBestPrice } from '../lib/formatters';
+import { type Lang, defaultLang, t } from '../i18n/index';
 
 interface Props {
   vpns: any[];
   pricing: Record<string, any>;
   pageType?: string;
+  lang?: Lang;
 }
 
-const { vpns, pricing, pageType = 'compare' } = Astro.props;
+const { vpns, pricing, pageType = 'compare', lang = defaultLang } = Astro.props;
 
 function getDownloadSpeed(vpn: any): number {
   const st = vpn.speed_tests;
@@ -20,7 +22,7 @@ function getDownloadSpeed(vpn: any): number {
   <table class="w-full text-sm">
     <thead>
       <tr class="border-b border-gray-200">
-        <th class="text-left py-3 px-4 font-semibold text-gray-600">Feature</th>
+        <th class="text-left py-3 px-4 font-semibold text-gray-600">{t(lang, 'compare.feature')}</th>
         {vpns.map((vpn) => (
           <th class="text-center py-3 px-4">
             <div class="flex flex-col items-center gap-1">
@@ -36,7 +38,7 @@ function getDownloadSpeed(vpn: any): number {
     </thead>
     <tbody class="divide-y divide-gray-100">
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Speed (Best Protocol)</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.speedWireguard')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
             {getDownloadSpeed(vpn) > 0 ? `${getDownloadSpeed(vpn)} Mbps` : '—'}
@@ -44,37 +46,37 @@ function getDownloadSpeed(vpn: any): number {
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">No-Logs Audit</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.noLogsAudit')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
             {vpn.security.no_logs_audited
               ? <span class="text-green-600">&#10003; {vpn.security.audit_firm}</span>
-              : <span class="text-gray-400">Not audited</span>}
+              : <span class="text-gray-400">{t(lang, 'compare.notAudited')}</span>}
           </td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Countries</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.countries')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">{vpn.server_network.country_count}</td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Servers</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.servers')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">{vpn.server_network.total_servers.toLocaleString()}</td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Devices</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.devices')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
-            {vpn.platform_support.simultaneous_connections || 'Unlimited'}
+            {vpn.platform_support.simultaneous_connections || t(lang, 'common.unlimited')}
           </td>
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Kill Switch</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'review.killSwitch')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
             {vpn.security.kill_switch ? <span class="text-green-600">&#10003;</span> : <span class="text-gray-400">&#10007;</span>}
@@ -82,7 +84,7 @@ function getDownloadSpeed(vpn: any): number {
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Best Price</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.bestPrice')}</td>
         {vpns.map((vpn) => {
           const p = pricing[vpn.id];
           const best = getBestPrice(p);
@@ -94,7 +96,7 @@ function getDownloadSpeed(vpn: any): number {
         })}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Netflix</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.netflix')}</td>
         {vpns.map((vpn) => (
           <td class="py-3 px-4 text-center">
             {vpn.streaming.netflix_us ? <span class="text-green-600">&#10003;</span> : <span class="text-red-500">&#10007;</span>}
@@ -102,12 +104,12 @@ function getDownloadSpeed(vpn: any): number {
         ))}
       </tr>
       <tr class="hover:bg-gray-50">
-        <td class="py-3 px-4 font-medium text-gray-700">Refund Policy</td>
+        <td class="py-3 px-4 font-medium text-gray-700">{t(lang, 'compare.refundPolicy')}</td>
         {vpns.map((vpn) => {
           const p = pricing[vpn.id];
           return (
             <td class="py-3 px-4 text-center">
-              {p?.refund_days ? `${p.refund_days} days` : 'N/A'}
+              {p?.refund_days ? `${p.refund_days} ${t(lang, 'compare.days')}` : 'N/A'}
             </td>
           );
         })}

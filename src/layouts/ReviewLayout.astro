@@ -185,7 +185,7 @@ faqSchema.mainEntity = faqData.map(faq => ({
     {pricing && (
       <section class="mb-8" aria-label="Pricing">
         <h2 class="text-2xl font-bold text-brand-dark mb-4">{t(lang, 'review.pricing')}</h2>
-        <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.name} pageType="review" />
+        <PricingTable pricing={pricing} vpnId={vpn.id} vpnName={vpn.name} pageType="review" lang={lang} />
       </section>
     )}
 

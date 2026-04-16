@@ -6,7 +6,7 @@ interface Props {
 const { questions } = Astro.props;
 ---
 
-<div class="space-y-3" x-data="{ open: null }">
+<div class="space-y-3">
   {questions.map((item, index) => (
     <details class="group bg-white rounded-lg border border-gray-200 open:border-brand/30 transition-colors duration-200">
       <summary class="flex items-center justify-between cursor-pointer p-4 list-none">
