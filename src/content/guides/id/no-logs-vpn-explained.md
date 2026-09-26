@@ -1,6 +1,6 @@
 ---
 title: "Apa Itu VPN No-Logs? Cara Mengetahui Apakah Klaimnya Benar"
-description: "Apa arti sebenarnya “no-logs”, data apa yang mungkin tetap disimpan VPN, dan bagaimana audit, server khusus RAM, serta kasus pengadilan membuktikan klaim penyedia."
+description: "Arti sebenarnya “no-logs”, data apa yang mungkin tetap disimpan VPN, dan bagaimana audit, server khusus RAM, serta kasus pengadilan membuktikan klaim penyedia."
 summary: "VPN no-logs berjanji tidak mencatat aktivitas online Anda — situs web yang Anda kunjungi, permintaan DNS, atau isi lalu lintas Anda — dan idealnya juga tidak mencatat stempel waktu koneksi atau alamat IP Anda. Karena siapa saja bisa membuat klaim ini, carilah bukti: audit independen oleh firma yang diakui, server khusus RAM, dan kasus nyata di mana penyedia tidak dapat menyerahkan data."
 date: "2026-01-15"
 updated: "2026-09-26"
