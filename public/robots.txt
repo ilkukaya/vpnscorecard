@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://vpnscorecard.com/sitemap-index.xml
-
-# Allow logo crawling for rich snippets
-# Disallow: /assets/

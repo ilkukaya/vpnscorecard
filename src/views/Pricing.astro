@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import VPNMark from '../components/VPNMark.astro';
+import CTA from '../components/CTA.astro';
+import Disclosure from '../components/Disclosure.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import { t, localized, priceFmt, dateFmt, numberFmt, type Lang } from '../i18n';
+import { allVPNs, lowestPrice, plans, pricing, refundDays, PRICES_AS_OF, freePlan } from '../lib/vpns';
+import { breadcrumbSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const rows = allVPNs.filter((v) => lowestPrice(v.id)).sort((a, b) => lowestPrice(a.id)!.price - lowestPrice(b.id)!.price);
+const cheapest = rows[0];
+const year = new Date(PRICES_AS_OF).getUTCFullYear();
+---
+<Base lang={lang} path="/pricing/" title={t(lang, 'pricing.metaTitle', { year })} description={t(lang, 'pricing.metaDescription')} schema={[breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.pricing'), path: L('/pricing/') }])]}>
+  <div class="wrap py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.pricing'), href: L('/pricing/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'pricing.h1', { year })}</h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-2">{t(lang, 'pricing.lead')}</p>
+    <div class="mt-8 max-w-3xl">
+      <QuickAnswer lang={lang}>{t(lang, 'pricing.quick', { name: cheapest.name, price: priceFmt(lang, lowestPrice(cheapest.id)!.price, lowestPrice(cheapest.id)!.currency) })}</QuickAnswer>
+      <Disclosure lang={lang} class="mt-4" />
+    </div>
+    <div class="scroll-x mt-8">
+      <table class="table-clean min-w-[720px] overflow-hidden rounded-2xl border border-line bg-white">
+        <thead><tr><th>VPN</th><th>{t(lang, 'plans.monthly')}</th><th>{t(lang, 'pricing.bestLongTerm')}</th><th>{t(lang, 'facts.refund')}</th><th>{t(lang, 'facts.freePlan')}</th><th></th></tr></thead>
+        <tbody>
+          {rows.map((v) => {
+            const p = pricing(v.id); const lo = lowestPrice(v.id)!; const m = plans(v.id).find((x) => x.key === 'monthly');
+            return (
+              <tr>
+                <td><a href={L(`/reviews/${v.slug}/`)} class="flex items-center gap-2.5 font-semibold hover:text-accent-ink"><VPNMark vpn={v} size={28} />{v.name}</a></td>
+                <td class="num">{m ? priceFmt(lang, m.plan.price, p.currency) : '—'}</td>
+                <td class="num"><strong>{priceFmt(lang, lo.price, lo.currency)}</strong>{t(lang, 'common.perMonth')} <span class="text-xs text-ink-3">({t(lang, `plans.${lo.key}`)})</span></td>
+                <td>{refundDays(v.id) ? t(lang, 'common.days', { n: numberFmt(lang, refundDays(v.id)) }) : '—'}</td>
+                <td>{freePlan(v) ? t(lang, 'common.yes') : '—'}</td>
+                <td><CTA id={v.id} place="pricing-table" small>{t(lang, 'pricing.check')}</CTA></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-3">{t(lang, 'pricing.note', { date: dateFmt(lang, PRICES_AS_OF) })}</p>
+  </div>
+</Base>

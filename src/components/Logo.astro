@@ -1,0 +1,11 @@
+---
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<span class={`inline-flex items-center gap-2 ${cls}`}>
+  <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+    <rect x="1" y="1" width="30" height="30" rx="8" fill="#121417" />
+    <path d="M8 16.5l5 5 11-11" fill="none" stroke="#14A37E" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <span class="font-display text-[19px] font-semibold tracking-tight text-ink" dir="ltr">VPN<span class="text-accent">Scorecard</span></span>
+</span>

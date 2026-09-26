@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import RankRow from '../components/RankRow.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { t, localized, monthYear, type Lang } from '../i18n';
+import { allVPNs, LAST_REVIEWED } from '../lib/vpns';
+import { breadcrumbSchema, itemListSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const year = new Date(LAST_REVIEWED).getUTCFullYear();
+const schema = [
+  breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.reviews'), path: L('/reviews/') }]),
+  itemListSchema(t(lang, 'reviews.h1', { year }), allVPNs.map((v) => ({ name: v.name, path: L(`/reviews/${v.slug}/`) }))),
+];
+---
+<Base lang={lang} path="/reviews/" title={t(lang, 'reviews.metaTitle', { year, count: allVPNs.length })} description={t(lang, 'reviews.metaDescription', { count: allVPNs.length })} schema={schema}>
+  <div class="wrap py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.reviews'), href: L('/reviews/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'reviews.h1', { year })}</h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-2">{t(lang, 'reviews.lead', { count: allVPNs.length, date: monthYear(lang, LAST_REVIEWED) })}</p>
+    <Disclosure lang={lang} class="mt-6" />
+    <div class="mt-8 grid gap-3">
+      {allVPNs.map((v, i) => <RankRow vpn={v} rank={i + 1} lang={lang} place="reviews-index" />)}
+    </div>
+  </div>
+</Base>

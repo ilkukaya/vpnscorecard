@@ -1,0 +1,14 @@
+---
+import { env } from '../lib/site';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+const slot = process.env.PUBLIC_ADSENSE_SLOT || '';
+const show = Boolean(env.adsenseClient && slot);
+---
+{show && (
+  <div class={`my-8 min-h-[120px] ${cls}`} data-pagefind-ignore>
+    <p class="mb-1 text-center text-[10px] uppercase tracking-widest text-ink-4">Advertisement</p>
+    <ins class="adsbygoogle block" data-ad-client={env.adsenseClient} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}

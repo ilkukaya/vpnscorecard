@@ -1,0 +1,7 @@
+---
+import View from '../../views/Best.astro';
+import { bestLists } from '../../lib/lists';
+export const getStaticPaths = () => bestLists.map((list) => ({ params: { key: list.key }, props: { key: list.key } }));
+const list = bestLists.find((l) => l.key === Astro.props.key)!;
+---
+<View lang="en" list={list} />

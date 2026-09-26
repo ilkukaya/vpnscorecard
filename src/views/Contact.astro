@@ -1,0 +1,28 @@
+---
+import Page from './Page.astro';
+import { t, localized, type Lang } from '../i18n';
+import { CONTACT_EMAIL } from '../lib/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<Page lang={lang} slug="contact">
+  <form name="contact" method="POST" action={localized('/contact/thanks/', lang)} data-netlify="true" netlify-honeypot="company" class="card mt-8 grid gap-4 p-6">
+    <input type="hidden" name="form-name" value="contact" />
+    <input type="hidden" name="lang" value={lang} />
+    <p class="hidden"><label>Company <input name="company" /></label></p>
+    <label class="grid gap-1.5 text-sm font-medium">{t(lang, 'contact.name')}<input required name="name" autocomplete="name" class="rounded-xl border border-line-strong px-3 py-2.5" /></label>
+    <label class="grid gap-1.5 text-sm font-medium">{t(lang, 'contact.email')}<input required type="email" name="email" autocomplete="email" class="rounded-xl border border-line-strong px-3 py-2.5" /></label>
+    <label class="grid gap-1.5 text-sm font-medium">{t(lang, 'contact.topic')}
+      <select name="topic" class="rounded-xl border border-line-strong bg-white px-3 py-2.5">
+        <option value="correction">{t(lang, 'contact.topics.correction')}</option>
+        <option value="partnership">{t(lang, 'contact.topics.partnership')}</option>
+        <option value="privacy">{t(lang, 'contact.topics.privacy')}</option>
+        <option value="other">{t(lang, 'contact.topics.other')}</option>
+      </select>
+    </label>
+    <label class="grid gap-1.5 text-sm font-medium">{t(lang, 'contact.message')}<textarea required name="message" rows="6" class="rounded-xl border border-line-strong px-3 py-2.5"></textarea></label>
+    <p class="text-xs text-ink-3">{t(lang, 'contact.privacy')} <a class="link" href={localized('/privacy/', lang)}>{t(lang, 'nav.privacy')}</a></p>
+    <button class="btn-primary" type="submit">{t(lang, 'contact.send')}</button>
+    {CONTACT_EMAIL && <p class="text-sm text-ink-3">{t(lang, 'contact.orEmail')} <a class="link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>}
+  </form>
+</Page>

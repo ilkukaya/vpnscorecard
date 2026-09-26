@@ -1,219 +1,96 @@
-import en from './en.json';
-import es from './es.json';
-import tr from './tr.json';
+import { languages, langs, defaultLang, type Lang } from './config';
 
-export const languages = {
-  en: { label: 'English', flag: '🇺🇸', code: 'en' },
-  es: { label: 'Español', flag: '🇪🇸', code: 'es' },
-  tr: { label: 'Türkçe', flag: '🇹🇷', code: 'tr' },
-} as const;
+export { languages, langs, defaultLang, nonDefaultLangs, type Lang } from './config';
 
-export type Lang = keyof typeof languages;
-export const defaultLang: Lang = 'en';
-export const supportedLangs = Object.keys(languages) as Lang[];
+const uiModules = import.meta.glob('./ui/*.json', { eager: true, import: 'default' }) as Record<string, any>;
+const vpnModules = import.meta.glob('./vpn/*.json', { eager: true, import: 'default' }) as Record<string, any>;
 
-const translations: Record<Lang, any> = { en, es, tr };
+function byLang(mods: Record<string, any>): Partial<Record<Lang, any>> {
+  const out: Partial<Record<Lang, any>> = {};
+  for (const [path, mod] of Object.entries(mods)) {
+    const code = path.split('/').pop()!.replace('.json', '') as Lang;
+    out[code] = mod;
+  }
+  return out;
+}
 
+const ui = byLang(uiModules);
+const vpnCopy = byLang(vpnModules);
+
+function lookup(obj: any, key: string): any {
+  return key.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), obj);
+}
+
+const warned = new Set<string>();
+
+/** Translate a UI key. Falls back to English, then to the key itself. */
 export function t(lang: Lang, key: string, params?: Record<string, string | number>): string {
-  const keys = key.split('.');
-  let value: any = translations[lang];
-
-  for (const k of keys) {
-    if (value && typeof value === 'object' && k in value) {
-      value = value[k];
-    } else {
-      // Fallback to English
-      value = translations.en;
-      for (const fk of keys) {
-        if (value && typeof value === 'object' && fk in value) {
-          value = value[fk];
-        } else {
-          return key; // Return key if not found
-        }
-      }
-      break;
-    }
+  let value = lookup(ui[lang], key);
+  if (value === undefined || value === '') value = lookup(ui[defaultLang], key);
+  if (typeof value !== 'string') {
+    if (!warned.has(key)) { warned.add(key); console.warn(`[i18n] missing key: ${key}`); }
+    return key;
   }
-
-  if (typeof value !== 'string') return key;
-
   if (params) {
-    return Object.entries(params).reduce(
-      (str, [k, v]) => str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v)),
-      value
-    );
+    for (const [k, v] of Object.entries(params)) value = value.replaceAll(`{${k}}`, String(v));
   }
-
   return value;
 }
 
-export function getLangFromUrl(url: URL): Lang {
-  const [, langOrPage] = url.pathname.split('/');
-  if (langOrPage && langOrPage in languages && langOrPage !== 'en') {
-    return langOrPage as Lang;
+/** Raw (possibly non-string) UI value, e.g. arrays of FAQ items. */
+export function tRaw<T = any>(lang: Lang, key: string): T {
+  const v = lookup(ui[lang], key);
+  return (v === undefined ? lookup(ui[defaultLang], key) : v) as T;
+}
+
+export function vpnText(lang: Lang, id: string): { tagline: string; verdict: string; pros: string[]; cons: string[] } {
+  return vpnCopy[lang]?.[id] || vpnCopy[defaultLang]![id];
+}
+
+/** Path helper: localized('/reviews/', 'tr') -> '/tr/reviews/' */
+export function localized(path: string, lang: Lang): string {
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  return lang === defaultLang ? clean : `/${lang}${clean === '/' ? '/' : clean}`;
+}
+
+/** Strip a language prefix from a pathname. */
+export function stripLang(pathname: string): string {
+  const parts = pathname.split('/');
+  if (parts[1] && (langs as string[]).includes(parts[1]) && parts[1] !== defaultLang) {
+    return '/' + parts.slice(2).join('/');
   }
-  return defaultLang;
+  return pathname;
 }
 
-export function getLocalizedPath(path: string, lang: Lang): string {
-  // Remove any existing lang prefix
-  const cleanPath = path.replace(/^\/(en|es|tr)/, '') || '/';
-  if (lang === defaultLang) return cleanPath;
-  return `/${lang}${cleanPath}`;
+export function langFromPath(pathname: string): Lang {
+  const seg = pathname.split('/')[1];
+  return seg && (langs as string[]).includes(seg) ? (seg as Lang) : defaultLang;
 }
 
-export function getAlternateLinks(currentPath: string): { lang: Lang; href: string }[] {
-  const cleanPath = currentPath.replace(/^\/(en|es|tr)/, '') || '/';
-  return supportedLangs.map(lang => ({
-    lang,
-    href: lang === defaultLang ? cleanPath : `/${lang}${cleanPath}`,
-  }));
+export function dir(lang: Lang) {
+  return languages[lang].dir;
 }
 
-// VPN data translations - pros, cons, and taglines in each language
-export const vpnTranslations: Record<string, Record<Lang, { tagline: string; pros: string[]; cons: string[] }>> = {
-  nordvpn: {
-    en: {
-      tagline: "The fastest and most reliable VPN",
-      pros: [
-        "Independently audited no-logs policy (Deloitte)",
-        "Fastest VPN with NordLynx protocol",
-        "6,400+ servers in 111 countries",
-        "Threat Protection blocks ads and malware",
-        "10 simultaneous connections"
-      ],
-      cons: [
-        "Router app setup is complex",
-        "No RAM-only server infrastructure yet",
-        "Slightly more expensive than budget options"
-      ]
-    },
-    es: {
-      tagline: "El VPN más rápido y confiable",
-      pros: [
-        "Política de no registros auditada independientemente (Deloitte)",
-        "El VPN más rápido con protocolo NordLynx",
-        "6.400+ servidores en 111 países",
-        "Threat Protection bloquea anuncios y malware",
-        "10 conexiones simultáneas"
-      ],
-      cons: [
-        "La configuración del router es compleja",
-        "Aún no tiene infraestructura de servidores solo RAM",
-        "Un poco más caro que las opciones económicas"
-      ]
-    },
-    tr: {
-      tagline: "En hızlı ve en güvenilir VPN",
-      pros: [
-        "Bağımsız denetimli no-logs politikası (Deloitte)",
-        "NordLynx ile piyasanın en hızlı VPN'i",
-        "111 ülkede 6.400+ sunucu",
-        "Threat Protection ile reklam ve malware engelleme",
-        "10 eş zamanlı bağlantı hakkı"
-      ],
-      cons: [
-        "Router uygulaması kurulumu karmaşık",
-        "RAM-only sunucu altyapısı henüz yok",
-        "Bütçe seçeneklerine göre biraz daha pahalı"
-      ]
-    }
-  },
-  expressvpn: {
-    en: {
-      tagline: "World standard in speed and reliability",
-      pros: [
-        "RAM-only server infrastructure (TrustedServer)",
-        "High speed with Lightway protocol",
-        "Wide server network in 105 countries",
-        "Best router VPN support",
-        "KPMG-audited no-logs policy"
-      ],
-      cons: [
-        "One of the most expensive VPNs",
-        "No dedicated IP feature",
-        "No Double VPN",
-        "8 simultaneous connection limit"
-      ]
-    },
-    es: {
-      tagline: "Estándar mundial en velocidad y confiabilidad",
-      pros: [
-        "Infraestructura de servidores solo RAM (TrustedServer)",
-        "Alta velocidad con protocolo Lightway",
-        "Amplia red de servidores en 105 países",
-        "Mejor soporte VPN para router",
-        "Política de no registros auditada por KPMG"
-      ],
-      cons: [
-        "Uno de los VPN más caros",
-        "Sin función de IP dedicada",
-        "Sin Double VPN",
-        "Límite de 8 conexiones simultáneas"
-      ]
-    },
-    tr: {
-      tagline: "Hız ve güvenilirlikte dünya standardı",
-      pros: [
-        "RAM-only sunucu altyapısı (TrustedServer teknolojisi)",
-        "Lightway protokolü ile yüksek hız",
-        "105 ülkede geniş sunucu ağı",
-        "En iyi router VPN desteği",
-        "KPMG bağımsız no-logs denetimi"
-      ],
-      cons: [
-        "Piyasanın en pahalı VPN'lerinden",
-        "Dedicated IP özelliği yok",
-        "Double VPN yok",
-        "8 eş zamanlı bağlantı limiti"
-      ]
-    }
-  },
-  surfshark: {
-    en: {
-      tagline: "Unlimited devices, unlimited freedom",
-      pros: [
-        "Unlimited simultaneous device connections",
-        "Best price-performance ratio on the market",
-        "Nexus technology with IP rotation",
-        "Deloitte-audited no-logs policy",
-        "CleanWeb ad blocker included"
-      ],
-      cons: [
-        "Based in Netherlands (14 Eyes country)",
-        "No RAM-only server infrastructure",
-        "Fewer servers compared to NordVPN"
-      ]
-    },
-    es: {
-      tagline: "Dispositivos ilimitados, libertad ilimitada",
-      pros: [
-        "Conexiones simultáneas ilimitadas",
-        "Mejor relación precio-rendimiento del mercado",
-        "Tecnología Nexus con rotación de IP",
-        "Política de no registros auditada por Deloitte",
-        "Bloqueador de anuncios CleanWeb incluido"
-      ],
-      cons: [
-        "Con sede en Países Bajos (país de 14 Eyes)",
-        "Sin infraestructura de servidores solo RAM",
-        "Menos servidores comparado con NordVPN"
-      ]
-    },
-    tr: {
-      tagline: "Sınırsız cihaz, sınırsız özgürlük",
-      pros: [
-        "Sınırsız eş zamanlı cihaz bağlantısı",
-        "Fiyat/performans oranında piyasanın en iyisi",
-        "Nexus teknolojisi ile IP rotasyonu",
-        "Deloitte bağımsız no-logs denetimi",
-        "CleanWeb ile reklam engelleme"
-      ],
-      cons: [
-        "Hollanda merkezli (14 Eyes ülkesi)",
-        "RAM-only sunucu altyapısı yok",
-        "NordVPN'e kıyasla daha az sunucu"
-      ]
-    }
+export function numberFmt(lang: Lang, n: number, opts?: Intl.NumberFormatOptions) {
+  return new Intl.NumberFormat(lang, opts).format(n);
+}
+
+export function priceFmt(lang: Lang, n: number, currency = 'USD') {
+  return new Intl.NumberFormat(lang, { style: 'currency', currency, minimumFractionDigits: 2 }).format(n);
+}
+
+export function dateFmt(lang: Lang, iso: string, opts: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }) {
+  return new Intl.DateTimeFormat(lang, { ...opts, timeZone: 'UTC' }).format(new Date(iso));
+}
+
+export function monthYear(lang: Lang, iso: string) {
+  return dateFmt(lang, iso, { year: 'numeric', month: 'long' });
+}
+
+export function countryName(lang: Lang, code: string) {
+  try {
+    return new Intl.DisplayNames([lang], { type: 'region' }).of(code) || code;
+  } catch {
+    return code;
   }
-};
+}

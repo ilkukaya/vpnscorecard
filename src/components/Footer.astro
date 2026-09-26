@@ -1,76 +1,61 @@
 ---
-import { getAllVPNs } from '../lib/vpnData';
-import { type Lang, defaultLang, getLocalizedPath, t } from '../i18n/index';
+import Logo from './Logo.astro';
+import { languages, langs, localized, t, type Lang } from '../i18n';
+import { bestLists, comparePairs, pairSlug } from '../lib/lists';
 
-interface Props {
-  lang?: Lang;
-}
-
-const { lang = defaultLang } = Astro.props;
-const topVpns = getAllVPNs()
-  .sort((a, b) => b.scores.total - a.scores.total)
-  .slice(0, 7);
+interface Props { lang: Lang; path: string; available: Lang[] }
+const { lang, path, available } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const pairs = comparePairs().slice(0, 6);
+const year = new Date().getFullYear();
 ---
-
-<footer class="bg-brand-dark text-gray-400 border-t border-gray-800">
-  <div class="max-w-7xl mx-auto px-4 py-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-      <div class="col-span-2 md:col-span-1">
-        <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 mb-4">
-          <svg class="w-8 h-8 text-brand-light" viewBox="0 0 32 32" fill="currentColor">
-            <rect x="2" y="8" width="28" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-            <line x1="2" y1="14" x2="30" y2="14" stroke="currentColor" stroke-width="2"/>
-            <line x1="12" y1="8" x2="12" y2="26" stroke="currentColor" stroke-width="2"/>
-            <circle cx="7" cy="20" r="2" fill="currentColor"/>
-          </svg>
-          <span class="text-lg font-bold text-white">VPN<span class="text-brand-light">Scorecard</span></span>
-        </a>
-        <p class="text-sm">{t(lang, 'site.tagline')}</p>
-        <p class="text-xs mt-2">{t(lang, 'site.since')}</p>
+<footer class="mt-24 bg-ink text-[#C9CDD3]">
+  <div class="wrap py-14">
+    <div class="grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <a href={L('/')} class="inline-block rounded-lg bg-paper px-3 py-2"><Logo /></a>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed">{t(lang, 'footer.about')}</p>
+        <p class="mt-4 max-w-sm text-xs leading-relaxed text-[#9aa1ab]">{t(lang, 'footer.lawful')}</p>
       </div>
-
-      <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.reviews')}</h3>
-        <ul class="space-y-2 text-sm">
-          {topVpns.map(vpn => (
-            <li><a href={getLocalizedPath(`/reviews/${vpn.slug}`, lang)} class="hover:text-white transition-colors">{vpn.name}</a></li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.compare')}</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href={getLocalizedPath('/compare/nordvpn-vs-expressvpn', lang)} class="hover:text-white transition-colors">NordVPN vs ExpressVPN</a></li>
-          <li><a href={getLocalizedPath('/compare/nordvpn-vs-surfshark', lang)} class="hover:text-white transition-colors">NordVPN vs Surfshark</a></li>
-          <li><a href={getLocalizedPath('/compare/expressvpn-vs-surfshark', lang)} class="hover:text-white transition-colors">ExpressVPN vs Surfshark</a></li>
-          <li><a href={getLocalizedPath('/compare/cyberghost-vs-nordvpn', lang)} class="hover:text-white transition-colors">CyberGhost vs NordVPN</a></li>
-          <li><a href={getLocalizedPath('/compare/surfshark-vs-cyberghost', lang)} class="hover:text-white transition-colors">Surfshark vs CyberGhost</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-white font-semibold mb-3 text-sm">{t(lang, 'footer.bestFor')}</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href={getLocalizedPath('/best/best-vpn-for-streaming', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.streaming')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-gaming', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.gaming')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-torrenting', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.torrenting')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-cheap-vpn', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.cheapVPN')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-privacy', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.privacy')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-netflix', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.netflix')}</a></li>
-          <li><a href={getLocalizedPath('/best/best-vpn-for-china', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.china')}</a></li>
-        </ul>
+      <div class="md:col-span-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <div>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white">{t(lang, 'nav.best')}</p>
+          <ul class="space-y-2 text-sm">{bestLists.slice(0, 7).map((b) => <li><a class="hover:text-white" href={L(`/best/${b.key}/`)}>{t(lang, `best.lists.${b.key}.short`)}</a></li>)}</ul>
+        </div>
+        <div>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white">{t(lang, 'nav.compare')}</p>
+          <ul class="space-y-2 text-sm">{pairs.map(([a, b]) => <li><a class="hover:text-white" href={L(`/compare/${pairSlug(a, b)}/`)} dir="ltr">{a.name} vs {b.name}</a></li>)}</ul>
+        </div>
+        <div>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white">{t(lang, 'footer.resources')}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a class="hover:text-white" href={L('/reviews/')}>{t(lang, 'nav.reviews')}</a></li>
+            <li><a class="hover:text-white" href={L('/guides/')}>{t(lang, 'nav.guides')}</a></li>
+            <li><a class="hover:text-white" href={L('/methodology/')}>{t(lang, 'nav.methodology')}</a></li>
+            <li><a class="hover:text-white" href={L('/vpn-legality/')}>{t(lang, 'nav.legality')}</a></li>
+            <li><a class="hover:text-white" href={L('/tools/what-is-my-ip/')}>{t(lang, 'nav.ip')}</a></li>
+            <li><a class="hover:text-white" href={L('/quiz/')}>{t(lang, 'nav.quiz')}</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-white">{t(lang, 'footer.company')}</p>
+          <ul class="space-y-2 text-sm">
+            <li><a class="hover:text-white" href={L('/about/')}>{t(lang, 'nav.about')}</a></li>
+            <li><a class="hover:text-white" href={L('/contact/')}>{t(lang, 'nav.contact')}</a></li>
+            <li><a class="hover:text-white" href={L('/editorial-policy/')}>{t(lang, 'nav.editorial')}</a></li>
+            <li><a class="hover:text-white" href={L('/affiliate-disclosure/')}>{t(lang, 'nav.disclosure')}</a></li>
+            <li><a class="hover:text-white" href={L('/privacy/')}>{t(lang, 'nav.privacy')}</a></li>
+            <li><a class="hover:text-white" href={L('/terms/')}>{t(lang, 'nav.terms')}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-xs">&copy; 2026 VPNScorecard. {t(lang, 'footer.allRightsReserved')}</p>
-      <div class="flex items-center gap-4 text-xs">
-        <a href={getLocalizedPath('/methodology', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.methodology')}</a>
-        <a href={getLocalizedPath('/about', lang)} class="hover:text-white transition-colors">{t(lang, 'footer.about')}</a>
-        <span class="text-gray-600">|</span>
-        <span class="text-gray-500">{t(lang, 'footer.affiliateDisclosure')}</span>
-      </div>
+    <div class="mt-12 border-t border-white/10 pt-6">
+      <p class="text-xs leading-relaxed text-[#9aa1ab]">{t(lang, 'footer.disclosure')}</p>
+      <nav class="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-xs" aria-label={t(lang, 'nav.language')}>
+        {langs.map((l) => <a href={available.includes(l) ? localized(path, l) : localized('/', l)} hreflang={languages[l].hreflang} lang={languages[l].hreflang} class={l === lang ? 'text-white font-semibold' : 'hover:text-white'}>{languages[l].name}</a>)}
+      </nav>
+      <p class="mt-5 text-xs text-[#9aa1ab]">© {year} VPNScorecard. {t(lang, 'footer.rights')}</p>
     </div>
   </div>
 </footer>

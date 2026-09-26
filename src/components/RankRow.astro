@@ -1,0 +1,43 @@
+---
+import VPNMark from './VPNMark.astro';
+import ScoreBadge from './ScoreBadge.astro';
+import CTA from './CTA.astro';
+import { t, vpnText, localized, priceFmt, numberFmt, type Lang } from '../i18n';
+import { lowestPrice, connections, type VPN } from '../lib/vpns';
+
+interface Props { vpn: VPN; rank: number; lang: Lang; place: string; highlight?: string; featured?: boolean }
+const { vpn, rank, lang, place, highlight, featured = false } = Astro.props;
+const copy = vpnText(lang, vpn.id);
+const price = lowestPrice(vpn.id);
+const conn = connections(vpn);
+const review = localized(`/reviews/${vpn.slug}/`, lang);
+---
+<article class={`card relative overflow-hidden ${featured ? 'ring-2 ring-accent' : ''}`} data-best-for={vpn.best_for.join(' ')}>
+  {featured && <div class="bg-accent px-5 py-1.5 text-xs font-semibold uppercase tracking-wider text-white">{t(lang, 'common.editorsChoice')}</div>}
+  <div class="grid gap-5 p-5 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6 md:p-6">
+    <div class="flex items-center gap-4">
+      <span class="w-7 text-center font-display text-3xl font-semibold text-ink-4 num">{rank}</span>
+      <VPNMark vpn={vpn} />
+    </div>
+    <div class="min-w-0">
+      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <h3 class="text-lg font-bold text-ink"><a href={review} class="hover:text-accent-ink">{vpn.name}</a></h3>
+        {highlight && <span class="chip border-accent/30 bg-accent-wash text-accent-ink">{highlight}</span>}
+      </div>
+      <p class="mt-0.5 text-sm text-ink-3">{copy.tagline}</p>
+      <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-[13px] text-ink-2">
+        {price && <li><span class="text-ink-4">{t(lang, 'common.from')}</span> <strong class="num">{priceFmt(lang, price.price, price.currency)}</strong>{t(lang, 'common.perMonth')}</li>}
+        <li><span class="text-ink-4">{t(lang, 'common.devices')}:</span> <strong>{conn === 'unlimited' ? t(lang, 'common.unlimited') : numberFmt(lang, conn)}</strong></li>
+        <li><span class="text-ink-4">{t(lang, 'common.countries')}:</span> <strong class="num">{numberFmt(lang, vpn.server_network.country_count)}</strong></li>
+        <li>{vpn.security.no_logs_audited ? <span class="text-accent-ink font-medium">✓ {t(lang, 'common.auditedNoLogs')}</span> : <span class="text-ink-3">{t(lang, 'common.notAudited')}</span>}</li>
+      </ul>
+    </div>
+    <div class="flex items-center justify-between gap-4 border-t border-line pt-4 md:flex-col md:items-end md:border-0 md:pt-0">
+      <ScoreBadge total={vpn.scores.total} lang={lang} />
+      <div class="flex gap-2">
+        <a href={review} class="btn-ghost btn-sm">{t(lang, 'common.review')}</a>
+        <CTA id={vpn.id} place={place} small>{t(lang, 'common.visit')}</CTA>
+      </div>
+    </div>
+  </div>
+</article>

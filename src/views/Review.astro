@@ -1,0 +1,239 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import VPNMark from '../components/VPNMark.astro';
+import ScoreBadge from '../components/ScoreBadge.astro';
+import ScoreBars from '../components/ScoreBars.astro';
+import CTA from '../components/CTA.astro';
+import Check from '../components/Check.astro';
+import Disclosure from '../components/Disclosure.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import FAQ from '../components/FAQ.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { t, vpnText, localized, priceFmt, numberFmt, dateFmt, monthYear, type Lang } from '../i18n';
+import { allVPNs, rankOf, plans, lowestPrice, refundDays, connections, freePlan, platforms, LAST_REVIEWED, DATA_AS_OF, PRICES_AS_OF, pricing, hasProgram, type VPN } from '../lib/vpns';
+import { comparePairs, pairSlug } from '../lib/lists';
+import { breadcrumbSchema, faqSchema, ORG_ID } from '../lib/seo';
+import { abs } from '../lib/site';
+
+interface Props { lang: Lang; vpn: VPN }
+const { lang, vpn } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const copy = vpnText(lang, vpn.id);
+const year = new Date(LAST_REVIEWED).getUTCFullYear();
+const rank = rankOf(vpn.id);
+const price = lowestPrice(vpn.id);
+const conn = connections(vpn);
+const connLabel = conn === 'unlimited' ? t(lang, 'common.unlimited') : numberFmt(lang, conn);
+const free = freePlan(vpn);
+const s10 = numberFmt(lang, vpn.scores.total / 10, { minimumFractionDigits: 1 });
+const path = `/reviews/${vpn.slug}/`;
+const sec = vpn.security as any;
+const sn = vpn.server_network as any;
+const priceStr = price ? priceFmt(lang, price.price, price.currency) : '—';
+const alternatives = allVPNs.filter((v) => v.id !== vpn.id).slice(0, 3);
+const pairs = comparePairs().filter(([a, b]) => a.id === vpn.id || b.id === vpn.id).slice(0, 6);
+
+const P = { name: vpn.name, score: s10, hq: vpn.headquarters, devices: connLabel, price: priceStr, countries: numberFmt(lang, sn.country_count), firm: sec.audit_firm || '', refund: refundDays(vpn.id) };
+const faq = [
+  { q: t(lang, 'review.faq.safeQ', P), a: sec.no_logs_audited ? t(lang, 'review.faq.safeA_audited', P) : t(lang, 'review.faq.safeA_notAudited', P) },
+  { q: t(lang, 'review.faq.logsQ', P), a: sec.no_logs_audited ? t(lang, 'review.faq.logsA_audited', P) : t(lang, 'review.faq.logsA_notAudited', P) },
+  { q: t(lang, 'review.faq.priceQ', P), a: price ? t(lang, 'review.faq.priceA', P) : t(lang, 'review.faq.priceA_none', P) },
+  { q: t(lang, 'review.faq.devicesQ', P), a: t(lang, 'review.faq.devicesA', P) },
+  { q: t(lang, 'review.faq.hqQ', P), a: vpn.fourteen_eyes ? t(lang, 'review.faq.hqA_eyes', P) : t(lang, 'review.faq.hqA_noEyes', P) },
+  { q: t(lang, 'review.faq.freeQ', P), a: free ? t(lang, 'review.faq.freeA_yes', P) : t(lang, 'review.faq.freeA_no', P) },
+];
+
+const facts: [string, any][] = [
+  [t(lang, 'facts.headquarters'), `${vpn.headquarters}${vpn.fourteen_eyes ? ` · ${t(lang, 'facts.eyesMember')}` : ''}`],
+  [t(lang, 'facts.founded'), String(vpn.founded_year)],
+  [t(lang, 'facts.servers'), `${numberFmt(lang, sn.total_servers)}+`],
+  [t(lang, 'facts.countries'), numberFmt(lang, sn.country_count)],
+  [t(lang, 'facts.devices'), connLabel],
+  [t(lang, 'facts.protocols'), sec.protocols.join(', ')],
+  [t(lang, 'facts.encryption'), sec.encryption],
+  [t(lang, 'facts.audit'), sec.no_logs_audited ? `${sec.audit_firm || '✓'}${sec.audit_date ? ` (${sec.audit_date.slice(0, 4)})` : ''}` : t(lang, 'common.notAudited')],
+  [t(lang, 'facts.refund'), refundDays(vpn.id) ? t(lang, 'common.days', { n: refundDays(vpn.id) }) : t(lang, 'common.none')],
+  [t(lang, 'facts.freePlan'), free ? t(lang, 'common.yes') : t(lang, 'common.no')],
+];
+const bools: [string, any][] = [
+  [t(lang, 'facts.killSwitch'), sec.kill_switch],
+  [t(lang, 'facts.dnsLeak'), sec.dns_leak_protection],
+  [t(lang, 'facts.ramOnly'), sn.ram_only],
+  [t(lang, 'facts.p2p'), sn.p2p_servers],
+  [t(lang, 'facts.obfuscation'), sec.obfuscated_servers],
+  [t(lang, 'facts.multihop'), sec.double_vpn],
+  [t(lang, 'facts.dedicatedIp'), sn.dedicated_ip],
+  [t(lang, 'facts.openSource'), sec.open_source],
+];
+const streams = Object.entries(vpn.streaming || {});
+
+const schema = [
+  {
+    '@type': 'Review',
+    '@id': abs(L(path)) + '#review',
+    name: t(lang, 'review.h1', { name: vpn.name, year }),
+    inLanguage: lang,
+    datePublished: '2026-04-01',
+    dateModified: LAST_REVIEWED,
+    author: { '@type': 'Organization', name: 'VPNScorecard Editorial Team', url: abs(L('/about/')) },
+    publisher: { '@id': ORG_ID },
+    reviewBody: copy.verdict,
+    reviewRating: { '@type': 'Rating', ratingValue: (vpn.scores.total / 10).toFixed(1), bestRating: '10', worstRating: '0' },
+    positiveNotes: { '@type': 'ItemList', itemListElement: copy.pros.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })) },
+    negativeNotes: { '@type': 'ItemList', itemListElement: copy.cons.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })) },
+    itemReviewed: {
+      '@type': 'SoftwareApplication',
+      name: vpn.name,
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: platforms(vpn).filter((p) => p.ok).map((p) => p.key).join(', '),
+      url: vpn.website,
+      ...(price ? { offers: { '@type': 'Offer', price: price.price.toFixed(2), priceCurrency: price.currency } } : {}),
+    },
+  },
+  breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.reviews'), path: L('/reviews/') }, { name: vpn.name, path: L(path) }]),
+  faqSchema(faq),
+];
+---
+<Base lang={lang} path={path} type="article" title={t(lang, 'review.metaTitle', { name: vpn.name, year, score: s10 })} description={t(lang, 'review.metaDescription', { name: vpn.name, score: s10, rank, total: allVPNs.length })} image={`/og/${vpn.slug}.png`} schema={schema} modified={LAST_REVIEWED}>
+  <div class="border-b border-line">
+    <div class="wrap py-8 md:py-12">
+      <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.reviews'), href: L('/reviews/') }, { name: vpn.name, href: L(path) }]} />
+      <div class="mt-6 grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-start">
+        <div>
+          <div class="flex items-center gap-4">
+            <VPNMark vpn={vpn} size={56} />
+            <div>
+              <p class="eyebrow">{t(lang, 'review.rankLabel', { rank, total: allVPNs.length })}</p>
+              <h1 class="h-display mt-1 text-3xl md:text-5xl">{t(lang, 'review.h1', { name: vpn.name, year })}</h1>
+            </div>
+          </div>
+          <p class="mt-4 text-lg text-ink-2">{copy.tagline}</p>
+          <p class="mt-3 text-sm text-ink-3">{t(lang, 'common.byline')} · {t(lang, 'common.updated')} <time datetime={LAST_REVIEWED}>{dateFmt(lang, LAST_REVIEWED)}</time></p>
+          <div class="mt-6"><QuickAnswer lang={lang} label={t(lang, 'review.verdict')}>{copy.verdict}</QuickAnswer></div>
+        </div>
+        <aside class="card p-6 lg:sticky lg:top-24">
+          <ScoreBadge total={vpn.scores.total} lang={lang} size="lg" />
+          <dl class="mt-5 grid grid-cols-2 gap-3 text-sm">
+            <div><dt class="text-ink-4">{t(lang, 'common.from')}</dt><dd class="font-bold num">{priceStr}{price && t(lang, 'common.perMonth')}</dd></div>
+            <div><dt class="text-ink-4">{t(lang, 'facts.devices')}</dt><dd class="font-bold">{connLabel}</dd></div>
+            <div><dt class="text-ink-4">{t(lang, 'facts.countries')}</dt><dd class="font-bold num">{numberFmt(lang, sn.country_count)}</dd></div>
+            <div><dt class="text-ink-4">{t(lang, 'facts.refund')}</dt><dd class="font-bold">{refundDays(vpn.id) ? t(lang, 'common.days', { n: refundDays(vpn.id) }) : '—'}</dd></div>
+          </dl>
+          <CTA id={vpn.id} place="review-sidebar" class="mt-5 w-full">{t(lang, 'review.cta', { name: vpn.name })}</CTA>
+          {!hasProgram(vpn.id) && <p class="mt-3 text-xs text-ink-3">{t(lang, 'review.noCommission')}</p>}
+          <p class="mt-3 text-[11px] text-ink-4">{t(lang, 'common.pricesAsOf', { date: dateFmt(lang, pricing(vpn.id)?.updated || PRICES_AS_OF) })}</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap grid gap-14 pt-10 lg:grid-cols-[1fr_22rem]">
+    <div class="min-w-0 space-y-14">
+      <Disclosure lang={lang} />
+
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="card p-6">
+          <h2 class="flex items-center gap-2 text-lg font-bold"><span class="grid h-7 w-7 place-items-center rounded-full bg-accent-wash text-accent-ink">+</span>{t(lang, 'review.pros')}</h2>
+          <ul class="mt-4 space-y-2.5 text-[15px] text-ink-2">{copy.pros.map((p) => <li class="flex gap-2.5"><Check ok={true} /><span>{p}</span></li>)}</ul>
+        </div>
+        <div class="card p-6">
+          <h2 class="flex items-center gap-2 text-lg font-bold"><span class="grid h-7 w-7 place-items-center rounded-full bg-amber-wash text-amber-ink">−</span>{t(lang, 'review.cons')}</h2>
+          <ul class="mt-4 space-y-2.5 text-[15px] text-ink-2">{copy.cons.map((p) => <li class="flex gap-2.5"><Check ok={false} /><span>{p}</span></li>)}</ul>
+        </div>
+      </section>
+
+      <section id="score">
+        <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'review.scoreTitle')}</h2>
+        <p class="mt-2 text-ink-3">{t(lang, 'review.scoreSub', { name: vpn.name, score: vpn.scores.total })} <a class="link" href={L('/methodology/')}>{t(lang, 'review.howScored')}</a></p>
+        <div class="card mt-5 p-6"><ScoreBars vpn={vpn} lang={lang} /></div>
+      </section>
+
+      <section id="facts">
+        <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'review.factsTitle')}</h2>
+        <div class="mt-5 overflow-hidden rounded-2xl border border-line bg-white">
+          <table class="table-clean"><tbody>
+            {facts.map(([k, v]) => <tr><th scope="row" class="w-2/5 !bg-white !text-sm !normal-case !tracking-normal !font-medium !text-ink-3">{k}</th><td class="font-medium text-ink">{v}</td></tr>)}
+          </tbody></table>
+        </div>
+        <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm sm:grid-cols-4">
+          {bools.map(([k, v]) => <li><Check ok={v} label={k} /></li>)}
+        </ul>
+        <p class="mt-4 text-xs text-ink-4">{t(lang, 'common.dataAsOf', { date: monthYear(lang, DATA_AS_OF) })}</p>
+      </section>
+
+      <section id="pricing">
+        <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'review.pricingTitle', { name: vpn.name })}</h2>
+        {plans(vpn.id).length > 0 ? (
+          <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {plans(vpn.id).map(({ key, plan }) => (
+              <div class={`card p-5 ${price && key === price.key ? 'ring-2 ring-accent' : ''}`}>
+                <p class="text-sm font-semibold text-ink-3">{t(lang, `plans.${key}`)}</p>
+                <p class="mt-1 font-display text-3xl font-semibold num">{priceFmt(lang, plan.price, pricing(vpn.id).currency)}<span class="text-sm font-sans font-normal text-ink-3">{t(lang, 'common.perMonth')}</span></p>
+                {plan.total && <p class="mt-1 text-xs text-ink-3">{t(lang, 'review.billed', { total: priceFmt(lang, plan.total, pricing(vpn.id).currency) })}</p>}
+                {plan.savings_percent && <p class="mt-2 chip border-accent/30 bg-accent-wash text-accent-ink">{t(lang, 'review.save', { n: plan.savings_percent })}</p>}
+              </div>
+            ))}
+          </div>
+        ) : <p class="mt-4 text-ink-3">—</p>}
+        <p class="mt-4 text-sm text-ink-3">{t(lang, 'review.pricingNote')}</p>
+      </section>
+
+      <section id="platforms">
+        <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'review.platformsTitle')}</h2>
+        <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {platforms(vpn).map((p) => <li class="card px-4 py-3 text-sm"><Check ok={p.ok} label={t(lang, `platforms.${p.key}`)} /></li>)}
+        </ul>
+      </section>
+
+      {streams.length > 0 && (
+        <section id="streaming">
+          <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'review.streamingTitle')}</h2>
+          <p class="mt-2 text-sm text-ink-3">{t(lang, 'review.streamingNote')}</p>
+          <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {streams.map(([k, ok]) => <li class="card px-4 py-3 text-sm"><Check ok={ok as boolean} label={t(lang, `streaming.${k}`)} /></li>)}
+          </ul>
+        </section>
+      )}
+
+      <AdSlot />
+
+      <FAQ items={faq} title={t(lang, 'review.faqTitle', { name: vpn.name })} />
+    </div>
+
+    <aside class="space-y-6">
+      <div class="card p-6">
+        <h2 class="text-base font-bold">{t(lang, 'review.alternatives')}</h2>
+        <ul class="mt-4 divide-y divide-line">
+          {alternatives.map((a) => (
+            <li class="flex items-center gap-3 py-3">
+              <VPNMark vpn={a} size={32} />
+              <a href={L(`/reviews/${a.slug}/`)} class="flex-1 text-sm font-semibold hover:text-accent-ink">{a.name}</a>
+              <span class="text-sm font-bold num">{numberFmt(lang, a.scores.total / 10, { minimumFractionDigits: 1 })}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {pairs.length > 0 && (
+        <div class="card p-6">
+          <h2 class="text-base font-bold">{t(lang, 'review.comparisons', { name: vpn.name })}</h2>
+          <ul class="mt-3 space-y-2 text-sm">
+            {pairs.map(([a, b]) => <li><a class="link" dir="ltr" href={L(`/compare/${pairSlug(a, b)}/`)}>{a.name} vs {b.name}</a></li>)}
+          </ul>
+        </div>
+      )}
+    </aside>
+  </div>
+
+  <div class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom))">
+    <div class="flex items-center gap-3">
+      <VPNMark vpn={vpn} size={36} />
+      <div class="min-w-0 flex-1 leading-tight">
+        <p class="truncate text-sm font-bold">{vpn.name} · {s10}/10</p>
+        {price && <p class="text-xs text-ink-3">{t(lang, 'common.from')} {priceStr}{t(lang, 'common.perMonth')}</p>}
+      </div>
+      <CTA id={vpn.id} place="review-sticky" small>{t(lang, 'common.visit')}</CTA>
+    </div>
+  </div>
+  <style is:global>@media (max-width: 1023px) { body > footer { padding-bottom: 4.5rem; } }</style>
+</Base>

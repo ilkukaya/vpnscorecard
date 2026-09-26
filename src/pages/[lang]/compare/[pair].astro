@@ -1,0 +1,8 @@
+---
+import View from '../../../views/Compare.astro';
+import { nonDefaultLangs, type Lang } from '../../../i18n';
+import { comparePairs, pairSlug } from '../../../lib/lists';
+export const getStaticPaths = () => nonDefaultLangs.flatMap((lang) => comparePairs().map(([a, b]) => ({ params: { lang, pair: pairSlug(a, b) }, props: { a, b } })));
+const { a, b } = Astro.props as any;
+---
+<View lang={Astro.params.lang as Lang} a={a} b={b} />

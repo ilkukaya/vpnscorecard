@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-21",
+  "last_updated": "2026-04-01",
   "prices": {
     "nordvpn": {
       "currency": "USD",
@@ -447,5 +447,6 @@
       "free_trial": true,
       "updated": "2026-04-01"
     }
-  }
+  },
+  "_note": "Introductory prices in USD (Mullvad: EUR) as published by providers on the date in each entry. Prices change often; always confirm on the provider site."
 }

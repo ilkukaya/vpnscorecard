@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { t, localized, dateFmt, type Lang } from '../i18n';
+import { pageEntry, pageLangs } from '../lib/content';
+import { breadcrumbSchema } from '../lib/seo';
+
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const entry = (await pageEntry(lang, slug))!;
+const { Content } = await entry.render();
+const available = await pageLangs(slug);
+const path = `/${slug}/`;
+---
+<Base lang={lang} path={path} title={entry.data.title} description={entry.data.description} available={available} showAds={false} schema={[breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: entry.data.title, path: L(path) }])]}>
+  <div class="wrap py-10 md:py-14">
+    <div class="mx-auto max-w-prose">
+      <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: entry.data.title, href: L(path) }]} />
+      <h1 class="h-display mt-5 text-4xl md:text-5xl">{entry.data.title}</h1>
+      <p class="mt-3 text-sm text-ink-3">{t(lang, 'common.updated')} <time datetime={entry.data.updated}>{dateFmt(lang, entry.data.updated)}</time></p>
+      <div class="prose prose-lg mt-8"><Content /></div>
+      <slot />
+    </div>
+  </div>
+</Base>

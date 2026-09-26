@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import FAQ from '../components/FAQ.astro';
+import { t, tRaw, localized, countryName, dateFmt, type Lang } from '../i18n';
+import legality from '../../data/vpn-legality.json';
+import { breadcrumbSchema, faqSchema, ORG_ID } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const order = { banned: 0, restricted: 1, legal: 2 } as const;
+const rows = [...legality.countries]
+  .map((c) => ({ ...c, name: countryName(lang, c.code) }))
+  .sort((a, b) => order[a.status as keyof typeof order] - order[b.status as keyof typeof order] || a.name.localeCompare(b.name, lang));
+const faq = tRaw<{ q: string; a: string }[]>(lang, 'legality.faq');
+const badge: Record<string, string> = {
+  banned: 'bg-[#FBE9E4] text-tone-low border-tone-low/30',
+  restricted: 'bg-amber-wash text-amber-ink border-amber/40',
+  legal: 'bg-accent-wash text-accent-ink border-accent/30',
+};
+const schema = [
+  { '@type': 'Article', headline: t(lang, 'legality.h1'), inLanguage: lang, dateModified: legality.last_reviewed, author: { '@type': 'Organization', name: 'VPNScorecard Editorial Team' }, publisher: { '@id': ORG_ID } },
+  breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.legality'), path: L('/vpn-legality/') }]),
+  faqSchema(faq),
+];
+---
+<Base lang={lang} path="/vpn-legality/" type="article" title={t(lang, 'legality.metaTitle')} description={t(lang, 'legality.metaDescription')} schema={schema} modified={legality.last_reviewed}>
+  <div class="wrap max-w-4xl py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.legality'), href: L('/vpn-legality/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'legality.h1')}</h1>
+    <p class="mt-3 text-sm text-ink-3">{t(lang, 'common.updated')} <time datetime={legality.last_reviewed}>{dateFmt(lang, legality.last_reviewed)}</time></p>
+    <p class="mt-5 text-lg leading-relaxed text-ink-2">{t(lang, 'legality.lead')}</p>
+    <div class="mt-6"><QuickAnswer lang={lang}>{t(lang, 'legality.quick')}</QuickAnswer></div>
+    <div class="mt-4 rounded-2xl border border-line bg-white p-4 text-sm text-ink-2"><strong>{t(lang, 'legality.disclaimerTitle')}</strong> {t(lang, 'legality.disclaimer')}</div>
+
+    <div class="scroll-x mt-8">
+      <table class="table-clean min-w-[560px] overflow-hidden rounded-2xl border border-line bg-white">
+        <thead><tr><th>{t(lang, 'legality.country')}</th><th>{t(lang, 'legality.status')}</th><th>{t(lang, 'legality.details')}</th></tr></thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td class="font-semibold">{r.name}</td>
+              <td><span class={`chip ${badge[r.status]}`}>{t(lang, `legality.statuses.${r.status}`)}</span></td>
+              <td class="text-ink-2">{t(lang, `legality.notes.${r.note}`)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-3">{t(lang, 'legality.notListed')}</p>
+    <div class="mt-14"><FAQ items={faq} title={t(lang, 'common.faqTitle')} /></div>
+  </div>
+</Base>

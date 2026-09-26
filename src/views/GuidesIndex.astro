@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { t, localized, dateFmt, type Lang } from '../i18n';
+import { guidesFor, splitSlug } from '../lib/content';
+import { breadcrumbSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const guides = await guidesFor(lang);
+---
+<Base lang={lang} path="/guides/" title={t(lang, 'guides.metaTitle')} description={t(lang, 'guides.metaDescription')} schema={[breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.guides'), path: L('/guides/') }])]}>
+  <div class="wrap py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.guides'), href: L('/guides/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'guides.h1')}</h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-2">{t(lang, 'guides.lead')}</p>
+    <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {guides.map((g) => (
+        <a href={L(`/guides/${splitSlug(g.slug).slug}/`)} class="card group flex flex-col p-6 hover:shadow-lift">
+          <p class="eyebrow">{t(lang, `guides.categories.${g.data.category}`)}</p>
+          <h2 class="mt-2 text-lg font-bold leading-snug group-hover:text-accent-ink">{g.data.title}</h2>
+          <p class="mt-2 flex-1 text-sm text-ink-3">{g.data.description}</p>
+          <p class="mt-4 text-xs text-ink-4">{dateFmt(lang, g.data.updated || g.data.date)} · {t(lang, 'guides.minRead', { n: g.data.readTime })}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

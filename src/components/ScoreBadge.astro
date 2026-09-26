@@ -1,0 +1,21 @@
+---
+import { t, numberFmt, type Lang } from '../i18n';
+import { grade, gradeTone } from '../lib/vpns';
+interface Props { total: number; lang: Lang; size?: 'sm' | 'md' | 'lg'; showLabel?: boolean }
+const { total, lang, size = 'md', showLabel = true } = Astro.props;
+const tone = gradeTone(total);
+const colors: Record<string, string> = { top: 'bg-tone-top', high: 'bg-tone-high', mid: 'bg-tone-mid', low: 'bg-tone-low' };
+const dims = { sm: 'h-11 w-11 text-base', md: 'h-14 w-14 text-xl', lg: 'h-20 w-20 text-3xl' }[size];
+const value = numberFmt(lang, total / 10, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+---
+<div class="flex items-center gap-3">
+  <div class={`grid ${dims} place-items-center rounded-2xl ${colors[tone]} font-display font-semibold text-white num`} aria-label={t(lang, 'score.aria', { score: value })}>
+    {value}
+  </div>
+  {showLabel && (
+    <div class="leading-tight">
+      <div class="text-sm font-semibold text-ink">{t(lang, `grade.${grade(total)}`)}</div>
+      <div class="text-xs text-ink-3">{t(lang, 'score.outOf10')}</div>
+    </div>
+  )}
+</div>
