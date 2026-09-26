@@ -1,0 +1,128 @@
+{
+  "nordvpn": {
+    "tagline": "Pilihan serba bisa terbaik untuk kebanyakan orang",
+    "verdict": "NordVPN memadukan klaim no-logs yang berulang kali diaudit, server khusus RAM, dan protokol NordLynx (berbasis WireGuard) yang cepat dengan jaringan yang sangat besar. VPN ini bukan pilihan termurah untuk paket bulanan, tetapi pada paket jangka panjang, NordVPN menawarkan paket keseluruhan terkuat di scorecard kami.",
+    "pros": ["Kebijakan no-logs diaudit oleh Deloitte beberapa kali", "Protokol NordLynx (berbasis WireGuard) dirancang untuk kecepatan", "Server khusus RAM di seluruh jaringan", "Threat Protection memblokir pelacak dan situs berbahaya", "10 perangkat per langganan"],
+    "cons": ["Paket bulanan mahal", "Harga perpanjangan lebih tinggi dari harga perkenalan", "Penyiapan router dilakukan secara manual"]
+  },
+  "expressvpn": {
+    "tagline": "Premium, matang, dan sangat mudah digunakan",
+    "verdict": "ExpressVPN adalah salah satu VPN paling matang yang tersedia, dengan teknologi TrustedServer khusus RAM, protokol Lightway miliknya sendiri, dan dukungan router yang sangat baik. Harganya biasanya lebih mahal dari pesaing, sehingga cocok untuk orang yang lebih mengutamakan kemudahan daripada harga.",
+    "pros": ["Infrastruktur TrustedServer khusus RAM", "Protokol Lightway cepat dan open source", "Server di sekitar 105 negara", "Aplikasi router terbaik di kelasnya", "Beberapa audit independen"],
+    "cons": ["Termasuk VPN paling mahal", "Tidak ada server multi-hop (Double VPN)", "Batas perangkat bergantung pada paket"]
+  },
+  "surfshark": {
+    "tagline": "Perangkat tanpa batas dengan harga hemat",
+    "verdict": "Surfshark memungkinkan Anda menghubungkan perangkat dalam jumlah tanpa batas dalam satu akun dan secara konsisten menjadi salah satu VPN premium termurah pada paket jangka panjang. VPN ini menggunakan server khusus RAM dan kebijakan no-logs-nya telah diaudit, menjadikannya pilihan bernilai tinggi untuk keluarga dan rumah tangga.",
+    "pros": ["Koneksi simultan tanpa batas", "Harga sangat rendah pada paket jangka panjang", "Server khusus RAM", "Kebijakan no-logs diaudit oleh Deloitte", "CleanWeb memblokir iklan dan pelacak"],
+    "cons": ["Berkantor pusat di Belanda (anggota 14 Eyes)", "Jaringan lebih kecil dari NordVPN", "Harga perpanjangan jauh lebih tinggi dari periode pertama"]
+  },
+  "cyberghost": {
+    "tagline": "Ramah pemula dengan masa pengembalian dana yang panjang",
+    "verdict": "CyberGhost dirancang untuk orang yang ingin memasang VPN lalu melupakannya. Aplikasinya sederhana, servernya diberi label sesuai kegunaan, dan menawarkan masa garansi uang kembali 45 hari pada paket jangka panjang, meskipun pengguna tingkat lanjut mungkin merasa opsi konfigurasinya kurang.",
+    "pros": ["Aplikasi sangat sederhana untuk pemula", "Server diberi label sesuai aktivitas (streaming, P2P)", "Jaringan server besar", "Garansi uang kembali 45 hari pada paket jangka panjang"],
+    "cons": ["Batas 7 perangkat", "Pengaturan lanjutan lebih sedikit dari pesaing", "Dimiliki oleh Kape, yang juga memiliki beberapa VPN lain"]
+  },
+  "protonvpn": {
+    "tagline": "Privasi ala Swiss dengan paket gratis terbaik",
+    "verdict": "Proton VPN dijalankan oleh perusahaan Swiss di balik Proton Mail. Aplikasinya open source, kebijakan no-logs-nya telah diaudit secara independen, dan paket gratisnya tanpa batas data, menjadikannya VPN gratis yang paling nyaman kami rekomendasikan.",
+    "pros": ["Paket gratis tanpa batas data", "Aplikasi open source yang diaudit secara independen", "Berbasis di Swiss", "Server multi-hop Secure Core", "Dukungan Tor over VPN"],
+    "cons": ["Paket berbayar lebih mahal dari pesaing kelas hemat", "Paket gratis memiliki lokasi server terbatas", "Jumlah server lebih sedikit dari jaringan terbesar"]
+  },
+  "pia": {
+    "tagline": "Sangat dapat dikonfigurasi dengan perangkat tanpa batas",
+    "verdict": "Private Internet Access menawarkan aplikasi open source, perangkat tanpa batas, dan opsi konfigurasi yang mendalam dengan harga jangka panjang yang rendah. Klaim no-logs-nya telah diuji dalam kasus pengadilan nyata dan diaudit, tetapi kantor pusatnya di AS menjadi kelemahan bagi sebagian pengguna yang mengutamakan privasi.",
+    "pros": ["Koneksi simultan tanpa batas", "Aplikasi open source dengan banyak pengaturan", "Klaim no-logs diaudit dan diuji di pengadilan", "Paket jangka panjang sangat terjangkau", "Server di setiap negara bagian AS"],
+    "cons": ["Berkantor pusat di Amerika Serikat (Five Eyes)", "Antarmuka bisa membingungkan pemula", "Performa streaming tidak konsisten"]
+  },
+  "ipvanish": {
+    "tagline": "Perangkat tanpa batas dan server milik sendiri",
+    "verdict": "IPVanish memiliki sebagian besar infrastruktur servernya sendiri dan mengizinkan perangkat tanpa batas. VPN ini merupakan pilihan hemat yang wajar, tetapi daftar negaranya lebih sedikit dibanding para pemimpin pasar dan berbasis di Amerika Serikat.",
+    "pros": ["Koneksi simultan tanpa batas", "Memiliki sebagian besar jaringan servernya", "Opsi Scramble membantu di jaringan yang ketat", "Paket jangka panjang terjangkau"],
+    "cons": ["Berkantor pusat di Amerika Serikat (Five Eyes)", "Negara lebih sedikit dari pesaing teratas", "Dukungan streaming tidak konsisten"]
+  },
+  "mullvad": {
+    "tagline": "Anonimitas maksimal, satu harga tetap",
+    "verdict": "Mullvad adalah VPN bagi para puritan privasi: tidak perlu alamat email, Anda bisa membayar tunai, dan setiap paket memiliki biaya bulanan tetap yang sama. VPN ini menjalankan server khusus RAM dan telah diaudit, tetapi sengaja tidak memasarkan diri untuk streaming.",
+    "pros": ["Akun tanpa email atau data pribadi", "Menerima uang tunai dan mata uang kripto", "Server khusus RAM dan aplikasi open source", "Tarif tetap €5/bulan, tanpa ikatan jangka panjang", "Infrastruktur diaudit secara independen"],
+    "cons": ["Tidak dirancang untuk layanan streaming", "Jaringan server lebih kecil", "Tidak ada program afiliasi, jadi kami tidak mendapat apa pun darinya"]
+  },
+  "purevpn": {
+    "tagline": "Harga hemat dengan no-logs teraudit",
+    "verdict": "PureVPN telah berinvestasi dalam audit dan sertifikasi dalam beberapa tahun terakhir dan sering menjadi salah satu opsi termurah untuk paket multi-tahun. Aplikasi dan kecepatannya solid, tetapi bukan yang terdepan di kelasnya.",
+    "pros": ["Kebijakan no-logs diaudit oleh KPMG", "Harga jangka panjang rendah", "Tersedia add-on IP khusus", "10 perangkat per akun"],
+    "cons": ["Negara lebih sedikit dari pesaing teratas", "Dukungan streaming tidak konsisten", "Aplikasi terasa kurang matang dibanding para pemimpin pasar"]
+  },
+  "torguard": {
+    "tagline": "VPN untuk pengguna mahir dengan IP khusus",
+    "verdict": "TorGuard ditujukan untuk pengguna teknis yang menginginkan kontrol terperinci atas protokol, port, dan IP khusus. VPN ini kurang ramah pemula dan belum memiliki audit no-logs independen yang dipublikasikan.",
+    "pros": ["Banyak opsi IP khusus", "Enkripsi dan port sangat dapat disesuaikan", "Dukungan P2P yang baik", "Tersedia WireGuard dan OpenVPN"],
+    "cons": ["Berkantor pusat di Amerika Serikat (Five Eyes)", "Tidak ada audit no-logs independen yang dipublikasikan", "Antarmuka tidak ramah pemula"]
+  },
+  "hideme": {
+    "tagline": "Mengutamakan privasi dengan paket gratis yang layak pakai",
+    "verdict": "hide.me adalah penyedia berbasis di Malaysia dengan kebijakan no-logs teraudit dan paket gratis yang aman untuk browsing ringan. Paket berbayarnya kompetitif, meskipun jaringannya lebih kecil dibanding para pemimpin pasar.",
+    "pros": ["Paket gratis tanpa iklan", "Kebijakan no-logs diaudit secara independen", "Berbasis di Malaysia, di luar 14 Eyes", "10 perangkat pada paket berbayar"],
+    "cons": ["Paket gratis memiliki batas data dan sedikit lokasi", "Dukungan streaming terbatas", "Jaringan lebih kecil dari para pemimpin pasar"]
+  },
+  "astrill": {
+    "tagline": "Mahal, niche, dan kaya fitur",
+    "verdict": "Astrill menawarkan protokol eksklusif dan IP khusus, tetapi harganya mahal, jaringannya kecil, dan belum mempublikasikan audit no-logs independen. Kebanyakan orang akan mendapat nilai lebih dari VPN di papan atas peringkat kami.",
+    "pros": ["Protokol eksklusif StealthVPN dan OpenWeb", "Tersedia IP khusus", "Berbasis di Seychelles"],
+    "cons": ["Sangat mahal", "Jaringan server kecil", "Tidak ada audit no-logs independen yang dipublikasikan", "Hanya 5 perangkat"]
+  },
+  "fastestvpn": {
+    "tagline": "Sangat murah, tetapi terbatas",
+    "verdict": "FastestVPN adalah salah satu VPN termurah yang bisa Anda beli dan mengizinkan banyak perangkat, tetapi jaringannya kecil dan belum mempublikasikan audit keamanan independen.",
+    "pros": ["Harga sangat rendah pada paket jangka panjang", "Hingga 15 perangkat", "Pemblokir iklan bawaan"],
+    "cons": ["Jaringan kecil (sekitar 40 negara)", "Tidak ada audit independen yang dipublikasikan", "Dukungan streaming terbatas"]
+  },
+  "tunnelbear": {
+    "tagline": "VPN paling ramah untuk memulai",
+    "verdict": "TunnelBear adalah VPN yang paling mudah dipahami, mempublikasikan audit keamanan tahunan, dan menawarkan paket gratis kecil. VPN ini tidak dirancang untuk pengguna mahir, P2P, atau streaming.",
+    "pros": ["Aplikasi sangat sederhana dan ramah", "Audit keamanan independen secara rutin", "Paket gratis untuk mencobanya", "Perangkat tanpa batas pada paket berbayar"],
+    "cons": ["Berkantor pusat di Kanada (Five Eyes)", "Paket gratis memiliki batas data kecil", "Dukungan streaming lemah", "Tidak ada dukungan live chat"]
+  },
+  "hotspotshield": {
+    "tagline": "Protokol eksklusif yang cepat dan versi gratis",
+    "verdict": "Protokol eksklusif Hydra (Catapult) milik Hotspot Shield berkinerja baik dan versi gratisnya mudah untuk memulai. Namun, versi gratisnya menampilkan iklan dan perusahaan ini belum mempublikasikan audit no-logs independen.",
+    "pros": ["Protokol eksklusif Hydra yang cepat", "Tersedia versi gratis", "Sekitar 80 negara", "10 perangkat pada paket premium"],
+    "cons": ["Berkantor pusat di Amerika Serikat (Five Eyes)", "Versi gratis menampilkan iklan dan terbatas", "Tidak ada audit no-logs independen yang dipublikasikan"]
+  },
+  "fsecure": {
+    "tagline": "VPN sederhana dari perusahaan keamanan",
+    "verdict": "VPN F-Secure adalah tambahan yang sederhana dan tepercaya dari perusahaan keamanan Finlandia yang sudah lama berdiri. VPN ini cukup untuk perlindungan dasar di Wi-Fi publik, tetapi jaringan dan fiturnya terbatas.",
+    "pros": ["Dari perusahaan keamanan Finlandia yang mapan", "Antarmuka sangat sederhana", "Tersedia uji coba gratis"],
+    "cons": ["Hanya sekitar 30 negara", "Sedikit fitur lanjutan", "Tidak mendukung Linux atau router"]
+  },
+  "privatevpn": {
+    "tagline": "Penyedia kecil dengan dukungan personal",
+    "verdict": "PrivateVPN adalah penyedia kecil asal Swedia dengan aplikasi sederhana, daftar negara yang lumayan, dan harga jangka panjang yang rendah. VPN ini belum memiliki audit independen dan jumlah servernya sedikit.",
+    "pros": ["Harga jangka panjang rendah", "Sekitar 60 negara meski jaringannya kecil", "10 perangkat per akun", "Tersedia uji coba gratis"],
+    "cons": ["Berkantor pusat di Swedia (14 Eyes)", "Jumlah server sedikit", "Tidak ada audit independen yang dipublikasikan"]
+  },
+  "ivacy": {
+    "tagline": "Paket jangka panjang super murah",
+    "verdict": "Ivacy termasuk VPN termurah pada paket multi-tahun dan mencakup banyak negara. VPN ini cukup untuk penggunaan santai, tetapi belum mempublikasikan audit independen dan mengikat Anda pada periode panjang untuk mendapatkan harga terbaik.",
+    "pros": ["Harga sangat rendah pada paket multi-tahun", "Mencakup banyak negara", "Add-on IP khusus", "10 perangkat per akun"],
+    "cons": ["Tidak ada audit independen yang dipublikasikan", "Harga terbaik memerlukan komitmen sangat panjang", "Dukungan streaming tidak konsisten"]
+  },
+  "vyprvpn": {
+    "tagline": "VPN Swiss dengan infrastruktur milik sendiri",
+    "verdict": "VyprVPN memiliki dan mengoperasikan jaringannya sendiri serta berbasis di Swiss. Protokol Chameleon-nya berguna di jaringan yang ketat, tetapi batas perangkatnya kecil dan servernya lebih sedikit dibanding para pemimpin pasar.",
+    "pros": ["Berbasis di Swiss", "Memiliki dan mengoperasikan jaringan servernya sendiri", "Kebijakan no-logs teraudit", "Protokol Chameleon untuk jaringan yang ketat"],
+    "cons": ["Hanya 5 perangkat pada beberapa paket", "Jaringan server lebih kecil", "Lebih mahal dari pesaing kelas hemat"]
+  },
+  "cactusvpn": {
+    "tagline": "Penyedia yang sangat kecil dan sederhana",
+    "verdict": "CactusVPN adalah penyedia kecil dengan aplikasi sederhana dan paket jangka pendek yang fleksibel. Jaringannya sangat kecil dan belum mempublikasikan audit independen, sehingga berada di dekat posisi terbawah scorecard kami.",
+    "pros": ["Aplikasi sederhana", "Tersedia uji coba gratis", "Berbasis di Moldova, di luar 14 Eyes"],
+    "cons": ["Jaringan sangat kecil (sekitar 22 negara)", "Tidak ada audit independen yang dipublikasikan", "Fitur terbatas"]
+  },
+  "avast": {
+    "tagline": "VPN dasar dari merek antivirus populer",
+    "verdict": "VPN Avast mudah digunakan dan berasal dari merek antivirus ternama, tetapi VPN bukan produk utamanya dan Avast pernah menuai kritik privasi terkait praktik data pada produk-produk lainnya.",
+    "pros": ["Sangat mudah bagi pengguna non-teknis", "Tersedia uji coba gratis", "10 perangkat pada paket multi-perangkat"],
+    "cons": ["Kontroversi privasi di masa lalu pada perusahaan induknya", "Tidak ada audit no-logs independen yang dipublikasikan", "Tidak mendukung Linux atau router"]
+  }
+}

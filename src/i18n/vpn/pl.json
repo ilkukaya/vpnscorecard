@@ -1,0 +1,128 @@
+{
+  "nordvpn": {
+    "tagline": "Najlepszy wszechstronny VPN dla większości osób",
+    "verdict": "NordVPN łączy wielokrotnie audytowaną politykę braku logów, serwery działające tylko w RAM i szybki protokół NordLynx (oparty na WireGuard) z bardzo dużą siecią. W planie miesięcznym nie jest najtańszą opcją, ale w planach długoterminowych oferuje najmocniejszy pakiet w naszym rankingu.",
+    "pros": ["Polityka braku logów kilkukrotnie audytowana przez Deloitte", "Protokół NordLynx (oparty na WireGuard) stworzony z myślą o szybkości", "Serwery działające tylko w RAM w całej sieci", "Threat Protection blokuje trackery i złośliwe strony", "10 urządzeń w ramach subskrypcji"],
+    "cons": ["Drogi plan miesięczny", "Ceny odnowienia są wyższe niż cena początkowa", "Konfiguracja na routerze wymaga ręcznej pracy"]
+  },
+  "expressvpn": {
+    "tagline": "Premium, dopracowany i bardzo łatwy w obsłudze",
+    "verdict": "ExpressVPN to jeden z najbardziej dopracowanych VPN-ów na rynku — z technologią TrustedServer opartą wyłącznie na RAM, własnym protokołem Lightway i świetną obsługą routerów. Zwykle kosztuje więcej niż konkurencja, więc sprawdzi się u osób, które cenią prostotę bardziej niż cenę.",
+    "pros": ["Infrastruktura TrustedServer działająca tylko w RAM", "Szybki protokół Lightway o otwartym kodzie", "Serwery w około 105 krajach", "Najlepsza w swojej klasie aplikacja na routery", "Wiele niezależnych audytów"],
+    "cons": ["Jeden z najdroższych VPN-ów", "Brak serwerów multi-hop (Double VPN)", "Limit urządzeń zależy od planu"]
+  },
+  "surfshark": {
+    "tagline": "Nielimitowana liczba urządzeń w budżetowej cenie",
+    "verdict": "Surfshark pozwala podłączyć nieograniczoną liczbę urządzeń do jednego konta i w planach długoterminowych niezmiennie należy do najtańszych VPN-ów klasy premium. Korzysta z serwerów działających tylko w RAM, a jego polityka braku logów przeszła audyt, co czyni go bardzo opłacalnym wyborem dla rodzin i gospodarstw domowych.",
+    "pros": ["Nielimitowana liczba jednoczesnych połączeń", "Bardzo niska cena w planach długoterminowych", "Serwery działające tylko w RAM", "Polityka braku logów audytowana przez Deloitte", "CleanWeb blokuje reklamy i trackery"],
+    "cons": ["Siedziba w Holandii (członek 14 Eyes)", "Mniejsza sieć niż NordVPN", "Cena odnowienia znacznie wyższa niż za pierwszy okres"]
+  },
+  "cyberghost": {
+    "tagline": "Przyjazny dla początkujących, z hojnym okresem zwrotu",
+    "verdict": "CyberGhost jest przeznaczony dla osób, które chcą zainstalować VPN i o nim zapomnieć. Ma proste aplikacje, oznacza serwery według zastosowań i oferuje 45-dniową gwarancję zwrotu pieniędzy w planach długoterminowych, choć zaawansowani użytkownicy mogą uznać go za mniej konfigurowalny.",
+    "pros": ["Bardzo proste aplikacje dla początkujących", "Serwery oznaczone według zastosowania (streaming, P2P)", "Duża sieć serwerów", "45-dniowa gwarancja zwrotu pieniędzy w planach długoterminowych"],
+    "cons": ["Limit 7 urządzeń", "Mniej zaawansowanych ustawień niż u konkurencji", "Należy do Kape, która jest właścicielem także kilku innych VPN-ów"]
+  },
+  "protonvpn": {
+    "tagline": "Szwajcarska prywatność i najlepszy darmowy plan",
+    "verdict": "Proton VPN prowadzi szwajcarska firma stojąca za Proton Mail. Jego aplikacje mają otwarty kod, polityka braku logów została niezależnie zaudytowana, a darmowy plan nie ma limitu danych — dlatego to darmowy VPN, który polecamy z największym przekonaniem.",
+    "pros": ["Darmowy plan bez limitu danych", "Aplikacje open source, niezależnie audytowane", "Siedziba w Szwajcarii", "Serwery multi-hop Secure Core", "Obsługa Tor over VPN"],
+    "cons": ["Plany płatne droższe niż u budżetowej konkurencji", "Darmowy plan ma ograniczoną liczbę lokalizacji", "Mniej serwerów niż w największych sieciach"]
+  },
+  "pia": {
+    "tagline": "Bardzo konfigurowalny, z nielimitowaną liczbą urządzeń",
+    "verdict": "Private Internet Access oferuje aplikacje open source, nielimitowaną liczbę urządzeń i rozbudowane opcje konfiguracji w niskiej cenie długoterminowej. Jego deklaracje o braku logów zostały sprawdzone w prawdziwych sprawach sądowych i zaudytowane, ale siedziba w USA jest minusem dla części użytkowników dbających o prywatność.",
+    "pros": ["Nielimitowana liczba jednoczesnych połączeń", "Aplikacje open source z wieloma ustawieniami", "Brak logów potwierdzony audytem i w sądzie", "Bardzo przystępne plany długoterminowe", "Serwery w każdym stanie USA"],
+    "cons": ["Siedziba w Stanach Zjednoczonych (Five Eyes)", "Interfejs może przytłoczyć początkujących", "Niestabilne działanie ze streamingiem"]
+  },
+  "ipvanish": {
+    "tagline": "Nielimitowana liczba urządzeń i własne serwery",
+    "verdict": "IPVanish jest właścicielem dużej części swojej infrastruktury serwerowej i pozwala na nielimitowaną liczbę urządzeń. To rozsądny wybór budżetowy, ale ma serwery w mniejszej liczbie krajów niż liderzy i siedzibę w Stanach Zjednoczonych.",
+    "pros": ["Nielimitowana liczba jednoczesnych połączeń", "Własność dużej części sieci serwerów", "Opcja Scramble pomaga w restrykcyjnych sieciach", "Przystępne plany długoterminowe"],
+    "cons": ["Siedziba w Stanach Zjednoczonych (Five Eyes)", "Mniej krajów niż u czołowej konkurencji", "Niestabilna obsługa streamingu"]
+  },
+  "mullvad": {
+    "tagline": "Maksymalna anonimowość, jedna stała cena",
+    "verdict": "Mullvad to VPN dla purystów prywatności: nie wymaga adresu e-mail, można zapłacić gotówką, a każdy plan kosztuje tyle samo — stałą opłatę miesięczną. Korzysta z serwerów działających tylko w RAM i przeszedł audyt, ale celowo nie reklamuje się jako VPN do streamingu.",
+    "pros": ["Konto bez e-maila i danych osobowych", "Płatność gotówką i kryptowalutami", "Serwery tylko w RAM i aplikacje open source", "Stała cena 5 €/mies., bez długich zobowiązań", "Niezależnie audytowana infrastruktura"],
+    "cons": ["Nie jest przeznaczony do serwisów streamingowych", "Mniejsza sieć serwerów", "Brak programu partnerskiego, więc nic na nim nie zarabiamy"]
+  },
+  "purevpn": {
+    "tagline": "Budżetowa cena i audytowany brak logów",
+    "verdict": "PureVPN w ostatnich latach zainwestował w audyty i certyfikaty i w planach wieloletnich często należy do najtańszych opcji. Jego aplikacje i szybkość są solidne, ale nie najlepsze w klasie.",
+    "pros": ["Polityka braku logów audytowana przez KPMG", "Niskie ceny długoterminowe", "Dostępny dodatek z dedykowanym IP", "10 urządzeń na konto"],
+    "cons": ["Mniej krajów niż u czołowej konkurencji", "Niestabilna obsługa streamingu", "Aplikacje mniej dopracowane niż u liderów"]
+  },
+  "torguard": {
+    "tagline": "VPN dla zaawansowanych, z dedykowanymi IP",
+    "verdict": "TorGuard jest skierowany do technicznych użytkowników, którzy chcą precyzyjnie kontrolować protokoły, porty i dedykowane adresy IP. Jest mniej przyjazny dla początkujących i nie ma opublikowanego niezależnego audytu braku logów.",
+    "pros": ["Wiele opcji dedykowanego IP", "Bardzo konfigurowalne szyfrowanie i porty", "Dobra obsługa P2P", "Dostępne WireGuard i OpenVPN"],
+    "cons": ["Siedziba w Stanach Zjednoczonych (Five Eyes)", "Brak opublikowanego niezależnego audytu braku logów", "Interfejs nieprzyjazny dla początkujących"]
+  },
+  "hideme": {
+    "tagline": "Prywatność przede wszystkim i użyteczny darmowy plan",
+    "verdict": "hide.me to dostawca z siedzibą w Malezji, z audytowaną polityką braku logów i darmowym planem, z którego można bezpiecznie korzystać przy lekkim przeglądaniu. Plany płatne są konkurencyjne, choć sieć jest mniejsza niż u liderów rynku.",
+    "pros": ["Darmowy plan bez reklam", "Niezależnie audytowana polityka braku logów", "Siedziba w Malezji, poza 14 Eyes", "10 urządzeń w planach płatnych"],
+    "cons": ["Darmowy plan ma limit danych i niewiele lokalizacji", "Ograniczona obsługa streamingu", "Mniejsza sieć niż u liderów"]
+  },
+  "astrill": {
+    "tagline": "Drogi, niszowy i bogaty w funkcje",
+    "verdict": "Astrill oferuje autorskie protokoły i dedykowane adresy IP, ale jest drogi, ma małą sieć i nie opublikował niezależnego audytu braku logów. Większość osób otrzyma więcej za swoje pieniądze w czołówce naszego rankingu.",
+    "pros": ["Autorskie protokoły StealthVPN i OpenWeb", "Dostępne dedykowane IP", "Siedziba na Seszelach"],
+    "cons": ["Bardzo drogi", "Mała sieć serwerów", "Brak opublikowanego niezależnego audytu braku logów", "Tylko 5 urządzeń"]
+  },
+  "fastestvpn": {
+    "tagline": "Bardzo tani, ale ograniczony",
+    "verdict": "FastestVPN to jeden z najtańszych VPN-ów, jakie można kupić, i pozwala na wiele urządzeń, ale ma małą sieć i nie opublikował niezależnego audytu bezpieczeństwa.",
+    "pros": ["Bardzo niska cena w planach długoterminowych", "Do 15 urządzeń", "Wbudowany bloker reklam"],
+    "cons": ["Mała sieć (około 40 krajów)", "Brak opublikowanego niezależnego audytu", "Ograniczona obsługa streamingu"]
+  },
+  "tunnelbear": {
+    "tagline": "Najbardziej przyjazny VPN na start",
+    "verdict": "TunnelBear to najłatwiejszy do zrozumienia VPN, który publikuje coroczne audyty bezpieczeństwa i oferuje niewielki darmowy plan. Nie jest przeznaczony dla zaawansowanych użytkowników, P2P ani streamingu.",
+    "pros": ["Niezwykle proste, przyjazne aplikacje", "Regularne niezależne audyty bezpieczeństwa", "Darmowy plan na próbę", "Nielimitowana liczba urządzeń w planach płatnych"],
+    "cons": ["Siedziba w Kanadzie (Five Eyes)", "Darmowy plan ma mały limit danych", "Słaba obsługa streamingu", "Brak pomocy przez czat na żywo"]
+  },
+  "hotspotshield": {
+    "tagline": "Szybki autorski protokół i darmowa wersja",
+    "verdict": "Autorski protokół Hydra (Catapult) w Hotspot Shield działa sprawnie, a darmowa wersja pozwala łatwo zacząć. Darmowa wersja wyświetla jednak reklamy, a firma nie opublikowała niezależnego audytu braku logów.",
+    "pros": ["Szybki autorski protokół Hydra", "Dostępna darmowa wersja", "Około 80 krajów", "10 urządzeń w planach premium"],
+    "cons": ["Siedziba w Stanach Zjednoczonych (Five Eyes)", "Darmowa wersja wyświetla reklamy i jest ograniczona", "Brak opublikowanego niezależnego audytu braku logów"]
+  },
+  "fsecure": {
+    "tagline": "Prosty VPN od firmy zajmującej się bezpieczeństwem",
+    "verdict": "VPN od F-Secure to prosty, godny zaufania dodatek od fińskiej firmy z długą historią w branży bezpieczeństwa. Wystarczy do podstawowej ochrony w publicznym Wi-Fi, ale sieć i zestaw funkcji są skromne.",
+    "pros": ["Od uznanej fińskiej firmy z branży bezpieczeństwa", "Bardzo prosty interfejs", "Dostępny okres próbny"],
+    "cons": ["Tylko około 30 krajów", "Niewiele zaawansowanych funkcji", "Brak obsługi Linuksa i routerów"]
+  },
+  "privatevpn": {
+    "tagline": "Mały dostawca z osobistym wsparciem",
+    "verdict": "PrivateVPN to mały szwedzki dostawca z prostą aplikacją, przyzwoitą liczbą krajów i niskimi cenami długoterminowymi. Brakuje mu niezależnego audytu, a liczba serwerów jest niewielka.",
+    "pros": ["Niska cena długoterminowa", "Około 60 krajów mimo małej sieci", "10 urządzeń na konto", "Dostępny okres próbny"],
+    "cons": ["Siedziba w Szwecji (14 Eyes)", "Mała liczba serwerów", "Brak opublikowanego niezależnego audytu"]
+  },
+  "ivacy": {
+    "tagline": "Ultratanie plany długoterminowe",
+    "verdict": "Ivacy należy do najtańszych VPN-ów w planach wieloletnich i obejmuje wiele krajów. Sprawdzi się przy okazjonalnym użyciu, ale nie opublikował niezależnego audytu, a najlepszą cenę oferuje tylko przy długich zobowiązaniach.",
+    "pros": ["Bardzo niska cena w planach wieloletnich", "Wiele obsługiwanych krajów", "Dodatek z dedykowanym IP", "10 urządzeń na konto"],
+    "cons": ["Brak opublikowanego niezależnego audytu", "Najlepsze ceny wymagają bardzo długich zobowiązań", "Niestabilna obsługa streamingu"]
+  },
+  "vyprvpn": {
+    "tagline": "Szwajcarski VPN z własną infrastrukturą",
+    "verdict": "VyprVPN jest właścicielem i operatorem własnej sieci i ma siedzibę w Szwajcarii. Jego protokół Chameleon przydaje się w restrykcyjnych sieciach, ale limit urządzeń jest niski, a serwerów mniej niż u liderów.",
+    "pros": ["Siedziba w Szwajcarii", "Własna sieć serwerów zarządzana samodzielnie", "Audytowana polityka braku logów", "Protokół Chameleon do restrykcyjnych sieci"],
+    "cons": ["Tylko 5 urządzeń w niektórych planach", "Mniejsza sieć serwerów", "Droższy niż budżetowa konkurencja"]
+  },
+  "cactusvpn": {
+    "tagline": "Bardzo mały, prosty dostawca",
+    "verdict": "CactusVPN to mały dostawca z prostymi aplikacjami i elastycznymi krótkimi planami. Jego sieć jest maleńka i nie opublikował niezależnego audytu, dlatego zajmuje miejsce blisko końca naszego rankingu.",
+    "pros": ["Proste aplikacje", "Dostępny okres próbny", "Siedziba w Mołdawii, poza 14 Eyes"],
+    "cons": ["Bardzo mała sieć (około 22 krajów)", "Brak opublikowanego niezależnego audytu", "Ograniczone funkcje"]
+  },
+  "avast": {
+    "tagline": "Podstawowy VPN od popularnej marki antywirusowej",
+    "verdict": "VPN od Avast jest łatwy w obsłudze i pochodzi od znanej marki antywirusowej, ale VPN nie jest jej głównym produktem, a Avast w przeszłości spotkał się z krytyką dotyczącą prywatności w związku z praktykami przetwarzania danych w innych produktach.",
+    "pros": ["Bardzo łatwy dla osób nietechnicznych", "Dostępny okres próbny", "10 urządzeń w planach wielourządzeniowych"],
+    "cons": ["Kontrowersje wokół prywatności w spółce macierzystej w przeszłości", "Brak opublikowanego niezależnego audytu braku logów", "Brak obsługi Linuksa i routerów"]
+  }
+}

@@ -66,7 +66,7 @@ const schema = [
       ))}
     </div>
 
-    <div class="mt-8"><QuickAnswer lang={lang}>{t(lang, 'compare.summary', P)} {cheaper && t(lang, 'compare.summaryPrice', { cheap: cheaper.name })} {more && t(lang, 'compare.summaryDevices', { more: more.name })}</QuickAnswer></div>
+    <div class="mt-8"><QuickAnswer lang={lang}>{[t(lang, 'compare.summary', P), cheaper && t(lang, 'compare.summaryPrice', { cheap: cheaper.name }), more && t(lang, 'compare.summaryDevices', { more: more.name })].filter(Boolean).join(' ')}</QuickAnswer></div>
     <Disclosure lang={lang} class="mt-4" />
 
     <section class="mt-14">

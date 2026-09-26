@@ -1,0 +1,40 @@
+name: Monthly data freshness check
+
+# Opens (or updates) a GitHub issue reminding the editor to re-check prices
+# and facts. It never changes data automatically.
+on:
+  schedule:
+    - cron: '0 7 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const pricing = JSON.parse(fs.readFileSync('data/pricing.json', 'utf8'));
+            const vpns = JSON.parse(fs.readFileSync('data/vpns.json', 'utf8'));
+            const days = (d) => Math.round((Date.now() - new Date(d)) / 864e5);
+            const title = 'Monthly check: prices and VPN facts';
+            const body = [
+              `Prices last updated: **${pricing.last_updated}** (${days(pricing.last_updated)} days ago)`,
+              `VPN facts as of: **${vpns.data_as_of}** (${days(vpns.data_as_of)} days ago)`,
+              '',
+              'Checklist:',
+              '- [ ] Re-check prices of the top 10 VPNs on their official pricing pages and update `data/pricing.json`',
+              '- [ ] Check for new independent audits or security incidents and update `data/vpns.json`',
+              '- [ ] Update `last_reviewed` in `data/vpns.json`',
+              '- [ ] Review `data/vpn-legality.json` for legal changes',
+            ].join('\n');
+            const open = await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100 });
+            const existing = open.data.find((i) => i.title === title);
+            if (existing) await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body });
+            else await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body });

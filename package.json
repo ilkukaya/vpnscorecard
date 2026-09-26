@@ -1,15 +1,15 @@
 {
   "name": "vpnscorecard",
   "type": "module",
-  "version": "1.0.0",
-  "description": "Independent VPN testing, scoring, and ranking platform",
+  "version": "2.0.0",
+  "description": "Research-based VPN scorecards in 14 languages",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "validate": "python scripts/validate_data.py"
+    "validate": "python3 scripts/validate_data.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.2.1",
@@ -27,5 +27,8 @@
     "@netlify/edge-functions": "^4.0.0",
     "@tailwindcss/typography": "^0.5.10",
     "pagefind": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

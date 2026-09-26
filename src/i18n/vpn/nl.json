@@ -1,0 +1,128 @@
+{
+  "nordvpn": {
+    "tagline": "De beste allrounder voor de meeste mensen",
+    "verdict": "NordVPN combineert herhaaldelijk geaudite no-logsclaims, RAM-only servers en het snelle NordLynx-protocol (gebaseerd op WireGuard) met een zeer groot netwerk. Met een maandabonnement is het niet de goedkoopste optie, maar met lange abonnementen biedt het het sterkste totaalpakket in onze scorecard.",
+    "pros": ["No-logsbeleid meerdere keren geaudit door Deloitte", "NordLynx-protocol (gebaseerd op WireGuard) is gebouwd voor snelheid", "RAM-only servers in het hele netwerk", "Threat Protection blokkeert trackers en schadelijke sites", "10 apparaten per abonnement"],
+    "cons": ["Maandabonnement is duur", "Verlengingsprijzen liggen hoger dan de introductieprijs", "Installatie op een router gaat handmatig"]
+  },
+  "expressvpn": {
+    "tagline": "Premium, verfijnd en heel eenvoudig in gebruik",
+    "verdict": "ExpressVPN is een van de meest verfijnde VPN's die er zijn, met RAM-only TrustedServer-technologie, een eigen Lightway-protocol en uitstekende routerondersteuning. Het is meestal duurder dan concurrenten en past daarom bij mensen die eenvoud belangrijker vinden dan de prijs.",
+    "pros": ["RAM-only TrustedServer-infrastructuur", "Lightway-protocol is snel en opensource", "Servers in ongeveer 105 landen", "Beste routerapp in zijn klasse", "Meerdere onafhankelijke audits"],
+    "cons": ["Een van de duurste VPN's", "Geen multi-hop-servers (Double VPN)", "Apparatenlimiet hangt af van het abonnement"]
+  },
+  "surfshark": {
+    "tagline": "Onbeperkt apparaten voor een budgetprijs",
+    "verdict": "Met Surfshark verbind je een onbeperkt aantal apparaten via één account, en met lange abonnementen is het steevast een van de goedkoopste premium-VPN's. Het gebruikt RAM-only servers en heeft zijn no-logsbeleid laten auditen, wat het een sterke keuze qua prijs-kwaliteit maakt voor gezinnen en huishoudens.",
+    "pros": ["Onbeperkt aantal gelijktijdige verbindingen", "Zeer lage prijs bij lange abonnementen", "RAM-only servers", "No-logsbeleid geaudit door Deloitte", "CleanWeb blokkeert advertenties en trackers"],
+    "cons": ["Hoofdkantoor in Nederland (lid van de 14 Eyes)", "Kleiner netwerk dan NordVPN", "Verlengingsprijs ligt veel hoger dan de eerste termijn"]
+  },
+  "cyberghost": {
+    "tagline": "Beginnersvriendelijk met een ruime bedenktijd",
+    "verdict": "CyberGhost is bedoeld voor mensen die een VPN willen installeren en er verder niet naar willen omkijken. De apps zijn eenvoudig, servers zijn gelabeld per gebruiksdoel en bij lange abonnementen krijg je 45 dagen geld-terug-garantie, al vinden gevorderde gebruikers het misschien minder goed instelbaar.",
+    "pros": ["Zeer eenvoudige apps voor beginners", "Servers gelabeld per activiteit (streaming, P2P)", "Groot servernetwerk", "45 dagen geld-terug-garantie bij lange abonnementen"],
+    "cons": ["Limiet van 7 apparaten", "Minder geavanceerde instellingen dan concurrenten", "Eigendom van Kape, dat ook verschillende andere VPN's bezit"]
+  },
+  "protonvpn": {
+    "tagline": "Zwitserse privacy met het beste gratis abonnement",
+    "verdict": "Proton VPN wordt beheerd door het Zwitserse bedrijf achter Proton Mail. De apps zijn opensource, het no-logsbeleid is onafhankelijk geaudit en het gratis abonnement heeft geen datalimiet, waardoor dit de gratis VPN is die we met het meeste vertrouwen aanraden.",
+    "pros": ["Gratis abonnement zonder datalimiet", "Opensource, onafhankelijk geaudite apps", "Gevestigd in Zwitserland", "Secure Core multi-hop-servers", "Ondersteuning voor Tor over VPN"],
+    "cons": ["Betaalde abonnementen zijn duurder dan budgetconcurrenten", "Gratis abonnement heeft beperkte serverlocaties", "Minder servers dan de grootste netwerken"]
+  },
+  "pia": {
+    "tagline": "Zeer goed instelbaar met onbeperkt apparaten",
+    "verdict": "Private Internet Access biedt opensource-apps, onbeperkt apparaten en uitgebreide instelmogelijkheden voor een lage langetermijnprijs. De no-logsclaims zijn in echte rechtszaken getest en geaudit, maar het Amerikaanse hoofdkantoor is een nadeel voor sommige privacybewuste gebruikers.",
+    "pros": ["Onbeperkt aantal gelijktijdige verbindingen", "Opensource-apps met veel instellingen", "No-logsclaims geaudit en getest in de rechtszaal", "Zeer betaalbare langlopende abonnementen", "Servers in elke Amerikaanse staat"],
+    "cons": ["Hoofdkantoor in de Verenigde Staten (Five Eyes)", "Interface kan beginners overweldigen", "Wisselende prestaties bij streaming"]
+  },
+  "ipvanish": {
+    "tagline": "Onbeperkt apparaten en eigen servers",
+    "verdict": "IPVanish bezit een groot deel van zijn serverinfrastructuur zelf en staat onbeperkt apparaten toe. Het is een redelijke budgetkeuze, maar heeft een kortere landenlijst dan de koplopers en is gevestigd in de Verenigde Staten.",
+    "pros": ["Onbeperkt aantal gelijktijdige verbindingen", "Bezit een groot deel van zijn servernetwerk", "Scramble-optie helpt op restrictieve netwerken", "Betaalbare langlopende abonnementen"],
+    "cons": ["Hoofdkantoor in de Verenigde Staten (Five Eyes)", "Minder landen dan de topconcurrenten", "Wisselende ondersteuning voor streaming"]
+  },
+  "mullvad": {
+    "tagline": "Maximale anonimiteit, één vaste prijs",
+    "verdict": "Mullvad is de VPN voor privacypuristen: je hebt geen e-mailadres nodig, je kunt contant betalen en elk abonnement kost hetzelfde vaste maandbedrag. Het gebruikt RAM-only servers en is geaudit, maar profileert zich bewust niet als VPN voor streaming.",
+    "pros": ["Account zonder e-mailadres of persoonsgegevens", "Accepteert contant geld en cryptovaluta", "RAM-only servers en opensource-apps", "Vast €5/maand, geen langdurige verplichting", "Onafhankelijk geaudite infrastructuur"],
+    "cons": ["Niet ontworpen voor streamingdiensten", "Kleiner servernetwerk", "Geen affiliateprogramma, dus we verdienen er niets aan"]
+  },
+  "purevpn": {
+    "tagline": "Budgetprijzen met geaudit no-logsbeleid",
+    "verdict": "PureVPN heeft de afgelopen jaren geïnvesteerd in audits en certificeringen en hoort bij meerjarige abonnementen vaak bij de goedkoopste opties. De apps en snelheden zijn degelijk, maar niet toonaangevend.",
+    "pros": ["No-logsbeleid geaudit door KPMG", "Lage langetermijnprijzen", "Dedicated IP als add-on beschikbaar", "10 apparaten per account"],
+    "cons": ["Minder landen dan de topconcurrenten", "Wisselende ondersteuning voor streaming", "Apps voelen minder verfijnd aan dan die van de koplopers"]
+  },
+  "torguard": {
+    "tagline": "Een VPN voor powerusers met dedicated IP's",
+    "verdict": "TorGuard richt zich op technische gebruikers die protocollen, poorten en dedicated IP's nauwkeurig willen instellen. Het is minder beginnersvriendelijk en heeft geen gepubliceerde onafhankelijke no-logsaudit.",
+    "pros": ["Veel opties voor dedicated IP's", "Versleuteling en poorten zeer goed aan te passen", "Goede ondersteuning voor P2P", "WireGuard en OpenVPN beschikbaar"],
+    "cons": ["Hoofdkantoor in de Verenigde Staten (Five Eyes)", "Geen gepubliceerde onafhankelijke no-logsaudit", "Interface is niet beginnersvriendelijk"]
+  },
+  "hideme": {
+    "tagline": "Privacy voorop, met een bruikbaar gratis abonnement",
+    "verdict": "hide.me is een in Maleisië gevestigde aanbieder met een geaudit no-logsbeleid en een gratis abonnement dat veilig is voor licht surfgebruik. De betaalde abonnementen zijn concurrerend, al is het netwerk kleiner dan dat van de marktleiders.",
+    "pros": ["Gratis abonnement zonder advertenties", "Onafhankelijk geaudit no-logsbeleid", "Gevestigd in Maleisië, buiten de 14 Eyes", "10 apparaten bij betaalde abonnementen"],
+    "cons": ["Gratis abonnement heeft een datalimiet en weinig locaties", "Beperkte ondersteuning voor streaming", "Kleiner netwerk dan de koplopers"]
+  },
+  "astrill": {
+    "tagline": "Duur, niche en vol functies",
+    "verdict": "Astrill biedt eigen protocollen en dedicated IP's, maar is duur, heeft een klein netwerk en heeft geen onafhankelijke no-logsaudit gepubliceerd. De meeste mensen halen meer waarde uit de top van onze ranglijst.",
+    "pros": ["Eigen StealthVPN- en OpenWeb-protocollen", "Dedicated IP beschikbaar", "Gevestigd op de Seychellen"],
+    "cons": ["Zeer duur", "Klein servernetwerk", "Geen gepubliceerde onafhankelijke no-logsaudit", "Slechts 5 apparaten"]
+  },
+  "fastestvpn": {
+    "tagline": "Heel goedkoop, maar beperkt",
+    "verdict": "FastestVPN is een van de goedkoopste VPN's die je kunt kopen en staat veel apparaten toe, maar het netwerk is klein en er is geen onafhankelijke beveiligingsaudit gepubliceerd.",
+    "pros": ["Zeer lage prijs bij lange abonnementen", "Tot 15 apparaten", "Ingebouwde adblocker"],
+    "cons": ["Klein netwerk (ongeveer 40 landen)", "Geen gepubliceerde onafhankelijke audit", "Beperkte ondersteuning voor streaming"]
+  },
+  "tunnelbear": {
+    "tagline": "De vriendelijkste VPN om mee te beginnen",
+    "verdict": "TunnelBear is de VPN die het makkelijkst te begrijpen is, publiceert jaarlijks beveiligingsaudits en biedt een klein gratis abonnement. Het is niet gebouwd voor powerusers, P2P of streaming.",
+    "pros": ["Uiterst eenvoudige, vriendelijke apps", "Regelmatige onafhankelijke beveiligingsaudits", "Gratis abonnement om het uit te proberen", "Onbeperkt apparaten bij betaalde abonnementen"],
+    "cons": ["Hoofdkantoor in Canada (Five Eyes)", "Gratis abonnement heeft een kleine datalimiet", "Zwakke ondersteuning voor streaming", "Geen livechat-support"]
+  },
+  "hotspotshield": {
+    "tagline": "Snel eigen protocol en een gratis versie",
+    "verdict": "Het eigen Hydra-protocol (Catapult) van Hotspot Shield presteert goed en met de gratis versie begin je makkelijk. De gratis versie toont echter advertenties en het bedrijf heeft geen onafhankelijke no-logsaudit gepubliceerd.",
+    "pros": ["Snel eigen Hydra-protocol", "Gratis versie beschikbaar", "Ongeveer 80 landen", "10 apparaten bij premiumabonnementen"],
+    "cons": ["Hoofdkantoor in de Verenigde Staten (Five Eyes)", "Gratis versie toont advertenties en is beperkt", "Geen gepubliceerde onafhankelijke no-logsaudit"]
+  },
+  "fsecure": {
+    "tagline": "Eenvoudige VPN van een beveiligingsbedrijf",
+    "verdict": "De VPN van F-Secure is een eenvoudige, betrouwbare aanvulling van een al lang bestaand Fins beveiligingsbedrijf. Hij volstaat voor basisbescherming op openbare wifi, maar het netwerk en de functies zijn beperkt.",
+    "pros": ["Van een gevestigd Fins beveiligingsbedrijf", "Zeer eenvoudige interface", "Gratis proefperiode beschikbaar"],
+    "cons": ["Slechts ongeveer 30 landen", "Weinig geavanceerde functies", "Geen ondersteuning voor Linux of routers"]
+  },
+  "privatevpn": {
+    "tagline": "Kleine aanbieder met persoonlijke support",
+    "verdict": "PrivateVPN is een kleine Zweedse aanbieder met een eenvoudige app, een behoorlijke landenlijst en lage langetermijnprijzen. Er is geen onafhankelijke audit en het aantal servers is klein.",
+    "pros": ["Lage langetermijnprijs", "Ongeveer 60 landen ondanks een klein netwerk", "10 apparaten per account", "Gratis proefperiode beschikbaar"],
+    "cons": ["Hoofdkantoor in Zweden (14 Eyes)", "Klein aantal servers", "Geen gepubliceerde onafhankelijke audit"]
+  },
+  "ivacy": {
+    "tagline": "Spotgoedkope langlopende abonnementen",
+    "verdict": "Ivacy hoort bij meerjarige abonnementen bij de goedkoopste VPN's en dekt veel landen. Het volstaat voor incidenteel gebruik, maar heeft geen onafhankelijke audit gepubliceerd en bindt je voor de beste prijs aan lange termijnen.",
+    "pros": ["Zeer lage prijs bij meerjarige abonnementen", "Veel landen gedekt", "Dedicated IP als add-on", "10 apparaten per account"],
+    "cons": ["Geen gepubliceerde onafhankelijke audit", "Beste prijzen vereisen zeer lange verplichtingen", "Wisselende ondersteuning voor streaming"]
+  },
+  "vyprvpn": {
+    "tagline": "Zwitserse VPN met eigen infrastructuur",
+    "verdict": "VyprVPN bezit en beheert zijn eigen netwerk en is gevestigd in Zwitserland. Het Chameleon-protocol helpt op restrictieve netwerken, maar de apparatenlimiet is laag en er zijn minder servers dan bij de koplopers.",
+    "pros": ["Gevestigd in Zwitserland", "Bezit en beheert zijn eigen servernetwerk", "Geaudit no-logsbeleid", "Chameleon-protocol voor restrictieve netwerken"],
+    "cons": ["Slechts 5 apparaten bij sommige abonnementen", "Kleiner servernetwerk", "Duurder dan budgetconcurrenten"]
+  },
+  "cactusvpn": {
+    "tagline": "Een heel kleine, eenvoudige aanbieder",
+    "verdict": "CactusVPN is een kleine aanbieder met eenvoudige apps en flexibele korte abonnementen. Het netwerk is piepklein en er is geen onafhankelijke audit gepubliceerd, dus het staat onderaan in onze scorecard.",
+    "pros": ["Eenvoudige apps", "Gratis proefperiode beschikbaar", "Gevestigd in Moldavië, buiten de 14 Eyes"],
+    "cons": ["Zeer klein netwerk (ongeveer 22 landen)", "Geen gepubliceerde onafhankelijke audit", "Beperkte functies"]
+  },
+  "avast": {
+    "tagline": "Basis-VPN van een bekend antivirusmerk",
+    "verdict": "De VPN van Avast is makkelijk in gebruik en komt van een bekend antivirusmerk, maar VPN is niet het kernproduct en Avast kreeg in het verleden kritiek op het gebied van privacy vanwege de omgang met gegevens in andere producten.",
+    "pros": ["Zeer eenvoudig voor niet-technische gebruikers", "Gratis proefperiode beschikbaar", "10 apparaten bij abonnementen voor meerdere apparaten"],
+    "cons": ["Privacycontroverses in het verleden bij het moederbedrijf", "Geen gepubliceerde onafhankelijke no-logsaudit", "Geen ondersteuning voor Linux of routers"]
+  }
+}

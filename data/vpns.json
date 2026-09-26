@@ -965,8 +965,8 @@
         "ease_of_use": 9,
         "server_network": 7,
         "value": 8,
-        "streaming": 7,
-        "total": 62
+        "streaming": 5,
+        "total": 60
       },
       "best_for": [
         "streaming",
