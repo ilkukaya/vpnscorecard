@@ -40,7 +40,7 @@ Waar de AVG of vergelijkbare wetgeving (zoals de Turkse KVKK of de Braziliaanse 
 
 ## Jouw rechten
 
-Afhankelijk van waar je woont, heb je mogelijk het recht om je gegevens in te zien, te corrigeren, te wissen of over te dragen, bezwaar te maken tegen de verwerking of deze te laten beperken, je toestemming in te trekken en een klacht in te dienen bij een toezichthouder voor gegevensbescherming (in Nederland de Autoriteit Persoonsgegevens). Inwoners van Californië kunnen vragen welke persoonsgegevens we hebben en verzoeken om verwijdering daarvan; we verkopen geen persoonsgegevens. Wil je een van deze rechten uitoefenen, [neem dan contact met ons op](/contact/).
+Afhankelijk van waar je woont, heb je mogelijk het recht om je gegevens in te zien, te corrigeren, te wissen of over te dragen, bezwaar te maken tegen de verwerking of deze te laten beperken, je toestemming in te trekken en een klacht in te dienen bij een toezichthouder voor gegevensbescherming. Inwoners van Californië kunnen vragen welke persoonsgegevens we hebben en verzoeken om verwijdering daarvan; we verkopen geen persoonsgegevens. Wil je een van deze rechten uitoefenen, [neem dan contact met ons op](/contact/).
 
 ## Internationale doorgifte
 
