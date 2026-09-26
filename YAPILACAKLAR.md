@@ -25,7 +25,7 @@ Bu dosya teknik bilgi gerektirmeden siteyi yönetebilmeniz için yazıldı.
 - **14 dil**: İngilizce, İspanyolca, Portekizce, Fransızca, Almanca, İtalyanca, Felemenkçe, Lehçe, Türkçe, Arapça, Hintçe, Endonezce, Japonca, Korece.
   - **Bilerek eklenmeyen diller**: Rusça (Rusya'da VPN reklamı yasak), Farsça (İran), Basitleştirilmiş Çince (Çin). Hukuki risk almamak için.
 - **Hukuki koruma**: VPN'in yasak veya kısıtlı olduğu ülkelerden (Çin, Rusya, İran, Belarus, Kuzey Kore, Türkmenistan, Umman, Irak, Myanmar, Pakistan) gelen ziyaretçiler VPN sağlayıcı linklerine tıkladığında satış sayfasına değil, "bu bölgede kullanılamaz" uyarı sayfasına yönlendirilir. Her sayfada "yasalara uygun kullanın" uyarısı ve affiliate açıklaması var.
-- **Yaklaşık 1.250 sayfa**: 21 VPN incelemesi, 31 karşılaştırma, 16 "en iyi VPN" listesi (streaming, oyun, gizlilik, ucuz, ücretsiz, aile, iPhone, Android…), fiyat karşılaştırması, VPN bulucu test, "IP adresim ne" aracı, ülkelere göre yasallık — hepsi 14 dilde.
+- **Yaklaşık 1.390 sayfa**: 21 VPN incelemesi, 31 karşılaştırma, 16 "en iyi VPN" listesi (streaming, oyun, gizlilik, ucuz, ücretsiz, aile, iPhone, Android…), fiyat karşılaştırması, VPN bulucu test, "IP adresim ne" aracı, ülkelere göre yasallık — hepsi 14 dilde.
 - **SEO**: her sayfada doğru canonical ve 14 dilli hreflang, site haritası, yapılandırılmış veri (Review, FAQ, Breadcrumb, ItemList, Article), her VPN için otomatik paylaşım görseli.
 - **AEO / GEO (yapay zekâ arama motorları)**: her sayfanın başında "Kısa cevap" kutusu, SSS bölümleri, `llms.txt` dosyası, ChatGPT/Claude/Perplexity/Google botlarına açık `robots.txt`.
 - **IndexNow**: her canlı yayından sonra Bing, Yandex, Naver'a otomatik bildirim.
