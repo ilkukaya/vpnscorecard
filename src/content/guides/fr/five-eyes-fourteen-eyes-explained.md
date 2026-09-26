@@ -10,7 +10,7 @@ faq:
   - q: "Quels pays font partie des 14 Eyes ?"
     a: "Les Five Eyes (États-Unis, Royaume-Uni, Canada, Australie, Nouvelle-Zélande), plus le Danemark, la France, les Pays-Bas et la Norvège (Nine Eyes), plus l'Allemagne, la Belgique, l'Italie, l'Espagne et la Suède (Fourteen Eyes)."
   - q: "Faut-il éviter les VPN basés dans les pays des 14 Eyes ?"
-    a: "Pas systématiquement. Un VPN situé dans un pays des 14 Eyes, doté d'une politique no-logs auditée et de serveurs fonctionnant uniquement en RAM, peut être plus digne de confiance qu'un VPN non audité installé dans un paradis offshore."
+    a: "Pas systématiquement. Un VPN situé dans un pays des 14 Eyes, doté d'une politique no-logs auditée et de serveurs fonctionnant uniquement en RAM, peut être plus digne de confiance qu'un VPN non audité installé dans une juridiction offshore."
   - q: "Quelle est la meilleure juridiction pour un VPN ?"
     a: "Les pays dotés de lois solides sur la protection de la vie privée et sans obligation de conservation des données pour les VPN, comme la Suisse ou le Panama, sont souvent considérés comme favorables — mais la preuve de l'absence de journalisation compte davantage que la localisation."
 ---
