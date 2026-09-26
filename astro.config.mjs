@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import pagefind from 'astro-pagefind';
 import { readFileSync, writeFileSync } from 'node:fs';
+import rehypeLocalizeLinks from './src/lib/rehype-localize-links.mjs';
 
 const SITE = (process.env.SITE_URL || process.env.URL || 'https://vpnscorecard.netlify.app').replace(/\/$/, '');
 const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'nl', 'pl', 'tr', 'ar', 'hi', 'id', 'ja', 'ko'];
@@ -95,5 +96,6 @@ export default defineConfig({
     netlifyRedirects(),
   ],
   output: 'static',
+  markdown: { rehypePlugins: [rehypeLocalizeLinks] },
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
 });
