@@ -1,0 +1,7 @@
+---
+interface Props { ok: boolean | null | undefined; label?: string }
+const { ok, label } = Astro.props;
+---
+{ok
+  ? <span class="inline-flex items-center gap-1.5 text-accent-ink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>{label && <span class="text-ink-2">{label}</span>}<span class="sr-only">✓</span></span>
+  : <span class="inline-flex items-center gap-1.5 text-ink-4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>{label && <span class="text-ink-3">{label}</span>}<span class="sr-only">✗</span></span>}

@@ -1,0 +1,21 @@
+---
+import { t, numberFmt, type Lang } from '../i18n';
+import { scoreCategories, type VPN } from '../lib/vpns';
+interface Props { vpn: VPN; lang: Lang }
+const { vpn, lang } = Astro.props;
+---
+<dl class="grid gap-3">
+  {scoreCategories.map((c) => {
+    const val = (vpn.scores as any)[c.key] as number;
+    const pct = Math.round((val / c.max) * 100);
+    return (
+      <div>
+        <div class="mb-1 flex items-baseline justify-between text-sm">
+          <dt class="text-ink-2">{t(lang, `categories.${c.key}`)}</dt>
+          <dd class="num font-semibold text-ink">{numberFmt(lang, val)}<span class="font-normal text-ink-4">/{c.max}</span></dd>
+        </div>
+        <div class="h-2 rounded-full bg-line" role="presentation"><div class="h-2 rounded-full bg-accent" style={`width:${pct}%`}></div></div>
+      </div>
+    );
+  })}
+</dl>

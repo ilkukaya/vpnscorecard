@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import VPNMark from '../components/VPNMark.astro';
+import ScoreBadge from '../components/ScoreBadge.astro';
+import CompareTable from '../components/CompareTable.astro';
+import Disclosure from '../components/Disclosure.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { t, localized, numberFmt, priceFmt, vpnText, dateFmt, type Lang } from '../i18n';
+import { scoreCategories, lowestPrice, connectionsNum, connections, LAST_REVIEWED, type VPN } from '../lib/vpns';
+import { comparePairs, pairSlug } from '../lib/lists';
+import { breadcrumbSchema, faqSchema, ORG_ID } from '../lib/seo';
+
+interface Props { lang: Lang; a: VPN; b: VPN }
+const { lang, a, b } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const slug = pairSlug(a, b);
+const path = `/compare/${slug}/`;
+const year = new Date(LAST_REVIEWED).getUTCFullYear();
+const s = (v: VPN) => numberFmt(lang, v.scores.total / 10, { minimumFractionDigits: 1 });
+const winner = a.scores.total >= b.scores.total ? a : b;
+const loser = winner === a ? b : a;
+const cat = (k: string) => {
+  const va = (a.scores as any)[k], vb = (b.scores as any)[k];
+  return va === vb ? null : va > vb ? a : b;
+};
+const pa = lowestPrice(a.id), pb = lowestPrice(b.id);
+const cheaper = pa && pb ? (pa.price <= pb.price ? a : b) : null;
+const more = connectionsNum(a) === connectionsNum(b) ? null : connectionsNum(a) > connectionsNum(b) ? a : b;
+const cl = (v: VPN) => { const c = connections(v); return c === 'unlimited' ? t(lang, 'common.unlimited') : numberFmt(lang, c); };
+const P = { a: a.name, b: b.name, winner: winner.name, loser: loser.name, sw: s(winner), sl: s(loser) };
+const faq = [
+  { q: t(lang, 'compare.faq.betterQ', P), a: t(lang, 'compare.faq.betterA', P) },
+  { q: t(lang, 'compare.faq.cheaperQ', P), a: cheaper && pa && pb ? t(lang, 'compare.faq.cheaperA', { ...P, cheap: cheaper.name, pa: priceFmt(lang, pa.price, pa.currency), pb: priceFmt(lang, pb.price, pb.currency) }) : t(lang, 'compare.faq.cheaperA_unknown', P) },
+  { q: t(lang, 'compare.faq.privacyQ', P), a: t(lang, 'compare.faq.privacyA', { ...P, priv: (cat('privacy') || winner).name }) },
+  { q: t(lang, 'compare.faq.devicesQ', P), a: t(lang, 'compare.faq.devicesA', { ...P, ca: cl(a), cb: cl(b) }) },
+];
+const others = comparePairs().filter(([x, y]) => pairSlug(x, y) !== slug && (x.id === a.id || y.id === a.id || x.id === b.id || y.id === b.id)).slice(0, 8);
+const schema = [
+  { '@type': 'Article', headline: t(lang, 'compare.h1', P), inLanguage: lang, dateModified: LAST_REVIEWED, author: { '@type': 'Organization', name: 'VPNScorecard Editorial Team' }, publisher: { '@id': ORG_ID } },
+  breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.compare'), path: L('/compare/') }, { name: `${a.name} vs ${b.name}`, path: L(path) }]),
+  faqSchema(faq),
+];
+---
+<Base lang={lang} path={path} type="article" title={t(lang, 'compare.metaTitle', { ...P, year })} description={t(lang, 'compare.metaDescription', P)} schema={schema} modified={LAST_REVIEWED}>
+  <div class="wrap py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.compare'), href: L('/compare/') }, { name: `${a.name} vs ${b.name}`, href: L(path) }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'compare.h1', P)}</h1>
+    <p class="mt-3 text-sm text-ink-3">{t(lang, 'common.byline')} · {t(lang, 'common.updated')} <time datetime={LAST_REVIEWED}>{dateFmt(lang, LAST_REVIEWED)}</time></p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      {[a, b].map((v) => (
+        <div class={`card p-6 ${v === winner ? 'ring-2 ring-accent' : ''}`}>
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3"><VPNMark vpn={v} /><div><p class="text-xl font-bold">{v.name}</p><p class="text-sm text-ink-3">{vpnText(lang, v.id).tagline}</p></div></div>
+            {v === winner && <span class="chip border-accent/30 bg-accent-wash text-accent-ink">{t(lang, 'compare.winner')}</span>}
+          </div>
+          <div class="mt-5 flex items-center justify-between gap-4">
+            <ScoreBadge total={v.scores.total} lang={lang} />
+            <div class="flex gap-2"><a href={L(`/reviews/${v.slug}/`)} class="btn-ghost btn-sm">{t(lang, 'common.review')}</a><CTA id={v.id} place="compare-card" small>{t(lang, 'common.visit')}</CTA></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8"><QuickAnswer lang={lang}>{[t(lang, 'compare.summary', P), cheaper && t(lang, 'compare.summaryPrice', { cheap: cheaper.name }), more && t(lang, 'compare.summaryDevices', { more: more.name })].filter(Boolean).join(' ')}</QuickAnswer></div>
+    <Disclosure lang={lang} class="mt-4" />
+
+    <section class="mt-14">
+      <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'compare.byCategory')}</h2>
+      <div class="scroll-x mt-5"><div class="overflow-hidden rounded-2xl border border-line bg-white min-w-[520px] sm:min-w-0">
+        <table class="table-clean">
+          <thead><tr><th>{t(lang, 'facts.feature')}</th><th dir="ltr">{a.name}</th><th dir="ltr">{b.name}</th><th>{t(lang, 'compare.edge')}</th></tr></thead>
+          <tbody>
+            {scoreCategories.map((c) => {
+              const w = cat(c.key);
+              return (
+                <tr>
+                  <td class="font-medium text-ink-2">{t(lang, `categories.${c.key}`)} <span class="text-ink-4">/{c.max}</span></td>
+                  <td class={`num ${w === a ? 'font-bold text-accent-ink' : ''}`}>{(a.scores as any)[c.key]}</td>
+                  <td class={`num ${w === b ? 'font-bold text-accent-ink' : ''}`}>{(b.scores as any)[c.key]}</td>
+                  <td class="text-ink-2">{w ? w.name : t(lang, 'compare.tie')}</td>
+                </tr>
+              );
+            })}
+            <tr><td class="font-bold">{t(lang, 'facts.score')}</td><td class="num font-bold">{a.scores.total}/100</td><td class="num font-bold">{b.scores.total}/100</td><td class="font-bold">{winner.name}</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'compare.specs')}</h2>
+      <div class="mt-5"><CompareTable vpns={[a, b]} lang={lang} place="compare-table" /></div>
+    </section>
+
+    <section class="mt-14 grid gap-4 md:grid-cols-2">
+      {[a, b].map((v) => (
+        <div class="card p-6">
+          <h3 class="text-lg font-bold">{t(lang, 'compare.chooseIf', { name: v.name })}</h3>
+          <ul class="mt-3 list-disc space-y-1.5 ps-5 text-[15px] text-ink-2">{vpnText(lang, v.id).pros.slice(0, 3).map((p) => <li>{p}</li>)}</ul>
+        </div>
+      ))}
+    </section>
+
+    <AdSlot />
+
+    <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_20rem]">
+      <FAQ items={faq} title={t(lang, 'common.faqTitle')} />
+      {others.length > 0 && (
+        <aside class="card h-fit p-6">
+          <h2 class="text-base font-bold">{t(lang, 'compare.more')}</h2>
+          <ul class="mt-3 space-y-2 text-sm">{others.map(([x, y]) => <li><a class="link" dir="ltr" href={L(`/compare/${pairSlug(x, y)}/`)}>{x.name} vs {y.name}</a></li>)}</ul>
+        </aside>
+      )}
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { t, localized, vpnText, type Lang } from '../i18n';
+import { allVPNs, lowestPrice, connectionsNum, freePlan, goPath } from '../lib/vpns';
+import { breadcrumbSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const data = allVPNs.map((v) => ({
+  id: v.id, name: v.name, url: L(`/reviews/${v.slug}/`), go: goPath(v.id), tagline: vpnText(lang, v.id).tagline,
+  s: v.scores, bf: v.best_for, price: lowestPrice(v.id)?.price ?? 99, dev: connectionsNum(v), free: Boolean(freePlan(v)),
+  p2p: Boolean(v.server_network.p2p_servers), audited: Boolean(v.security.no_logs_audited),
+}));
+const questions = [
+  { id: 'use', opts: ['streaming', 'privacy', 'p2p', 'gaming', 'general'] },
+  { id: 'devices', opts: ['few', 'many', 'unlimited'] },
+  { id: 'budget', opts: ['free', 'low', 'balanced', 'premium'] },
+  { id: 'level', opts: ['beginner', 'advanced'] },
+];
+---
+<Base lang={lang} path="/quiz/" title={t(lang, 'quiz.metaTitle')} description={t(lang, 'quiz.metaDescription')} schema={[breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.quiz'), path: L('/quiz/') }])]}>
+  <div class="wrap max-w-3xl py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.quiz'), href: L('/quiz/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'quiz.h1')}</h1>
+    <p class="mt-4 text-lg text-ink-2">{t(lang, 'quiz.lead')}</p>
+    <form id="quiz" class="mt-8 space-y-6" data-vpns={JSON.stringify(data)} data-t-match={t(lang, 'quiz.match')} data-t-review={t(lang, 'common.review')} data-t-visit={t(lang, 'common.visit')}>
+      {questions.map((q, qi) => (
+        <fieldset class="card p-6">
+          <legend class="sr-only">{t(lang, `quiz.q.${q.id}.title`)}</legend>
+          <p class="text-xs font-semibold text-ink-4">{qi + 1} / {questions.length}</p>
+          <p class="mt-1 text-lg font-bold" aria-hidden="true">{t(lang, `quiz.q.${q.id}.title`)}</p>
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            {q.opts.map((o, oi) => (
+              <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-line px-4 py-3 text-[15px] hover:border-ink has-[:checked]:border-accent has-[:checked]:bg-accent-wash">
+                <input type="radio" name={q.id} value={o} checked={oi === 0} class="accent-[#0F7B5F]" />
+                {t(lang, `quiz.q.${q.id}.${o}`)}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <button type="submit" class="btn-primary w-full py-4 text-base">{t(lang, 'quiz.submit')}</button>
+    </form>
+    <section id="result" class="mt-10 hidden" aria-live="polite">
+      <h2 class="h-display text-3xl">{t(lang, 'quiz.resultTitle')}</h2>
+      <Disclosure lang={lang} class="mt-3" />
+      <ol id="result-list" class="mt-5 grid gap-3"></ol>
+    </section>
+  </div>
+</Base>
+<script>
+  const form = document.getElementById('quiz') as HTMLFormElement;
+  const vpns = JSON.parse(form.dataset.vpns || '[]');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(form);
+    const use = f.get('use'), devices = f.get('devices'), budget = f.get('budget'), level = f.get('level');
+    const scored = vpns.map((v: any) => {
+      let s = v.s.total;
+      if (use === 'streaming') s += v.s.streaming * 4 + (v.bf.includes('streaming') ? 8 : 0);
+      if (use === 'privacy') s += v.s.privacy * 1.2 + (v.audited ? 8 : -10);
+      if (use === 'p2p') s += (v.p2p ? 10 : -30) + v.s.privacy * 0.5;
+      if (use === 'gaming') s += v.s.speed * 1.2;
+      if (devices === 'many') s += v.dev >= 10 ? 6 : -8;
+      if (devices === 'unlimited') s += v.dev >= 999 ? 14 : -10;
+      if (budget === 'free') s += v.free ? 30 : -25;
+      if (budget === 'low') s += Math.max(0, 6 - v.price) * 4;
+      if (budget === 'premium') s += v.s.total * 0.2;
+      if (level === 'beginner') s += v.s.ease_of_use * 1.2;
+      if (level === 'advanced') s += v.bf.includes('advanced') ? 8 : 0;
+      return { v, s };
+    }).sort((a: any, b: any) => b.s - a.s).slice(0, 3);
+    const list = document.getElementById('result-list')!;
+    const max = scored[0].s;
+    list.innerHTML = '';
+    scored.forEach(({ v, s }: any, i: number) => {
+      const li = document.createElement('li');
+      li.className = 'card flex flex-wrap items-center gap-4 p-5' + (i === 0 ? ' ring-2 ring-accent' : '');
+      const pct = Math.round((s / max) * 100);
+      li.innerHTML = `<span class="font-display text-3xl font-semibold text-ink-4">${i + 1}</span>
+        <div class="min-w-0 flex-1"><a class="text-lg font-bold hover:text-accent-ink"></a><p class="text-sm text-ink-3"></p><p class="mt-1 text-xs font-semibold text-accent-ink"></p></div>
+        <div class="flex gap-2"><a class="btn-ghost btn-sm"></a><a class="btn-primary btn-sm" rel="sponsored nofollow noopener" target="_blank"></a></div>`;
+      const [name, review, go] = li.querySelectorAll('a');
+      name.textContent = v.name; name.setAttribute('href', v.url);
+      li.querySelectorAll('p')[0].textContent = v.tagline;
+      li.querySelectorAll('p')[1].textContent = `${form.dataset.tMatch} ${pct}%`;
+      review.textContent = form.dataset.tReview!; review.setAttribute('href', v.url);
+      go.textContent = form.dataset.tVisit!; go.setAttribute('href', v.go); go.dataset.go = v.id; go.dataset.place = 'quiz';
+      list.appendChild(li);
+    });
+    const r = document.getElementById('result')!;
+    r.classList.remove('hidden');
+    r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

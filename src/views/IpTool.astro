@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Disclosure from '../components/Disclosure.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import { t, tRaw, localized, type Lang } from '../i18n';
+import { allVPNs } from '../lib/vpns';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const faq = tRaw<{ q: string; a: string }[]>(lang, 'ip.faq');
+const top = allVPNs[0];
+const schema = [
+  { '@type': 'WebApplication', name: t(lang, 'ip.h1'), applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.ip'), path: L('/tools/what-is-my-ip/') }]),
+  faqSchema(faq),
+];
+---
+<Base lang={lang} path="/tools/what-is-my-ip/" title={t(lang, 'ip.metaTitle')} description={t(lang, 'ip.metaDescription')} schema={schema}>
+  <div class="wrap max-w-4xl py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.ip'), href: L('/tools/what-is-my-ip/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'ip.h1')}</h1>
+    <p class="mt-4 text-lg text-ink-2">{t(lang, 'ip.lead')}</p>
+
+    <div class="card mt-8 overflow-hidden" data-pagefind-ignore>
+      <div class="bg-ink p-6 text-white md:p-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-accent-bright">{t(lang, 'ip.yourIp')}</p>
+        <p id="ip" class="mt-2 break-all font-display text-4xl font-semibold md:text-5xl num" dir="ltr">…</p>
+        <button id="copy" type="button" class="mt-4 rounded-lg border border-white/20 px-3 py-1.5 text-xs font-semibold hover:bg-white/10" data-done={t(lang, 'ip.copied')}>{t(lang, 'ip.copy')}</button>
+      </div>
+      <dl class="grid gap-px bg-line sm:grid-cols-3">
+        <div class="bg-white p-5"><dt class="text-xs text-ink-4">{t(lang, 'ip.location')}</dt><dd id="loc" class="mt-1 font-semibold">…</dd></div>
+        <div class="bg-white p-5"><dt class="text-xs text-ink-4">{t(lang, 'ip.timezone')}</dt><dd id="tz" class="mt-1 font-semibold">…</dd></div>
+        <div class="bg-white p-5"><dt class="text-xs text-ink-4">{t(lang, 'ip.browserTz')}</dt><dd id="btz" class="mt-1 font-semibold">…</dd></div>
+      </dl>
+      <p id="err" class="hidden bg-amber-wash p-4 text-sm text-amber-ink">{t(lang, 'ip.error')}</p>
+    </div>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-[1fr_auto] md:items-center card p-6">
+      <div>
+        <p class="text-lg font-bold">{t(lang, 'ip.hideTitle')}</p>
+        <p class="mt-1 text-sm text-ink-3">{t(lang, 'ip.hideText', { name: top.name })}</p>
+      </div>
+      <CTA id={top.id} place="ip-tool">{t(lang, 'ip.hideCta', { name: top.name })}</CTA>
+    </div>
+    <Disclosure lang={lang} class="mt-3" />
+
+    <div class="mt-10"><QuickAnswer lang={lang}>{t(lang, 'ip.quick')}</QuickAnswer></div>
+    <p class="mt-4 text-xs text-ink-3">{t(lang, 'ip.privacy')}</p>
+    <div class="mt-12"><FAQ items={faq} title={t(lang, 'common.faqTitle')} /></div>
+  </div>
+</Base>
+<script>
+  const $ = (id: string) => document.getElementById(id)!;
+  try { $('btz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || '—'; } catch { $('btz').textContent = '—'; }
+  fetch('/api/ip', { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((d) => {
+      $('ip').textContent = d.ip || '—';
+      $('loc').textContent = [d.city, d.region, d.country].filter(Boolean).join(', ') || '—';
+      $('tz').textContent = d.timezone || '—';
+    })
+    .catch(() => {
+      $('ip').textContent = '—';
+      $('loc').textContent = '—';
+      $('tz').textContent = '—';
+      $('err').classList.remove('hidden');
+    });
+  $('copy').addEventListener('click', (e) => {
+    const b = e.currentTarget as HTMLButtonElement;
+    navigator.clipboard?.writeText($('ip').textContent || '').then(() => { b.textContent = b.dataset.done || 'OK'; });
+  });
+</script>

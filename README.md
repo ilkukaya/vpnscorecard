@@ -1,185 +1,72 @@
 # VPNScorecard
 
-Independent VPN testing, scoring, and ranking platform.
+Research-based VPN scorecards in 14 languages. Static Astro site hosted on Netlify.
 
-**Site:** [vpnscorecard.com](https://vpnscorecard.com)
+> Türkçe kurulum ve yapılacaklar listesi: **[YAPILACAKLAR.md](YAPILACAKLAR.md)**
 
-## Tech Stack
+## Stack
 
-- **Framework:** Astro 4.x (SSG)
-- **Styling:** Tailwind CSS 3.x
-- **Interactive:** Astro Islands (React for Quiz)
-- **Hosting:** Netlify Free Tier
-- **CI/CD:** GitHub Actions
-- **Data:** JSON files (no database)
-- **Search:** Pagefind
-- **Analytics:** Plausible (privacy-friendly, no cookie banner)
+- **Astro 4** (static output) + **Tailwind CSS**, self-hosted fonts (Fraunces, Inter)
+- **Pagefind** for search, **@astrojs/sitemap** with hreflang
+- **Netlify**: hosting, Forms (contact), Edge Function (`/api/ip`), geo-aware redirects
+- No database — everything lives in `data/*.json` and `src/content/`
 
-## Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Run dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Validate data files
-npm run validate
-```
-
-## Project Structure
-
-```
-vpnscorecard/
-├── data/                    # JSON data files
-│   ├── vpns.json           # Main VPN database (8 VPNs)
-│   ├── pricing.json        # Weekly-updated pricing
-│   ├── speed-tests.json    # Monthly speed test results
-│   ├── deals.json          # Active campaigns
-│   ├── server-counts.json  # Server count data
-│   └── blog-posts.json     # Blog post metadata
-├── src/
-│   ├── components/         # Astro components
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── VPNCard.astro
-│   │   ├── ScoreGauge.astro
-│   │   ├── ScoreBreakdown.astro
-│   │   ├── ComparisonTable.astro
-│   │   ├── SpeedTestChart.astro
-│   │   ├── PricingTable.astro
-│   │   ├── ProConList.astro
-│   │   ├── UseCaseMatch.astro
-│   │   ├── AffiliateDisclosure.astro
-│   │   ├── QuizWidget.tsx   # React quiz component
-│   │   ├── FAQAccordion.astro
-│   │   ├── TrustBadge.astro
-│   │   └── CTAButton.astro
-│   ├── layouts/
-│   │   ├── BaseLayout.astro
-│   │   └── ReviewLayout.astro
-│   ├── lib/
-│   │   ├── scoring.ts       # Scoring algorithm
-│   │   ├── affiliateLinks.ts # UTM + affiliate link management
-│   │   ├── vpnData.ts       # Data loading & filtering
-│   │   └── formatters.ts    # Utility formatters
-│   ├── pages/
-│   │   ├── index.astro              # Homepage
-│   │   ├── reviews/                 # 8 VPN review pages
-│   │   ├── compare/                 # 5 comparison pages
-│   │   ├── best/                    # 8 "best for" pages
-│   │   ├── quiz.astro               # VPN finder quiz
-│   │   ├── methodology.astro        # Testing methodology
-│   │   ├── deals.astro              # Current deals
-│   │   ├── about.astro              # About page
-│   │   └── blog/                    # Dynamic blog pages
-│   └── styles/
-│       └── global.css
-├── scripts/
-│   ├── update_pricing.py     # Weekly price scraper
-│   ├── validate_data.py      # JSON validation
-│   ├── run_speed_tests.py    # Automated speed tests
-│   └── check_server_counts.py # Server count checker
-├── .github/workflows/
-│   ├── update-pricing.yml    # Weekly price update
-│   └── run-speed-tests.yml   # Monthly speed tests
-├── public/
-│   ├── logos/                # VPN logos (SVG)
-│   ├── favicon.svg
-│   ├── og-image.svg
-│   └── robots.txt
-├── astro.config.mjs
-├── tailwind.config.mjs
-├── netlify.toml
-└── package.json
-```
-
-## Setup
-
-### 1. Install Dependencies
+## Commands
 
 ```bash
 npm install
+npm run dev       # local dev server
+npm run build     # production build into dist/
+npm run validate  # data + translation checks
 ```
 
-### 2. Register for Affiliate Programs
+## Where things live
 
-Before deploying, register for these affiliate programs and replace `YOURID` in `data/vpns.json`:
+| What | File |
+|---|---|
+| VPN facts & scores | `data/vpns.json` |
+| Prices | `data/pricing.json` |
+| **Affiliate links** | `data/affiliates.json` (paste your tracking URL into `url`) |
+| VPN legality by country | `data/vpn-legality.json` |
+| UI text per language | `src/i18n/ui/<lang>.json` |
+| VPN taglines, verdicts, pros/cons | `src/i18n/vpn/<lang>.json` |
+| Guides (articles) | `src/content/guides/<lang>/*.md` |
+| Legal/static pages | `src/content/pages/<lang>/*.md` |
+| Page templates | `src/views/*.astro` |
+| Languages list | `src/i18n/config.ts` |
 
-| VPN | Commission | Register |
-|-----|-----------|----------|
-| NordVPN | 40% recurring | [affiliates.nordvpn.com](https://affiliates.nordvpn.com/) |
-| ExpressVPN | $13 flat | [expressvpn.com/affiliates](https://www.expressvpn.com/affiliates) |
-| Surfshark | 40% recurring | [surfshark.com/affiliate-program](https://surfshark.com/affiliate-program) |
-| CyberGhost | 45% recurring | [cyberghostvpn.com/affiliates](https://www.cyberghostvpn.com/affiliates) |
-| PIA | 33% recurring | [privateinternetaccess.com/affiliate](https://www.privateinternetaccess.com/affiliate) |
-| Proton VPN | $10 flat | Contact Proton for affiliate program |
+## How outbound links work
 
-### 3. Update Affiliate IDs
+Every "Visit site" button links to `/go/<vpn-id>/`. At build time `astro.config.mjs` writes `dist/_redirects`:
 
-Search for `YOURID` in `data/vpns.json` and replace with your actual affiliate IDs.
+- visitors from countries where VPN use is banned/restricted (`block_affiliate: true` in `data/vpn-legality.json`) are redirected to `/legal-notice/`;
+- everyone else is redirected to the affiliate URL from `data/affiliates.json`, or to the official website while no affiliate URL is set.
 
-### 4. Deploy to Netlify
+## Optional environment variables (Netlify → Site configuration → Environment variables)
 
-```bash
-# Connect your GitHub repo to Netlify
-# Netlify will auto-detect the build command from netlify.toml
-npm run build
-```
+| Variable | Purpose |
+|---|---|
+| `SITE_URL` | Canonical URL (defaults to Netlify's `URL`, i.e. your primary domain) |
+| `PUBLIC_ADSENSE_CLIENT` | e.g. `ca-pub-1234567890123456` — loads Google AdSense |
+| `PUBLIC_ADSENSE_SLOT` | A display ad unit ID for in-page ad slots |
+| `PUBLIC_CF_BEACON_TOKEN` | Cloudflare Web Analytics token (free, cookieless) |
+| `PUBLIC_GA4_ID` | Google Analytics 4 ID (consent mode, default denied) |
+| `PUBLIC_GOOGLE_SITE_VERIFICATION` | Google Search Console verification |
+| `PUBLIC_BING_SITE_VERIFICATION` | Bing Webmaster Tools verification |
+| `PUBLIC_YANDEX_VERIFICATION` | Yandex Webmaster verification |
+| `PUBLIC_CONTACT_EMAIL` | Shows an email address on the contact page |
 
-### 5. Configure Plausible Analytics
+## SEO / AEO / GEO features
 
-The Plausible script is already included in `BaseLayout.astro`. Just:
-1. Sign up at [plausible.io](https://plausible.io)
-2. Add `vpnscorecard.com` as your site
-3. The tracking is already configured
+- Per-page canonical, hreflang (14 languages + x-default), Open Graph, Twitter cards
+- Generated OG images per review (`/og/<slug>.png`)
+- JSON-LD: Organization, WebSite + SearchAction, Review, BreadcrumbList, FAQPage, ItemList, Article
+- "Short answer" boxes on every page for answer engines, FAQ sections
+- `llms.txt` and an AI-crawler-friendly `robots.txt`
+- IndexNow ping after each production deploy (`plugins/indexnow`)
+- Localized 404 pages, legacy URL redirects
 
-## Scoring System
+## Automation
 
-Each VPN is scored out of 100 points across 6 categories:
-
-| Category | Weight | Criteria |
-|----------|--------|----------|
-| Speed & Performance | 25% | Download, upload, ping, consistency |
-| Privacy & Security | 25% | No-logs audit, encryption, kill switch, jurisdiction |
-| Ease of Use | 15% | App quality, setup, platform support |
-| Server Network | 15% | Countries, servers, specialized features |
-| Price & Value | 15% | Monthly cost, refund policy, connections |
-| Streaming Support | 5% | Netflix, Disney+, BBC iPlayer, etc. |
-
-## Automated Workflows
-
-### Weekly Price Update (Mondays 06:00 UTC)
-- Scrapes VPN pricing pages
-- Updates `data/pricing.json` and `data/deals.json`
-- Commits changes automatically
-
-### Monthly Speed Tests (15th of each month, 20:00 UTC)
-- Runs iperf3 speed tests
-- Updates `data/speed-tests.json`
-- Commits changes automatically
-
-## Data Validation
-
-```bash
-npm run validate
-# or
-python scripts/validate_data.py
-```
-
-Validates all JSON files for:
-- Required fields
-- Score consistency
-- Duplicate IDs
-- Proper ranking order
-
-## License
-
-MIT
+- `.github/workflows/ci.yml` — validates data and builds on every PR/push
+- `.github/workflows/freshness.yml` — opens a monthly reminder issue to re-check prices and facts (never changes data automatically)

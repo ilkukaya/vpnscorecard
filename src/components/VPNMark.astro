@@ -1,0 +1,8 @@
+---
+// Neutral monogram instead of trademarked logos.
+import type { VPN } from '../lib/vpns';
+interface Props { vpn: VPN; size?: number }
+const { vpn, size = 44 } = Astro.props;
+const initials = vpn.name.replace(/VPN|Private Internet Access/gi, (m) => (m.toLowerCase() === 'vpn' ? '' : 'PIA')).replace(/[^A-Za-z0-9]/g, '').slice(0, 2) || vpn.name.slice(0, 2);
+---
+<span class="grid shrink-0 place-items-center rounded-xl font-bold text-white shadow-card" style={`width:${size}px;height:${size}px;background:${vpn.color};font-size:${Math.round(size * 0.36)}px`} aria-hidden="true" dir="ltr">{initials}</span>

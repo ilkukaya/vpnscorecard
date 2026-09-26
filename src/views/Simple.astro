@@ -1,0 +1,38 @@
+---
+// Small utility pages: thanks, search, 404, legal notice
+import Base from '../layouts/Base.astro';
+import { t, localized, type Lang } from '../i18n';
+interface Props { lang: Lang; kind: 'thanks' | 'search' | 'notfound' | 'legalnotice'; path: string }
+const { lang, kind, path } = Astro.props;
+const L = (p: string) => localized(p, lang);
+---
+<Base lang={lang} path={path} title={t(lang, `simple.${kind}.title`)} description={t(lang, `simple.${kind}.text`)} noindex={true} showAds={false}>
+  <div class="wrap max-w-3xl py-14 md:py-20">
+    <h1 class="h-display text-4xl md:text-5xl">{t(lang, `simple.${kind}.title`)}</h1>
+    <p class="mt-4 text-lg text-ink-2">{t(lang, `simple.${kind}.text`)}</p>
+    {kind === 'search' && (
+      <>
+        <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+        <div id="search" class="mt-8"></div>
+        <script is:inline src="/pagefind/pagefind-ui.js"></script>
+        <script is:inline>
+          window.addEventListener('DOMContentLoaded', function () {
+            var ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, autofocus: true });
+            var q = new URLSearchParams(location.search).get('q');
+            if (q) ui.triggerSearch(q);
+          });
+        </script>
+        <style is:global>
+          #search { --pagefind-ui-primary: #0F7B5F; --pagefind-ui-text: #121417; --pagefind-ui-border: #CFCAC0; --pagefind-ui-border-radius: 12px; --pagefind-ui-font: inherit; }
+        </style>
+      </>
+    )}
+    {kind !== 'search' && (
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={L('/')} class="btn-primary">{t(lang, 'simple.home')}</a>
+        <a href={L('/reviews/')} class="btn-ghost">{t(lang, 'nav.reviews')}</a>
+        {kind === 'legalnotice' && <a href={L('/vpn-legality/')} class="btn-ghost">{t(lang, 'nav.legality')}</a>}
+      </div>
+    )}
+  </div>
+</Base>

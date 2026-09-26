@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import VPNMark from '../components/VPNMark.astro';
+import CompareTable from '../components/CompareTable.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { t, localized, type Lang } from '../i18n';
+import { allVPNs, LAST_REVIEWED } from '../lib/vpns';
+import { comparePairs, pairSlug } from '../lib/lists';
+import { breadcrumbSchema } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const L = (p: string) => localized(p, lang);
+const year = new Date(LAST_REVIEWED).getUTCFullYear();
+const pairs = comparePairs();
+---
+<Base lang={lang} path="/compare/" title={t(lang, 'compareIndex.metaTitle', { year })} description={t(lang, 'compareIndex.metaDescription')} schema={[breadcrumbSchema([{ name: t(lang, 'nav.home'), path: L('/') }, { name: t(lang, 'nav.compare'), path: L('/compare/') }])]}>
+  <div class="wrap py-10 md:py-14">
+    <Breadcrumbs items={[{ name: t(lang, 'nav.home'), href: L('/') }, { name: t(lang, 'nav.compare'), href: L('/compare/') }]} />
+    <h1 class="h-display mt-5 text-4xl md:text-5xl">{t(lang, 'compareIndex.h1')}</h1>
+    <p class="mt-4 max-w-2xl text-lg text-ink-2">{t(lang, 'compareIndex.lead')}</p>
+    <Disclosure lang={lang} class="mt-6" />
+
+    <form id="picker" class="card mt-8 grid gap-3 p-5 sm:grid-cols-[1fr_auto_1fr_auto] sm:items-end" data-base={L('/compare/')}>
+      <label class="grid gap-1 text-sm font-medium">{t(lang, 'compareIndex.first')}
+        <select name="a" class="rounded-xl border border-line-strong bg-white px-3 py-2.5">{allVPNs.slice(0, 8).map((v, i) => <option value={v.slug} selected={i === 0}>{v.name}</option>)}</select>
+      </label>
+      <span class="hidden pb-3 text-center text-sm font-bold text-ink-4 sm:block">vs</span>
+      <label class="grid gap-1 text-sm font-medium">{t(lang, 'compareIndex.second')}
+        <select name="b" class="rounded-xl border border-line-strong bg-white px-3 py-2.5">{allVPNs.slice(0, 8).map((v, i) => <option value={v.slug} selected={i === 1}>{v.name}</option>)}</select>
+      </label>
+      <button class="btn-primary" type="submit">{t(lang, 'compareIndex.go')}</button>
+    </form>
+
+    <section class="mt-12">
+      <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'compareIndex.popular')}</h2>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {pairs.map(([a, b]) => (
+          <a href={L(`/compare/${pairSlug(a, b)}/`)} class="card flex items-center gap-3 p-4 hover:shadow-lift">
+            <VPNMark vpn={a} size={32} /><span class="text-xs font-bold text-ink-4">vs</span><VPNMark vpn={b} size={32} />
+            <span class="ms-1 text-sm font-semibold" dir="ltr">{a.name} vs {b.name}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <h2 class="h-display text-2xl md:text-3xl">{t(lang, 'compareIndex.top5')}</h2>
+      <div class="mt-5"><CompareTable vpns={allVPNs.slice(0, 5)} lang={lang} place="compare-index" /></div>
+    </section>
+  </div>
+</Base>
+<script>
+  const form = document.getElementById('picker') as HTMLFormElement;
+  const valid = new Set(Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href*="-vs-"]')).map((a) => a.getAttribute('href')));
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const a = (form.elements.namedItem('a') as HTMLSelectElement).value;
+    const b = (form.elements.namedItem('b') as HTMLSelectElement).value;
+    if (a === b) return;
+    const base = form.dataset.base!;
+    const x = `${base}${a}-vs-${b}/`, y = `${base}${b}-vs-${a}/`;
+    location.href = valid.has(x) ? x : valid.has(y) ? y : x;
+  });
+</script>

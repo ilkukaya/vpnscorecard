@@ -1,0 +1,8 @@
+---
+import View from '../../../views/Best.astro';
+import { nonDefaultLangs, type Lang } from '../../../i18n';
+import { bestLists } from '../../../lib/lists';
+export const getStaticPaths = () => nonDefaultLangs.flatMap((lang) => bestLists.map((list) => ({ params: { lang, key: list.key }, props: { key: list.key } })));
+const list = bestLists.find((l) => l.key === Astro.props.key)!;
+---
+<View lang={Astro.params.lang as Lang} list={list} />

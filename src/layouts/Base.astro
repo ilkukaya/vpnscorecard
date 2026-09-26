@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { languages, langs, localized, t, type Lang, defaultLang } from '../i18n';
+import { SITE_URL, SITE_NAME, abs, env } from '../lib/site';
+import { orgSchema, websiteSchema, graph } from '../lib/seo';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Unlocalized path, e.g. "/reviews/nordvpn/" */
+  path: string;
+  image?: string;
+  type?: 'website' | 'article';
+  schema?: any[];
+  noindex?: boolean;
+  /** Languages in which this page exists (for hreflang). Defaults to all. */
+  available?: Lang[];
+  published?: string;
+  modified?: string;
+  showAds?: boolean;
+}
+
+const { lang, title, description, path, image = '/og/default.png', type = 'website', schema = [], noindex = false, available = langs, published, modified, showAds = true } = Astro.props;
+const L = languages[lang];
+const canonical = abs(localized(path, lang));
+const ogImage = image.startsWith('http') ? image : abs(image);
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+const ld = graph([orgSchema(), websiteSchema(lang), ...schema]);
+const adsOn = Boolean(env.adsenseClient) && showAds;
+---
+<!doctype html>
+<html lang={L.hreflang} dir={L.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    {!noindex && available.map((l) => <link rel="alternate" hreflang={languages[l].hreflang} href={abs(localized(path, l))} />)}
+    {!noindex && available.includes(defaultLang) && <link rel="alternate" hreflang="x-default" href={abs(localized(path, defaultLang))} />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#F7F6F2" />
+    <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={L.ogLocale} />
+    {available.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={languages[l].ogLocale} />)}
+    {published && <meta property="article:published_time" content={published} />}
+    {modified && <meta property="article:modified_time" content={modified} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {env.googleVerification && <meta name="google-site-verification" content={env.googleVerification} />}
+    {env.bingVerification && <meta name="msvalidate.01" content={env.bingVerification} />}
+    {env.yandexVerification && <meta name="yandex-verification" content={env.yandexVerification} />}
+
+    <script type="application/ld+json" set:html={ld} />
+
+    {adsOn && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${env.adsenseClient}`} crossorigin="anonymous"></script>}
+    {env.cfBeaconToken && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: env.cfBeaconToken })}></script>}
+    {env.ga4Id && (
+      <>
+        <script is:inline define:vars={{ id: env.ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+          gtag('js', new Date());
+          gtag('config', id, { anonymize_ip: true });
+          var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s);
+        </script>
+      </>
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:start-3 focus:z-[60] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-white">{t(lang, 'a11y.skip')}</a>
+    <Header lang={lang} path={path} available={available} />
+    <main id="main" class="flex-1" data-pagefind-body={noindex ? undefined : ""}>
+      <slot />
+    </main>
+    <Footer lang={lang} path={path} available={available} />
+    <script>
+      // Outbound click tracking (works with GA4 or Cloudflare if present; harmless otherwise)
+      document.addEventListener('click', (e) => {
+        const a = (e.target as HTMLElement).closest('a[data-go]') as HTMLAnchorElement | null;
+        if (!a) return;
+        const w = window as any;
+        if (typeof w.gtag === 'function') w.gtag('event', 'affiliate_click', { vpn: a.dataset.go, placement: a.dataset.place || '' });
+      });
+    </script>
+  </body>
+</html>

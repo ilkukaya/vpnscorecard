@@ -1,0 +1,50 @@
+---
+import VPNMark from './VPNMark.astro';
+import Check from './Check.astro';
+import CTA from './CTA.astro';
+import { t, localized, priceFmt, numberFmt, type Lang } from '../i18n';
+import { lowestPrice, connections, refundDays, type VPN } from '../lib/vpns';
+
+interface Props { vpns: VPN[]; lang: Lang; place: string }
+const { vpns, lang, place } = Astro.props;
+const n = (x: number) => numberFmt(lang, x);
+const rows: { label: string; cell: (v: VPN) => any; kind?: 'bool' }[] = [
+  { label: t(lang, 'facts.score'), cell: (v) => `${numberFmt(lang, v.scores.total / 10, { minimumFractionDigits: 1 })}/10` },
+  { label: t(lang, 'facts.lowestPrice'), cell: (v) => { const p = lowestPrice(v.id); return p ? `${priceFmt(lang, p.price, p.currency)}${t(lang, 'common.perMonth')}` : '—'; } },
+  { label: t(lang, 'facts.refund'), cell: (v) => refundDays(v.id) ? t(lang, 'common.days', { n: refundDays(v.id) }) : '—' },
+  { label: t(lang, 'facts.devices'), cell: (v) => { const c = connections(v); return c === 'unlimited' ? t(lang, 'common.unlimited') : n(c); } },
+  { label: t(lang, 'facts.countries'), cell: (v) => n(v.server_network.country_count) },
+  { label: t(lang, 'facts.headquarters'), cell: (v) => v.headquarters },
+  { label: t(lang, 'facts.audited'), cell: (v) => v.security.no_logs_audited, kind: 'bool' },
+  { label: t(lang, 'facts.ramOnly'), cell: (v) => (v.server_network as any).ram_only, kind: 'bool' },
+  { label: t(lang, 'facts.killSwitch'), cell: (v) => v.security.kill_switch, kind: 'bool' },
+  { label: t(lang, 'facts.p2p'), cell: (v) => v.server_network.p2p_servers, kind: 'bool' },
+  { label: t(lang, 'facts.protocol'), cell: (v) => v.speed.fastest_protocol },
+];
+---
+<div class="scroll-x">
+  <table class="table-clean min-w-[640px] bg-white rounded-2xl overflow-hidden border border-line">
+    <thead>
+      <tr>
+        <th class="w-44"><span class="sr-only">{t(lang, 'facts.feature')}</span></th>
+        {vpns.map((v) => (
+          <th class="normal-case tracking-normal">
+            <a href={localized(`/reviews/${v.slug}/`, lang)} class="flex items-center gap-2 text-sm font-bold text-ink hover:text-accent-ink"><VPNMark vpn={v} size={28} />{v.name}</a>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <td class="font-medium text-ink-2">{r.label}</td>
+          {vpns.map((v) => <td class="num">{r.kind === 'bool' ? <Check ok={r.cell(v)} /> : r.cell(v)}</td>)}
+        </tr>
+      ))}
+      <tr>
+        <td></td>
+        {vpns.map((v) => <td><CTA id={v.id} place={place} small>{t(lang, 'common.visit')}</CTA></td>)}
+      </tr>
+    </tbody>
+  </table>
+</div>

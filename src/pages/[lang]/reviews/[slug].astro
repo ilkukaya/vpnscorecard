@@ -1,0 +1,8 @@
+---
+import View from '../../../views/Review.astro';
+import { nonDefaultLangs, type Lang } from '../../../i18n';
+import { allVPNs, type VPN } from '../../../lib/vpns';
+export const getStaticPaths = () => nonDefaultLangs.flatMap((lang) => allVPNs.map((vpn) => ({ params: { lang, slug: vpn.slug }, props: { vpn } })));
+const { vpn } = Astro.props as { vpn: VPN };
+---
+<View lang={Astro.params.lang as Lang} vpn={vpn} />

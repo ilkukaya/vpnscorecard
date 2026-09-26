@@ -1,176 +1,55 @@
 #!/usr/bin/env python3
-"""
-JSON Validation Script
-Validates all data/*.json files and checks required fields.
+"""Validates data/*.json and translation files. Run: python3 scripts/validate_data.py"""
+import json, os, sys, glob, datetime
 
-Usage: python scripts/validate_data.py
-"""
-
-import json
-import os
-import sys
-
-
-def load_json(filepath):
-    """Load a JSON file."""
-    with open(filepath, "r", encoding="utf-8") as f:
+errors, warnings = [], []
+def load(p):
+    with open(p, encoding="utf-8") as f:
         return json.load(f)
 
+vpns = load("data/vpns.json")["vpns"]
+pricing = load("data/pricing.json")
+aff = load("data/affiliates.json")
+legal = load("data/vpn-legality.json")
 
-def validate_vpns():
-    """Validate vpns.json."""
-    filepath = os.path.join("data", "vpns.json")
-    data = load_json(filepath)
+ids = set()
+for v in vpns:
+    if v["id"] in ids: errors.append(f"duplicate id {v['id']}")
+    ids.add(v["id"])
+    s = v["scores"]
+    total = sum(s[k] for k in ["speed", "privacy", "ease_of_use", "server_network", "value", "streaming"])
+    if total != s["total"]: errors.append(f"{v['id']}: score parts sum to {total}, total says {s['total']}")
+    for k, mx in [("speed", 25), ("privacy", 25), ("ease_of_use", 15), ("server_network", 15), ("value", 15), ("streaming", 5)]:
+        if not 0 <= s[k] <= mx: errors.append(f"{v['id']}: {k}={s[k]} outside 0..{mx}")
+    if v["id"] not in pricing["prices"]: warnings.append(f"{v['id']}: no pricing")
+    if v["id"] not in aff: errors.append(f"{v['id']}: missing in affiliates.json")
+    if not v["website"].startswith("https://"): errors.append(f"{v['id']}: website must be https")
+    u = (aff.get(v["id"]) or {}).get("url", "")
+    if u and not u.startswith("https://"): errors.append(f"{v['id']}: affiliate url must be https")
 
-    required_fields = [
-        "id", "name", "slug", "logo", "color_hex", "tagline", "website",
-        "headquarters", "is14Eyes", "founded_year", "security", "server_network",
-        "speed_tests", "platform_support", "streaming", "scores", "affiliate",
-        "pros", "cons", "best_for", "active",
-    ]
+en_copy = load("src/i18n/vpn/en.json")
+for f in glob.glob("src/i18n/vpn/*.json"):
+    c = load(f)
+    for i in ids:
+        if i not in c: errors.append(f"{f}: missing {i}")
 
-    errors = []
-    vpn_ids = set()
-
-    for vpn in data["vpns"]:
-        if vpn["id"] in vpn_ids:
-            errors.append(f"Duplicate VPN id: {vpn['id']}")
-        vpn_ids.add(vpn["id"])
-
-        for field in required_fields:
-            if field not in vpn:
-                errors.append(f"VPN {vpn.get('id', 'unknown')} missing field: {field}")
-
-        if "scores" in vpn:
-            s = vpn["scores"]
-            calculated = (
-                s.get("speed", 0) + s.get("privacy", 0) + s.get("ease_of_use", 0)
-                + s.get("server_network", 0) + s.get("value", 0) + s.get("streaming", 0)
-            )
-            if s.get("total") != calculated:
-                errors.append(
-                    f"VPN {vpn['id']}: score mismatch "
-                    f"(calculated: {calculated}, reported: {s.get('total')})"
-                )
-
-        if "security" in vpn:
-            for sec_field in ["encryption", "protocols", "no_logs_policy", "kill_switch"]:
-                if sec_field not in vpn["security"]:
-                    errors.append(f"VPN {vpn['id']} security missing: {sec_field}")
-
-    return errors
-
-
-def validate_pricing():
-    """Validate pricing.json."""
-    filepath = os.path.join("data", "pricing.json")
-    data = load_json(filepath)
-
-    errors = []
-    for vpn_id, pricing in data["prices"].items():
-        if "currency" not in pricing:
-            errors.append(f"Pricing {vpn_id}: currency missing")
-        if "monthly" not in pricing and "free_plan" not in pricing:
-            errors.append(f"Pricing {vpn_id}: at least one plan required")
-
-    return errors
-
-
-def validate_speed_tests():
-    """Validate speed-tests.json."""
-    filepath = os.path.join("data", "speed-tests.json")
-    data = load_json(filepath)
-
-    errors = []
-    required_fields = [
-        "vpn_id", "protocol", "download_mbps", "upload_mbps",
-        "ping_ms", "consistency_percent", "rank",
-    ]
-
-    for result in data["results"]:
-        for field in required_fields:
-            if field not in result:
-                errors.append(f"Speed test {result.get('vpn_id', 'unknown')} missing: {field}")
-
-    rankings = [r["rank"] for r in data["results"]]
-    if rankings != sorted(rankings):
-        errors.append("Speed test rankings are inconsistent")
-
-    return errors
-
-
-def validate_deals():
-    """Validate deals.json."""
-    filepath = os.path.join("data", "deals.json")
-    data = load_json(filepath)
-
-    errors = []
-    required_fields = [
-        "vpn_id", "title", "description", "discount_percent",
-        "monthly_price_usd", "link", "verified_date",
-    ]
-
-    for deal in data["deals"]:
-        for field in required_fields:
-            if field not in deal:
-                errors.append(f"Deal {deal.get('vpn_id', 'unknown')} missing: {field}")
-
-    return errors
-
-
-def validate_server_counts():
-    """Validate server-counts.json."""
-    filepath = os.path.join("data", "server-counts.json")
-    data = load_json(filepath)
-
-    errors = []
-    for vpn_id, counts in data["server_counts"].items():
-        if "servers" not in counts:
-            errors.append(f"Server counts {vpn_id}: servers missing")
-        if "countries" not in counts:
-            errors.append(f"Server counts {vpn_id}: countries missing")
-
-    return errors
-
-
-def main():
-    print("Validating JSON data files...\n")
-
-    all_errors = []
-
-    validators = [
-        ("vpns.json", validate_vpns),
-        ("pricing.json", validate_pricing),
-        ("speed-tests.json", validate_speed_tests),
-        ("deals.json", validate_deals),
-        ("server-counts.json", validate_server_counts),
-    ]
-
-    for name, validator in validators:
-        try:
-            errors = validator()
-            if errors:
-                print(f"FAIL {name}: {len(errors)} error(s)")
-                for err in errors:
-                    print(f"   - {err}")
-                all_errors.extend(errors)
-            else:
-                print(f"OK   {name}: Valid")
-        except FileNotFoundError:
-            print(f"FAIL {name}: File not found")
-            all_errors.append(f"{name} file not found")
-        except json.JSONDecodeError as e:
-            print(f"FAIL {name}: JSON parse error: {e}")
-            all_errors.append(f"{name} JSON parse error")
-
-    print()
-    if all_errors:
-        print(f"FAILED: {len(all_errors)} error(s) found!")
-        sys.exit(1)
+def keys(o, p=""):
+    if isinstance(o, dict):
+        for k, v in o.items(): yield from keys(v, f"{p}.{k}" if p else k)
     else:
-        print("ALL PASSED: All JSON files are valid!")
-        sys.exit(0)
+        yield p
+en_keys = set(keys(load("src/i18n/ui/en.json")))
+for f in glob.glob("src/i18n/ui/*.json"):
+    missing = en_keys - set(keys(load(f)))
+    if missing: warnings.append(f"{f}: {len(missing)} keys missing (English fallback used), e.g. {sorted(missing)[:3]}")
 
+for c in legal["countries"]:
+    if c["status"] not in ("legal", "restricted", "banned"): errors.append(f"legality {c['code']}: bad status")
 
-if __name__ == "__main__":
-    main()
+age = (datetime.date.today() - datetime.date.fromisoformat(pricing["last_updated"])).days
+if age > 120: warnings.append(f"pricing.json is {age} days old — please re-check prices")
+
+for w in warnings: print("WARN ", w)
+for e in errors: print("ERROR", e)
+print(f"{len(vpns)} VPNs checked: {len(errors)} errors, {len(warnings)} warnings")
+sys.exit(1 if errors else 0)

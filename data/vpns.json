@@ -1,19 +1,17 @@
 {
-  "last_updated": "2026-04-01",
-  "methodology_version": "2.1",
+  "data_as_of": "2026-04-01",
+  "last_reviewed": "2026-09-26",
+  "methodology_version": "3.0",
   "vpns": [
     {
       "id": "nordvpn",
       "name": "NordVPN",
       "slug": "nordvpn",
-      "logo": "/logos/nordvpn.svg",
-      "color_hex": "#4687FF",
-      "tagline": "The fastest and most reliable VPN",
+      "color": "#4687FF",
       "website": "https://nordvpn.com",
       "headquarters": "Panama",
-      "is14Eyes": false,
       "founded_year": 2012,
-      "priority": "A",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256-GCM",
         "protocols": [
@@ -40,24 +38,10 @@
         "p2p_servers": true,
         "streaming_servers": true,
         "dedicated_ip": true,
-        "ram_only": false
+        "ram_only": true
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "nordlynx": {
-          "download_mbps": 887,
-          "upload_mbps": 412,
-          "ping_ms": 8,
-          "consistency_percent": 94
-        },
-        "openvpn": {
-          "download_mbps": 312,
-          "upload_mbps": 180,
-          "ping_ms": 22,
-          "consistency_percent": 89
-        }
+      "speed": {
+        "fastest_protocol": "NordLynx (WireGuard)"
       },
       "platform_support": {
         "windows": true,
@@ -84,6 +68,7 @@
         "email": true,
         "response_time_hours": 2
       },
+      "free_plan": null,
       "scores": {
         "speed": 23,
         "privacy": 24,
@@ -93,48 +78,24 @@
         "streaming": 5,
         "total": 91
       },
-      "affiliate": {
-        "program": "NordVPN Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 40,
-        "cookie_days": 30,
-        "link_1month": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=902",
-        "link_1year": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=900",
-        "link_2year": "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOURID&url_id=901"
-      },
-      "pros": [
-        "Independently audited no-logs policy (Deloitte)",
-        "Fastest VPN with NordLynx protocol (887 Mbps)",
-        "6,400+ servers in 111 countries",
-        "Threat Protection blocks ads and malware",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "Router app setup is complex",
-        "No RAM-only server infrastructure yet",
-        "Slightly more expensive than budget options"
-      ],
       "best_for": [
         "streaming",
         "privacy",
         "speed",
         "overall"
       ],
-      "recommended_plan": "2-year plan (lowest monthly cost)",
+      "affiliate_program": "NordVPN Affiliate",
       "active": true
     },
     {
       "id": "expressvpn",
       "name": "ExpressVPN",
       "slug": "expressvpn",
-      "logo": "/logos/expressvpn.svg",
-      "color_hex": "#DA3940",
-      "tagline": "World standard in speed and reliability",
+      "color": "#DA3940",
       "website": "https://www.expressvpn.com",
       "headquarters": "British Virgin Islands",
-      "is14Eyes": false,
       "founded_year": 2009,
-      "priority": "A",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256-GCM",
         "protocols": [
@@ -152,33 +113,18 @@
         "dns_leak_protection": true,
         "ipv6_protection": true,
         "double_vpn": false,
-        "obfuscated_servers": true,
-        "ram_only": true
+        "obfuscated_servers": true
       },
       "server_network": {
         "total_servers": 3000,
         "country_count": 105,
         "p2p_servers": true,
         "streaming_servers": true,
-        "dedicated_ip": false,
+        "dedicated_ip": true,
         "ram_only": true
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "lightway": {
-          "download_mbps": 812,
-          "upload_mbps": 389,
-          "ping_ms": 10,
-          "consistency_percent": 92
-        },
-        "openvpn": {
-          "download_mbps": 289,
-          "upload_mbps": 167,
-          "ping_ms": 25,
-          "consistency_percent": 87
-        }
+      "speed": {
+        "fastest_protocol": "Lightway"
       },
       "platform_support": {
         "windows": true,
@@ -189,7 +135,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "simultaneous_connections": 8
+        "simultaneous_connections": 10
       },
       "streaming": {
         "netflix_us": true,
@@ -205,6 +151,7 @@
         "email": true,
         "response_time_hours": 1
       },
+      "free_plan": null,
       "scores": {
         "speed": 22,
         "privacy": 23,
@@ -214,46 +161,23 @@
         "streaming": 5,
         "total": 86
       },
-      "affiliate": {
-        "program": "ExpressVPN Affiliate",
-        "commission_type": "flat",
-        "commission_usd": 13,
-        "cookie_days": 90,
-        "link_main": "https://www.expressvpn.com/vpn-service/refer-a-friend?ref=YOURID"
-      },
-      "pros": [
-        "RAM-only server infrastructure (TrustedServer)",
-        "High speed with Lightway protocol",
-        "Wide server network in 105 countries",
-        "Best router VPN support",
-        "KPMG-audited no-logs policy"
-      ],
-      "cons": [
-        "One of the most expensive VPNs",
-        "No dedicated IP feature",
-        "No Double VPN",
-        "8 simultaneous connection limit"
-      ],
       "best_for": [
         "streaming",
         "router",
         "business"
       ],
-      "recommended_plan": "1-year plan",
+      "affiliate_program": "ExpressVPN Affiliate",
       "active": true
     },
     {
       "id": "surfshark",
       "name": "Surfshark",
       "slug": "surfshark",
-      "logo": "/logos/surfshark.svg",
-      "color_hex": "#1DB9C3",
-      "tagline": "Unlimited devices, unlimited freedom",
+      "color": "#1DB9C3",
       "website": "https://surfshark.com",
       "headquarters": "Netherlands",
-      "is14Eyes": true,
       "founded_year": 2018,
-      "priority": "A",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256-GCM",
         "protocols": [
@@ -278,18 +202,10 @@
         "p2p_servers": true,
         "streaming_servers": true,
         "dedicated_ip": true,
-        "ram_only": false
+        "ram_only": true
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 798,
-          "upload_mbps": 367,
-          "ping_ms": 11,
-          "consistency_percent": 91
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -300,7 +216,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "simultaneous_connections": null
+        "simultaneous_connections": "unlimited"
       },
       "streaming": {
         "netflix_us": true,
@@ -316,6 +232,7 @@
         "email": true,
         "response_time_hours": 3
       },
+      "free_plan": null,
       "scores": {
         "speed": 21,
         "privacy": 21,
@@ -325,45 +242,23 @@
         "streaming": 4,
         "total": 87
       },
-      "affiliate": {
-        "program": "Surfshark Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 40,
-        "cookie_days": 30,
-        "link_main": "https://surfshark.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Unlimited simultaneous device connections",
-        "Best price-performance ratio on the market",
-        "Nexus technology with IP rotation",
-        "Deloitte-audited no-logs policy",
-        "CleanWeb ad blocker included"
-      ],
-      "cons": [
-        "Based in Netherlands (14 Eyes country)",
-        "No RAM-only server infrastructure",
-        "Fewer servers compared to NordVPN"
-      ],
       "best_for": [
         "budget",
         "multi_device",
         "family"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "Surfshark Affiliate",
       "active": true
     },
     {
       "id": "cyberghost",
       "name": "CyberGhost",
       "slug": "cyberghost",
-      "logo": "/logos/cyberghost.svg",
-      "color_hex": "#FFCC00",
-      "tagline": "The easiest VPN for beginners",
+      "color": "#FFCC00",
       "website": "https://www.cyberghostvpn.com",
       "headquarters": "Romania",
-      "is14Eyes": false,
       "founded_year": 2011,
-      "priority": "A",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -390,16 +285,8 @@
         "dedicated_ip": true,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 743,
-          "upload_mbps": 312,
-          "ping_ms": 14,
-          "consistency_percent": 88
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -426,6 +313,7 @@
         "email": true,
         "response_time_hours": 4
       },
+      "free_plan": null,
       "scores": {
         "speed": 19,
         "privacy": 20,
@@ -435,46 +323,23 @@
         "streaming": 3,
         "total": 85
       },
-      "affiliate": {
-        "program": "CyberGhost Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 45,
-        "cookie_days": 45,
-        "link_main": "https://www.cyberghostvpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "9,600+ servers — largest VPN network",
-        "Easiest interface for beginners",
-        "Streaming-optimized servers",
-        "45-day money-back guarantee",
-        "45% recurring affiliate commission"
-      ],
-      "cons": [
-        "BBC iPlayer and some streaming services may not work",
-        "Speed performance slightly below competitors",
-        "7 device limit"
-      ],
       "best_for": [
         "beginners",
         "streaming",
-        "torrent"
+        "p2p"
       ],
-      "recommended_plan": "2-year plan",
-      "active": true,
-      "color_text_hex": "#1A1A1A"
+      "affiliate_program": "CyberGhost Affiliate",
+      "active": true
     },
     {
       "id": "protonvpn",
       "name": "Proton VPN",
       "slug": "protonvpn",
-      "logo": "/logos/protonvpn.svg",
-      "color_hex": "#6D4AFF",
-      "tagline": "The secure choice for journalists and activists",
+      "color": "#6D4AFF",
       "website": "https://protonvpn.com",
       "headquarters": "Switzerland",
-      "is14Eyes": false,
       "founded_year": 2017,
-      "priority": "A",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -504,16 +369,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 689,
-          "upload_mbps": 298,
-          "ping_ms": 13,
-          "consistency_percent": 90
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -540,6 +397,13 @@
         "email": true,
         "response_time_hours": 12
       },
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 5,
+        "data_limit_gb": null,
+        "ads": false
+      },
       "scores": {
         "speed": 18,
         "privacy": 25,
@@ -549,51 +413,23 @@
         "streaming": 4,
         "total": 83
       },
-      "affiliate": {
-        "program": "Proton VPN Affiliate",
-        "commission_type": "flat",
-        "commission_usd": 10,
-        "cookie_days": 60
-      },
-      "pros": [
-        "Swiss-based, strong privacy laws",
-        "Open-source apps (auditable by anyone)",
-        "Free plan with unlimited data",
-        "Tor over VPN support",
-        "Ideal for journalists and activists"
-      ],
-      "cons": [
-        "Premium plan more expensive than competitors",
-        "No browser extension",
-        "Speed behind NordVPN/ExpressVPN"
-      ],
       "best_for": [
         "privacy",
-        "journalism",
+        "max_privacy",
         "free_tier"
       ],
-      "recommended_plan": "Proton VPN Plus yearly",
-      "active": true,
-      "free_plan": {
-        "available": true,
-        "speed_limit_mbps": null,
-        "country_count": 5,
-        "data_limit_gb": null,
-        "ads": false
-      }
+      "affiliate_program": "Proton VPN Affiliate",
+      "active": true
     },
     {
       "id": "pia",
       "name": "Private Internet Access",
       "slug": "pia",
-      "logo": "/logos/pia.svg",
-      "color_hex": "#4CBB17",
-      "tagline": "The customization lovers VPN",
+      "color": "#4CBB17",
       "website": "https://www.privateinternetaccess.com",
       "headquarters": "United States",
-      "is14Eyes": true,
       "founded_year": 2010,
-      "priority": "A",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-128 / AES-256 (seçilebilir)",
         "protocols": [
@@ -618,18 +454,10 @@
         "p2p_servers": true,
         "streaming_servers": true,
         "dedicated_ip": true,
-        "ram_only": false
+        "ram_only": true
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 651,
-          "upload_mbps": 287,
-          "ping_ms": 16,
-          "consistency_percent": 86
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -640,7 +468,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": true,
-        "simultaneous_connections": null
+        "simultaneous_connections": "unlimited"
       },
       "streaming": {
         "netflix_us": true,
@@ -656,6 +484,7 @@
         "email": true,
         "response_time_hours": 6
       },
+      "free_plan": null,
       "scores": {
         "speed": 17,
         "privacy": 20,
@@ -665,44 +494,23 @@
         "streaming": 3,
         "total": 80
       },
-      "affiliate": {
-        "program": "PIA Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 33,
-        "cookie_days": 45
-      },
-      "pros": [
-        "18,000+ servers — worlds largest VPN network",
-        "Unlimited simultaneous connections",
-        "Open-source, court-proven no-logs",
-        "MACE ad and malware blocker",
-        "Very affordable long-term plans"
-      ],
-      "cons": [
-        "US-based (14 Eyes country)",
-        "Streaming performance weaker than competitors",
-        "Interface complex for beginners"
-      ],
       "best_for": [
-        "torrent",
+        "p2p",
         "privacy",
         "advanced"
       ],
-      "recommended_plan": "3-year plan (cheapest option)",
+      "affiliate_program": "PIA Affiliate",
       "active": true
     },
     {
       "id": "ipvanish",
       "name": "IPVanish",
       "slug": "ipvanish",
-      "logo": "/logos/ipvanish.svg",
-      "color_hex": "#F47920",
-      "tagline": "Reliable and affordable VPN",
+      "color": "#F47920",
       "website": "https://www.ipvanish.com",
       "headquarters": "United States",
-      "is14Eyes": true,
       "founded_year": 2012,
-      "priority": "A",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -726,16 +534,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 623,
-          "upload_mbps": 278,
-          "ping_ms": 18,
-          "consistency_percent": 84
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -746,7 +546,7 @@
         "browser_extension": false,
         "router": true,
         "smart_tv": true,
-        "simultaneous_connections": null
+        "simultaneous_connections": "unlimited"
       },
       "streaming": {
         "netflix_us": true,
@@ -762,6 +562,7 @@
         "email": true,
         "response_time_hours": 8
       },
+      "free_plan": null,
       "scores": {
         "speed": 16,
         "privacy": 18,
@@ -771,44 +572,23 @@
         "streaming": 2,
         "total": 71
       },
-      "affiliate": {
-        "program": "IPVanish Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 30,
-        "cookie_days": 30
-      },
-      "pros": [
-        "Unlimited simultaneous connections",
-        "Owns its own server infrastructure",
-        "Affordable long-term plans",
-        "Scramble feature for censorship bypass"
-      ],
-      "cons": [
-        "US-based (14 Eyes country)",
-        "No independent audit",
-        "Limited streaming support",
-        "Fewer country coverage"
-      ],
       "best_for": [
-        "torrent",
+        "p2p",
         "budget",
         "multi_device"
       ],
-      "recommended_plan": "1-year plan",
+      "affiliate_program": "IPVanish Affiliate",
       "active": true
     },
     {
       "id": "mullvad",
       "name": "Mullvad VPN",
       "slug": "mullvad",
-      "logo": "/logos/mullvad.svg",
-      "color_hex": "#FFCA5E",
-      "tagline": "Anonymous payment, maximum privacy",
+      "color": "#FFCA5E",
       "website": "https://mullvad.net",
       "headquarters": "Sweden",
-      "is14Eyes": true,
       "founded_year": 2009,
-      "priority": "A",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -822,7 +602,6 @@
         "audit_date": "2024-03",
         "kill_switch": true,
         "dns_leak_protection": true,
-        "ram_only": true,
         "open_source": true,
         "anonymous_account": true,
         "cash_payment": true,
@@ -836,16 +615,8 @@
         "dedicated_ip": false,
         "ram_only": true
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 912,
-          "upload_mbps": 445,
-          "ping_ms": 7,
-          "consistency_percent": 96
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -872,6 +643,7 @@
         "email": true,
         "response_time_hours": 24
       },
+      "free_plan": null,
       "scores": {
         "speed": 24,
         "privacy": 25,
@@ -881,44 +653,21 @@
         "streaming": 0,
         "total": 79
       },
-      "affiliate": {
-        "program": null,
-        "note": "Mullvad affiliate programı yoktur. Editoryal içerik olarak dahil et."
-      },
-      "pros": [
-        "Fastest WireGuard speeds in our testing (912 Mbps)",
-        "No email required for signup",
-        "Anonymous payment via cash and crypto",
-        "RAM-only server infrastructure",
-        "Flat pricing: fixed 5 EUR/mo, no discounts"
-      ],
-      "cons": [
-        "Does not unblock any streaming service",
-        "No affiliate program",
-        "Limited server and country count",
-        "No router or Smart TV support"
-      ],
       "best_for": [
-        "max_privacy",
-        "journalist",
-        "activist"
+        "max_privacy"
       ],
-      "recommended_plan": "Monthly plan (no commitment)",
-      "active": true,
-      "color_text_hex": "#1A1A1A"
+      "affiliate_program": null,
+      "active": true
     },
     {
       "id": "purevpn",
       "name": "PureVPN",
       "slug": "purevpn",
-      "logo": "/logos/purevpn.svg",
-      "color_hex": "#6F2DA8",
-      "tagline": "Affordable VPN with global reach",
+      "color": "#6F2DA8",
       "website": "https://www.purevpn.com",
       "headquarters": "British Virgin Islands",
-      "is14Eyes": false,
       "founded_year": 2007,
-      "priority": "A",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -943,16 +692,8 @@
         "dedicated_ip": true,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 580,
-          "upload_mbps": 256,
-          "ping_ms": 19,
-          "consistency_percent": 83
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -979,6 +720,7 @@
         "email": true,
         "response_time_hours": 4
       },
+      "free_plan": null,
       "scores": {
         "speed": 16,
         "privacy": 17,
@@ -988,45 +730,23 @@
         "streaming": 4,
         "total": 74
       },
-      "affiliate": {
-        "program": "PureVPN Affiliate",
-        "commission_type": "hybrid",
-        "commission_percent": 40,
-        "cookie_days": 90,
-        "link_main": "https://www.purevpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "KPMG-audited no-logs policy",
-        "6,500+ servers in 65+ countries",
-        "Dedicated IP available",
-        "Affordable long-term plans from $1.99/mo",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "Fewer countries than top competitors",
-        "Streaming support inconsistent for some services",
-        "Speed behind NordVPN and ExpressVPN"
-      ],
       "best_for": [
         "streaming",
         "budget",
         "multi_device"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "PureVPN Affiliate",
       "active": true
     },
     {
       "id": "torguard",
       "name": "TorGuard",
       "slug": "torguard",
-      "logo": "/logos/torguard.svg",
-      "color_hex": "#2C3E50",
-      "tagline": "Advanced privacy for power users",
+      "color": "#2C3E50",
       "website": "https://torguard.net",
       "headquarters": "United States",
-      "is14Eyes": true,
       "founded_year": 2012,
-      "priority": "B",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1048,16 +768,8 @@
         "dedicated_ip": true,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 540,
-          "upload_mbps": 234,
-          "ping_ms": 20,
-          "consistency_percent": 82
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1084,6 +796,7 @@
         "email": true,
         "response_time_hours": 6
       },
+      "free_plan": null,
       "scores": {
         "speed": 15,
         "privacy": 18,
@@ -1093,46 +806,23 @@
         "streaming": 4,
         "total": 68
       },
-      "affiliate": {
-        "program": "TorGuard Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 30,
-        "cookie_days": 60,
-        "link_main": "https://torguard.net/aff.php?aff=YOURID"
-      },
-      "pros": [
-        "30% lifetime recurring commissions",
-        "Dedicated IP options for streaming",
-        "Strong privacy focus with no-logs",
-        "Good P2P/torrenting support",
-        "Customizable encryption settings"
-      ],
-      "cons": [
-        "US-based (14 Eyes country)",
-        "No independent no-logs audit",
-        "Interface not beginner-friendly",
-        "Only 8 simultaneous connections"
-      ],
       "best_for": [
-        "torrent",
+        "p2p",
         "privacy",
         "advanced"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "TorGuard Affiliate",
       "active": true
     },
     {
       "id": "hideme",
       "name": "hide.me",
       "slug": "hideme",
-      "logo": "/logos/hideme.svg",
-      "color_hex": "#F7B731",
-      "tagline": "Privacy-first VPN with a free plan",
+      "color": "#F7B731",
       "website": "https://hide.me",
       "headquarters": "Malaysia",
-      "is14Eyes": false,
       "founded_year": 2012,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1157,16 +847,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 510,
-          "upload_mbps": 221,
-          "ping_ms": 18,
-          "consistency_percent": 84
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1193,6 +875,13 @@
         "email": true,
         "response_time_hours": 5
       },
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 5,
+        "data_limit_gb": 10,
+        "ads": false
+      },
       "scores": {
         "speed": 14,
         "privacy": 17,
@@ -1202,53 +891,23 @@
         "streaming": 3,
         "total": 66
       },
-      "affiliate": {
-        "program": "hide.me Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 30,
-        "cookie_days": 30,
-        "link_main": "https://hide.me/en/affiliate?ref=YOURID"
-      },
-      "pros": [
-        "Free plan with 10 GB/month",
-        "Independently audited no-logs policy",
-        "75+ country coverage",
-        "Malaysia-based (outside 14 Eyes)",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "Streaming support limited",
-        "No dedicated streaming servers",
-        "Speed behind top-tier competitors",
-        "Free plan has location restrictions"
-      ],
       "best_for": [
         "privacy",
         "free_tier",
         "beginners"
       ],
-      "recommended_plan": "2-year plan",
-      "active": true,
-      "free_plan": {
-        "available": true,
-        "speed_limit_mbps": null,
-        "country_count": 5,
-        "data_limit_gb": 10,
-        "ads": false
-      }
+      "affiliate_program": "hide.me Affiliate",
+      "active": true
     },
     {
       "id": "astrill",
       "name": "Astrill VPN",
       "slug": "astrill",
-      "logo": "/logos/astrill.svg",
-      "color_hex": "#FF6600",
-      "tagline": "The go-to VPN for China and censored regions",
+      "color": "#FF6600",
       "website": "https://www.astrill.com",
       "headquarters": "Seychelles",
-      "is14Eyes": false,
       "founded_year": 2009,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1271,16 +930,8 @@
         "dedicated_ip": true,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 490,
-          "upload_mbps": 198,
-          "ping_ms": 22,
-          "consistency_percent": 80
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1307,55 +958,32 @@
         "email": true,
         "response_time_hours": 3
       },
+      "free_plan": null,
       "scores": {
         "speed": 15,
         "privacy": 16,
         "ease_of_use": 9,
         "server_network": 7,
         "value": 8,
-        "streaming": 7,
-        "total": 62
+        "streaming": 5,
+        "total": 60
       },
-      "affiliate": {
-        "program": "Astrill Affiliate",
-        "commission_type": "flat",
-        "commission_usd": 21,
-        "cookie_days": 30,
-        "link_main": "https://www.astrill.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Most reliable VPN for China (StealthVPN)",
-        "Unblocks Netflix, Disney+, HBO Max",
-        "Seychelles-based (strong privacy)",
-        "Dedicated IP available",
-        "Works in UAE, Iran, and other censored regions"
-      ],
-      "cons": [
-        "Very expensive ($10-25/mo)",
-        "Only 300 servers",
-        "Only 5 simultaneous connections",
-        "No independent no-logs audit"
-      ],
       "best_for": [
-        "china",
         "streaming",
         "privacy"
       ],
-      "recommended_plan": "1-year plan",
+      "affiliate_program": "Astrill Affiliate",
       "active": true
     },
     {
       "id": "fastestvpn",
       "name": "FastestVPN",
       "slug": "fastestvpn",
-      "logo": "/logos/fastestvpn.svg",
-      "color_hex": "#00B894",
-      "tagline": "Ultra-affordable VPN with lifetime deals",
+      "color": "#00B894",
       "website": "https://fastestvpn.com",
       "headquarters": "Cayman Islands",
-      "is14Eyes": false,
       "founded_year": 2017,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1377,16 +1005,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 420,
-          "upload_mbps": 185,
-          "ping_ms": 24,
-          "consistency_percent": 78
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1413,6 +1033,7 @@
         "email": true,
         "response_time_hours": 8
       },
+      "free_plan": null,
       "scores": {
         "speed": 12,
         "privacy": 14,
@@ -1422,45 +1043,22 @@
         "streaming": 3,
         "total": 58
       },
-      "affiliate": {
-        "program": "FastestVPN Affiliate",
-        "commission_type": "hybrid",
-        "commission_percent": 35,
-        "cookie_days": 30,
-        "link_main": "https://fastestvpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Extremely cheap — $1.11/mo on 3-year plan",
-        "15 simultaneous connections",
-        "Cayman Islands jurisdiction (privacy-friendly)",
-        "Ad blocker included",
-        "60-100% commission on new sales"
-      ],
-      "cons": [
-        "Only 800 servers in 40 countries",
-        "No independent security audit",
-        "Speed below average in testing",
-        "Limited streaming support"
-      ],
       "best_for": [
         "budget",
         "multi_device"
       ],
-      "recommended_plan": "3-year plan",
+      "affiliate_program": "FastestVPN Affiliate",
       "active": true
     },
     {
       "id": "tunnelbear",
       "name": "TunnelBear",
       "slug": "tunnelbear",
-      "logo": "/logos/tunnelbear.svg",
-      "color_hex": "#F5A623",
-      "tagline": "The friendliest VPN for beginners",
+      "color": "#F5A623",
       "website": "https://www.tunnelbear.com",
       "headquarters": "Canada",
-      "is14Eyes": true,
       "founded_year": 2011,
-      "priority": "B",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1484,16 +1082,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 480,
-          "upload_mbps": 210,
-          "ping_ms": 17,
-          "consistency_percent": 83
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1504,7 +1094,7 @@
         "browser_extension": true,
         "router": false,
         "smart_tv": false,
-        "simultaneous_connections": null
+        "simultaneous_connections": "unlimited"
       },
       "streaming": {
         "netflix_us": false,
@@ -1520,6 +1110,13 @@
         "email": true,
         "response_time_hours": 24
       },
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 47,
+        "data_limit_gb": 2,
+        "ads": false
+      },
       "scores": {
         "speed": 13,
         "privacy": 16,
@@ -1529,54 +1126,23 @@
         "streaming": 3,
         "total": 65
       },
-      "affiliate": {
-        "program": "TunnelBear Affiliate (CJ)",
-        "commission_type": "flat_percent",
-        "commission_percent": 50,
-        "cookie_days": 30,
-        "link_main": "https://www.tunnelbear.com/affiliate?ref=YOURID"
-      },
-      "pros": [
-        "Most beginner-friendly VPN interface",
-        "Cure53-audited no-logs policy",
-        "Free plan with 2 GB/month",
-        "Unlimited simultaneous connections",
-        "Fun and approachable brand"
-      ],
-      "cons": [
-        "Canada-based (14 Eyes country)",
-        "Poor streaming support",
-        "No P2P/torrenting servers",
-        "No Linux or router support",
-        "No live chat support"
-      ],
       "best_for": [
         "beginners",
         "free_tier",
         "privacy"
       ],
-      "recommended_plan": "1-year plan",
-      "active": true,
-      "free_plan": {
-        "available": true,
-        "speed_limit_mbps": null,
-        "country_count": 47,
-        "data_limit_gb": 2,
-        "ads": false
-      }
+      "affiliate_program": "TunnelBear Affiliate (CJ)",
+      "active": true
     },
     {
       "id": "hotspotshield",
       "name": "Hotspot Shield",
       "slug": "hotspotshield",
-      "logo": "/logos/hotspotshield.svg",
-      "color_hex": "#6EC1E4",
-      "tagline": "Blazing fast speeds with Hydra protocol",
+      "color": "#6EC1E4",
       "website": "https://www.hotspotshield.com",
       "headquarters": "United States",
-      "is14Eyes": true,
       "founded_year": 2008,
-      "priority": "B",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1599,16 +1165,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "hydra": {
-          "download_mbps": 620,
-          "upload_mbps": 265,
-          "ping_ms": 15,
-          "consistency_percent": 85
-        }
+      "speed": {
+        "fastest_protocol": "Hydra (Catapult)"
       },
       "platform_support": {
         "windows": true,
@@ -1635,6 +1193,13 @@
         "email": true,
         "response_time_hours": 4
       },
+      "free_plan": {
+        "available": true,
+        "speed_limit_mbps": null,
+        "country_count": 1,
+        "data_limit_gb": 0.5,
+        "ads": true
+      },
       "scores": {
         "speed": 17,
         "privacy": 13,
@@ -1644,53 +1209,23 @@
         "streaming": 3,
         "total": 64
       },
-      "affiliate": {
-        "program": "Hotspot Shield Affiliate",
-        "commission_type": "flat",
-        "commission_usd": 50,
-        "cookie_days": 45,
-        "link_main": "https://www.hotspotshield.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Proprietary Hydra protocol — very fast (620 Mbps)",
-        "3,200+ servers in 80 countries",
-        "Free plan available (500 MB/day)",
-        "Good mainstream recognition",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "US-based (14 Eyes country)",
-        "No independent no-logs audit",
-        "Some data logging concerns historically",
-        "Premium plan relatively expensive"
-      ],
       "best_for": [
         "speed",
         "streaming",
         "beginners"
       ],
-      "recommended_plan": "1-year plan",
-      "active": true,
-      "free_plan": {
-        "available": true,
-        "speed_limit_mbps": null,
-        "country_count": 1,
-        "data_limit_gb": 0.5,
-        "ads": true
-      }
+      "affiliate_program": "Hotspot Shield Affiliate",
+      "active": true
     },
     {
       "id": "fsecure",
       "name": "F-Secure VPN",
       "slug": "fsecure",
-      "logo": "/logos/fsecure.svg",
-      "color_hex": "#5C2D91",
-      "tagline": "Security suite VPN from a trusted brand",
+      "color": "#5C2D91",
       "website": "https://www.f-secure.com",
       "headquarters": "Finland",
-      "is14Eyes": false,
       "founded_year": 1988,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1711,16 +1246,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "openvpn": {
-          "download_mbps": 380,
-          "upload_mbps": 165,
-          "ping_ms": 22,
-          "consistency_percent": 78
-        }
+      "speed": {
+        "fastest_protocol": "OpenVPN"
       },
       "platform_support": {
         "windows": true,
@@ -1747,6 +1274,7 @@
         "email": true,
         "response_time_hours": 24
       },
+      "free_plan": null,
       "scores": {
         "speed": 11,
         "privacy": 14,
@@ -1756,46 +1284,22 @@
         "streaming": 3,
         "total": 55
       },
-      "affiliate": {
-        "program": "F-Secure Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 30,
-        "cookie_days": 30,
-        "link_main": "https://www.f-secure.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Finland-based — strong privacy jurisdiction",
-        "Part of trusted F-Secure security brand",
-        "Simple and clean interface",
-        "Affordable pricing ($3.49/mo yearly)",
-        "Free trial available"
-      ],
-      "cons": [
-        "Only 30 countries covered",
-        "No streaming support",
-        "No WireGuard protocol",
-        "No Linux or router support",
-        "Limited server count"
-      ],
       "best_for": [
         "beginners",
         "privacy"
       ],
-      "recommended_plan": "1-year plan",
+      "affiliate_program": "F-Secure Affiliate",
       "active": true
     },
     {
       "id": "privatevpn",
       "name": "PrivateVPN",
       "slug": "privatevpn",
-      "logo": "/logos/privatevpn.svg",
-      "color_hex": "#4A90D9",
-      "tagline": "Small but reliable budget VPN",
+      "color": "#4A90D9",
       "website": "https://privatevpn.com",
       "headquarters": "Sweden",
-      "is14Eyes": true,
       "founded_year": 2009,
-      "priority": "B",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1817,16 +1321,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 440,
-          "upload_mbps": 192,
-          "ping_ms": 21,
-          "consistency_percent": 80
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1853,6 +1349,7 @@
         "email": true,
         "response_time_hours": 6
       },
+      "free_plan": null,
       "scores": {
         "speed": 13,
         "privacy": 15,
@@ -1862,45 +1359,22 @@
         "streaming": 3,
         "total": 60
       },
-      "affiliate": {
-        "program": "PrivateVPN Affiliate",
-        "commission_type": "recurring",
-        "commission_percent": 30,
-        "cookie_days": 30,
-        "link_main": "https://privatevpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Good streaming support (Netflix, Disney+, BBC iPlayer)",
-        "Very affordable at $2.00/mo (3-year)",
-        "63 country coverage despite small size",
-        "Free trial available",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "Sweden-based (14 Eyes)",
-        "Only 200 servers",
-        "No independent audit",
-        "No browser extension"
-      ],
       "best_for": [
         "budget",
         "streaming"
       ],
-      "recommended_plan": "3-year plan",
+      "affiliate_program": "PrivateVPN Affiliate",
       "active": true
     },
     {
       "id": "ivacy",
       "name": "Ivacy VPN",
       "slug": "ivacy",
-      "logo": "/logos/ivacy.svg",
-      "color_hex": "#00C853",
-      "tagline": "Ultra-cheap VPN with massive server network",
+      "color": "#00C853",
       "website": "https://www.ivacy.com",
       "headquarters": "Singapore",
-      "is14Eyes": false,
       "founded_year": 2007,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -1922,16 +1396,8 @@
         "dedicated_ip": true,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 410,
-          "upload_mbps": 178,
-          "ping_ms": 23,
-          "consistency_percent": 79
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -1958,6 +1424,7 @@
         "email": true,
         "response_time_hours": 8
       },
+      "free_plan": null,
       "scores": {
         "speed": 12,
         "privacy": 14,
@@ -1967,45 +1434,22 @@
         "streaming": 2,
         "total": 59
       },
-      "affiliate": {
-        "program": "Ivacy Affiliate",
-        "commission_type": "hybrid",
-        "commission_percent": 40,
-        "cookie_days": 60,
-        "link_main": "https://www.ivacy.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Incredibly cheap — $1.00/mo on 5-year plan",
-        "5,700+ servers in 100+ countries",
-        "Dedicated IP available",
-        "Singapore-based (outside 14 Eyes)",
-        "40-100% commission for affiliates"
-      ],
-      "cons": [
-        "No independent security audit",
-        "Streaming support inconsistent",
-        "Speed below average in tests",
-        "Long-term plans lock you in"
-      ],
       "best_for": [
         "budget",
         "multi_device"
       ],
-      "recommended_plan": "5-year plan",
+      "affiliate_program": "Ivacy Affiliate",
       "active": true
     },
     {
       "id": "vyprvpn",
       "name": "VyprVPN",
       "slug": "vyprvpn",
-      "logo": "/logos/vyprvpn.svg",
-      "color_hex": "#1B75BC",
-      "tagline": "Swiss privacy with proprietary Chameleon protocol",
+      "color": "#1B75BC",
       "website": "https://www.vyprvpn.com",
       "headquarters": "Switzerland",
-      "is14Eyes": false,
       "founded_year": 2010,
-      "priority": "B",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -2031,16 +1475,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 470,
-          "upload_mbps": 205,
-          "ping_ms": 19,
-          "consistency_percent": 81
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -2067,6 +1503,7 @@
         "email": true,
         "response_time_hours": 4
       },
+      "free_plan": null,
       "scores": {
         "speed": 14,
         "privacy": 17,
@@ -2076,45 +1513,21 @@
         "streaming": 3,
         "total": 63
       },
-      "affiliate": {
-        "program": "VyprVPN Affiliate",
-        "commission_type": "flat",
-        "commission_usd": 20,
-        "cookie_days": 30,
-        "link_main": "https://www.vyprvpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Switzerland-based — excellent privacy jurisdiction",
-        "Leviathan Security-audited no-logs policy",
-        "Chameleon protocol for censorship bypass",
-        "Owns its entire server infrastructure",
-        "70 country coverage"
-      ],
-      "cons": [
-        "Only 5 simultaneous connections on basic plan",
-        "Only 700 servers",
-        "More expensive than budget options",
-        "No browser extension"
-      ],
       "best_for": [
-        "privacy",
-        "china"
+        "privacy"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "VyprVPN Affiliate",
       "active": true
     },
     {
       "id": "cactusvpn",
       "name": "CactusVPN",
       "slug": "cactusvpn",
-      "logo": "/logos/cactusvpn.svg",
-      "color_hex": "#4CAF50",
-      "tagline": "Simple and affordable small-scale VPN",
+      "color": "#4CAF50",
       "website": "https://www.cactusvpn.com",
       "headquarters": "Moldova",
-      "is14Eyes": false,
       "founded_year": 2011,
-      "priority": "C",
+      "fourteen_eyes": false,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -2136,16 +1549,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 350,
-          "upload_mbps": 152,
-          "ping_ms": 25,
-          "consistency_percent": 76
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -2156,7 +1561,7 @@
         "browser_extension": true,
         "router": true,
         "smart_tv": false,
-        "simultaneous_connections": null
+        "simultaneous_connections": "unlimited"
       },
       "streaming": {
         "netflix_us": true,
@@ -2172,6 +1577,7 @@
         "email": true,
         "response_time_hours": 12
       },
+      "free_plan": null,
       "scores": {
         "speed": 10,
         "privacy": 12,
@@ -2181,44 +1587,21 @@
         "streaming": 3,
         "total": 50
       },
-      "affiliate": {
-        "program": "CactusVPN Affiliate",
-        "commission_type": "flat_percent",
-        "commission_percent": 25,
-        "cookie_days": 30,
-        "link_main": "https://www.cactusvpn.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Unlimited simultaneous connections",
-        "Moldova-based (outside 14 Eyes)",
-        "Simple direct affiliate program (25%)",
-        "Free trial available",
-        "Affordable pricing"
-      ],
-      "cons": [
-        "Only 40 servers in 22 countries",
-        "No independent audit",
-        "Below-average speed performance",
-        "Very small provider"
-      ],
       "best_for": [
         "budget"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "CactusVPN Affiliate",
       "active": true
     },
     {
       "id": "avast",
       "name": "Avast SecureLine VPN",
       "slug": "avast",
-      "logo": "/logos/avast.svg",
-      "color_hex": "#FF6A00",
-      "tagline": "Mass-market VPN from a trusted security brand",
+      "color": "#FF6A00",
       "website": "https://www.avast.com",
       "headquarters": "Czech Republic",
-      "is14Eyes": true,
       "founded_year": 1988,
-      "priority": "C",
+      "fourteen_eyes": true,
       "security": {
         "encryption": "AES-256",
         "protocols": [
@@ -2239,16 +1622,8 @@
         "dedicated_ip": false,
         "ram_only": false
       },
-      "speed_tests": {
-        "test_date": "2026-03-15",
-        "test_location": "Frankfurt",
-        "test_connection_mbps": 1000,
-        "wireguard": {
-          "download_mbps": 390,
-          "upload_mbps": 170,
-          "ping_ms": 20,
-          "consistency_percent": 80
-        }
+      "speed": {
+        "fastest_protocol": "WireGuard"
       },
       "platform_support": {
         "windows": true,
@@ -2275,6 +1650,7 @@
         "email": true,
         "response_time_hours": 8
       },
+      "free_plan": null,
       "scores": {
         "speed": 12,
         "privacy": 11,
@@ -2284,31 +1660,10 @@
         "streaming": 3,
         "total": 53
       },
-      "affiliate": {
-        "program": "Avast Affiliate (CJ)",
-        "commission_type": "flat_percent",
-        "commission_percent": 35,
-        "cookie_days": 45,
-        "link_main": "https://www.avast.com/affiliates?ref=YOURID"
-      },
-      "pros": [
-        "Trusted Avast security brand recognition",
-        "Easy to use for non-technical users",
-        "Free trial available",
-        "Netflix and Disney+ support",
-        "10 simultaneous connections"
-      ],
-      "cons": [
-        "Czech Republic (14 Eyes via EU)",
-        "VPN is not the core product",
-        "No independent no-logs audit",
-        "No Linux or router support",
-        "Historical privacy controversies"
-      ],
       "best_for": [
         "beginners"
       ],
-      "recommended_plan": "2-year plan",
+      "affiliate_program": "Avast Affiliate (CJ)",
       "active": true
     }
   ]

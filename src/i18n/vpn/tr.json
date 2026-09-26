@@ -1,0 +1,128 @@
+{
+  "nordvpn": {
+    "tagline": "Çoğu kullanıcı için en iyi çok yönlü seçenek",
+    "verdict": "NordVPN; defalarca denetlenmiş kayıt tutmama taahhüdünü, yalnızca RAM tabanlı sunucuları ve hızlı NordLynx (WireGuard tabanlı) protokolünü çok geniş bir ağla birleştiriyor. Aylık planda en ucuz seçenek değil, ancak uzun süreli planlarda puan tablomuzdaki en güçlü genel paketi sunuyor.",
+    "pros": ["Kayıt tutmama politikası Deloitte tarafından birkaç kez denetlendi", "NordLynx (WireGuard tabanlı) protokolü hız için tasarlandı", "Tüm ağda yalnızca RAM tabanlı sunucular", "Threat Protection izleyicileri ve kötü amaçlı siteleri engelliyor", "Abonelik başına 10 cihaz"],
+    "cons": ["Aylık plan pahalı", "Yenileme fiyatları ilk dönem fiyatından yüksek", "Router kurulumu manuel"]
+  },
+  "expressvpn": {
+    "tagline": "Premium, özenli ve kullanımı çok kolay",
+    "verdict": "ExpressVPN; yalnızca RAM tabanlı TrustedServer teknolojisi, kendi geliştirdiği Lightway protokolü ve mükemmel router desteğiyle piyasadaki en özenli VPN'lerden biri. Genellikle rakiplerinden daha pahalı olduğu için fiyattan çok sadeliğe önem verenlere uygun.",
+    "pros": ["Yalnızca RAM tabanlı TrustedServer altyapısı", "Lightway protokolü hızlı ve açık kaynaklı", "Yaklaşık 105 ülkede sunucu", "Sınıfının en iyisi router uygulaması", "Birden fazla bağımsız denetim"],
+    "cons": ["En pahalı VPN'ler arasında", "Multi-hop (Double VPN) sunucusu yok", "Cihaz sınırı plana göre değişiyor"]
+  },
+  "surfshark": {
+    "tagline": "Uygun fiyata sınırsız cihaz",
+    "verdict": "Surfshark, tek bir hesapla sınırsız sayıda cihaz bağlamanıza izin veriyor ve uzun süreli planlarda sürekli olarak en ucuz premium VPN'ler arasında yer alıyor. Yalnızca RAM tabanlı sunucular kullanıyor ve kayıt tutmama politikası denetlendi; bu da onu aileler ve haneler için güçlü bir fiyat/performans seçeneği yapıyor.",
+    "pros": ["Sınırsız eşzamanlı bağlantı", "Uzun süreli planlarda çok düşük fiyat", "Yalnızca RAM tabanlı sunucular", "Kayıt tutmama politikası Deloitte tarafından denetlendi", "CleanWeb reklamları ve izleyicileri engelliyor"],
+    "cons": ["Merkezi Hollanda'da (14 Göz üyesi)", "Ağı NordVPN'den küçük", "Yenileme fiyatı ilk dönemden çok daha yüksek"]
+  },
+  "cyberghost": {
+    "tagline": "Yeni başlayanlara uygun, cömert iade süresi",
+    "verdict": "CyberGhost, bir VPN kurup unutmak isteyenler için tasarlanmış. Uygulamaları sade, sunucuları kullanım amacına göre etiketliyor ve uzun süreli planlarda 45 günlük para iade süresi sunuyor; ancak ileri düzey kullanıcılar onu daha az yapılandırılabilir bulabilir.",
+    "pros": ["Yeni başlayanlar için çok sade uygulamalar", "Etkinliğe göre etiketlenmiş sunucular (yayın, P2P)", "Geniş sunucu ağı", "Uzun süreli planlarda 45 günlük para iade garantisi"],
+    "cons": ["7 cihaz sınırı", "Rakiplerine göre daha az gelişmiş ayar", "Başka birkaç VPN'in de sahibi olan Kape'ye ait"]
+  },
+  "protonvpn": {
+    "tagline": "İsviçre gizliliği ve en iyi ücretsiz plan",
+    "verdict": "Proton VPN, Proton Mail'in arkasındaki İsviçreli şirket tarafından işletiliyor. Uygulamaları açık kaynaklı, kayıt tutmama politikası bağımsız olarak denetlendi ve ücretsiz planında veri sınırı yok; bu da onu gönül rahatlığıyla önerebildiğimiz ücretsiz VPN yapıyor.",
+    "pros": ["Veri sınırı olmayan ücretsiz plan", "Açık kaynaklı, bağımsız olarak denetlenmiş uygulamalar", "İsviçre merkezli", "Secure Core multi-hop sunucuları", "Tor over VPN desteği"],
+    "cons": ["Ücretli planlar uygun fiyatlı rakiplerden pahalı", "Ücretsiz planda sunucu konumları sınırlı", "En büyük ağlara göre daha az sunucu"]
+  },
+  "pia": {
+    "tagline": "Sınırsız cihazla son derece yapılandırılabilir",
+    "verdict": "Private Internet Access; açık kaynaklı uygulamaları, sınırsız cihaz desteğini ve kapsamlı yapılandırma seçeneklerini düşük bir uzun vadeli fiyatla sunuyor. Kayıt tutmama iddiaları gerçek mahkeme davalarında sınandı ve denetlendi; ancak ABD merkezli olması gizlilik odaklı bazı kullanıcılar için bir dezavantaj.",
+    "pros": ["Sınırsız eşzamanlı bağlantı", "Çok sayıda ayar sunan açık kaynaklı uygulamalar", "Kayıt tutmama iddiaları denetlendi ve mahkemede sınandı", "Çok uygun fiyatlı uzun süreli planlar", "ABD'nin her eyaletinde sunucu"],
+    "cons": ["Merkezi ABD'de (Beş Göz)", "Arayüz yeni başlayanları bunaltabilir", "Yayın performansı tutarsız"]
+  },
+  "ipvanish": {
+    "tagline": "Sınırsız cihaz ve kendine ait sunucular",
+    "verdict": "IPVanish, sunucu altyapısının büyük bölümüne kendisi sahip ve sınırsız cihaza izin veriyor. Makul bir bütçe dostu seçenek, ancak ülke listesi liderlerden daha kısa ve ABD merkezli.",
+    "pros": ["Sınırsız eşzamanlı bağlantı", "Sunucu ağının büyük bölümüne sahip", "Scramble seçeneği kısıtlayıcı ağlarda işe yarıyor", "Uygun fiyatlı uzun süreli planlar"],
+    "cons": ["Merkezi ABD'de (Beş Göz)", "En iyi rakiplerine göre daha az ülke", "Tutarsız yayın desteği"]
+  },
+  "mullvad": {
+    "tagline": "En üst düzey anonimlik, tek sabit fiyat",
+    "verdict": "Mullvad, gizlilik konusunda taviz vermeyenlerin VPN'i: e-posta adresi gerekmiyor, nakit ödeme yapabiliyorsunuz ve her plan aynı sabit aylık ücrete mal oluyor. Yalnızca RAM tabanlı sunucular çalıştırıyor ve denetlendi; ancak bilinçli olarak kendini yayın hizmetleri için pazarlamıyor.",
+    "pros": ["E-posta veya kişisel veri gerektirmeyen hesap", "Nakit ve kripto para kabul ediyor", "Yalnızca RAM tabanlı sunucular ve açık kaynaklı uygulamalar", "Aylık sabit 5 €, uzun süreli taahhüt yok", "Bağımsız olarak denetlenmiş altyapı"],
+    "cons": ["Yayın hizmetleri için tasarlanmamış", "Daha küçük sunucu ağı", "Satış ortaklığı programı yok, bu yüzden ondan hiçbir kazanç elde etmiyoruz"]
+  },
+  "purevpn": {
+    "tagline": "Denetlenmiş kayıt tutmama politikasıyla uygun fiyat",
+    "verdict": "PureVPN son yıllarda denetimlere ve sertifikalara yatırım yaptı ve çok yıllık planlarda çoğu zaman en ucuz seçenekler arasında yer alıyor. Uygulamaları ve hızları sağlam, ancak sınıfının lideri değil.",
+    "pros": ["Kayıt tutmama politikası KPMG tarafından denetlendi", "Düşük uzun vadeli fiyatlar", "Ek hizmet olarak özel IP mevcut", "Hesap başına 10 cihaz"],
+    "cons": ["En iyi rakiplerine göre daha az ülke", "Tutarsız yayın desteği", "Uygulamalar liderler kadar özenli değil"]
+  },
+  "torguard": {
+    "tagline": "Özel IP'ler sunan, ileri düzey kullanıcılara yönelik VPN",
+    "verdict": "TorGuard; protokoller, portlar ve özel IP'ler üzerinde ince ayar yapmak isteyen teknik kullanıcılara yönelik. Yeni başlayanlar için pek uygun değil ve yayımlanmış bağımsız bir kayıt tutmama denetimi yok.",
+    "pros": ["Çok sayıda özel IP seçeneği", "Şifreleme ve portlar son derece özelleştirilebilir", "İyi P2P desteği", "WireGuard ve OpenVPN mevcut"],
+    "cons": ["Merkezi ABD'de (Beş Göz)", "Yayımlanmış bağımsız kayıt tutmama denetimi yok", "Arayüz yeni başlayanlara uygun değil"]
+  },
+  "hideme": {
+    "tagline": "Gizlilik öncelikli, kullanışlı ücretsiz plan",
+    "verdict": "hide.me, denetlenmiş kayıt tutmama politikasına ve hafif internet gezintisi için güvenle kullanılabilecek ücretsiz bir plana sahip Malezya merkezli bir sağlayıcı. Ücretli planları rekabetçi, ancak ağı pazar liderlerinden küçük.",
+    "pros": ["Reklamsız ücretsiz plan", "Bağımsız olarak denetlenmiş kayıt tutmama politikası", "Malezya merkezli, 14 Göz'ün dışında", "Ücretli planlarda 10 cihaz"],
+    "cons": ["Ücretsiz planda veri sınırı var ve konum sayısı az", "Sınırlı yayın desteği", "Ağı liderlerden küçük"]
+  },
+  "astrill": {
+    "tagline": "Pahalı, niş ve özellik dolu",
+    "verdict": "Astrill kendine özgü protokoller ve özel IP'ler sunuyor; ancak pahalı, ağı küçük ve yayımlanmış bağımsız bir kayıt tutmama denetimi yok. Çoğu kullanıcı, sıralamamızın üst sıralarındaki seçeneklerden daha fazla değer elde edecektir.",
+    "pros": ["Kendine özgü StealthVPN ve OpenWeb protokolleri", "Özel IP mevcut", "Seyşeller merkezli"],
+    "cons": ["Çok pahalı", "Küçük sunucu ağı", "Yayımlanmış bağımsız kayıt tutmama denetimi yok", "Yalnızca 5 cihaz"]
+  },
+  "fastestvpn": {
+    "tagline": "Çok ucuz ama sınırlı",
+    "verdict": "FastestVPN, satın alabileceğiniz en ucuz VPN'lerden biri ve çok sayıda cihaza izin veriyor; ancak ağı küçük ve yayımlanmış bağımsız bir güvenlik denetimi yok.",
+    "pros": ["Uzun süreli planlarda çok düşük fiyat", "15 cihaza kadar", "Dahili reklam engelleyici"],
+    "cons": ["Küçük ağ (yaklaşık 40 ülke)", "Yayımlanmış bağımsız denetim yok", "Sınırlı yayın desteği"]
+  },
+  "tunnelbear": {
+    "tagline": "Başlamak için en samimi VPN",
+    "verdict": "TunnelBear anlaşılması en kolay VPN; her yıl güvenlik denetimi yayımlıyor ve küçük bir ücretsiz plan sunuyor. İleri düzey kullanıcılar, P2P veya yayın için tasarlanmamış.",
+    "pros": ["Son derece sade ve kullanıcı dostu uygulamalar", "Düzenli bağımsız güvenlik denetimleri", "Denemek için ücretsiz plan", "Ücretli planlarda sınırsız cihaz"],
+    "cons": ["Merkezi Kanada'da (Beş Göz)", "Ücretsiz planda veri sınırı düşük", "Zayıf yayın desteği", "Canlı sohbet desteği yok"]
+  },
+  "hotspotshield": {
+    "tagline": "Hızlı özel protokol ve ücretsiz sürüm",
+    "verdict": "Hotspot Shield'ın kendine özgü Hydra (Catapult) protokolü iyi performans gösteriyor ve ücretsiz sürümüyle başlamak kolay. Ancak ücretsiz sürüm reklam gösteriyor ve şirket yayımlanmış bağımsız bir kayıt tutmama denetimine sahip değil.",
+    "pros": ["Hızlı ve kendine özgü Hydra protokolü", "Ücretsiz sürüm mevcut", "Yaklaşık 80 ülke", "Premium planlarda 10 cihaz"],
+    "cons": ["Merkezi ABD'de (Beş Göz)", "Ücretsiz sürüm reklam gösteriyor ve sınırlı", "Yayımlanmış bağımsız kayıt tutmama denetimi yok"]
+  },
+  "fsecure": {
+    "tagline": "Bir güvenlik şirketinden sade VPN",
+    "verdict": "F-Secure'un VPN'i, köklü bir Fin güvenlik şirketinden gelen sade ve güvenilir bir ek hizmet. Halka açık Wi-Fi ağlarında temel koruma için yeterli, ancak ağı ve özellik yelpazesi dar.",
+    "pros": ["Köklü bir Fin güvenlik şirketinden", "Çok sade arayüz", "Ücretsiz deneme mevcut"],
+    "cons": ["Yalnızca yaklaşık 30 ülke", "Az sayıda gelişmiş özellik", "Linux veya router desteği yok"]
+  },
+  "privatevpn": {
+    "tagline": "Kişisel destek sunan küçük sağlayıcı",
+    "verdict": "PrivateVPN; sade bir uygulamaya, makul bir ülke listesine ve düşük uzun vadeli fiyatlara sahip küçük bir İsveçli sağlayıcı. Bağımsız bir denetimi yok ve sunucu sayısı az.",
+    "pros": ["Düşük uzun vadeli fiyat", "Küçük ağa rağmen yaklaşık 60 ülke", "Hesap başına 10 cihaz", "Ücretsiz deneme mevcut"],
+    "cons": ["Merkezi İsveç'te (14 Göz)", "Az sayıda sunucu", "Yayımlanmış bağımsız denetim yok"]
+  },
+  "ivacy": {
+    "tagline": "Son derece ucuz uzun süreli planlar",
+    "verdict": "Ivacy, çok yıllık planlarda en ucuz VPN'ler arasında yer alıyor ve pek çok ülkeyi kapsıyor. Günlük kullanım için yeterli; ancak yayımlanmış bağımsız bir denetimi yok ve en iyi fiyat için sizi uzun taahhütlere bağlıyor.",
+    "pros": ["Çok yıllık planlarda çok düşük fiyat", "Çok sayıda ülke kapsanıyor", "Ek hizmet olarak özel IP", "Hesap başına 10 cihaz"],
+    "cons": ["Yayımlanmış bağımsız denetim yok", "En iyi fiyatlar çok uzun taahhüt gerektiriyor", "Tutarsız yayın desteği"]
+  },
+  "vyprvpn": {
+    "tagline": "Kendi altyapısına sahip İsviçreli VPN",
+    "verdict": "VyprVPN kendi ağına sahip, bu ağı kendisi işletiyor ve İsviçre merkezli. Chameleon protokolü kısıtlayıcı ağlarda işe yarıyor, ancak cihaz sınırı düşük ve liderlere göre daha az sunucusu var.",
+    "pros": ["İsviçre merkezli", "Sunucu ağına sahip ve ağı kendisi işletiyor", "Denetlenmiş kayıt tutmama politikası", "Kısıtlayıcı ağlar için Chameleon protokolü"],
+    "cons": ["Bazı planlarda yalnızca 5 cihaz", "Daha küçük sunucu ağı", "Uygun fiyatlı rakiplerden pahalı"]
+  },
+  "cactusvpn": {
+    "tagline": "Çok küçük ve sade bir sağlayıcı",
+    "verdict": "CactusVPN, sade uygulamalara ve esnek kısa süreli planlara sahip küçük bir sağlayıcı. Ağı çok küçük ve yayımlanmış bağımsız bir denetimi yok; bu nedenle puan tablomuzun alt sıralarında yer alıyor.",
+    "pros": ["Sade uygulamalar", "Ücretsiz deneme mevcut", "Moldova merkezli, 14 Göz'ün dışında"],
+    "cons": ["Çok küçük ağ (yaklaşık 22 ülke)", "Yayımlanmış bağımsız denetim yok", "Sınırlı özellikler"]
+  },
+  "avast": {
+    "tagline": "Yaygın bir antivirüs markasından temel VPN",
+    "verdict": "Avast'ın VPN'i kullanımı kolay ve tanınmış bir antivirüs markasından geliyor; ancak VPN şirketin ana ürünü değil ve Avast, geçmişte diğer ürünlerindeki veri uygulamaları nedeniyle gizlilik eleştirileriyle karşılaştı.",
+    "pros": ["Teknik bilgisi olmayan kullanıcılar için çok kolay", "Ücretsiz deneme mevcut", "Çok cihazlı planlarda 10 cihaz"],
+    "cons": ["Ana şirketin geçmişteki gizlilik tartışmaları", "Yayımlanmış bağımsız kayıt tutmama denetimi yok", "Linux veya router desteği yok"]
+  }
+}

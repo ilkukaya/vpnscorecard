@@ -1,0 +1,7 @@
+---
+import View from '../../views/Compare.astro';
+import { comparePairs, pairSlug } from '../../lib/lists';
+export const getStaticPaths = () => comparePairs().map(([a, b]) => ({ params: { pair: pairSlug(a, b) }, props: { a, b } }));
+const { a, b } = Astro.props as any;
+---
+<View lang="en" a={a} b={b} />

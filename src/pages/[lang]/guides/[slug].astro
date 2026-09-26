@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import View from '../../../views/Guide.astro';
+import { splitSlug } from '../../../lib/content';
+import type { Lang } from '../../../i18n';
+export async function getStaticPaths() {
+  const all = await getCollection('guides');
+  return all.filter((e) => splitSlug(e.slug).lang !== 'en').map((entry) => ({ params: { lang: splitSlug(entry.slug).lang, slug: splitSlug(entry.slug).slug }, props: { entry } }));
+}
+---
+<View lang={Astro.params.lang as Lang} entry={Astro.props.entry} />

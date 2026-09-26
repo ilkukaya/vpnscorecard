@@ -1,87 +1,45 @@
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/fraunces/opsz.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-slate-50 text-gray-900 antialiased;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold;
-  }
-
-  a {
-    @apply transition-colors duration-200;
-  }
+  :root { color-scheme: light; }
+  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
+  body { @apply bg-paper text-ink font-sans antialiased; overflow-x: clip; font-feature-settings: 'cv11', 'ss01'; }
+  h1, h2, h3 { @apply text-ink; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: #cfe8de; }
+  :focus-visible { @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper rounded; }
+  [dir='rtl'] .font-display, [lang='ar'] h1, [lang='ar'] h2, [lang='ar'] h3,
+  [lang='hi'] .font-display, [lang='ja'] .font-display, [lang='ko'] .font-display { font-family: theme('fontFamily.sans'); }
 }
 
 @layer components {
-  .container-narrow {
-    @apply max-w-4xl mx-auto px-4;
-  }
-
-  .container-wide {
-    @apply max-w-7xl mx-auto px-4;
-  }
-
-  .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center justify-center px-5 py-2.5 bg-brand hover:bg-brand-dark text-white font-semibold rounded-lg transition-colors duration-200 text-sm;
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 text-sm;
-  }
-
-  .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-  }
+  .wrap { @apply mx-auto w-full max-w-page px-4 sm:px-6; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.12em] text-accent-ink; }
+  .h-display { @apply font-display font-semibold tracking-tight text-ink; font-variation-settings: 'opsz' 96; }
+  .card { @apply rounded-2xl border border-line bg-white shadow-card; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-colors duration-150; }
+  .btn-primary { @apply btn bg-accent text-white hover:bg-accent-ink; }
+  .btn-ghost { @apply btn border border-line-strong bg-white text-ink hover:border-ink; }
+  .btn-sm { @apply px-3.5 py-2 text-[13px] rounded-lg; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1 text-xs font-medium text-ink-2; }
+  .num { font-variant-numeric: tabular-nums; }
+  .link { @apply text-accent-ink underline decoration-1 underline-offset-[3px] hover:text-ink; }
+  .table-clean { @apply w-full border-collapse text-sm; }
+  .table-clean th { @apply border-b border-line-strong bg-paper px-3 py-2.5 text-start text-xs font-semibold uppercase tracking-wide text-ink-3; }
+  .table-clean td { @apply border-b border-line px-3 py-3 align-top; }
+  .scroll-x { @apply -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0; }
 }
 
 @layer utilities {
-  .animate-gauge-fill {
-    animation: gaugeFill 1.5s ease-out forwards;
-  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
 
-  @keyframes gaugeFill {
-    from {
-      stroke-dashoffset: 283;
-    }
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

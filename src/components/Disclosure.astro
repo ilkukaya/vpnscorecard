@@ -1,0 +1,9 @@
+---
+import { t, localized, type Lang } from '../i18n';
+interface Props { lang: Lang; class?: string }
+const { lang, class: cls = '' } = Astro.props;
+---
+<p class={`flex items-start gap-2 text-xs leading-relaxed text-ink-3 ${cls}`}>
+  <svg class="mt-0.5 shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+  <span>{t(lang, 'disclosure.short')} <a href={localized('/affiliate-disclosure/', lang)} class="link">{t(lang, 'disclosure.more')}</a></span>
+</p>
